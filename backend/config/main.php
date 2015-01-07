@@ -21,8 +21,8 @@ $config = [
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [
             'theme' => [
-                'pathMap' => ['@app/views' => '@webroot/themes/slate/views'],
-                'baseUrl' => '@web/themes/slate',
+                'pathMap' => ['@app/views' => '@webroot/themes/default/views'],
+                'baseUrl' => '@web/themes/default',
             ],
         ],
         'user' => [
