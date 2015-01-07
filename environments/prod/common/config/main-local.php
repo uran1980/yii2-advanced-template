@@ -1,13 +1,8 @@
 <?php
 return [
     'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=advanced',
-            'username' => 'root',
-            'password' => 'root',
-            'charset' => 'utf8',
-        ],
+        'db' => require(__DIR__ . '/multidb/db.php'),
+        'dbLogger' => require(__DIR__ . '/multidb/dbLogger.php'),
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',

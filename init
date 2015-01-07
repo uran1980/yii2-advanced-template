@@ -18,10 +18,10 @@ if (!extension_loaded('mcrypt')) {
     die('The mcrypt PHP extension is required by Yii2.');
 }
 
-$params = getParams();
-$root = str_replace('\\', '/', dirname(__DIR__));
-$envs = require("$root/environments/index.php");
-$envNames = array_keys($envs);
+$params     = getParams();
+$root       = str_replace('\\', '/', __DIR__);
+$envs       = require("$root/environments/index.php");
+$envNames   = array_keys($envs);
 
 echo "Yii Application Initialization Tool v1.0\n\n";
 

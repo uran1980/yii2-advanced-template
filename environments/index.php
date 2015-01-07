@@ -45,23 +45,6 @@ return [
             'frontend/config/main-local.php',
         ],
     ],
-    'Staging' => [
-        'path' => 'staging',
-        'setWritable' => [
-            'backend/runtime',
-            'frontend/runtime',
-            'frontend/runtime/mail',
-            '/web/assets',
-            '/web/backend/assets'
-        ],
-        'setExecutable' => [
-            'yii',
-        ],
-        'setCookieValidationKey' => [
-            'backend/config/main-local.php',
-            'frontend/config/main-local.php',
-        ],
-    ],
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
@@ -73,6 +56,23 @@ return [
         'setExecutable' => [
             'yii',
             'frontend/runtime/mail',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+        ],
+    ],
+    'Staging' => [
+        'path' => 'staging',
+        'setWritable' => [
+            'backend/runtime',
+            'frontend/runtime',
+            'frontend/runtime/mail',
+            '/web/assets',
+            '/web/backend/assets'
+        ],
+        'setExecutable' => [
+            'yii',
         ],
         'setCookieValidationKey' => [
             'backend/config/main-local.php',
