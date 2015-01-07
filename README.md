@@ -88,6 +88,7 @@ Then restart web server. Also in hosts file add this string:
 ``` 127.0.0.1 yii2-advanced-template.local www.yii2-advanced-template.local ```
 
 You are done, you can start your application in your browser by enter this url:
+
 For frontend:
 
 ``` http://yii2-advanced-template.local ```
