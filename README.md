@@ -63,14 +63,14 @@ Open up main-local.php config file in ```advanced/common/config/main-local.php``
 and adjust your connection credentials.
 
 8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
-While you are inside a project root folder execute ```./yii migrate command```:
+While you are inside a project root folder execute ```php yii migrate command```:
 
-   ``` ./yii migrate ``` or if you are on Windows ``` yii migrate ```
+   ``` php yii migrate ```
 
 9. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
 permissions:
 
-   ``` ./yii rbac/init ``` or if you are on Windows ``` yii rbac/init ```
+   ``` php yii rbac/init ```
 
 10. Configure your web server:
 
@@ -119,9 +119,9 @@ Here is how you can set up everything easily:
 
 3. Open up your console and ```cd``` to the project root folder of your application.
 
-4. Run the migrations again: ``` ./yii migrate ``` or if you are on Windows ```yii migrate```
+4. Run the migrations again: ``` php yii migrate ```
 
-5. Run rbac/init again: ``` ./yii rbac/init ``` or if you are on Windows ```yii rbac/init```
+5. Run rbac/init again: ``` php yii rbac/init ```
 
 6. Now you can tell your application to use your ```advanced``` database again instead of ```advanced_tests```.
 Adjust your ```main-local.php``` config file again.
