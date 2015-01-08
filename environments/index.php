@@ -34,8 +34,11 @@ return [
             'backend/runtime',
             'frontend/runtime',
             'frontend/runtime/mail',
+            'console/runtime',
             '/web/assets',
-            '/web/backend/assets'
+            '/web/backend/assets',
+            '/web/compiled',
+            '/web/backend/compiled',
         ],
         'setExecutable' => [
             'yii',
@@ -50,8 +53,12 @@ return [
         'setWritable' => [
             'backend/runtime',
             'frontend/runtime',
+            'frontend/runtime/mail',
+            'console/runtime',
             '/web/assets',
-            '/web/backend/assets'
+            '/web/backend/assets',
+            '/web/compiled',
+            '/web/backend/compiled',
         ],
         'setExecutable' => [
             'yii',
@@ -68,8 +75,11 @@ return [
             'backend/runtime',
             'frontend/runtime',
             'frontend/runtime/mail',
+            'console/runtime',
             '/web/assets',
-            '/web/backend/assets'
+            '/web/backend/assets',
+            '/web/compiled',
+            '/web/backend/compiled',
         ],
         'setExecutable' => [
             'yii',
