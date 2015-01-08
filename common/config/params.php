@@ -1,5 +1,7 @@
 <?php
 
+use \yii\web\View;
+
 $config = [
 
 //------------------------//
@@ -52,7 +54,7 @@ $config = [
     // ----------------------- URL MANAGER COMPONENT ---------------------------
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/url.md
     'app.urlManager' => [
-        'class'             => common\components\web\AppUrlManager::className(),
+        'class'             => yii\web\UrlManager::className(),
         'enablePrettyUrl'   => true,
         'showScriptName'    => false,                                           // false - means that index.php will not be part of the URLs
     ],
