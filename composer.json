@@ -1,12 +1,12 @@
 {
-    "name": "uran1980/yii2-advanced-template",
+    "name": "uran1980/yii2-advanced-template-custom",
     "description": "Improved Yii 2 Advanced Application Template By Nenad Zivkovic And customized by Uran1980",
     "keywords": ["yii2", "framework", "advanced", "improved", "application template", "nenad", "uran1980"],
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
         "tutorial": "http://www.freetuts.org/tutorial/view?id=6",
-        "source": "https://github.com/uran1980/yii2-advanced-template"
+        "source": "https://github.com/uran1980/yii2-advanced-template-custom"
     },
     "minimum-stability": "stable",
     "require": {
