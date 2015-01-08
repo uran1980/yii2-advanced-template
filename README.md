@@ -1,7 +1,7 @@
-yii2-advanced-template
-======================
+yii2-advanced-template-custom
+=============================
 
-Yii2-advanced-template is based on yii2-app-advanced created by yii2 core developers.
+Yii2-advanced-template-custom is based on [yii2-advanced-template](https://github.com/nenad-zivkovic/yii2-advanced-template).
 There are several upgrades made to this template.
 
 1. This template has additional features listed in the next section of this guide.
