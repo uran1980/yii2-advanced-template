@@ -20,18 +20,13 @@ $this->title = Yii::t('app', 'Login');
 
         <?php //-- use email or username field depending on model scenario --// ?>
         <?php if ($model->scenario === 'lwe'): ?>
-            <?= $form->field($model, 'email') ?>        
+            <?= $form->field($model, 'email') ?>
         <?php else: ?>
             <?= $form->field($model, 'username') ?>
         <?php endif ?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-        <div style="color:#999;margin:1em 0">
-            <?= Yii::t('app', 'If you forgot your password you can') ?>
-            <?= Html::a(Yii::t('app', 'reset it'), ['site/request-password-reset']) ?>.
-        </div>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
@@ -40,5 +35,5 @@ $this->title = Yii::t('app', 'Login');
         <?php ActiveForm::end(); ?>
 
     </div>
-  
+
 </div>

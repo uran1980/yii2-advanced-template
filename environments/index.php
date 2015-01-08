@@ -16,12 +16,10 @@
  *             // list of directories that should be set executable
  *         ],
  *         'setCookieValidationKey' => [
- *             // list of config files that need to be inserted with
- *             automatically generated cookie validation keys
+ *             // list of config files that need to be inserted with automatically generated cookie validation keys
  *         ],
  *         'createSymlink' => [
- *             // list of symlinks to be created.
- *             Keys are symlinks, and values are the targets.
+ *             // list of symlinks to be created. Keys are symlinks, and values are the targets.
  *         ],
  *     ],
  * ];
