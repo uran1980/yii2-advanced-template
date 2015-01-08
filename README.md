@@ -46,7 +46,7 @@ for example: ``` cd /var/www/sites/ ```
 
 5. Run the Composer ```update``` command:
 
-   ``` composer create-project uran1980/yii2-advanced-template advanced ```
+   ``` composer update ```
 
 6. Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
