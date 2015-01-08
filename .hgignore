@@ -38,6 +38,14 @@ vendor/
 .DS_Store
 
 runtime/*
+common/config/multidb/*
 web/assets/*
+web/backend/assets/*
+web/compiled/*
+web/backend/compiled/*
+web/index.php
+web/index-test.php
+web/backend/index.php
+web/backend/index-test.php
 .sass-cache
 compiled
