@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// Jumbotron
+// -----------------------------------------------------------------------------
+.jumbotron {
+    //$border-color: darken(#B1C0C4, 5%);
+    $border-color: #B1C0C4;
+    $shadow: 0 0 100px rgba(darken($border-color, 10%), 0.3) inset;
+
+    //background: url("/images/bg-gradient-sky.png") repeat scroll 0 0, url("/images/grain.png") repeat scroll 0 0, none repeat scroll 0 0 darken($body-color-bg, 3%);
+    background-color: darken($body-color-bg, 3%);
+    border: 1px solid $border-color !important;
+    @include box-shadow($shadow);
+
+    h1, .h1, p {
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+        color: #484848;
+    }
+}

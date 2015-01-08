@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+//                              CUSTOM FUNCTIONS
+// -----------------------------------------------------------------------------
+
+// Google ads placeholders
+// -----------------------
+// @see https://support.google.com/adsense/answer/185665?utm_source=aso&utm_medium=link&utm_campaign=ww-ww-et-asfe_&gsessionid=GEfkoNChwuvhqkoT8S8SdA
+@function google-ads-placeholder($size: '728x90', $param: 'width') {
+    @if ( $size == '728x90' ) {
+        @if ( $param == width ) {
+            @return 728px;
+        }
+        @else {
+            @return 90px;
+        }
+    }
+}

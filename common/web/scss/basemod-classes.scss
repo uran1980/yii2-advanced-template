@@ -1,0 +1,157 @@
+@import '../../../../vendor/bower/compass-mixins/lib/compass';
+
+@media screen, projection {
+    .xdebug-var-dump {
+        font-size: 1.5em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+    }
+
+    .no-bg-image { background-image: none !important; }
+    .background-color-none { background: none !important; }
+
+    $border-radius-list: 3px 4px 5px 6px 10px;
+    @each $radius in $border-radius-list {
+      .border-radius-#{$radius} {
+        @include border-radius(#{$radius} !important);
+      }
+    }
+    @each $radius in $border-radius-list {
+      .border-radius-top-#{$radius} {
+        @include border-top-left-radius(#{$radius} !important);
+        @include border-top-right-radius(#{$radius} !important);
+      }
+    }
+    @each $radius in $border-radius-list {
+      .border-radius-bottom-#{$radius} {
+        @include border-bottom-left-radius(#{$radius} !important);
+        @include border-bottom-right-radius(#{$radius} !important);
+      }
+    }
+
+    $box-shadow-size-list: 3px 5px 10px 15px 20px;
+    @each $size in $box-shadow-size-list {
+      .box-shadow-#{$size} {
+        @include box-shadow(0 0 10px #666);
+      }
+    }
+
+    .center { margin-left: auto !important; margin-right: auto !important; }
+
+    .clear-both  { clear: both  !important; }
+    .clear-right { clear: right !important; }
+    .clear-left  { clear: left  !important; }
+
+    .display-inline { display: inline !important; }
+    .display-block  { display: block  !important; }
+    .display-none   { display: none   !important; }
+
+    .float-left  { float: left  !important; }
+    .float-right { float: right !important; }
+
+    $font-size-list: 5px 8px 9px 10px 11px 12px 13px 14px 16px 18px 20px 22px 24px 26px 28px 30px 40px 50px 60px 75px 80px 100px;
+    @each $size in $font-size-list {
+      .font-size-#{$size} {
+        font-size: #{$size} !important;
+      }
+    }
+
+    .font-weight-bold, .bold { font-weight: bold !important; }
+
+    .hidden  { visibility: hidden  !important; display: none !important; }
+    .visible { visibility: visible !important; }
+
+    .height-5px  { height: 10px !important; }
+    .height-10px { height: 10px !important; }
+
+    .justify, .text-align-justify { text-align: justify !important; }
+
+    .lowercase { text-transform: lowercase !important; }
+    .uppercase { text-transform: uppercase !important; }
+
+    $line-height-list: 10px 12px 14px 16px 18px 20px 28px 30px;
+    @each $height in $line-height-list {
+        .line-height-#{$height} { line-height: #{$height} !important; }
+    }
+
+    $margin-size-list: 0 0px 1px 2px 3px 4px 5px 10px 20px 30px 40px 50px 55px 60px 70px 80px 100px 150px 200px 250px 300px;
+    $margin-pos-list: top right bottom left;
+    @each $size in $margin-size-list {
+      .margin-#{$size} {
+        margin: #{$size} !important;
+      }
+    }
+    @each $size in $margin-size-list {
+      @each $pos in $margin-pos-list {
+        .margin-#{$pos}-#{$size} {
+          margin-#{$pos}: #{$size} !important;
+        }
+      }
+    }
+    @each $size in $margin-size-list {
+      .append-bottom-#{$size} {
+        margin-bottom: #{$size} !important;
+      }
+    }
+    @each $size in $margin-size-list {
+      .prepend-top-#{$size} {
+        margin-top: #{$size} !important;
+      }
+    }
+
+    .prepend-top   { margin-top:    1.5em; }
+    .append-bottom { margin-bottom: 1.5em; }
+
+    .nowrap { white-space: nowrap !important; }
+
+    $opacity-list: 5 10 20 30 40 50 60 70 80 90 100;
+    @each $opacity in $opacity-list {
+      .opacity-#{$opacity} {
+         @include opacity($opacity * 0.01);
+      }
+    }
+
+    .overflow-hidden { overflow: hidden !important; }
+    .overflow-visible { overflow: visible !important; }
+
+    $padding-size-list: $margin-size-list;
+    $padding-pos-list: $margin-pos-list;
+    @each $size in $padding-size-list {
+      .padding-#{$size} {
+        padding: #{$size} !important;
+      }
+    }
+    @each $size in $padding-size-list {
+      @each $pos in $padding-pos-list {
+        .padding-#{$pos}-#{$size} {
+          padding-#{$pos}: #{$size} !important;
+        }
+      }
+    }
+
+    .position-fixed    { position: fixed    !important; }
+    .position-absolute { position: absolute !important; }
+    .position-relative { position: relative !important; }
+
+    .text-align-center {
+        text-align: center !important;
+    }
+    .text-align-left {
+        text-align: left !important;
+    }
+    .text-align-right {
+        text-align: right !important;
+    }
+    .text-decoration-none, .underline-none { text-decoration: none !important; }
+
+    $width-list: 35px 50px 100px 150px 200px 250px 300px 350px 400px 450px 500px auto;
+    @each $width in $width-list {
+      .width-#{$width} { width: #{$width} !important; }
+    }
+
+    $z-index-list: -1001 -999 -5 -4 -3 -2 -1 0 1 2 3 4 5 999 1001;
+    @each $z-index in $z-index-list {
+      .z-index-#{$z-index} { z-index: #{$z-index}; }
+    }
+
+}

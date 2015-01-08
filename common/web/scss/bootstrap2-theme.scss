@@ -1,0 +1,29 @@
+
+// -----------------------------------------------------------------------------
+// Load Bootstrap3 core variables and mixins
+// -----------------------------------------------------------------------------
+//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
+//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
+
+@import 'variables';
+@import 'bootstrap2-theme/base';
+@import 'bootstrap2-theme/jumbotron';
+@import 'bootstrap2-theme/badges';
+@import 'bootstrap2-theme/progress-bars';
+@import 'bootstrap2-theme/buttons';
+@import 'bootstrap2-theme/images';
+@import 'bootstrap2-theme/dropdowns';
+@import 'bootstrap2-theme/navbar';
+@import 'bootstrap2-theme/tabs';
+@import 'bootstrap2-theme/breadcrumbs';
+@import 'bootstrap2-theme/alerts';
+@import 'bootstrap2-theme/list-groups';
+@import 'bootstrap2-theme/panels';
+@import 'bootstrap2-theme/pills';
+@import 'bootstrap2-theme/pagination';
+@import 'bootstrap2-theme/wells';
+@import 'bootstrap2-theme/forms';
+@import 'bootstrap2-theme/tables';
+@import 'bootstrap2-theme/emphasis-misc';
+@import 'bootstrap2-theme/type';

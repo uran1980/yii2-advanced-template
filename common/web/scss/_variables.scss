@@ -1,0 +1,125 @@
+// -----------------------------------------------------------------------------
+// Load Bootstrap3 core variables
+// -----------------------------------------------------------------------------
+//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+
+// -----------------------------------------------------------------------------
+// Colors
+// -----------------------------------------------------------------------------
+$black:             #111;
+$white:             #fff;
+$dark-white:        #f2f5f7;
+$gray:              #eee;
+$light-gray:        #f2f2f2;
+$dark-gray:         #474e5e;
+$smoke-gray:        #b1b8c6;
+$dark-smoke-gray:   #717c96;
+$blue-gray:         #b1c0c4;
+$dark-blue-gray:    #414f67;
+$blue:              #3498db;
+$dark-blue:         #375a7f;
+$sky-blue:          #0d8fdb;
+$header-blue:       #0673a2;                                                    // #23779c;
+$link-blue:         $sky-blue;                                                  // #317eac | #6699cc;
+$link-hover-blue:   #0099ea;
+$yellow:            #f39c12;
+$orange:            #ff6600;
+$fire-red:          #ff1900;
+$red:               #e74c3c;
+$lava-red:          #f8591a;
+$green:             #02a000;
+$light-green:       #00bc8c;
+$vine_green:        #39dbac;
+
+$html-bg:   $gray;                                                              // $white;
+$header-bg: $header-blue;
+$footer-bg: $header-bg;
+
+$border-color: $blue-gray;
+
+$panel-primary-heading-bg:   darken($blue, 10%);
+$panel-info-heading-bg:      $blue;
+$panel-success-border-color: $light-green;
+
+$body-color-bg:     $light-gray;
+$link-color:        $link-blue;                                                 // #6699cc;
+$link-hover-color:  $link-hover-blue;
+
+$badge-bg: $brand-primary;
+
+$nav-link-hover-bg:                 darken($gray-lighter, 5%);
+$navbar-inverse-bg:                 #2a2f33;                                    // #394a57;
+$navbar-inverse-brand-color:        #c8c8c8;
+$navbar-default-link-color:         $link-color;
+$navbar-default-link-hover-color:   $link-hover-color;
+$navbar-default-brand-color:        $link-color;
+$navbar-default-brand-hover-color:  $link-hover-color;
+$navbar-default-link-active-color:  $link-color;
+$navbar-default-link-active-bg:     rgba(3, 14, 27, .08);
+
+$dropdown-link-color:   $link-color;
+$text-shadow-primary:   0 1px 0 rgba(darken($panel-primary-heading-bg, 50%),.85);
+$box-shadow-primary:    0 0 20px rgba(0, 0, 0, 0.3) inset;
+
+$alert-success-bg:  #62c462;
+//$alert-danger-bg:   #ffcdc9;
+$alert-danger-bg:   lighten($red, 5%);
+$alert-warning-bg:  #f6b559;                                                    // #ffdc00; //#ffe22f;
+$alert-info-bg:     #7fdbff;
+$alert-default-bg:  #fff;
+
+$panel-success-heading-bg:  $alert-success-bg;
+$panel-warning-heading-bg:  $alert-warning-bg;
+$panel-danger-heading-bg:   $red;
+
+$state-info-bg:         #c8ecff;
+$state-success-text:    $green;
+$state-success-bg:      #c3ffab;
+$state-warning-text:    darken($alert-warning-bg, 10%);
+$state-warning-bg:      #ffefa2;
+$state-danger-text:     $fire-red;
+$state-danger-bg:       #ffdada;
+
+$pagination-hover-color:        #fff;
+$pagination-hover-bg:           #599bdc;
+$pagination-hover-border:       #2a65a0;
+$pagination-hover-text-shadow:  0 -1px 0 rgba(0, 0, 0, 0.3);
+
+//$pager-border:              #ccc;
+$pager-border:              $border-color;
+$pager-hover-bg:            $pagination-hover-bg;
+$pager-hover-text-shadow:   $pagination-hover-text-shadow;
+$pager-hover-color:         $pagination-hover-color;
+$pager-disabled-bg:         $pagination-disabled-bg;
+
+$nav-tabs-border-color:     $border-color;
+$page-header-border-color:  $border-color;
+$btn-default-border:        $border-color;
+$input-border:              $border-color;
+$table-border-color:        $border-color;
+$blockquote-border-color:   $border-color;
+
+$thumbnail-border:          $border-color;
+
+
+// -----------------------------------------------------------------------------
+//                          GOOGLE ADS PLACEHOLDERS
+// -----------------------------------------------------------------------------
+// @see https://support.google.com/adsense/answer/185665?utm_source=aso&utm_medium=link&utm_campaign=ww-ww-et-asfe_&gsessionid=GEfkoNChwuvhqkoT8S8SdA
+$google-ads-300x250: '300x250';
+$google-ads-336x280: '336x280';
+$google-ads-728x90:  '728x90';
+$google-ads-160x600: '160x600';
+
+$google-ads-234x60:  '234x60';
+$google-ads-468x60:  '468x60';
+$google-ads-970x90:  '970x90';
+
+$google-ads-120x600: '120x600';
+$google-ads-120x240: '120x240';
+$google-ads-300x600: '300x600';
+
+$google-ads-250x250: '250x250';
+$google-ads-200x200: '200x200';
+$google-ads-180x150: '180x150';
+$google-ads-125x125: '125x125';

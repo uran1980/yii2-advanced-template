@@ -14,10 +14,35 @@
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-redis": "*",
+        "yiisoft/yii2-authclient": "*",
+        "yiisoft/yii2-imagine": "*",
+
         "nenad/yii2-password-strength": "*",
         "mihaildev/yii2-ckeditor": "*",
 
-        "rmrevin/yii2-minify-view": "*"
+        "rmrevin/yii2-fontawesome": "*",
+        "rmrevin/yii2-minify-view": "*",
+        "codemix/yii2-localeurls": "*",
+        "zelenin/yii2-i18n-module": "*",
+        "danielstjules/stringy": "*",
+
+        "bower-asset/bootstrap-sass-official": "3.2.*",
+        "bower-asset/compass-mixins": "0.12.*",
+        "bower-asset/colors": "0.2.*",
+        "bower-asset/stitch-css": "*",
+        "bower-asset/jquery.easing": "*",
+        "bower-asset/jquery-mousewheel": "*",
+        "bower-asset/jquery-cookie": "*",
+        "bower-asset/datetimepicker": "*",
+        "bower-asset/jqueryui-timepicker-addon": "*",
+        "bower-asset/igrowl": "*",
+        "bower-asset/awesome-bootstrap-checkbox": "*",
+        "bower-asset/perfect-scrollbar": "*",
+        "bower-asset/scroll-to-top": "*",
+        "bower-asset/formValidation": "*",
+        "bower-asset/ladda-bootstrap": "*",
+        "bower-asset/holderjs": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

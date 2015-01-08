@@ -79,6 +79,35 @@ $config = [
         ],
     ],
 
+    // ------------------- ASSET MANAGER COMPONENT -----------------------------
+    // @see http://stackoverflow.com/questions/25850164/yii2-asset-convertor
+    // @see vendor\yiisoft\yii2\web\AssetConverter.php
+    'app.assetManager' => [
+        'bundles' => [
+            // we will use bootstrap css from our theme
+            'yii\bootstrap\BootstrapAsset' => [
+                'css' => [], // do not use yii default one
+            ],
+//             // use bootstrap js from CDN
+//             'yii\bootstrap\BootstrapPluginAsset' => [
+//                 'sourcePath' => null,   // do not use file from our server
+//                 'js' => [
+//                     'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js']
+//             ],
+//             // use jquery from CDN
+//             'yii\web\JqueryAsset' => [
+//                 'sourcePath' => null,   // do not use file from our server
+//                 'js' => [
+//                     '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+//                 ]
+//             ],
+        ],
+        'converter' => [
+            'class' => common\assets\AppAssetConvertor::className(),
+            'forceConvert'  => ( YII_ENV == 'prod' ? false : true ),
+        ],
+    ],
+
     // ---------------------------- DEBUG MODULE -------------------------------
     'app.debugModule' => [
         'class' => yii\debug\Module::className(),

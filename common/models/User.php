@@ -14,9 +14,9 @@ use Yii;
  */
 class User extends UserIdentity
 {
-    const STATUS_DELETED = 0;
+    const STATUS_DELETED    = 0;
     const STATUS_NOT_ACTIVE = 1;
-    const STATUS_ACTIVE = 10;
+    const STATUS_ACTIVE     = 10;
 
     public $password;
 
@@ -42,7 +42,7 @@ class User extends UserIdentity
             ['password', 'required', 'on' => 'create'],
             // use passwordStrengthRule() method to determine password strength
             $this->passwordStrengthRule(),
-                      
+
             ['username', 'unique', 'message' => 'This username has already been taken.'],
             ['email', 'unique', 'message' => 'This email address has already been taken.'],
         ];
@@ -58,7 +58,7 @@ class User extends UserIdentity
         // get setting value for 'Force Strong Password'
         $fsp = Yii::$app->params['fsp'];
 
-        // password strength rule is determined by StrengthValidator 
+        // password strength rule is determined by StrengthValidator
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
         $strong = [['password'], StrengthValidator::className(), 'preset'=>'normal'];
 
@@ -113,13 +113,13 @@ class User extends UserIdentity
 
     /**
      * Relation with Article model.
-     * 
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getArticles()
     {
         return $this->hasMany(Article::className(), ['user_id' => 'id']);
-    }    
+    }
 
 //------------------------------------------------------------------------------------------------//
 // USER FINDERS
@@ -134,8 +134,8 @@ class User extends UserIdentity
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => User::STATUS_ACTIVE]);
-    }  
-    
+    }
+
     /**
      * Finds user by email.
      *
@@ -145,7 +145,7 @@ class User extends UserIdentity
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email, 'status' => User::STATUS_ACTIVE]);
-    } 
+    }
 
     /**
      * Finds user by password reset token.
@@ -155,7 +155,7 @@ class User extends UserIdentity
      */
     public static function findByPasswordResetToken($token)
     {
-        if (!static::isPasswordResetTokenValid($token)) 
+        if (!static::isPasswordResetTokenValid($token))
         {
             return null;
         }
@@ -195,7 +195,7 @@ class User extends UserIdentity
     {
         // if scenario is 'lwe', we need to check email, otherwise we check username
         $field = ($scenario === 'lwe') ? 'email' : 'username';
-        
+
         if ($user = static::findOne([$field => $username]))
         {
             if ($user->validatePassword($password))
@@ -205,14 +205,14 @@ class User extends UserIdentity
             else
             {
                 return false; // invalid password
-            }            
+            }
         }
         else
         {
             return false; // invalid username|email
         }
     }
-  
+
 //------------------------------------------------------------------------------------------------//
 // HELPERS
 //------------------------------------------------------------------------------------------------//
@@ -274,7 +274,7 @@ class User extends UserIdentity
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
-    
+
     /**
      * Removes password reset token.
      */
@@ -285,13 +285,13 @@ class User extends UserIdentity
 
     /**
      * Finds out if password reset token is valid.
-     * 
+     *
      * @param  string $token Password reset token.
      * @return bool
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (empty($token)) 
+        if (empty($token))
         {
             return false;
         }
@@ -301,7 +301,7 @@ class User extends UserIdentity
         $parts = explode('_', $token);
 
         $timestamp = (int) end($parts);
-        
+
         return $timestamp + $expire >= time();
     }
 

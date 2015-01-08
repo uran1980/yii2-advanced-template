@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
+
+@import '../../../../common/web/scss/variables';
+@import '../../../../common/web/scss/functions';
+@import '../../../../common/web/scss/mixins';
+@import '../../../../common/web/scss/bootstrap2-theme';
+
+html {
+    //@include noise-background($white);
+    background: $gray;
+}
+body {
+    background: transparent;
+}
+
+// FIX -------------------------------------------------------------------------
+// @see http://stackoverflow.com/questions/12007507/how-to-remove-dotted-border-around-link
+a,
+a:active,
+a:visited,
+a:link,
+a:focus,
+a:hover,
+input[type="button"],
+input[type="submit"],
+button {
+    outline: none;
+}
+// -----------------------------------------------------------------------------
+
+a:focus, a:hover {
+    text-decoration: none;
+}
+
+a.scroll-to-top-link {
+    width: 40px;
+    height: 40px;
+    opacity: 0.3;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    display: none;
+    text-indent: -9999px;
+    background: url(../images/icons/icon_top.png) no-repeat;
+    outline: none;
+    @media ( min-width: $screen-sm ) {
+        right: 100px;
+    }
+}
+
+.spoiler-content {
+    display: none;
+}
+
+.table-responsive {
+    border: none;
+    overflow-x: visible;
+}
+
+.nav-tabs {
+    > li.active {
+        > a,
+        > a:hover,
+        > a:focus {
+            background-color: $gray;
+        }
+    }
+}

@@ -50,19 +50,19 @@ class UserSearch extends User
     public function search($params)
     {
         // we make sure that admin can not see users with theCreator role
-        if (!Yii::$app->user->can('theCreator')) 
-        {
-            $query = User::find()->joinWith('role')
-                                 ->where(['!=', 'item_name', 'theCreator']);
+        if (!Yii::$app->user->can('theCreator')) {
+            $query = User::find()
+                ->joinWith('role')
+                ->where(['!=', 'item_name', 'theCreator'])
+            ;
         }
-        else
-        {
+        else {
             $query = User::find()->joinWith('role');
         }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['id'=>SORT_ASC]],
+            'sort' => ['defaultOrder' => ['id'=>SORT_ASC]],
             'pagination' => [
                 'pageSize' => $this->_pageSize,
             ]
@@ -74,8 +74,7 @@ class UserSearch extends User
             'desc' => ['item_name' => SORT_DESC],
         ];
 
-        if (!($this->load($params) && $this->validate())) 
-        {
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
@@ -86,9 +85,11 @@ class UserSearch extends User
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-              ->andFilterWhere(['like', 'email', $this->email])
-              ->andFilterWhere(['like', 'item_name', $this->item_name]);
+        $query
+            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'item_name', $this->item_name])
+        ;
 
         return $dataProvider;
     }
@@ -103,8 +104,7 @@ class UserSearch extends User
     {
         $roles = [];
 
-        foreach (AuthItem::getRoles() as $item_name) 
-        {
+        foreach (AuthItem::getRoles() as $item_name) {
             $roles[$item_name->name] = $item_name->name;
         }
 

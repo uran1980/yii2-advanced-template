@@ -1,0 +1,47 @@
+// -----------------------------------------------------------------------------
+// Dropdowns
+// -----------------------------------------------------------------------------
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    //@include gradient-vertical($start-color: $dropdown-link-hover-bg, $end-color: darken($dropdown-link-hover-bg, 5%));
+    //background-color: darken($dropdown-link-hover-bg, 5%);
+    @include gradient-vertical($start-color: $list-group-active-bg, $end-color: darken($list-group-active-bg, 5%));
+    background-color: darken($list-group-active-bg, 5%);
+    color: $list-group-active-color;
+    text-shadow: $text-shadow-primary;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+    @include gradient-vertical($start-color: $dropdown-link-active-bg, $end-color: darken($dropdown-link-active-bg, 5%));
+    background-color: darken($dropdown-link-active-bg, 5%);
+    text-shadow: $text-shadow-primary;
+}
+
+// -----------------------------------------------------------------------------
+// Dropdown menus links
+// -----------------------------------------------------------------------------
+.dropdown-menu {
+    // Links within the dropdown menu
+    > li > a {
+        color: $dropdown-link-color;
+    }
+}
+
+// Active state
+.dropdown-menu > .active > a {
+    &,
+    &:hover,
+    &:focus {
+        color: $dropdown-link-active-color;
+    }
+}
+
+// @see https://scotch.io/bar-talk/bootstrap-3-tips-and-tricks-you-might-not-know
+@media only screen and (min-width : 768px) {
+    /* Make Navigation Toggle on Desktop Hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+

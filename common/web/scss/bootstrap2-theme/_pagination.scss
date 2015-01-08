@@ -1,0 +1,103 @@
+// -----------------------------------------------------------------------------
+// Pagination (multiple pages)
+// -----------------------------------------------------------------------------
+.pagination {
+    > li > a,
+    > li > span {
+        @include btn-styles($btn-default-bg);
+        text-shadow: 0 1px 0 #fff;
+        border-color: $btn-default-border;
+
+        &:hover,
+        &:focus {
+            //@include gradient-vertical($start-color: $pagination-hover-bg, $end-color: darken($pagination-hover-bg, 12%));
+            //@include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            //background-repeat: repeat-x;
+
+            @include btn-styles($pagination-hover-bg);
+            border-color: darken($pagination-hover-bg, 20%);
+            color: $pagination-hover-color;
+            text-shadow: $pagination-hover-text-shadow;
+            z-index: 3;
+        }
+    }
+    > .active > a,
+    > .active > span {
+        &,
+        &:hover,
+        &:focus {
+            @include gradient-vertical($start-color: $pagination-hover-bg, $end-color: darken($pagination-hover-bg, 12%));
+            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            box-shadow: $box-shadow-primary;
+            text-shadow: $text-shadow-primary;
+        }
+    }
+    > .disabled {
+        > span,
+        > span:hover,
+        > span:focus,
+        > a,
+        > a:hover,
+        > a:focus {
+            background-color: $pagination-disabled-bg !important;
+            background-image: none !important;
+            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Pager pagination
+// -----------------------------------------------------------------------------
+.pager {
+    li {
+        display: inline;
+        > a,
+        > span {
+            @include btn-styles($btn-default-bg);
+            text-shadow: 0 1px 0 #fff;
+            border-color: $pager-border;
+
+            &:hover,
+            &:focus {
+                @include btn-styles($pager-hover-bg);
+                border-color: darken($pager-hover-bg, 20%);
+                color: $pager-hover-color;
+                text-shadow: $pager-hover-text-shadow;
+                z-index: 3;
+            }
+        }
+
+        > a:hover,
+        > a:focus {
+            text-decoration: none;
+            background-color: $pager-hover-bg;
+        }
+    }
+    > .active > a,
+    > .active > span {
+        &,
+        &:hover,
+        &:focus {
+            @include gradient-vertical($start-color: $pager-hover-bg, $end-color: darken($pager-hover-bg, 12%));
+            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            box-shadow: $box-shadow-primary;
+            text-shadow: $text-shadow-primary;
+        }
+    }
+    > .disabled {
+        > span,
+        > span:hover,
+        > span:focus,
+        > a,
+        > a:hover,
+        > a:focus {
+            background-color: $pager-disabled-bg !important;
+            background-image: none !important;
+            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            border-color: lighten($pager-border, 5%);
+            color: $pager-disabled-color;
+            text-shadow: none;
+        }
+    }
+}

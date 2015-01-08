@@ -1,0 +1,80 @@
+// Mixin for generating new styles
+@mixin panel-heading-styles($color) {
+    @include gradient-vertical($start-color: $color, $end-color: darken($color, 5%));
+    text-shadow: 0 1px 0 rgba(lighten($color, 25%),.85);
+    $shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.10);
+    @include box-shadow($shadow);
+}
+
+
+// -----------------------------------------------------------------------------
+// Panels
+// -----------------------------------------------------------------------------
+// Common styles
+.panel {
+    @include box-shadow(0 1px 2px rgba(0,0,0,.05));
+}
+
+// Apply the mixin to the panel headings only
+.panel-default {
+    $panel-default-border-color: $btn-default-border;
+
+    border-color: $panel-default-border-color;
+    > .panel-heading,
+    > .panel-footer {
+        @include panel-heading-styles($panel-default-heading-bg);
+        border-color: $panel-default-border-color;
+    }
+}
+.panel-primary {
+    & > .panel-heading {
+        @include panel-heading-styles($panel-primary-heading-bg);
+        border: none;
+        color: $white;
+        text-shadow: 0 1px 0 rgba($black, 0.85);
+    }
+}
+.panel-success {
+    $panel-success-border-color: darken($panel-success-heading-bg, 10%);
+
+    border-color: $panel-success-border-color;
+    & > .panel-heading {
+        @include panel-heading-styles($panel-success-heading-bg);
+        border: none;
+        color: darken($panel-success-heading-bg, 40%);
+        text-shadow: 0 1px 0 rgba(lighten($panel-success-heading-bg, 50%), .5);
+    }
+}
+.panel-info {
+    $panel-info-border-color: darken($panel-info-heading-bg, 10%);
+
+    border-color: $panel-info-border-color;
+    & > .panel-heading {
+        @include panel-heading-styles($panel-info-heading-bg);
+        border: none;
+        color: $white;
+        text-shadow: 0 1px 0 rgba($black, 0.85);
+    }
+}
+.panel-warning {
+    $panel-warning-border-color: darken($panel-warning-heading-bg, 10%);
+
+    border-color: $panel-warning-border-color;
+    & > .panel-heading {
+        @include panel-heading-styles($panel-warning-heading-bg);
+        border: none;
+        color: darken($panel-warning-heading-bg, 40%);
+        text-shadow: 0 1px 0 rgba(lighten($panel-warning-heading-bg, 50%), .5);
+    }
+}
+.panel-danger {
+    $panel-danger-border-color: darken($panel-danger-heading-bg, 10%);
+
+    border-color: $red;
+    & > .panel-heading {
+        @include panel-heading-styles($panel-danger-heading-bg);
+        border: none;
+        color: $white;
+        text-shadow: 0 1px 0 rgba($black, 0.85);
+    }
+}

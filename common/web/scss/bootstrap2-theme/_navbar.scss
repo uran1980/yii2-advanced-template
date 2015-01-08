@@ -1,0 +1,216 @@
+// -----------------------------------------------------------------------------
+// Nav
+// -----------------------------------------------------------------------------
+.nav {
+    > li {
+        > a {
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                background-color: $nav-link-hover-bg;
+            }
+        }
+    }
+    // Open dropdowns
+    .open > a {
+        &,
+        &:hover,
+        &:focus {
+            background-color: $nav-link-hover-bg;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Navbar
+// -----------------------------------------------------------------------------
+// Default navbar
+.navbar-default {
+    @include gradient-vertical($start-color: lighten($navbar-default-bg, 10%), $end-color: $navbar-default-bg);
+    @include reset-filter();                                                      // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered
+    border-radius: $navbar-border-radius;
+    border-color: $btn-default-border;
+    $shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    @include box-shadow($shadow);
+
+    .navbar-nav > .active > a {
+        @include gradient-vertical($start-color: darken($navbar-default-bg, 5%), $end-color: darken($navbar-default-bg, 2%));
+        @include box-shadow(inset 0 3px 9px rgba(0,0,0,.075));
+    }
+}
+.navbar-brand,
+.navbar-nav > li > a {
+    text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+.navbar-default {
+    .navbar-brand {
+        color: $navbar-default-brand-color;
+        &:hover,
+        &:focus {
+            color: $navbar-default-brand-hover-color;
+        }
+    }
+    .navbar-nav {
+        > li > a {
+            color: $navbar-default-link-color;
+            &:hover,
+            &:focus {
+                color: $navbar-default-link-hover-color;
+            }
+        }
+        > .active > a {
+            &,
+            &:hover,
+            &:focus {
+                background-image: none;
+                background-color: $navbar-default-link-active-bg;
+            }
+        }
+    }
+    // Dropdown menu items
+    .navbar-nav {
+        // Remove background color from open dropdown
+        > .open > a {
+            &,
+            &:hover,
+            &:focus {
+                color: $navbar-default-link-active-color;
+            }
+        }
+
+        @media (max-width: $grid-float-breakpoint-max) {
+            // Dropdowns get custom display when collapsed
+            .open .dropdown-menu {
+                > li > a {
+                    color: $navbar-default-link-color;
+                    &:hover,
+                    &:focus {
+                        //color: $navbar-default-link-hover-color;
+                        @include gradient-vertical($start-color: $list-group-active-bg, $end-color: darken($list-group-active-bg, 5%));
+                        background-color: darken($list-group-active-bg, 5%);
+                        color: $list-group-active-color;
+                        text-shadow: $text-shadow-primary;
+                    }
+                }
+                > .active > a {
+                    &,
+                    &:hover,
+                    &:focus {
+                        background-image: none;
+                        background-color: $navbar-default-link-active-bg;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Inverted navbar
+.navbar-inverse {
+    @include gradient-vertical($start-color: lighten($navbar-inverse-bg, 10%), $end-color: $navbar-inverse-bg);
+    @include reset-filter();                                                    // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered
+
+    .navbar-nav {
+        > li {
+            border-left: 1px solid rgba(0, 0, 0, 0.7);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            &.active {
+                border-left: 1px solid rgba(0, 0, 0, 0.7);
+                border-right: 1px solid rgba(0, 0, 0, 0.7);
+            }
+        }
+    }
+
+    .navbar-brand,
+    .navbar-nav > li > a {
+        //text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+        text-shadow: 0 -1px 1px darken($navbar-inverse-bg, 30%);
+        color: $navbar-inverse-brand-color;
+        &:hover,
+        &:focus {
+            @include gradient-vertical($start-color: lighten($navbar-inverse-bg, 20%), $end-color: lighten($navbar-inverse-bg, 10%));
+            @include box-shadow(inset 0 3px 9px rgba(0,0,0,.25));
+        }
+    }
+
+    .navbar-nav {
+        > .active > a {
+            @include gradient-vertical($start-color: $navbar-inverse-bg, $end-color: lighten($navbar-inverse-bg, 2.5%));
+            @include box-shadow(inset 0 3px 9px rgba(0,0,0,.25));
+            &:hover,
+            &:focus {
+                @include gradient-vertical($start-color: $navbar-inverse-bg, $end-color: lighten($navbar-inverse-bg, 2.5%));
+            }
+        }
+        > .open > a {
+            &,
+            &:hover,
+            &:focus {
+                @include gradient-vertical($start-color: lighten($navbar-inverse-bg, 20%), $end-color: lighten($navbar-inverse-bg, 10%));
+                @include box-shadow(inset 0 3px 9px rgba(0,0,0,.25));
+            }
+        }
+    }
+}
+
+// instagramm like navbar
+.navbar-instagramm-like {
+    $navbar-instagramm-like-bg: #306088;                                        // #517FA4 #306088
+    $navbar-instagramm-like-brand-color: lighten($navbar-inverse-brand-color, 10%);
+
+    @extend .navbar-inverse;
+    @include gradient-vertical($start-color: lighten($navbar-instagramm-like-bg, 10%), $end-color: $navbar-instagramm-like-bg);
+    @include reset-filter();                                                    // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered
+
+    //border-color: lighten($navbar-instagramm-like-bg, 20%);
+    border-color: darken($navbar-instagramm-like-bg, 5%);
+    border-bottom-color: lighten($navbar-instagramm-like-bg, 20%);
+    .navbar-nav {
+        > li {
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            &.active {
+                border-left: 1px solid rgba(0, 0, 0, 0.1);
+                border-right: 1px solid rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    .navbar-brand,
+    .navbar-nav > li > a {
+        //text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+        text-shadow: 0 -1px 1px darken($navbar-instagramm-like-bg, 20%);
+        color: $navbar-instagramm-like-brand-color;
+        &:hover,
+        &:focus {
+            @include gradient-vertical($start-color: lighten($navbar-instagramm-like-bg, 20%), $end-color: lighten($navbar-instagramm-like-bg, 10%));
+            box-shadow: none;
+        }
+    }
+
+    .navbar-nav {
+        > .active > a {
+            @include gradient-vertical($start-color: $navbar-instagramm-like-bg, $end-color: lighten($navbar-instagramm-like-bg, 2.5%));
+            //box-shadow: none;
+            &:hover,
+            &:focus {
+                @include gradient-vertical($start-color: $navbar-instagramm-like-bg, $end-color: lighten($navbar-instagramm-like-bg, 2.5%));
+            }
+        }
+        > .open > a {
+            &,
+            &:hover,
+            &:focus {
+                @include gradient-vertical($start-color: lighten($navbar-instagramm-like-bg, 20%), $end-color: lighten($navbar-instagramm-like-bg, 10%));
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+// Undo rounded corners in static and fixed navbars
+.navbar-static-top,
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+    border-radius: 0;
+}

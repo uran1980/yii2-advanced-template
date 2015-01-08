@@ -1,0 +1,26 @@
+// -----------------------------------------------------------------------------
+// Forms
+// -----------------------------------------------------------------------------
+.form-control {
+    border: 1px solid $input-border;
+}
+
+// Feedback states
+.has-success {
+    @include form-control-validation($state-success-text, $state-success-text, $state-success-bg);
+    .form-control {
+        background-color: $state-success-bg;
+    }
+}
+.has-warning {
+    @include form-control-validation($state-warning-text, $state-warning-text, $state-warning-bg);
+    .form-control {
+        background-color: $state-warning-bg;
+    }
+}
+.has-error {
+    @include form-control-validation($state-danger-text, $state-danger-text, $state-danger-bg);
+    .form-control {
+        background-color: $state-danger-bg;
+    }
+}
