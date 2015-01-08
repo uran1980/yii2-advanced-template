@@ -40,7 +40,7 @@ for example: ``` cd /var/www/sites/ ```
 
 3. Run the Composer ```create-project``` command:
 
-   ``` composer create-project nenad/yii2-advanced-template advanced ```
+   ``` composer create-project uran1980/yii2-advanced-template advanced ```
 
 4. Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
