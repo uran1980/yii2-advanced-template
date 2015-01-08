@@ -38,11 +38,17 @@ other tool you like).
 2. Now open up your console and ```cd``` to your web root directory,
 for example: ``` cd /var/www/sites/ ```
 
-3. Run the Composer ```create-project``` command:
+3. Clone this repo:
+ 
+``` git clone https://github.com/uran1980/yii2-advanced-template-custom.git advanced ```
+
+4. ```cd``` to your project root directory, for example: ``` cd /var/www/sites/advanced ```
+
+5. Run the Composer ```update``` command:
 
    ``` composer create-project uran1980/yii2-advanced-template advanced ```
 
-4. Once template is downloaded, you need to initialize it in one of three environments:
+6. Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
 and execute ```php init``` command.
 
@@ -52,21 +58,21 @@ and execute ```php init``` command.
 
    Type __0__ for development, execute coomant, type __yes__ to confirm, and execute again.
 
-5. Now you need to tell your application to use database that you have previously created.
+7. Now you need to tell your application to use database that you have previously created.
 Open up main-local.php config file in ```advanced/common/config/main-local.php```
 and adjust your connection credentials.
 
-6. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
+8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
 While you are inside a project root folder execute ```./yii migrate command```:
 
    ``` ./yii migrate ``` or if you are on Windows ``` yii migrate ```
 
-7. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
+9. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
 permissions:
 
    ``` ./yii rbac/init ``` or if you are on Windows ``` yii rbac/init ```
 
-8. Configure your web server:
+10. Configure your web server:
 
 For apache2 web server on localhost developmen configure httpd-vhosts.conf:
 
