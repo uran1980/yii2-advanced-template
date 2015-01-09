@@ -3,6 +3,7 @@
 use \yii\web\View;
 
 $config = [
+    'projectName' => 'My Project',
 
 //------------------------//
 // SYSTEM SETTINGS
@@ -20,7 +21,7 @@ $config = [
      *
      * If set to true users will have to login using email/password combo.
      */
-    'LoginWithEmail' => false,
+    'LoginWithEmail' => true,
 
     /**
      * Force Strong Password.
@@ -54,9 +55,26 @@ $config = [
     // ----------------------- URL MANAGER COMPONENT ---------------------------
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/url.md
     'app.urlManager' => [
-        'class'             => common\components\web\AppUrlManager::className(),
+        'class'             => yii\web\UrlManager::className(),
         'enablePrettyUrl'   => true,
         'showScriptName'    => false,                                           // false - means that index.php will not be part of the URLs
+    ],
+    'app.urlManager.localeUrls' => [
+        'class'             => codemix\localeurls\UrlManager::className(),
+        'enablePrettyUrl'   => true,
+        'showScriptName'    => false,
+    ],
+
+    // ----------------------- LOCALE URLS COMPONENT ---------------------------
+    // @see https://github.com/codemix/yii2-localeurls
+    'app.localeUrls' => [
+        'class'                     => codemix\localeurls\LocaleUrls::className(),
+        'enableDefaultSuffix'       => true,
+        'enablePersistence'         => true,
+        'enableLanguageDetection'   => true,
+
+        // List all supported languages here
+        'languages' => ['en', 'ru'],
     ],
 
     // ---------------------------- GII MODULE ---------------------------------
@@ -111,7 +129,43 @@ $config = [
         ],
         'converter' => [
             'class' => common\assets\AppAssetConvertor::className(),
-//            'forceConvert'  => YII_ENV_DEV,
+//            'forceConvert' => YII_ENV_DEV,
+        ],
+    ],
+
+    // ------------------------- AUTH MANAGER ----------------------------------
+    'app.authManager' => [
+        // varinat1: data base storage scenario
+        'class' => yii\rbac\DbManager::className(),
+
+//        // variant2: file storage scenario
+//        'class' => yii\rbac\PhpManager::className(),
+//        'itemFile'          => '@common/rbac/data/items.php',
+//        'assignmentFile'    => '@common/rbac/data/assignments.php',
+//        'ruleFile'          => '@common/rbac/data/rules.php',
+
+//        'defaultRoles' => ['user'],
+    ],
+
+    // ------------------------ MAIL COMPONENT ---------------------------------
+    'app.mail' => [
+        'class' => yii\swiftmailer\Mailer::className(),
+        'viewPath' => '@common/mails',
+        'useFileTransport' => true,
+    ],
+
+    // ----------------------------- I18N MODULE -------------------------------
+    // @see https://github.com/zelenin/yii2-i18n-module
+    // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md
+    'app.i18nModule' => [
+        'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
+        'languages' => ['en', 'ru'],
+        'translations' => [
+            '*' => [
+                'class'             => yii\i18n\DbMessageSource::className(),
+                'enableCaching'     => true,
+                'cachingDuration'   => 60 * 60 * 2,                             // cache on 2 hourse
+            ],
         ],
     ],
 

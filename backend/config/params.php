@@ -4,7 +4,6 @@ $config = [
     // ----------------------- URL MANAGER COMPONENT ---------------------------
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/url.md
     'app.urlManager' => [
-        'class' => yii\web\UrlManager::className(),
         'rules' => [
             ''      => 'backend/index/index',
             '/home' => 'backend/index/index',
@@ -25,5 +24,6 @@ $config = [
         ],
     ],
 ];
+$config['app.urlManager.localeUrls']['rules'] = $config['app.urlManager']['rules'];
 
 return $config;

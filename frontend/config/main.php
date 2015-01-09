@@ -13,7 +13,7 @@ $params = ArrayHelper::merge(
 $config = [
     'id'                  => 'app-frontend',
     'basePath'            => dirname(__DIR__),
-    'bootstrap'           => ['log'],
+    'bootstrap'           => ['log', 'localeUrls'],
     'controllerNamespace' => 'frontend\modules\site\controllers',
     'controller'          => '@frontend/modules/site/IndexController',
     'defaultRoute'        => 'site/index/index',
@@ -23,7 +23,9 @@ $config = [
         'profile'   => frontend\modules\profile\Module::className(),
     ],
     'components' => [
-        'urlManager' => $params['app.urlManager'],
+        'urlManager'    => $params['app.urlManager.localeUrls'],
+        'localeUrls'    => $params['app.localeUrls'],
+        'i18n'          => $params['app.i18nModule'],
         // here you can set theme used for your frontend application
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [
@@ -47,6 +49,7 @@ $config = [
                 'dbLogger' => [
                     'class'  => common\components\log\AppLoggerDbTarget::className(),
                     'levels' => ['info', 'error', 'warning'],
+                    'logVars' => ['_GET', '_POST'],                             // @see yii2\log\Target.php
                     'categories' => [
                         AppLogger::CATEGORY_APPLICATION,
                         AppLogger::CATEGORY_TEST,

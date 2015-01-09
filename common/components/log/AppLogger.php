@@ -11,14 +11,14 @@ class AppLogger
     const INFO      = 'info';
     const TRACE     = 'trace';
 
-    const CATEGORY_APPLICATION  = 'application';
-    const CATEGORY_FRONTEND     = 'frontend';
-    const CATEGORY_SITE         = 'site';
-    const CATEGORY_PROFILE      = 'profile';
-    const CATEGORY_BACKEND      = 'backend';
-    const CATEGORY_COMMON       = 'common';
-    const CATEGORY_TEST         = 'test';
-    const CATEGORY_CONSOLE      = 'console';
+    const CATEGORY_APPLICATION  = 'application*';
+    const CATEGORY_FRONTEND     = 'frontend*';
+    const CATEGORY_SITE         = 'site*';
+    const CATEGORY_PROFILE      = 'profile*';
+    const CATEGORY_BACKEND      = 'backend*';
+    const CATEGORY_COMMON       = 'common*';
+    const CATEGORY_TEST         = 'test*';
+    const CATEGORY_CONSOLE      = 'console*';
 
     /**
      * Logs a message with the given type and category.

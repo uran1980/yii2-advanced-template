@@ -66,6 +66,17 @@ class IndexController extends BackendController
      */
     public function actionIndex()
     {
+//        // debug info ----------------------------------------------------------
+//        \common\helpers\AppDebug::dump(array(
+//            'method'    => __METHOD__,
+//            'line'      => __LINE__,
+//            'isAdmin'   => Yii::$app->user->can('admin'),
+//            'isCreator' => Yii::$app->user->can('theCreator'),
+//            'user'      => Yii::$app->user->getIdentity(),
+//        ));
+//        // ---------------------------------------------------------------------
+
+
         return $this->render('index');
     }
 

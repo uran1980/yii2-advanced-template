@@ -36,6 +36,16 @@ class RbacHelper
             $auth->assign($role, $id);
         }
 
+//        // log -----------------------------------------------------------------
+//        \common\components\log\AppLogger::info(array(
+//            'method'        => __METHOD__,
+//            'line'          => __LINE__,
+//            'id'            => $id,
+//            '$usersCount'   => $usersCount,
+//            '$role'         => $role,
+//        ), __NAMESPACE__ . '\\' . __METHOD__);
+//        // ---------------------------------------------------------------------
+
         // return assigned role name in case you want to use this method in tests
         return $role->name;
     }

@@ -21,5 +21,6 @@ $config = [
         ],
     ],
 ];
+$config['app.urlManager.localeUrls']['rules'] = $config['app.urlManager']['rules'];
 
 return $config;
