@@ -145,66 +145,89 @@ Directory structure
 ```
 backend
 |
-|-- assets/              contains backend assets definition
+|-- assets/                    contains backend assets definition
 |
-|-- config/              contains backend configurations
+|-- config/                    contains backend configurations
 |
-|-- controllers/         contains Web controller classes
+|-- layouts/                   contain backend layouts
 |
-|-- helpers/             contains helper classes
+|-- modules                    contain backend modules
+|    |
+|    |-- backend
+|          |
+|          |-- controllers/    contains Web controller classes
+|          |
+|          |-- models/         contains backend-specific model classes
+|          |
+|          |-- views/          contains view files for the Web application
 |
-|-- models/              contains backend-specific model classes
-|
-|-- runtime/             contains files generated during runtime
-|
-|-- views/               contains view files for the Web application
+|-- runtime/                   contains files generated during runtime
 
 common
 |
-|-- config/              contains shared configurations
+|-- config/                    contains shared configurations
 |
-|-- mail/                contains view files for e-mails
+|-- helpers/                   contains helper classes
 |
-|-- models/              contains model classes used in both backend and frontend
+|-- layouts/                   contains shared layouts
 |
-|-- rbac/                contains role based access control classes
+|-- mail/                      contains view files for e-mails
+|
+|-- models/                    contains model classes used in both backend and frontend
+|
+|-- rbac/                      contains role based access control classes
 
 console
 |
-|-- config/              contains console configurations
+|-- config/                    contains console configurations
 |
-|-- controllers/         contains console controllers (commands)
+|-- controllers/               contains console controllers (commands)
 |
-|-- migrations/          contains database migrations
+|-- migrations/                contains database migrations
 |
-|-- models/              contains console-specific model classes
+|-- models/                    contains console-specific model classes
 |
-|-- runtime/             contains files generated during runtime
+|-- runtime/                   contains files generated during runtime
 
-environments             contains environment-based overrides
+environments/                  contains environment-based overrides
 
 frontend
 |
-|-- assets/              contains frontend assets definition
+|-- assets/                    contains frontend assets definition
 |
-|-- config/              contains frontend configurations
+|-- config/                    contains frontend configurations
 |
-|-- controllers/         contains Web controller classes
+|-- layouts/                   contain frontend layouts
 |
-|-- models/              contains frontend-specific model classes
+|-- modules                    contain frontend modules
+|    |
+|    |-- profile/              client's profile module
+|    |     |
+|    |     |-- controllers/    contains Web controller classes
+|    |     |
+|    |     |-- models/         contains profile-specific model classes
+|    |     |
+|    |     |-- views/          contains view files for the profile
+|    |
+|    |-- site/                 frontend site module
+|          |
+|          |-- controllers/    contains Web controller classes
+|          |
+|          |-- models/         contains site-specific model classes
+|          |
+|          |-- views/          contains view files for site module
 |
-|-- runtime/             contains files generated during runtime
 |
-|-- views/               contains view files for the Web application
+|-- runtime/                   contains files generated during runtime
 |
-|-- widgets/             contains frontend widgets
+|-- widgets/                   contains frontend widgets
 
 web
-|-- assets               contains application assets generated during runtime
+|-- assets                     contains application assets generated during runtime
 |
-|-- backend              contains the entry script and Web resources for backend side of application
+|-- backend                    contains the entry script and Web resources for backend side of application
 |
-|-- themes               contains frontend themes
+|-- themes                     contains frontend themes
 
 ```
 
