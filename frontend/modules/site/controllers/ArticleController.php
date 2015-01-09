@@ -6,6 +6,7 @@ use frontend\modules\site\models\Article;
 use frontend\modules\site\models\ArticleSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
+use frontend\modules\site\Module;
 use Yii;
 
 /**
@@ -106,7 +107,7 @@ class ArticleController extends FrontendController
         }
         else
         {
-            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+            throw new MethodNotAllowedHttpException(Module::t('You are not allowed to access this page.'));
         }
     }
 

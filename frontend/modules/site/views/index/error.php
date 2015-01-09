@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $name string */
@@ -17,11 +18,11 @@ $this->title = $name;
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
-    <p> 
-        <?= Yii::t('app', 'The above error occurred while the Web server was processing your request.') ?>
+    <p>
+        <?= Module::t('The above error occurred while the Web server was processing your request.') ?>
     </p>
     <p>
-        <?= Yii::t('app', 'Please contact us if you think this is a server error. Thank you.') ?>
+        <?= Module::t('Please contact us if you think this is a server error. Thank you.') ?>
     </p>
 
 </div>

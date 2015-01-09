@@ -2,9 +2,10 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use backend\modules\backend\Module;
 
 NavBar::begin([
-    'brandLabel' => Yii::t('app', Yii::$app->name),
+    'brandLabel' => Module::t(Yii::$app->name),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-default navbar-fixed-top',
@@ -13,18 +14,18 @@ NavBar::begin([
 
 // display Account and Users to admin+ roles
 if (Yii::$app->user->can('admin')) {
-    $menuItems[] = ['label' => Yii::t('app', 'Home'),  'url' => ['/backend/index/index']];
-    $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/backend/user/index']];
+    $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
+    $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
 }
 
 // display Login page to guests of the site
 if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/backend/index/login']];
+    $menuItems[] = ['label' => Module::t('Login'), 'url' => ['/backend/index/login']];
 }
 // display Logout to all logged in users
 else {
     $menuItems[] = [
-        'label'       => Yii::t('app', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
+        'label'       => Module::t('Logout'). ' (' . Yii::$app->user->identity->username . ')',
         'url'         => ['/backend/index/logout'],
         'linkOptions' => ['data-method' => 'post']
     ];

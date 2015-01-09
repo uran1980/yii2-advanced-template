@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
+use backend\modules\backend\Module;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -33,7 +34,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-        <p class="pull-left">&copy; <?= Yii::t('app', Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Module::t(Yii::$app->name) ?> <?= date('Y') ?></p>
         <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>

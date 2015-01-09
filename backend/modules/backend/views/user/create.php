@@ -1,12 +1,13 @@
 <?php
 use yii\helpers\Html;
+use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
 /* @var $role common\rbac\models\Role */
 
-$this->title = Yii::t('app', 'Create User');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = Module::t('Create User');
+$this->params['breadcrumbs'][] = ['label' => Module::t('Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-create">
