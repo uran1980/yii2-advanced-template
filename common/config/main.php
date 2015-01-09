@@ -1,4 +1,4 @@
-<?php
+<?php  // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
 
 use yii\helpers\ArrayHelper;
 
@@ -8,15 +8,16 @@ $params = ArrayHelper::merge(
 );
 
 $config = [
-    'name' => 'My Company',
-//    'language' => 'en',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
-        'assetManager' => $params['app.assetManager'],
-        'cache' => [
-            'class' => yii\caching\FileCache::className(),
-        ],
-        'urlManager' => $params['app.urlManager'],
+        'db'            => require(__DIR__ . '/multidb/db.php'),
+        'dbLogger'      => require(__DIR__ . '/multidb/dbLogger.php'),
+        'cache'         => $params['app.fileCache'],
+        'mail'          => $params['app.mail'],
+        'urlManager'    => $params['app.urlManager'],
+        'assetManager'  => $params['app.assetManager'],
+        'authManager'   => $params['app.authManager'],
+        'i18n'          => $params['app.i18nModule'],
         'session' => [
             'class' => yii\web\DbSession::className(),
         ],
@@ -25,23 +26,6 @@ $config = [
             'identityClass'     => common\models\UserIdentity::className(),
             'enableAutoLogin'   => true,
             'loginUrl'          => '/login',
-        ],
-        'authManager' => [
-            'class' => yii\rbac\DbManager::className(),
-        ],
-        'i18n' => [
-            'translations' => [
-                'app*' => [
-                    'class' => yii\i18n\PhpMessageSource::className(),
-                    'basePath' => '@common/translations',
-                    'sourceLanguage' => 'en',
-                ],
-                'yii' => [
-                    'class' => yii\i18n\PhpMessageSource::className(),
-                    'basePath' => '@common/translations',
-                    'sourceLanguage' => 'en'
-                ],
-            ],
         ],
     ], // components
 ];

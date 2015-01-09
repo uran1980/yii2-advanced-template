@@ -1,4 +1,4 @@
-<?php
+<?php // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
@@ -19,7 +19,9 @@ $config = [
     'defaultRoute'          => 'backend/index/index',
     'layout'                => '@backend/layouts/main.php',
     'modules' => [
-        'backend' => backend\modules\backend\Module::className(),
+        'backend'   => backend\modules\backend\Module::className(),
+//        'translate' => backend\modules\translate\Module::className(),
+        'i18n'      => Zelenin\yii\modules\I18n\Module::className(),
     ],
     'components' => [
         'urlManager' => $params['app.urlManager'],
@@ -28,12 +30,17 @@ $config = [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@app/modules/site/views'    => '@webroot/themes/default/views',
-                    '@app/modules/profile/views' => '@webroot/themes/default/views',
-                    '@app/modules/test/views'    => '@webroot/themes/default/views',
+                    '@app/modules/backend/views'    => '@webroot/themes/default/views',
+                    '@app/modules/translate/views'  => '@webroot/themes/default/views',
                 ],
                 'baseUrl' => '@web/themes/default',
             ],
+        ],
+        'user' => [
+            'class'             => yii\web\User::className(),
+            'identityClass'     => common\models\UserIdentity::className(),
+            'enableAutoLogin'   => true,
+            'loginUrl'          => '/backend/login',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

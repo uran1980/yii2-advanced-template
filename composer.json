@@ -25,6 +25,7 @@
         "rmrevin/yii2-minify-view": "*",
         "codemix/yii2-localeurls": "*",
         "zelenin/yii2-i18n-module": "*",
+        "vova07/yii2-fileapi-widget": "*",
         "danielstjules/stringy": "*",
 
         "bower-asset/bootstrap-sass-official": "3.2.*",

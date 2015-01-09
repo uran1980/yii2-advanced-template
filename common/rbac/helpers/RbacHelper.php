@@ -24,8 +24,7 @@ class RbacHelper
         Role::deleteAll(['user_id' => $id]);
 
         $usersCount = User::find()->count();
-
-        $auth = Yii::$app->authManager;
+        $auth       = Yii::$app->authManager;
 
         // this is the first user in our system, give him theCreator role
         if ($usersCount == 1) {
@@ -36,6 +35,16 @@ class RbacHelper
             $role = $auth->getRole('user');
             $auth->assign($role, $id);
         }
+
+//        // log -----------------------------------------------------------------
+//        \common\components\log\AppLogger::info(array(
+//            'method'        => __METHOD__,
+//            'line'          => __LINE__,
+//            'id'            => $id,
+//            '$usersCount'   => $usersCount,
+//            '$role'         => $role,
+//        ), __NAMESPACE__ . '\\' . __METHOD__);
+//        // ---------------------------------------------------------------------
 
         // return assigned role name in case you want to use this method in tests
         return $role->name;

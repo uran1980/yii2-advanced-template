@@ -1,11 +1,12 @@
 <?php
 use yii\helpers\Html;
+use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
 
-$this->title = Yii::t('app', 'Create Article');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
+$this->title = Module::t('Create Article');
+$this->params['breadcrumbs'][] = ['label' => Module::t('Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-create">

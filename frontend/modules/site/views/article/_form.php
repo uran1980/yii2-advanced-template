@@ -2,6 +2,7 @@
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\site\models\Article */
@@ -30,11 +31,11 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create')
-            : Yii::t('app', 'Update'), ['class' => $model->isNewRecord
+        <?= Html::submitButton($model->isNewRecord ? Module::t('Create')
+            : Module::t('Update'), ['class' => $model->isNewRecord
             ? 'btn btn-success' : 'btn btn-primary']) ?>
 
-        <?= Html::a(Yii::t('app', 'Cancel'), ['article/index'], ['class' => 'btn btn-default']) ?>
+        <?= Html::a(Module::t('Cancel'), ['article/index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

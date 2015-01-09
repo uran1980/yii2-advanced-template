@@ -1,9 +1,10 @@
 <?php
 use yii\helpers\Html;
+use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 
-$this->title = Yii::t('app', 'About');
+$this->title = Module::t('About');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index-about">

@@ -36,17 +36,17 @@ class AuthItem extends ActiveRecord
     public static function getRoles()
     {
         // we make sure that only You can see theCreator role in drop down list
-        if (Yii::$app->user->can('theCreator')) 
-        {
-            return static::find()->select('name')->where(['type' => 1])->all();  
+        if (Yii::$app->user->can('theCreator')) {
+            return static::find()->select('name')->where(['type' => 1])->all();
         }
         // admin can not see theCreator role in drop down list
-        else
-        {
-            return static::find()->select('name')
-                                 ->where(['type' => 1])
-                                 ->andWhere(['!=', 'name', 'theCreator'])
-                                 ->all();
+        else {
+            return static::find()
+                ->select('name')
+                ->where(['type' => 1])
+                ->andWhere(['!=', 'name', 'theCreator'])
+                ->all()
+            ;
         }
-    }        
+    }
 }

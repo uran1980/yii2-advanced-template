@@ -4,6 +4,7 @@ namespace frontend\modules\site\models;
 use common\models\User;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use frontend\modules\site\Module;
 use Yii;
 
 /**
@@ -75,15 +76,15 @@ class Article extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'Author'),
-            'title' => Yii::t('app', 'Title'),
-            'summary' => Yii::t('app', 'Summary'),
-            'content' => Yii::t('app', 'Content'),
-            'status' => Yii::t('app', 'Status'),
-            'category' => Yii::t('app', 'Category'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'id'            => Module::t('ID'),
+            'user_id'       => Module::t('Author'),
+            'title'         => Module::t('Title'),
+            'summary'       => Module::t('Summary'),
+            'content'       => Module::t('Content'),
+            'status'        => Module::t('Status'),
+            'category'      => Module::t('Category'),
+            'created_at'    => Module::t('Created At'),
+            'updated_at'    => Module::t('Updated At'),
         ];
     }
 
@@ -128,11 +129,11 @@ class Article extends ActiveRecord
 
         if ($status === self::STATUS_DRAFT)
         {
-            return Yii::t('app', 'Draft');
+            return Module::t('Draft');
         }
         else
         {
-            return Yii::t('app', 'Published');
+            return Module::t('Published');
         }
     }
 
@@ -144,8 +145,8 @@ class Article extends ActiveRecord
     public function getStatusList()
     {
         $statusArray = [
-            self::STATUS_DRAFT     => Yii::t('app', 'Draft'),
-            self::STATUS_PUBLISHED => Yii::t('app', 'Published'),
+            self::STATUS_DRAFT     => Module::t('Draft'),
+            self::STATUS_PUBLISHED => Module::t('Published'),
         ];
 
         return $statusArray;
@@ -163,15 +164,15 @@ class Article extends ActiveRecord
 
         if ($category === self::CATEGORY_ECONOMY)
         {
-            return Yii::t('app', 'Economy');
+            return Module::t('Economy');
         }
         elseif ($category === self::CATEGORY_SOCIETY)
         {
-            return Yii::t('app', 'Society');
+            return Module::t('Society');
         }
         else
         {
-            return Yii::t('app', 'Sport');
+            return Module::t('Sport');
         }
     }
 
@@ -183,9 +184,9 @@ class Article extends ActiveRecord
     public function getCategoryList()
     {
         $statusArray = [
-            self::CATEGORY_ECONOMY => Yii::t('app', 'Economy'),
-            self::CATEGORY_SOCIETY => Yii::t('app', 'Society'),
-            self::CATEGORY_SPORT   => Yii::t('app', 'Sport'),
+            self::CATEGORY_ECONOMY => Module::t('Economy'),
+            self::CATEGORY_SOCIETY => Module::t('Society'),
+            self::CATEGORY_SPORT   => Module::t('Sport'),
         ];
 
         return $statusArray;

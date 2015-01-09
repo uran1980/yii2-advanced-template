@@ -2,12 +2,13 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model frontend\modules\site\models\ContactForm */
 
-$this->title = Yii::t('app', 'Contact');
+$this->title = Module::t('Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-index-contact row">
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p><?php
-            echo Yii::t('app', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'); ?></p>
+            echo Module::t('If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'); ?></p>
 
         <div class="row">
             <div class="well bs-component">
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template'      => '<div class="row"><div class="col-sm-4">{image}</div><div class="col-sm-8">{input}</div></div>',
                     ]) ?>
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton(Module::t('Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>
