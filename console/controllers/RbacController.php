@@ -14,12 +14,12 @@ use Yii;
  * - admin      : your direct clients, administrators of this site
  * - editor     : editor of this site
  * - support    : support staff
- * - premium    : premium member of this site
- * - member     : user of this site who has registered his account and can log in
+ * - premium    : premium user of this site
+ * - user       : user of this site who has registered his profile and can log in
  *
  * Creates 7 permissions:
  *
- * - usePremiumContent  : allows premium members to use premium content
+ * - usePremiumContent  : allows premium users to use premium content
  * - createArticle      : allows editor+ roles to create articles
  * - updateOwnArticle   : allows editor+ roles to update own articles
  * - updateArticle      : allows admin+ roles to update all articles
@@ -40,14 +40,12 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
 
-        //---------- RULES ----------//
-
+        //----------------------------- RULES ----------------------------------
         // add the rule
         $rule = new \common\rbac\rules\AuthorRule;
         $auth->add($rule);
 
-        //---------- PERMISSIONS ----------//
-
+        //-------------------------- PERMISSIONS -------------------------------
         // add "usePremiumContent" permission
         $usePremiumContent = $auth->createPermission('usePremiumContent');
         $usePremiumContent->description = 'Allows premium+ roles to use premium content';
@@ -71,7 +69,7 @@ class RbacController extends Controller
         // add "adminArticle" permission
         $adminArticle = $auth->createPermission('adminArticle');
         $adminArticle->description = 'Allows admin+ roles to manage articles';
-        $auth->add($adminArticle);  
+        $auth->add($adminArticle);
 
         // add "updateArticle" permission
         $updateArticle = $auth->createPermission('updateArticle');
@@ -87,28 +85,27 @@ class RbacController extends Controller
         // "updateOwnArticle" will be used from "updateArticle"
         $auth->addChild($updateOwnArticle, $updateArticle);
 
-        //---------- ROLES ----------//
-
-        // add "member" role
-        $member = $auth->createRole('member');
-        $member->description = 'Registered users, members of this site';
-        $auth->add($member);
+        //-------------------------- ROLES -------------------------------------
+        // add "user" role
+        $user = $auth->createRole('user');
+        $user->description = 'Registered users, users of this site';
+        $auth->add($user);
 
         // add "premium" role
         $premium = $auth->createRole('premium');
-        $premium->description = 'Premium members. They have more permissions than normal members';
+        $premium->description = 'Premium users. They have more permissions than normal users';
         $auth->add($premium);
         $auth->addChild($premium, $usePremiumContent);
 
         // add "support" role
-        // support can do everything that member and premium can, plus you can add him more powers
+        // support can do everything that user and premium can, plus you can add him more powers
         $support = $auth->createRole('support');
         $support->description = 'Support staff';
-        $auth->add($support); 
+        $auth->add($support);
         $auth->addChild($support, $premium);
-        $auth->addChild($support, $member);    
+        $auth->addChild($support, $user);
 
-        // add "editor" role and give this role: 
+        // add "editor" role and give this role:
         // createArticle, updateOwnArticle and adminArticle permissions, plus he can do everything that support role can do.
         $editor = $auth->createRole('editor');
         $editor->description = 'Editor of this application';
@@ -118,7 +115,7 @@ class RbacController extends Controller
         $auth->addChild($editor, $updateOwnArticle);
         $auth->addChild($editor, $adminArticle);
 
-        // add "admin" role and give this role: 
+        // add "admin" role and give this role:
         // manageUsers, updateArticle adn deleteArticle permissions, plus he can do everything that editor role can do.
         $admin = $auth->createRole('admin');
         $admin->description = 'Administrator of this application';
@@ -132,11 +129,10 @@ class RbacController extends Controller
         // You can do everything that admin can do plus more (if You decide so)
         $theCreator = $auth->createRole('theCreator');
         $theCreator->description = 'You!';
-        $auth->add($theCreator); 
+        $auth->add($theCreator);
         $auth->addChild($theCreator, $admin);
 
-        if ($auth) 
-        {
+        if ($auth) {
             $this->stdout("\nRbac authorization data are installed successfully.\n", Console::FG_GREEN);
         }
     }

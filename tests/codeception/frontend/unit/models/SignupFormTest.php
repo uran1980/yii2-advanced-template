@@ -18,7 +18,7 @@ class SignupFormTest extends DbTestCase
     protected function tearDown()
     {
         // delete roles
-        Role::deleteAll();  
+        Role::deleteAll();
     }
 
     /**
@@ -33,7 +33,7 @@ class SignupFormTest extends DbTestCase
             'password' => 'asDF@#12asdf',
             'status' => 1
         ]);
-        $model->scenario = 'rna';
+        $model->scenario = 'RegistrationNeedsActivation';
 
         $user = $model->signup();
 
@@ -43,10 +43,10 @@ class SignupFormTest extends DbTestCase
         expect('email should be correct', $user->email)->equals('some_email@example.com');
         expect('password should be correct', $user->validatePassword('asDF@#12asdf'))->true();
 
-        expect('user has valid account activation token', 
+        expect('user has valid account activation token',
             $user->account_activation_token)->notNull();
 
-        expect('account activation email should be sent', 
+        expect('account activation email should be sent',
             $model->sendAccountActivationEmail($user))->true();
     }
 
@@ -70,9 +70,9 @@ class SignupFormTest extends DbTestCase
         expect('email should be correct', $user->email)->equals('some_email@example.com');
         expect('password should be correct', $user->validatePassword('asDF@#12asdf'))->true();
 
-        expect('account activation token is not set', 
+        expect('account activation token is not set',
             $user->account_activation_token)->null();
-    }   
+    }
 
     /**
      * Make sure that user can not take username|email that already exists.

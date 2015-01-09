@@ -30,13 +30,13 @@ return [
     //-- static pages --//
     'Password' => 'Lozinka',
     'Username' => 'Korisničko ime',
-    
+
     // contact
     'Name'    => 'Ime',
     'Subject' => 'Naslov',
     'Text'    => 'Tekst',
     'Verification Code' => 'Antispam kod',
-    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' 
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.'
         => 'Ako imate poslovni predlog ili pitanja, možete nas kontaktirati preko ove forme.',
     'Thank you for contacting us. We will respond to you as soon as possible.' => 'Hvala što ste nas kontaktirali. Odgovorićemo Vam u najkraćem mogućem roku.',
     'There was an error sending email.' => 'Nismo uspeli da Vam pošaljemo email',
@@ -58,23 +58,23 @@ return [
     // signup
     'Signup'   => 'Registracija',
     'Please fill out the following fields to signup:' => 'Molimo Vas popunite sledeća polja:',
-    'We will send you an email with account activation link.' => 'Poslaćemo Vam email sa linkom za aktivaciju.',
+    'We will send you an email with profile activation link.' => 'Poslaćemo Vam email sa linkom za aktivaciju.',
     'We couldn\'t sign you up, please contact us.' => 'Nismo uspeli da Vam napravimo nalog, molimo Vas da nas kontaktirate.',
 
     // login
     'Remember me'  => 'Zapamti me',
     'Please fill out the following fields to login:' => 'Molimo Vas popunite sledeća polja:',
-    'You have to activate your account first. Please check your email.' => 'Morate prvo da aktivirate Vaš nalog. Molimo Vas da proverite Vaš email.',
+    'You have to activate your profile first. Please check your email.' => 'Morate prvo da aktivirate Vaš nalog. Molimo Vas da proverite Vaš email.',
     'To be able to log in, you need to confirm your registration. Please check your email, we have sent you a message.'
         => 'Da biste mogli da se ulogujete, morate da potvrdite Vašu registraciju. Molimo Vas da proverite Vaš email, poslali smo Vam poruku.',
 
-    // account activation
-    'We couldn\'t send you account activation email, please contact us.' => 'Nismo mogli da Vam pošaljemo email sa linkom za aktivaciju naloga. Molimo Vas da nas kontaktirate.',
+    // profile activation
+    'We couldn\'t send you profile activation email, please contact us.' => 'Nismo mogli da Vam pošaljemo email sa linkom za aktivaciju naloga. Molimo Vas da nas kontaktirate.',
     'Success! You can now log in.' => 'Bravo! Sada možete da se ulogujete.',
     'for joining us!' => 'što ste nam se pridružili.',
-    'your account could not be activated, please contact us!' => 'nismo uspeli da Vam aktiviramo nalog, molimo Vas da nas kontaktirate!',
-    'Account activation token cannot be blank.' => 'Token ne može biti prazan.',
-    'Wrong account activation token.' => 'Pogrešan token.',
+    'your profile could not be activated, please contact us!' => 'nismo uspeli da Vam aktiviramo nalog, molimo Vas da nas kontaktirate!',
+    'Profile activation token cannot be blank.' => 'Token ne može biti prazan.',
+    'Wrong profile activation token.' => 'Pogrešan token.',
 
     //-- general db fields --//
     'Created At' => 'Napravljen',
@@ -84,7 +84,7 @@ return [
     'My Company' => 'Moja firma',
     'Hello' => 'Pozdrav',
     'Thank you' => 'Hvala',
-    
+
     //-- users management --//
     'Role' => 'Rola',
     'Create User' => 'Napravi nalog',

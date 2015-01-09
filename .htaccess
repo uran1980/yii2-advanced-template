@@ -2,7 +2,9 @@ RewriteEngine on
 
 # hide files and folders
 RedirectMatch 404 /_protected
+RedirectMatch 404 /application
 RedirectMatch 404 /\.git
+RedirectMatch 404 /\.hg
 RedirectMatch 404 /composer\.
 RedirectMatch 404 /.bowerrc
 

@@ -1,10 +1,8 @@
 <?php
 /**
- * -----------------------------------------------------------------------------
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
- * -----------------------------------------------------------------------------
  */
 
 namespace frontend\widgets;
@@ -63,14 +61,10 @@ class Alert extends Widget
         $flashes = $session->getAllFlashes();
         $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 
-        foreach ($flashes as $type => $data)
-        {
-            if (isset($this->alertTypes[$type]))
-            {
-                $data = (array)$data;
-
-                foreach ($data as $i => $message)
-                {
+        foreach ($flashes as $type => $data) {
+            if (isset($this->alertTypes[$type])) {
+                $data = (array) $data;
+                foreach ($data as $i => $message) {
                     /* initialize css class for each alert box */
                     $this->options['class'] = $this->alertTypes[$type] . $appendCss;
 

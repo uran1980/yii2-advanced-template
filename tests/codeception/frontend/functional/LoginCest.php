@@ -34,16 +34,16 @@ class LoginCest
 
     /**
      * Test login process.
-     * Based on your system settings for 'Login With Email' it will 
+     * Based on your system settings for 'Login With Email' it will
      * run either testLoginWithEmail() or testLoginWithUsername method.
-     * 
+     *
      * @param \Codeception\FunctionalTester $I
      * @param \Codeception\Scenario         $scenario
      */
     public function testLogin($I, $scenario)
     {
         // get setting value for 'Login With Email'
-        $lwe = \Yii::$app->params['lwe'];
+        $lwe = \Yii::$app->params['LoginWithEmail'];
 
         $lwe ? $this->testLoginWithEmail($I) : $this->testLoginWithUsername($I);
     }
@@ -111,18 +111,18 @@ class LoginCest
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
-  
+
     /**
      * We want to be sure that not active user can not login.
      * If he try to login, he should get error flash message.
-     * 
+     *
      * @param \Codeception\FunctionalTester $I
      * @param \Codeception\Scenario         $scenario
      */
     public function testLoginNotActiveUser($I, $scenario)
     {
         // get setting value for 'Login With Email'
-        $lwe = \Yii::$app->params['lwe'];
+        $lwe = \Yii::$app->params['LoginWithEmail'];
 
         $field = ($lwe) ? 'tester@example.com' : 'tester' ;
 

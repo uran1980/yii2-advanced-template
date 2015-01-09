@@ -11,23 +11,23 @@ $config = [
     /**
      * Registration Needs Activation.
      *
-     * If set to true users will have to activate their accounts using email account activation.
+     * If set to true users will have to activate their profile using email profile activation.
      */
-    'rna' => false,
+    'RegistrationNeedsActivation' => false,
 
     /**
      * Login With Email.
      *
      * If set to true users will have to login using email/password combo.
      */
-    'lwe' => false,
+    'LoginWithEmail' => false,
 
     /**
      * Force Strong Password.
      *
      * If set to true users will have to use passwords with strength determined by StrengthValidator.
      */
-    'fsp' => false,
+    'ForceStrongPassword' => false,
 
     /**
      * Set the password reset token expiration time.
@@ -54,7 +54,7 @@ $config = [
     // ----------------------- URL MANAGER COMPONENT ---------------------------
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/url.md
     'app.urlManager' => [
-        'class'             => yii\web\UrlManager::className(),
+        'class'             => common\components\web\AppUrlManager::className(),
         'enablePrettyUrl'   => true,
         'showScriptName'    => false,                                           // false - means that index.php will not be part of the URLs
     ],
@@ -64,6 +64,12 @@ $config = [
     'app.giiModule' => [
         'class'      => yii\gii\Module::className(),
         'allowedIPs' => ['127.0.0.1', '::1', '192.168.0.*'],
+    ],
+
+    // -------------------------- CACHE COMPONENT ------------------------------
+    // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/caching.md
+    'app.fileCache' => [
+        'class' => yii\caching\FileCache::className(),
     ],
 
     // ------------------------ MINIFY VIEW COMPONET ---------------------------
@@ -83,6 +89,7 @@ $config = [
     // @see http://stackoverflow.com/questions/25850164/yii2-asset-convertor
     // @see vendor\yiisoft\yii2\web\AssetConverter.php
     'app.assetManager' => [
+//        'forceCopy' => YII_ENV_DEV,
         'bundles' => [
             // we will use bootstrap css from our theme
             'yii\bootstrap\BootstrapAsset' => [
@@ -104,7 +111,7 @@ $config = [
         ],
         'converter' => [
             'class' => common\assets\AppAssetConvertor::className(),
-            'forceConvert'  => ( YII_ENV == 'prod' ? false : true ),
+//            'forceConvert'  => YII_ENV_DEV,
         ],
     ],
 

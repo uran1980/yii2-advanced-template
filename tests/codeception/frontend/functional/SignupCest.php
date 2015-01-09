@@ -19,9 +19,9 @@ class SignupCest
             'email' => 'demo@example.com',
             'username' => 'demo',
         ]);
-        
+
         // delete roles
-        Role::deleteAll();   
+        Role::deleteAll();
     }
 
     /**
@@ -30,7 +30,7 @@ class SignupCest
      * @param \Codeception\Event\TestEvent $event
      */
     public function _after($event)
-    { 
+    {
     }
 
     /**
@@ -44,16 +44,16 @@ class SignupCest
 
     /**
      * Test user signup process.
-     * Based on your system settings for 'Registration Needs Activation' it will 
+     * Based on your system settings for 'Registration Needs Activation' it will
      * run either testSignupWithActivation() or testSignupWithoutActivation() method.
-     * 
+     *
      * @param \Codeception\FunctionalTester $I
      * @param \Codeception\Scenario         $scenario
      */
     public function testSignup($I, $scenario)
     {
         // get setting value for 'Registration Needs Activation'
-        $rna = \Yii::$app->params['rna'];
+        $rna = \Yii::$app->params['RegistrationNeedsActivation'];
 
         $rna ? $this->testSignupWithActivation($I) : $this->testSignupWithoutActivation($I);
     }
@@ -101,7 +101,7 @@ class SignupCest
         ]);
 
         $I->expectTo('see that user is logged in');
-        $I->seeLink('Logout (demo)');     
+        $I->seeLink('Logout (demo)');
     }
 
     /**
@@ -128,5 +128,5 @@ class SignupCest
         $I->seeInCurrentUrl('signup');
         $I->see('Hello demo.', '.alert-success');
         $I->dontSeeLink('Logout (demo)');
-    }    
+    }
 }

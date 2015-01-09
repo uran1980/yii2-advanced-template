@@ -11,26 +11,33 @@ $params = ArrayHelper::merge(
 );
 
 $config = [
-    'id' => 'app-backend',
-    'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [],
+    'id'                    => 'app-backend',
+    'basePath'              => dirname(__DIR__),
+    'bootstrap'             => ['log'],
+    'controllerNamespace'   => 'backend\modules\backend\controllers',
+    'controller'            => '@backend/modules/backend/IndexController',
+    'defaultRoute'          => 'backend/index/index',
+    'layout'                => '@backend/layouts/main.php',
+    'modules' => [
+        'backend' => backend\modules\backend\Module::className(),
+    ],
     'components' => [
+        'urlManager' => $params['app.urlManager'],
         // here you can set theme used for your backend application
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [
             'theme' => [
-                'pathMap' => ['@app/views' => '@webroot/themes/default/views'],
+                'pathMap' => [
+                    '@app/modules/site/views'    => '@webroot/themes/default/views',
+                    '@app/modules/profile/views' => '@webroot/themes/default/views',
+                    '@app/modules/test/views'    => '@webroot/themes/default/views',
+                ],
                 'baseUrl' => '@web/themes/default',
             ],
         ],
-        'user' => [
-            'identityClass' => 'common\models\UserIdentity',
-            'enableAutoLogin' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
+            // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/runtime-logging.md#log-targets
             'targets' => [
                 'file' => [
                     'class'     => yii\log\FileTarget::className(),
@@ -40,14 +47,24 @@ $config = [
                     'class'  => common\components\log\AppLoggerDbTarget::className(),
                     'levels' => ['info', 'error', 'warning'],
                     'categories' => [
+                        AppLogger::CATEGORY_APPLICATION,
+                        AppLogger::CATEGORY_TEST,
                         AppLogger::CATEGORY_BACKEND,
                     ],
                     'logTable' => 'log',
                 ],
+//                // email target example
+//                'email' => [
+//                    'class' => 'yii\log\EmailTarget',
+//                    'levels' => ['error', 'warning'],
+//                    'message' => [
+//                        'to' => 'admin@example.com',
+//                    ],
+//                ],
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'backend/index/error',
         ],
     ],
     'params' => $params,

@@ -17,7 +17,7 @@ use Yii;
  * @property string  $password_hash
  * @property string  $password_reset_token
  * @property string  $email
- * @property string  $account_activation_token
+ * @property string  $profile_activation_token
  * @property string  $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -56,7 +56,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
      * @param  mixed $token
      * @param  null  $type
      * @return void|IdentityInterface
-     * 
+     *
      * @throws NotSupportedException
      */
     public static function findIdentityByAccessToken($token, $type = null)
@@ -90,7 +90,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
 
     /**
      * Validates the given auth key.
-     * 
+     *
      * @param  string  $authKey The given auth key.
      * @return boolean          Whether the given auth key is valid.
      */
@@ -104,7 +104,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
 //------------------------------------------------------------------------------------------------//
 
     /**
-     * Generates "remember me" authentication key. 
+     * Generates "remember me" authentication key.
      */
     public function generateAuthKey()
     {
@@ -116,7 +116,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
      *
      * @param  string $password
      * @return bool
-     * 
+     *
      * @throws \yii\base\InvalidConfigException
      */
     public function validatePassword($password)
@@ -128,7 +128,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model.
      *
      * @param  string $password
-     * 
+     *
      * @throws \yii\base\Exception
      * @throws \yii\base\InvalidConfigException
      */

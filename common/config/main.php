@@ -20,6 +20,12 @@ $config = [
         'session' => [
             'class' => yii\web\DbSession::className(),
         ],
+        'user' => [
+            'class'             => yii\web\User::className(),
+            'identityClass'     => common\models\UserIdentity::className(),
+            'enableAutoLogin'   => true,
+            'loginUrl'          => '/login',
+        ],
         'authManager' => [
             'class' => yii\rbac\DbManager::className(),
         ],

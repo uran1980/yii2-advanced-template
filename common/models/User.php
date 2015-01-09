@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use common\rbac\models\Role;
@@ -56,7 +57,7 @@ class User extends UserIdentity
     private function passwordStrengthRule()
     {
         // get setting value for 'Force Strong Password'
-        $fsp = Yii::$app->params['fsp'];
+        $fsp = Yii::$app->params['ForceStrongPassword'];
 
         // password strength rule is determined by StrengthValidator
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
@@ -89,14 +90,14 @@ class User extends UserIdentity
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
-            'email' => Yii::t('app', 'Email'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'item_name' => Yii::t('app', 'Role'),
+            'id'            => Yii::t('app', 'ID'),
+            'username'      => Yii::t('app', 'Username'),
+            'password'      => Yii::t('app', 'Password'),
+            'email'         => Yii::t('app', 'Email'),
+            'status'        => Yii::t('app', 'Status'),
+            'created_at'    => Yii::t('app', 'Created At'),
+            'updated_at'    => Yii::t('app', 'Updated At'),
+            'item_name'     => Yii::t('app', 'Role'),
         ];
     }
 
@@ -155,8 +156,7 @@ class User extends UserIdentity
      */
     public static function findByPasswordResetToken($token)
     {
-        if (!static::isPasswordResetTokenValid($token))
-        {
+        if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
@@ -167,15 +167,15 @@ class User extends UserIdentity
     }
 
     /**
-     * Finds user by account activation token.
+     * Finds user by profile activation token.
      *
-     * @param  string $token Account activation token.
+     * @param  string $token Profile activation token.
      * @return static|null
      */
-    public static function findByAccountActivationToken($token)
+    public static function findByProfileActivationToken($token)
     {
         return static::findOne([
-            'account_activation_token' => $token,
+            'profile_activation_token' => $token,
             'status' => User::STATUS_NOT_ACTIVE,
         ]);
     }
@@ -193,22 +193,18 @@ class User extends UserIdentity
      */
     public static function userExists($username, $password, $scenario)
     {
-        // if scenario is 'lwe', we need to check email, otherwise we check username
-        $field = ($scenario === 'lwe') ? 'email' : 'username';
+        // if scenario is 'LoginWithEmail', we need to check email, otherwise we check username
+        $field = ($scenario === 'LoginWithEmail') ? 'email' : 'username';
 
-        if ($user = static::findOne([$field => $username]))
-        {
-            if ($user->validatePassword($password))
-            {
+        if ($user = static::findOne([$field => $username])) {
+            if ($user->validatePassword($password)) {
                 return $user;
             }
-            else
-            {
+            else {
                 return false; // invalid password
             }
         }
-        else
-        {
+        else {
             return false; // invalid username|email
         }
     }
@@ -227,16 +223,13 @@ class User extends UserIdentity
     {
         $status = (empty($status)) ? $this->status : $status ;
 
-        if ($status === self::STATUS_DELETED)
-        {
+        if ($status === self::STATUS_DELETED) {
             return "Deleted";
         }
-        elseif ($status === self::STATUS_NOT_ACTIVE)
-        {
+        elseif ($status === self::STATUS_NOT_ACTIVE) {
             return "Inactive";
         }
-        else
-        {
+        else {
             return "Active";
         }
     }
@@ -291,33 +284,30 @@ class User extends UserIdentity
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (empty($token))
-        {
+        if (empty($token)) {
             return false;
         }
 
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-
-        $parts = explode('_', $token);
-
-        $timestamp = (int) end($parts);
+        $expire     = Yii::$app->params['user.passwordResetTokenExpire'];
+        $parts      = explode('_', $token);
+        $timestamp  = (int) end($parts);
 
         return $timestamp + $expire >= time();
     }
 
     /**
-     * Generates new account activation token.
+     * Generates new profile activation token.
      */
-    public function generateAccountActivationToken()
+    public function generateProfileActivationToken()
     {
-        $this->account_activation_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->profile_activation_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     /**
-     * Removes account activation token.
+     * Removes profile activation token.
      */
-    public function removeAccountActivationToken()
+    public function removeProfileActivationToken()
     {
-        $this->account_activation_token = null;
+        $this->profile_activation_token = null;
     }
 }

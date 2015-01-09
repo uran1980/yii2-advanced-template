@@ -34,16 +34,16 @@ class LoginCest
 
     /**
      * Test login process.
-     * Based on your system settings for 'Login With Email' it will 
+     * Based on your system settings for 'Login With Email' it will
      * run either testLoginWithEmail() or testLoginWithUsername method.
-     * 
+     *
      * @param \Codeception\AcceptanceTester $I
      * @param \Codeception\Scenario         $scenario
      */
     public function testLogin($I, $scenario)
     {
         // get setting value for 'Login With Email'
-        $lwe = \Yii::$app->params['lwe'];
+        $lwe = \Yii::$app->params['LoginWithEmail'];
 
         $lwe ? $this->testLoginWithEmail($I) : $this->testLoginWithUsername($I);
     }
@@ -68,7 +68,7 @@ class LoginCest
         //-- submit form with wrong credentials --//
         $I->amGoingTo('(login with email): try to login with wrong credentials');
         $loginPage->login('wrong@example.com', 'wrong');
-        if (method_exists($I, 'wait')) 
+        if (method_exists($I, 'wait'))
         {
             $I->wait(3); // only for selenium
         }
@@ -78,7 +78,7 @@ class LoginCest
         //-- login user with correct credentials --//
         $I->amGoingTo('try to log in correct user');
         $loginPage->login('member@example.com', 'member123');
-        if (method_exists($I, 'wait')) 
+        if (method_exists($I, 'wait'))
         {
             $I->wait(3); // only for selenium
         }
@@ -108,7 +108,7 @@ class LoginCest
         //-- submit form with wrong credentials --//
         $I->amGoingTo('(login with username): try to login with wrong credentials');
         $loginPage->login('wrong', 'wrong');
-        if (method_exists($I, 'wait')) 
+        if (method_exists($I, 'wait'))
         {
             $I->wait(3); // only for selenium
         }
@@ -118,7 +118,7 @@ class LoginCest
         //-- login user with correct credentials --//
         $I->amGoingTo('try to log in correct user');
         $loginPage->login('member', 'member123');
-        if (method_exists($I, 'wait')) 
+        if (method_exists($I, 'wait'))
         {
             $I->wait(3); // only for selenium
         }
@@ -131,14 +131,14 @@ class LoginCest
     /**
      * We want to be sure that not active user can not login.
      * If he try to login, he should get error flash message.
-     * 
+     *
      * @param \Codeception\AcceptanceTester $I
      * @param \Codeception\Scenario         $scenario
      */
     public function testLoginNotActiveUser($I, $scenario)
     {
         // get setting value for 'Login With Email'
-        $lwe = \Yii::$app->params['lwe'];
+        $lwe = \Yii::$app->params['LoginWithEmail'];
 
         $field = ($lwe) ? 'tester@example.com' : 'tester' ;
 

@@ -1,4 +1,4 @@
-<?php
+<?php // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
@@ -11,25 +11,34 @@ $params = ArrayHelper::merge(
 );
 
 $config = [
-    'id' => 'app-frontend',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
+    'id'                  => 'app-frontend',
+    'basePath'            => dirname(__DIR__),
+    'bootstrap'           => ['log'],
+    'controllerNamespace' => 'frontend\modules\site\controllers',
+    'controller'          => '@frontend/modules/site/IndexController',
+    'defaultRoute'        => 'site/index/index',
+    'layout'              => '@frontend/layouts/main.php',
+    'modules' => [
+        'site'      => frontend\modules\site\Module::className(),
+        'profile'   => frontend\modules\profile\Module::className(),
+    ],
     'components' => [
+        'urlManager' => $params['app.urlManager'],
         // here you can set theme used for your frontend application
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [
             'theme' => [
-                'pathMap' => ['@app/views' => '@webroot/themes/default/views'],
+                'pathMap' => [
+                    '@app/modules/site/views'    => '@webroot/themes/default/views',
+                    '@app/modules/profile/views' => '@webroot/themes/default/views',
+                    '@app/modules/test/views'    => '@webroot/themes/default/views',
+                ],
                 'baseUrl' => '@web/themes/default',
             ],
         ],
-        'user' => [
-            'identityClass' => common\models\UserIdentity::className(),
-            'enableAutoLogin' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
+            // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/runtime-logging.md#log-targets
             'targets' => [
                 'file' => [
                     'class'     => yii\log\FileTarget::className(),
@@ -39,7 +48,10 @@ $config = [
                     'class'  => common\components\log\AppLoggerDbTarget::className(),
                     'levels' => ['info', 'error', 'warning'],
                     'categories' => [
+                        AppLogger::CATEGORY_APPLICATION,
+                        AppLogger::CATEGORY_TEST,
                         AppLogger::CATEGORY_FRONTEND,
+                        AppLogger::CATEGORY_PROFILE,
                         AppLogger::CATEGORY_SITE,
                     ],
                     'logTable' => 'log',
@@ -55,10 +67,14 @@ $config = [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'site/index/error',
         ],
     ],
     'params' => $params,
 ];
+
+if ( YII_ENV_DEV ) {
+    $config['modules']['test'] = frontend\modules\test\Module::className();
+}
 
 return $config;

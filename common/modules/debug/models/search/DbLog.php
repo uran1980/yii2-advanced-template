@@ -2,6 +2,7 @@
 
 namespace common\modules\debug\models\search;
 
+use yii\debug\components\search\Filter;
 use yii\debug\models\search\Base;
 use common\models\Log;
 

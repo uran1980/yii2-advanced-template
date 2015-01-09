@@ -21,7 +21,7 @@ class m141022_115823_create_user_table extends Migration
             'status'                    => Schema::TYPE_SMALLINT . ' NOT NULL',
             'auth_key'                  => Schema::TYPE_STRING . '(32) NOT NULL',
             'password_reset_token'      => Schema::TYPE_STRING,
-            'account_activation_token'  => Schema::TYPE_STRING,
+            'profile_activation_token'  => Schema::TYPE_STRING,
             'created_at'                => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at'                => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
