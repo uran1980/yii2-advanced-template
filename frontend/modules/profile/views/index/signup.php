@@ -10,31 +10,27 @@ use yii\bootstrap\ActiveForm;
 $this->title = Yii::t('app', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
+<div class="site-signup row">
+    <div class="col-lg-6 col-lg-push-3">
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <div class="well bs-component">
+            <p><?= Yii::t('app', 'Please fill out the following fields to signup:') ?></p>
 
-    <div class="col-lg-5 well bs-component">
+            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+                <?= $form->field($model, 'username') ?>
+                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'password')->widget(PasswordInput::classname(), []) ?>
+                <div class="form-group">
+                    <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                </div>
+            <?php ActiveForm::end(); ?>
 
-        <p><?= Yii::t('app', 'Please fill out the following fields to signup:') ?></p>
-
-        <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-            <?= $form->field($model, 'username') ?>
-            <?= $form->field($model, 'email') ?>
-            <?= $form->field($model, 'password')->widget(PasswordInput::classname(), []) ?>
-
-            <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-            </div>
-
-        <?php ActiveForm::end(); ?>
-
-        <?php if ($model->scenario === 'RegistrationNeedsActivation'): ?>
-            <div style="color:#666;margin:1em 0">
+            <?php if ($model->scenario === 'RegistrationNeedsActivation'): ?>
+            <div style="color: #666; margin: 1em 0;">
                 <i>*<?= Yii::t('app', 'We will send you an email with profile activation link.') ?></i>
             </div>
-        <?php endif ?>
-
+            <?php endif ?>
+        </div>
     </div>
 </div>
