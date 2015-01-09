@@ -80,8 +80,8 @@ class SignupFormTest extends DbTestCase
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'member',
-            'email' => 'member@example.com',
+            'username' => 'user',
+            'email' => 'user@example.com',
             'password' => 'asDF@#12asdf',
             'status' => 1
         ]);

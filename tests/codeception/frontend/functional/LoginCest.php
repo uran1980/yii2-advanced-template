@@ -73,9 +73,9 @@ class LoginCest
 
         //-- login user with correct credentials --//
         $I->amGoingTo('try to log in correct user');
-        $loginPage->login('member@example.com', 'member123');
+        $loginPage->login('user@example.com', 'user123');
         $I->expectTo('see that user is logged in');
-        $I->seeLink('Logout (member)');
+        $I->seeLink('Logout (user)');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
@@ -105,9 +105,9 @@ class LoginCest
 
         //-- login user with correct credentials --//
         $I->amGoingTo('try to log in correct user');
-        $loginPage->login('member', 'member123');
+        $loginPage->login('user', 'user123');
         $I->expectTo('see that user is logged in');
-        $I->seeLink('Logout (member)');
+        $I->seeLink('Logout (user)');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }

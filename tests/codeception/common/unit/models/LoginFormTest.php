@@ -44,7 +44,7 @@ class LoginFormTest extends DbTestCase
     {
         $model = new LoginForm([
             'username' => 'wrong',
-            'password' => 'member123',
+            'password' => 'user123',
         ]);
 
         $this->specify('user should not be able to login, when username is wrong',
@@ -60,8 +60,8 @@ class LoginFormTest extends DbTestCase
     private function testLoginWrongEmail()
     {
         $model = new LoginForm(['scenario' => 'LoginWithEmail']);
-        $model->email = 'member@wrong.com';
-        $model->password = 'member123';
+        $model->email = 'user@wrong.com';
+        $model->password = 'user123';
 
         $this->specify('user should not be able to login, when email is wrong',
             function () use ($model) {
@@ -76,7 +76,7 @@ class LoginFormTest extends DbTestCase
     public function testLoginWrongPassword()
     {
         $model = new LoginForm(['scenario' => 'LoginWithEmail']);
-        $model->email = 'member@example.com';
+        $model->email = 'user@example.com';
         $model->password = 'password';
 
         $this->specify('user should not be able to login with wrong password',
@@ -108,8 +108,8 @@ class LoginFormTest extends DbTestCase
     public function testLoginActivatedUser()
     {
         $model = new LoginForm(['scenario' => 'LoginWithEmail']);
-        $model->email = 'member@example.com';
-        $model->password = 'member123';
+        $model->email = 'user@example.com';
+        $model->password = 'user123';
 
         $this->specify('user should be able to login with correct credentials',
             function () use ($model) {

@@ -2,11 +2,11 @@
 
 return [
     [
-        // this user is active and is member of the site
-        'username' => 'member',
-        'email' => 'member@example.com',
+        // this user is active and is user of the site
+        'username' => 'user',
+        'email' => 'user@example.com',
         'auth_key' => 'iwTNae9t34OmnK6l4vT4IeaTk-YWI2Rv',
-        // password is : member123
+        // password is : user123
         'password_hash' => '$2y$13$X1pvTWtc6k8FZg0Z/84Ypejc5It23sJUdWxnu35S8oxBYieWDwhna',
         'password_reset_token' => 't5GU9NwpuGYSfb7FEZMAxqtuz2PkEvv_' . time(),
         'account_activation_token' => '',
