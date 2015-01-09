@@ -13,8 +13,7 @@ $params = ArrayHelper::merge(
 $config = [
     'id'                  => 'app-frontend',
     'basePath'            => dirname(__DIR__),
-    'language'            => 'en',                                              // default app language
-    'bootstrap'           => ['log', 'localeUrls'],
+    'bootstrap'           => ['log'],
     'controllerNamespace' => 'frontend\modules\site\controllers',
     'controller'          => '@frontend/modules/site/IndexController',
     'defaultRoute'        => 'site/index/index',
@@ -24,9 +23,7 @@ $config = [
         'profile'   => frontend\modules\profile\Module::className(),
     ],
     'components' => [
-        'urlManager'    => $params['app.urlManager'],
-        'localeUrls'    => $params['app.localeUrls'],
-        'i18n'          => $params['app.i18nModule'],
+        'urlManager' => $params['app.urlManager'],
         // here you can set theme used for your frontend application
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [

@@ -5,7 +5,6 @@ use common\models\User;
 use common\rbac\helpers\RbacHelper;
 use nenad\passwordStrength\StrengthValidator;
 use yii\base\Model;
-use frontend\modules\profile\Module;
 use Yii;
 
 /**
@@ -80,9 +79,9 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username'  => Module::t('Username'),
-            'password'  => Module::t('Password'),
-            'email'     => Module::t('Email'),
+            'username'  => Yii::t('app', 'Username'),
+            'password'  => Yii::t('app', 'Password'),
+            'email'     => Yii::t('app', 'Email'),
         ];
     }
 

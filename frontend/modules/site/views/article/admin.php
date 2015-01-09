@@ -2,13 +2,12 @@
 use common\helpers\CssHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('Articles');
+$this->title = Yii::t('app', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-admin">
@@ -18,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::encode($this->title) ?>
 
     <span class="pull-right">
-        <?= Html::a(Module::t('Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
-    </span>
+        <?= Html::a(Yii::t('app', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
+    </span>  
 
     </h1>
 
@@ -62,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ['class' => 'yii\grid\ActionColumn',
-            'header' => Module::t('Menu')],
+            'header' => Yii::t('app', 'Menu')],
         ],
     ]); ?>
 

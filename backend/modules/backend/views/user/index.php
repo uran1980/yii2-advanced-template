@@ -2,13 +2,12 @@
 use common\helpers\CssHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('Users');
+$this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -18,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::encode($this->title) ?>
 
     <span class="pull-right">
-        <?= Html::a(Module::t('Create User'), ['create'], ['class' => 'btn btn-success']) ?>
-    </span>
+        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
+    </span>         
 
     </h1>
 
@@ -60,19 +59,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                        return Html::a('', $url, ['title'=>'View user',
+                        return Html::a('', $url, ['title'=>'View user', 
                             'class'=>'glyphicon glyphicon-eye-open']);
                     },
                     'update' => function ($url, $model, $key) {
-                        return Html::a('', $url, ['title'=>'Manage user',
+                        return Html::a('', $url, ['title'=>'Manage user', 
                             'class'=>'glyphicon glyphicon-user']);
                     },
                     'delete' => function ($url, $model, $key) {
-                        return Html::a('', $url,
-                        ['title'=>'Delete user',
+                        return Html::a('', $url, 
+                        ['title'=>'Delete user', 
                             'class'=>'glyphicon glyphicon-trash',
                             'data' => [
-                                'confirm' => Module::t('Are you sure you want to delete this user?'),
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this user?'),
                                 'method' => 'post']
                         ]);
                     }

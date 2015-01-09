@@ -1,14 +1,13 @@
 <?php
 use yii\helpers\Html;
-use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\site\models\Article */
 
-$this->title = Module::t('Update Article') . ': ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Module::t('Articles'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Update Article') . ': ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Module::t('Update');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="article-update">
 

@@ -1,9 +1,7 @@
 <?php
 
-use frontend\modules\profile\Module;
-
 /* @var $this yii\web\View */
-$this->title = Yii::t(Yii::$app->name);
+$this->title = Yii::t('app', Yii::$app->name);
 ?>
 <div class="site-index">
 

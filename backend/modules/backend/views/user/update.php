@@ -1,15 +1,14 @@
 <?php
 use yii\helpers\Html;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
 /* @var $role common\rbac\models\Role; */
 
-$this->title = Module::t('Update User') . ': ' . $user->username;
-$this->params['breadcrumbs'][] = ['label' => Module::t('Users'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Update User') . ': ' . $user->username;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $user->username, 'url' => ['view', 'id' => $user->id]];
-$this->params['breadcrumbs'][] = Module::t('Update');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="user-update">
 

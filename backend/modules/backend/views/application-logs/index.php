@@ -8,15 +8,14 @@ use yii\grid\GridView;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
-use backend\modules\backend\Module;
 
 \common\assets\CommonAsset::register($this);
 
-$this->title = Module::t('Application Log Messages');
+$this->title = Yii::t('backend', 'Application Log Messages');
 ?>
 
 <div class="backend-application-logs-index">
-    <h1><?php echo Module::t('Application Log Messages'); ?></h1>
+    <h1><?php echo Yii::t('backend', 'Application Log Messages'); ?></h1>
 
 <?php
     echo GridView::widget([

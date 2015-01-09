@@ -39,14 +39,19 @@ class FrontendController extends MainController
                     [
                         // other rules
                     ],
+
                 ], // rules
+
             ], // access
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
             ], // verbs
+
         ]; // return
+
     } // behaviors
 }

@@ -1,40 +1,36 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = Module::t('Login');
+$this->title = Yii::t('app', 'Login');
 ?>
+<div class="site-login">
 
-<div class="backend-login row">
-    <div class="col-lg-5 col-lg-push-3">
-        <h1 class="login"><?php echo Html::encode($this->title); ?></h1>
+    <h1 class="login"><?= Html::encode($this->title) ?></h1>
 
-        <div class="well bs-component">
-            <p><?php echo Module::t('Please fill out the following fields to login:'); ?></p>
+    <div class="col-lg-5 well bs-component">
 
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                <?php //-- use email or username field depending on model scenario --// ?>
-                <?php if ($model->scenario === 'LoginWithEmail'): ?>
-                    <?php echo $form->field($model, 'email'); ?>
-                <?php else: ?>
-                    <?php echo $form->field($model, 'username'); ?>
-                <?php endif ?>
+        <p><?= Yii::t('app', 'Please fill out the following fields to login:') ?></p>
 
-                <?php echo $form->field($model, 'password')->passwordInput(); ?>
-                <?php echo $form->field($model, 'rememberMe')->checkbox(); ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <div class="form-group"><?php
-                    echo Html::submitButton(Module::t('Login'), [
-                        'class' => 'btn btn-primary',
-                        'name' => 'login-button',
-                    ]); ?>
-                </div>
-            <?php ActiveForm::end(); ?>
+        <?php //-- use email or username field depending on model scenario --// ?>
+        <?php if ($model->scenario === 'LoginWithEmail'): ?>
+            <?= $form->field($model, 'email') ?>
+        <?php else: ?>
+            <?= $form->field($model, 'username') ?>
+        <?php endif ?>
+
+        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
