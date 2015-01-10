@@ -22,10 +22,11 @@ Features
 - Session data is stored in database out of box.
 - System setting are stored in config/params.php file ( changes from v2 ).
 - Theming is supported out of the box.
-- Translation is supported out of the box.
+- Translation is supported out of the box with [yii2-i18n-module](https://github.com/zelenin/yii2-i18n-module).
 - Administrators and The Creator can manage users ( changes from v2 ).
 - Password strength validation and strength meter.
 - All functionalities of default advanced template are included in this template.
+- Added [yii2-localeurls](https://github.com/codemix/yii2-localeurls) module with lang switcher in top navbar
 - Code is heavily commented out.
 
 Installation
