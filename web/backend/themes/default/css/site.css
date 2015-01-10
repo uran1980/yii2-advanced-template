@@ -160,7 +160,7 @@ div.required label:after {
 
 .blue {
     font-weight: bold;
-    color: #7373ff; 
+    color: #7373ff;
 }
 
 .green {
@@ -170,7 +170,7 @@ div.required label:after {
 
 .gold {
     font-weight: bold;
-    color: #c4a500;   
+    color: #c4a500;
 }
 
 hr.top {
@@ -193,3 +193,18 @@ hr.article-devider {
 .nz-meter-container {
     display: none;
 }
+
+/*-- Lang switcher --*/
+.navbar .lang-switcher {
+  margin: 8px 0 0 20px; }
+  #wrapper > .navbar .lang-switcher .btn {
+    background: transparent; }
+.navbar.navbar-inverse .lang-switcher, #wrapper > .navbar.navbar-instagramm-like .lang-switcher {
+  color: #c8c8c8; }
+  .navbar.navbar-inverse .lang-switcher .btn:hover,
+  .navbar.navbar-instagramm-like .lang-switcher .btn:hover,
+  .navbar.navbar-inverse .lang-switcher .btn:focus,
+  .navbar.navbar-instagramm-like .lang-switcher .btn:focus,
+  .navbar.navbar-inverse .lang-switcher .btn.focus,
+  .navbar.navbar-instagramm-like .lang-switcher .btn.focus {
+    color: #fff; }
