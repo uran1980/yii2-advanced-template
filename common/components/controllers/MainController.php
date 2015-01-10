@@ -4,7 +4,6 @@ namespace common\components\controllers;
 
 use Yii;
 use yii\web\Controller;
-use common\helpers\ClientIp;
 
 class MainController extends Controller
 {
@@ -38,6 +37,16 @@ class MainController extends Controller
     }
 
     /**
+     * The controller ID that is prefixed with the module ID (if any).
+     *
+     * @return string
+     */
+    public function getControllerUniqueName()
+    {
+        return Yii::$app->controller->uniqueId;
+    }
+
+    /**
      * Returns current action name
      *
      * @return string
@@ -52,7 +61,13 @@ class MainController extends Controller
      */
     public function getClientIp()
     {
-        return ClientIp::get();
+        $userIp = Yii::$app->getRequest()->getUserIP();
+
+        if ( null === $userIp ) {
+           $userIp = \common\helpers\ClientIp::get();
+        }
+
+        return $userIp;
     }
 
     /**

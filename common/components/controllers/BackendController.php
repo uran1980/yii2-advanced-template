@@ -20,10 +20,10 @@ class BackendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'controllers' => ['user'],
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
-                        'allow' => true,
-                        'roles' => ['admin'],
+                        'controllers'   => ['backend/user'],
+                        'actions'       => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow'         => true,
+                        'roles'         => ['admin'],
                     ],
                     [
                         // other rules

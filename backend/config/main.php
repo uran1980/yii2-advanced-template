@@ -26,6 +26,7 @@ $config = [
     'components' => [
 //        'urlManager' => $params['app.urlManager'],
         'urlManager' => $params['app.urlManager.localeUrls'],
+        'localeUrls' => $params['app.localeUrls'],
         // here you can set theme used for your backend application
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [

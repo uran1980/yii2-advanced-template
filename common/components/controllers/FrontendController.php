@@ -20,21 +20,25 @@ class FrontendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'controllers' => ['article'],
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'admin'],
+                        'controllers' => ['site/index', 'site/foo'],
                         'allow' => true,
-                        'roles' => ['admin'],
                     ],
                     [
-                        'controllers' => ['article'],
-                        'actions' => ['create', 'update', 'admin'],
-                        'allow' => true,
-                        'roles' => ['editor'],
+                        'controllers'   => ['site/article'],
+                        'actions'       => ['index', 'view', 'create', 'update', 'delete', 'admin'],
+                        'allow'         => true,
+                        'roles'         => ['admin'],
                     ],
                     [
-                        'controllers' => ['article'],
-                        'actions' => ['index', 'view'],
-                        'allow' => true
+                        'controllers'   => ['site/article'],
+                        'actions'       => ['create', 'update', 'admin'],
+                        'allow'         => true,
+                        'roles'         => ['editor'],
+                    ],
+                    [
+                        'controllers'   => ['site/article'],
+                        'actions'       => ['index', 'view'],
+                        'allow'         => true
                     ],
                     [
                         // other rules
