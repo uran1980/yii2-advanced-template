@@ -7,6 +7,7 @@ use frontend\modules\site\models\ArticleSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use frontend\modules\site\Module;
+use common\rbac\AccessControl;
 use Yii;
 
 /**
@@ -33,11 +34,11 @@ class ArticleController extends FrontendController
          */
         $published = true;
 
-        $searchModel = new ArticleSearch();
+        $searchModel  = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $pageSize, $published);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -67,12 +68,10 @@ class ArticleController extends FrontendController
 
         $model->user_id = Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        else
-        {
+        else {
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,21 +91,17 @@ class ArticleController extends FrontendController
     {
         $model = $this->findModel($id);
 
-        if (Yii::$app->user->can('updateArticle', ['model' => $model]))
-        {
-            if ($model->load(Yii::$app->request->post()) && $model->save())
-            {
+        if (Yii::$app->user->can(AccessControl::PERMISSION_UPDATE_ARTICLE, ['model' => $model])) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-            else
-            {
+            else {
                 return $this->render('update', [
                     'model' => $model,
                 ]);
             }
         }
-        else
-        {
+        else {
             throw new MethodNotAllowedHttpException(Module::t('You are not allowed to access this page.'));
         }
     }
@@ -145,13 +140,13 @@ class ArticleController extends FrontendController
          * Editors will be able to see only published articles and their own drafts @see: search().
          * @var boolean
          */
-        $published = (Yii::$app->user->can('admin')) ? false : true ;
+        $published = (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) ? false : true ;
 
-        $searchModel = new ArticleSearch();
+        $searchModel  = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $pageSize, $published);
 
         return $this->render('admin', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -167,12 +162,10 @@ class ArticleController extends FrontendController
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null)
-        {
+        if (($model = Article::findOne($id)) !== null) {
             return $model;
         }
-        else
-        {
+        else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }

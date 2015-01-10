@@ -129,7 +129,7 @@ div.required label:after {
 
 /*-- Css for nicer display of user roles --*/
 
-.role-theCreator {
+.role-root {
     font-weight: bold;
     color: black;
 }

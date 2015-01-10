@@ -7,6 +7,7 @@ use common\models\UserSearch;
 use common\rbac\models\Role;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
+use common\rbac\AccessControl;
 use Yii;
 
 /**
@@ -96,16 +97,17 @@ class UserController extends BackendController
         $user = $this->findModel($id);
 
         // only The Creator can update everyone`s roles
-        // admin will not be able to update role of theCreator
-        if (!Yii::$app->user->can('theCreator')) {
-            if ($role->item_name === 'theCreator') {
+        // admin will not be able to update role of root
+        if (!Yii::$app->user->can(AccessControl::ROLE_ROOT)) {
+            if ($role->item_name === AccessControl::ROLE_ROOT) {
                 return $this->goHome();
             }
         }
 
         // load user data with role and validate them
         if ( $user->load(Yii::$app->request->post())
-             && $role->load(Yii::$app->request->post()) && Model::validateMultiple([$user, $role]) )
+             && $role->load(Yii::$app->request->post())
+             && Model::validateMultiple([$user, $role]) )
         {
             // only if user entered new password we want to hash and save it
             if ($user->password) {

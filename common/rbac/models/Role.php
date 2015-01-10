@@ -3,7 +3,6 @@ namespace common\rbac\models;
 
 use common\models\User;
 use yii\db\ActiveRecord;
-use Yii;
 
 /**
  * This is the model class for table "auth_assignment".

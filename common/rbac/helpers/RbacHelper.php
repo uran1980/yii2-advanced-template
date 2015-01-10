@@ -13,7 +13,7 @@ class RbacHelper
     /**
      * Assigns the appropriate role to the registered user.
      * If this is the first registered user in our system, he will get the
-     * theCreator role (this should be you), if not, he will get the user role.
+     * root role (this should be you), if not, he will get the user role.
      *
      * @param  integer $id The id of the registered user.
      * @return string      Role name.
@@ -26,9 +26,9 @@ class RbacHelper
         $usersCount = User::find()->count();
         $auth       = Yii::$app->authManager;
 
-        // this is the first user in our system, give him theCreator role
+        // this is the first user in our system, give him root role
         if ($usersCount == 1) {
-            $role = $auth->getRole('theCreator');
+            $role = $auth->getRole('root');
             $auth->assign($role, $id);
         }
         else {

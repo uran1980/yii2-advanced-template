@@ -3,6 +3,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use frontend\modules\site\Module;
+use common\rbac\AccessControl;
 
 NavBar::begin([
     'brandLabel' => Module::t(Yii::$app->name),
@@ -16,14 +17,14 @@ NavBar::begin([
 $menuItems[] = ['label' => Module::t('Home'), 'url' => ['/site/index/index']];
 
 // we do not need to display Article/index, About and Contact pages to editor+ roles
-if (!Yii::$app->user->can('editor')) {
+if (!Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
     $menuItems[] = ['label' => Module::t('Articles'),   'url' => ['/site/article/index']];
     $menuItems[] = ['label' => Module::t('About'),      'url' => ['/site/index/about']];
     $menuItems[] = ['label' => Module::t('Contact'),    'url' => ['/site/index/contact']];
 }
 
 // display Article admin page to editor+ roles
-if (Yii::$app->user->can('editor')) {
+if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
     $menuItems[] = ['label' => Module::t('Articles'), 'url' => ['/site/article/admin']];
 }
 

@@ -2,7 +2,7 @@
 
 namespace common\components\controllers;
 
-use yii\filters\AccessControl;
+use common\rbac\AccessControl;
 use yii\filters\VerbFilter;
 
 class FrontendController extends MainController

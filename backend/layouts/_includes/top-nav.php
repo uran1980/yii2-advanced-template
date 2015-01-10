@@ -3,6 +3,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use backend\modules\backend\Module;
+use common\rbac\AccessControl;
 
 NavBar::begin([
     'brandLabel' => Module::t(Yii::$app->name),
@@ -13,7 +14,7 @@ NavBar::begin([
 ]);
 
 // display Account and Users to admin+ roles
-if (Yii::$app->user->can('admin')) {
+if (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) {
     $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
     $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
 }

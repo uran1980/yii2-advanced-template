@@ -4,6 +4,7 @@ namespace common\models;
 use common\rbac\models\AuthItem;
 use yii\data\ActiveDataProvider;
 use yii\base\Model;
+use common\rbac\AccessControl;
 use Yii;
 
 /**
@@ -49,11 +50,11 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        // we make sure that admin can not see users with theCreator role
-        if (!Yii::$app->user->can('theCreator')) {
+        // we make sure that admin can not see users with root role
+        if (!Yii::$app->user->can(AccessControl::ROLE_ROOT)) {
             $query = User::find()
                 ->joinWith('role')
-                ->where(['!=', 'item_name', 'theCreator'])
+                ->where(['!=', 'item_name', 'root'])
             ;
         }
         else {
