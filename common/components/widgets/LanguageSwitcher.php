@@ -34,12 +34,12 @@ class LanguageSwitcher extends ButtonDropdown
             $items = [];
             foreach ($languages as $lang) {
                 if ($lang === $appLanguage) {
-                    $this->label = self::label($lang);
+                    $this->label = static::label($lang);
                 }
 
                 $item = [
-                    'label' => self::label($lang),
-                    'url'   => '/' . $lang . '/' . $params[0]
+                    'label' => static::label($lang),
+                    'url'   => $this->getUrl($lang, $params[0]),
                 ];
                 $items[] = $item;
             }
@@ -48,6 +48,20 @@ class LanguageSwitcher extends ButtonDropdown
 
             parent::run();
         }
+    }
+
+    /**
+     * @param string $lang
+     * @param string $requestUri
+     * @return string
+     */
+    private function getUrl($lang = '', $requestUri = null)
+    {
+        $output = Yii::getAlias('@web')
+                . (!empty($lang) ? '/' . $lang : '') . '/'
+                . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $requestUri), "/\\");
+
+        return $output;
     }
 
     /**
@@ -61,8 +75,6 @@ class LanguageSwitcher extends ButtonDropdown
             self::$_labels = [
                 'en' => Yii::t('app-language', 'English'),
                 'ru' => Yii::t('app-language', 'Russian'),
-//                'en' => 'English',
-//                'ru' => 'Русский',
             ];
         }
 

@@ -55,6 +55,7 @@ $config = [
                 'dbLogger' => [
                     'class'  => common\components\log\AppLoggerDbTarget::className(),
                     'levels' => ['info', 'error', 'warning'],
+                    'logVars' => ['_GET', '_POST'],                             // @see yii2\log\Target.php
                     'categories' => [
                         AppLogger::CATEGORY_APPLICATION,
                         AppLogger::CATEGORY_TEST,

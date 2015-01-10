@@ -2,10 +2,10 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use common\helpers\AppHelper;
 use common\components\widgets\LanguageSwitcher;
 use frontend\modules\site\Module;
 use common\rbac\AccessControl;
+use Yii;
 
 NavBar::begin([
     'brandLabel' => Module::t(Yii::$app->name),
@@ -43,7 +43,9 @@ else {
         'linkOptions' => ['data-method' => 'post'],
     ];
 }
-echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
+if ( Yii::$app->has('localeUrls') ) {
+    echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
+}
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items'   => $menuItems,

@@ -2,6 +2,7 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use common\components\widgets\LanguageSwitcher;
 use backend\modules\backend\Module;
 use common\rbac\AccessControl;
 
@@ -30,6 +31,9 @@ else {
         'url'         => ['/backend/index/logout'],
         'linkOptions' => ['data-method' => 'post']
     ];
+}
+if ( Yii::$app->has('localeUrls') ) {
+    echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
 }
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
