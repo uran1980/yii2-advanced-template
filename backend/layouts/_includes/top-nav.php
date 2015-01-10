@@ -6,7 +6,7 @@ use backend\modules\backend\Module;
 use common\rbac\AccessControl;
 
 NavBar::begin([
-    'brandLabel' => Module::t(Yii::$app->name),
+    'brandLabel' => Module::t('Backend Dashboard'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-default navbar-fixed-top',
@@ -33,6 +33,6 @@ else {
 }
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
-    'items' => $menuItems,
+    'items'   => $menuItems,
 ]);
 NavBar::end();

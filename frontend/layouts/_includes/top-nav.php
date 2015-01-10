@@ -2,6 +2,8 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use common\helpers\AppHelper;
+use common\components\widgets\LanguageSwitcher;
 use frontend\modules\site\Module;
 use common\rbac\AccessControl;
 
@@ -31,18 +33,19 @@ if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
 // display Signup and Login pages to guests of the site
 if (Yii::$app->user->isGuest) {
     $menuItems[] = ['label' => Module::t('Signup'), 'url' => ['/signup']];
-    $menuItems[] = ['label' => Module::t('Login'),  'url' => ['/profile/index/login']];
+    $menuItems[] = ['label' => Module::t('Login'),  'url' => ['/login']];
 }
 // display Logout to all logged in users
 else {
     $menuItems[] = [
-        'label' => Module::t('Logout'). ' (' . Yii::$app->user->identity->username . ')',
-        'url' => ['/profile/index/logout'],
-        'linkOptions' => ['data-method' => 'post']
+        'label'       => Module::t('Logout'). ' (' . Yii::$app->user->identity->username . ')',
+        'url'         => ['/logout'],
+        'linkOptions' => ['data-method' => 'post'],
     ];
 }
+echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
-    'items' => $menuItems,
+    'items'   => $menuItems,
 ]);
 NavBar::end();

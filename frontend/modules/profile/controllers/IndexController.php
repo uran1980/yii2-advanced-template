@@ -31,14 +31,14 @@ class IndexController extends FrontendController
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
+                        'actions'   => ['signup'],
+                        'allow'     => true,
+                        'roles'     => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'actions'   => ['logout'],
+                        'allow'     => true,
+                        'roles'     => ['@'],
                     ],
                 ],
             ],

@@ -31,7 +31,7 @@ $this->title = Module::t('Login');
                 <div class="form-group"><?php
                     echo Html::submitButton(Module::t('Login'), [
                         'class' => 'btn btn-primary',
-                        'name' => 'login-button',
+                        'name'  => 'login-button',
                     ]); ?>
                 </div>
             <?php ActiveForm::end(); ?>

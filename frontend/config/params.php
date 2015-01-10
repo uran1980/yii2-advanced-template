@@ -7,7 +7,7 @@ $config = [
         'rules' => [
             ''              => 'site/index/index',
             '/home'         => 'site/index/index',
-            '/articles'      => 'site/article/index',
+            '/articles'     => 'site/article/index',
 
             // @see http://www.elisdn.ru/blog/62/seo-service-on-yii2-ide-and-modules
             '<_a:(error|index|about|contact|captcha)>'                                  => 'site/index/<_a>',

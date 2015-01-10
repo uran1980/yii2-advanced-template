@@ -27,13 +27,13 @@ class FrontendController extends MainController
                         'controllers'   => ['site/article'],
                         'actions'       => ['index', 'view', 'create', 'update', 'delete', 'admin'],
                         'allow'         => true,
-                        'roles'         => ['admin'],
+                        'roles'         => [AccessControl::ROLE_ADMIN],
                     ],
                     [
                         'controllers'   => ['site/article'],
                         'actions'       => ['create', 'update', 'admin'],
                         'allow'         => true,
-                        'roles'         => ['editor'],
+                        'roles'         => [AccessControl::ROLE_EDITOR],
                     ],
                     [
                         'controllers'   => ['site/article'],

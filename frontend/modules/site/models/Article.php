@@ -127,12 +127,10 @@ class Article extends ActiveRecord
     {
         $status = (empty($status)) ? $this->status : $status ;
 
-        if ($status === self::STATUS_DRAFT)
-        {
+        if ($status === self::STATUS_DRAFT) {
             return Module::t('Draft');
         }
-        else
-        {
+        else {
             return Module::t('Published');
         }
     }
@@ -162,16 +160,13 @@ class Article extends ActiveRecord
     {
         $category = (empty($category)) ? $this->category : $category ;
 
-        if ($category === self::CATEGORY_ECONOMY)
-        {
+        if ($category === self::CATEGORY_ECONOMY) {
             return Module::t('Economy');
         }
-        elseif ($category === self::CATEGORY_SOCIETY)
-        {
+        elseif ($category === self::CATEGORY_SOCIETY) {
             return Module::t('Society');
         }
-        else
-        {
+        else {
             return Module::t('Sport');
         }
     }

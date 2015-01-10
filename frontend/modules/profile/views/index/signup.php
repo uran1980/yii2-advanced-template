@@ -11,7 +11,7 @@ use frontend\modules\profile\Module;
 $this->title = Module::t('Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup row">
+<div class="profile-index-signup row">
     <div class="col-lg-6 col-lg-push-3">
         <h1><?= Html::encode($this->title) ?></h1>
 

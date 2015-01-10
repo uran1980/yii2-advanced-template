@@ -33,28 +33,28 @@ $this->params['breadcrumbs'][]  = $this->title;
         <?php endif; ?>
         </div>
     </h1>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            // [
-            //     'label' => Module::t('Author'),
-            //     'value' => $model->authorName,
-            // ],
+//            'id',
+//             [
+//                 'label' => Module::t('Author'),
+//                 'value' => $model->authorName,
+//             ],
             'title',
             'summary:ntext',
             'content:html',
-            // [
-            //     'label' => Module::t('Status'),
-            //     'value' => $model->statusName,
-            // ],
+//             [
+//                 'label' => Module::t('Status'),
+//                 'value' => $model->statusName,
+//             ],
             [
                 'label' => Module::t('Category'),
                 'value' => $model->categoryName,
             ],
             'created_at:dateTime',
-            //'updated_at:dateTime',
+//            'updated_at:dateTime',
         ],
     ]) ?>
-
 </div>

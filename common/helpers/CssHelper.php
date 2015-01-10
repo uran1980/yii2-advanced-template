@@ -17,14 +17,12 @@ class CssHelper
      */
     public static function statusCss($status)
     {
-        if ($status === 'Active')
-        {
+        if ($status === 'Active') {
             return "boolean-true";
-        } 
-        else 
-        {
+        }
+        else {
             return "boolean-false";
-        }      
+        }
     }
 
     /**
@@ -36,7 +34,7 @@ class CssHelper
      */
     public static function roleCss($role)
     {
-        return "role-".$role."";    
+        return "role-".$role."";
     }
 
     /**
@@ -48,15 +46,13 @@ class CssHelper
      */
     public static function articleStatusCss($status)
     {
-        if ($status === Yii::t('app', 'Published'))
-        {
+        if ($status === Yii::t('common', 'Published')) {
             return "boolean-true";
-        } 
-        else 
-        {
+        }
+        else {
             return "boolean-false";
-        }      
-    }  
+        }
+    }
 
     /**
      * Returns the appropriate css class based on the value of Article $category.
@@ -67,17 +63,14 @@ class CssHelper
      */
     public static function articleCategoryCss($category)
     {
-        if ($category === Yii::t('app', 'Economy'))
-        {
+        if ($category === Yii::t('common', 'Economy')) {
             return "blue";
         }
-        elseif ($category === Yii::t('app', 'Sport')) 
-        {
+        elseif ($category === Yii::t('common', 'Sport')) {
             return "green";
         }
-        else 
-        {
+        else {
             return "gold";
-        }      
-    }       
+        }
+    }
 }

@@ -143,8 +143,6 @@ $config = [
 //        'itemFile'          => '@common/rbac/data/items.php',
 //        'assignmentFile'    => '@common/rbac/data/assignments.php',
 //        'ruleFile'          => '@common/rbac/data/rules.php',
-
-//        'defaultRoles' => ['user'],
     ],
 
     // ------------------------ MAIL COMPONENT ---------------------------------

@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\modules\site\controllers;
 
 use common\components\controllers\FrontendController;
@@ -68,27 +69,19 @@ class IndexController extends FrontendController
     {
         $model = new ContactForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            if ($model->contact(Yii::$app->params['adminEmail']))
-            {
-                Yii::$app->session->setFlash('success',
-                    'Thank you for contacting us. We will respond to you as soon as possible.');
-            }
-            else
-            {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->contact(Yii::$app->params['adminEmail'])) {
+                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+            } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending email.');
             }
 
             return $this->refresh();
-        }
-        else
-        {
+        } else {
             return $this->render('contact', [
                 'model' => $model,
             ]);
         }
     }
-
 
 }

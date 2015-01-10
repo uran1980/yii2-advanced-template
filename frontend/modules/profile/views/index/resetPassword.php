@@ -11,7 +11,7 @@ use frontend\modules\profile\Module;
 $this->title = Module::t('Reset password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-reset-password">
+<div class="profile-index-reset-password">
 
     <div class="col-lg-5 well bs-component">
 

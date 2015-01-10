@@ -23,13 +23,14 @@ class BackendController extends MainController
                         'controllers'   => ['backend/user'],
                         'actions'       => ['index', 'view', 'create', 'update', 'delete'],
                         'allow'         => true,
-                        'roles'         => ['admin'],
+                        'roles'         => [AccessControl::ROLE_ADMIN],
                     ],
                     [
                         // other rules
                     ],
                 ], // rules
             ], // access
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

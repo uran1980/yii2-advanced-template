@@ -10,7 +10,7 @@ use frontend\modules\profile\Module;
 $this->title = Module::t('Request password reset');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-request-password-reset">
+<div class="profile-index-request-password-reset">
 
     <div class="col-lg-5 well bs-component">
 

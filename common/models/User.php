@@ -90,14 +90,14 @@ class User extends UserIdentity
     public function attributeLabels()
     {
         return [
-            'id'            => Yii::t('app', 'ID'),
-            'username'      => Yii::t('app', 'Username'),
-            'password'      => Yii::t('app', 'Password'),
-            'email'         => Yii::t('app', 'Email'),
-            'status'        => Yii::t('app', 'Status'),
-            'created_at'    => Yii::t('app', 'Created At'),
-            'updated_at'    => Yii::t('app', 'Updated At'),
-            'item_name'     => Yii::t('app', 'Role'),
+            'id'            => Yii::t('common', 'ID'),
+            'username'      => Yii::t('common', 'Username'),
+            'password'      => Yii::t('common', 'Password'),
+            'email'         => Yii::t('common', 'Email'),
+            'status'        => Yii::t('common', 'Status'),
+            'created_at'    => Yii::t('common', 'Created At'),
+            'updated_at'    => Yii::t('common', 'Updated At'),
+            'item_name'     => Yii::t('common', 'Role'),
         ];
     }
 
