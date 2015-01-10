@@ -2,6 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
+use common\rbac\AccessControl;
 
 $params = ArrayHelper::merge(
     require(__DIR__ . '/../../common/config/params.php'),
@@ -20,8 +21,20 @@ $config = [
     'layout'                => '@backend/layouts/main.php',
     'modules' => [
         'backend'   => backend\modules\backend\Module::className(),
-//        'translate' => backend\modules\translate\Module::className(),
-        'i18n'      => Zelenin\yii\modules\I18n\Module::className(),
+        'i18n'      => [
+            'class' => Zelenin\yii\modules\I18n\Module::className(),
+            'as access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'controllers'   => ['i18n/default'],
+                        'actions'       => ['index', 'update'],
+                        'allow'         => true,
+                        'roles'         => [AccessControl::ROLE_ADMIN],
+                    ],
+                ],
+            ],
+        ],
     ],
     'components' => [
 //        'urlManager' => $params['app.urlManager'],
