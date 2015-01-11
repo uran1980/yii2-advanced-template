@@ -1,7 +1,21 @@
-RewriteEngine on
+################################################################################
+#   @see http://httpd.apache.org/docs/2.2/mod/core.html#adddefaultcharset
+################################################################################
+AddDefaultCharset UTF-8
 
-# If a directory or a file exists, use the request directly
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-# Otherwise forward the request to index.php
-RewriteRule . index.php
+# Mod_Autoindex
+<IfModule mod_autoindex.c>
+    # Disable Indexes
+    Options -Indexes
+</IfModule>
+
+# Mod_Rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If a directory or a file exists, use the request directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Otherwise forward the request to index.php
+    RewriteRule . index.php
+</IfModule>
