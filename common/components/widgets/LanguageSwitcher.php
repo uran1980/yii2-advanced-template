@@ -21,12 +21,7 @@ class LanguageSwitcher extends ButtonDropdown
      */
     public function run()
     {
-        $route          = Yii::$app->controller->route;
-        $appLanguage    = Yii::$app->language;
-        $params         = $_GET;
-
-        array_unshift($params, $route);
-
+        $appLanguage = Yii::$app->language;
         $languages  = isset(Yii::$app->localeUrls->languages)
                     ? Yii::$app->localeUrls->languages
                     : [];
@@ -40,7 +35,7 @@ class LanguageSwitcher extends ButtonDropdown
 
                 $item = [
                     'label' => static::label($lang),
-                    'url'   => $this->getUrl($lang, $params[0]),
+                    'url'   => $this->getUrl($lang),
                 ];
                 $items[] = $item;
             }
@@ -53,18 +48,18 @@ class LanguageSwitcher extends ButtonDropdown
 
     /**
      * @param string $lang
-     * @param string $requestUri
      * @return string
      */
-    private function getUrl($lang = '', $requestUri = null)
+    private function getUrl($lang = '')
     {
-        $output = Yii::getAlias('@web') . (!empty($lang) ? '/' . $lang : '') . $this->filter($requestUri);
+        $route  = Yii::$app->controller->route;
+        $output = Yii::getAlias('@web') . (!empty($lang) ? '/' . $lang : '') . $this->filter($route);
 
 //        // debug info ----------------------------------------------------------
 //        \common\components\log\AppLogger::info(array(
-//            '$lang'         => $lang,
-//            '$requestUri'   => $requestUri,
-//            '$output'       => $output,
+//            '$lang'   => $lang,
+//            '$route'  => $route,
+//            '$output' => $output,
 //        ));
 //        // ---------------------------------------------------------------------
 
@@ -77,18 +72,23 @@ class LanguageSwitcher extends ButtonDropdown
      */
     private function filter($requestUri = '')
     {
-        $params     = Yii::$app->params;
-        $languages  = isset($params['app.localeUrls'], $params['app.localeUrls']['languages'])
-                    ? $params['app.localeUrls']['languages'] : [];
-        $urls       = [];
-        $webRoot    = Yii::getAlias('@web');
+        $params      = Yii::$app->params;
+        $languages   = isset($params['app.localeUrls'], $params['app.localeUrls']['languages'])
+                     ? $params['app.localeUrls']['languages'] : [];
+        $urls        = [];
+        $request     = Yii::$app->getRequest();
+        $baseUrl     = $request->baseUrl;
+        $queryParams = $request->queryParams;
 
         foreach ($languages as $lang) {
-            $urls[] = trim($webRoot . '/' . $lang, "/\\");
+            $urls[] = trim($baseUrl . '/' . $lang, "/\\");
         }
 
         $requestUri = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $requestUri), "/\\");
-        $requestUri = Url::to([$requestUri]);
+
+        array_unshift($queryParams, $requestUri);
+
+        $requestUri = Url::to($queryParams);
 
         // filter langs
         $pattern    = '#^/' . implode('|', $urls) . '/#i';
@@ -101,6 +101,9 @@ class LanguageSwitcher extends ButtonDropdown
 //            '$pattern'      => $pattern,
 //            '$requestUri'   => $requestUri,
 //            '$requestUri'   => $requestUri,
+//            'route'         => Yii::$app->controller->route,
+//            'baseUrl'       => $request->baseUrl,
+//            'queryParams'   => $queryParams,
 //        ));
 //        // ---------------------------------------------------------------------
 
