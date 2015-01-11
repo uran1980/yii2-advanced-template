@@ -53,14 +53,14 @@ for example: ``` cd /var/www/sites/ ```
 development (dev), staging (staging) or production (prod). Change your working directory to project root
 and execute ```php init``` command.
 
-   ```cd advanced/```
+   ```cd advanced/_application```
 
    ```php init ```
 
    Type __0__ for development, execute coomant, type __yes__ to confirm, and execute again.
 
 7. Now you need to tell your application to use database that you have previously created.
-Open up main-local.php config file in ```advanced/common/config/main-local.php```
+Open up main-local.php config file in ```advanced/_application/common/config/main-local.php```
 and adjust your connection credentials.
 
 8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
@@ -118,7 +118,7 @@ Here is how you can set up everything easily:
 
 2. Inside your ```main-local.php``` config file change database you are going to use to ```advanced_tests```.
 
-3. Open up your console and ```cd``` to the project root folder of your application.
+3. Open up your console and ```cd``` to the ``` _application ``` folder.
 
 4. Run the migrations again: ``` php yii migrate ```
 
@@ -129,14 +129,14 @@ Adjust your ```main-local.php``` config file again.
 
 7. Now you are ready to tell Codeception to use ```advanced_tests``` database.
 
-   Inside: ``` tests/codeception/config/config.php ``` file tell your ```db``` to use
+   Inside: ``` _application/tests/codeception/config/config.php ``` file tell your ```db``` to use
    ```advanced_tests``` database.
 
 8. Start your php server inside the root of your application: ``` php -S localhost:8080 ```
 (if the name of your application is advanced, then root is ```advanced``` folder)
 
 9. To run tests written for frontend side of your application
-   ```cd``` to ```tests/codeception/frontend``` , run ```codecept build``` and then run your tests.
+   ```cd``` to ```_application/tests/codeception/frontend``` , run ```codecept build``` and then run your tests.
 
 10. Take similar steps like in step 9 for backend and common tests.
 
@@ -144,91 +144,92 @@ Directory structure
 -------------------
 
 ```
-backend
-|
-|-- assets/                    contains backend assets definition
-|
-|-- config/                    contains backend configurations
-|
-|-- layouts/                   contain backend layouts
-|
-|-- modules                    contain backend modules
-|    |
+|-- _application
 |    |-- backend
-|          |
-|          |-- controllers/    contains Web controller classes
-|          |
-|          |-- models/         contains backend-specific model classes
-|          |
-|          |-- views/          contains view files for the Web application
-|
-|-- runtime/                   contains files generated during runtime
-
-common
-|
-|-- config/                    contains shared configurations
-|
-|-- helpers/                   contains helper classes
-|
-|-- layouts/                   contains shared layouts
-|
-|-- mail/                      contains view files for e-mails
-|
-|-- models/                    contains model classes used in both backend and frontend
-|
-|-- rbac/                      contains role based access control classes
-
-console
-|
-|-- config/                    contains console configurations
-|
-|-- controllers/               contains console controllers (commands)
-|
-|-- migrations/                contains database migrations
-|
-|-- models/                    contains console-specific model classes
-|
-|-- runtime/                   contains files generated during runtime
-
-environments/                  contains environment-based overrides
-
-frontend
-|
-|-- assets/                    contains frontend assets definition
-|
-|-- config/                    contains frontend configurations
-|
-|-- layouts/                   contain frontend layouts
-|
-|-- modules                    contain frontend modules
+|    |    |
+|    |    |-- assets/                  contains backend assets definition
+|    |    |
+|    |    |-- config/                  contains backend configurations
+|    |    |
+|    |    |-- layouts/                 contain backend layouts
+|    |    |
+|    |    |-- modules                  contain backend modules
+|    |    |    |
+|    |    |    |-- backend
+|    |    |    |     |
+|    |    |    .     |-- controllers/  contains Web controller classes
+|    |    |    .     |
+|    |    |    .     |-- models/       contains backend-specific model classes
+|    |    |          |
+|    |    |          |-- views/        contains view files for the Web application
+|    |    |
+|    |    |-- runtime/                 contains files generated during runtime
 |    |
-|    |-- profile/              client's profile module
-|    |     |
-|    |     |-- controllers/    contains Web controller classes
-|    |     |
-|    |     |-- models/         contains profile-specific model classes
-|    |     |
-|    |     |-- views/          contains view files for the profile
+|    |-- common
+|    |    |
+|    |    |-- config/                  contains shared configurations
+|    |    |
+|    |    |-- helpers/                 contains helper classes
+|    |    |
+|    |    |-- layouts/                 contains shared layouts
+|    |    |
+|    |    |-- mail/                    contains view files for e-mails
+|    |    |
+|    |    |-- models/                  contains model classes used in both backend and frontend
+|    |    |
+|    |    |-- rbac/                    contains role based access control classes
 |    |
-|    |-- site/                 frontend site module
-|          |
-|          |-- controllers/    contains Web controller classes
-|          |
-|          |-- models/         contains site-specific model classes
-|          |
-|          |-- views/          contains view files for site module
+|    |-- console
+|    |    |
+|    |    |-- config/                  contains console configurations
+|    |    |
+|    |    |-- controllers/             contains console controllers (commands)
+|    |    |
+|    |    |-- migrations/              contains database migrations
+|    |    |
+|    |    |-- models/                  contains console-specific model classes
+|    |    |
+|    |    |-- runtime/                 contains files generated during runtime
+|    |
+|    |-- environments/                 contains environment-based overrides
+|    |
+|    |-- frontend
+|    |    |
+|    .    |-- assets/                  contains frontend assets definition
+|    .    |
+|    .    |-- config/                  contains frontend configurations
+|         |
+|         |-- layouts/                 contain frontend layouts
+|         |
+|         |-- modules                  contain frontend modules
+|         |    |
+|         |    |-- profile/            client's profile module
+|         |    |    |
+|         |    |    |-- controllers/   contains Web controller classes
+|         |    |    |
+|         |    |    |-- models/        contains profile-specific model classes
+|         |    |    |
+|         |    |    |-- views/         contains view files for the profile
+|         |    |
+|         |    |-- site/               frontend site module
+|         |    |    |
+|         |    .    |-- controllers/   contains Web controller classes
+|         |    .    |
+|         |    .    |-- models/        contains site-specific model classes
+|         |         |
+|         |         |-- views/         contains view files for site module
+|         |
+|         |
+|         |-- runtime/                 contains files generated during runtime
+|         |
+|         |-- widgets/                 contains frontend widgets
 |
-|
-|-- runtime/                   contains files generated during runtime
-|
-|-- widgets/                   contains frontend widgets
-
-web
-|-- assets                     contains application assets generated during runtime
-|
-|-- backend                    contains the entry script and Web resources for backend side of application
-|
-|-- themes                     contains frontend themes
+|-- web
+|    |-- assets      contains application assets generated during runtime
+.    |
+.    |-- backend     contains the entry script and Web resources for backend side of application
+.    |
+     |-- themes      contains frontend themes
 
 ```
 
