@@ -32,8 +32,8 @@ if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
 
 // display Signup and Login pages to guests of the site
 if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => Module::t('Signup'), 'url' => ['/signup']];
-    $menuItems[] = ['label' => Module::t('Login'),  'url' => ['/login']];
+    $menuItems[] = ['label' => Module::t('Signup'), 'url' => ['/profile/index/signup']];
+    $menuItems[] = ['label' => Module::t('Login'),  'url' => ['/profile/index/login']];
 }
 // display Logout to all logged in users
 else {

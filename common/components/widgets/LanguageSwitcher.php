@@ -7,6 +7,7 @@
 namespace common\components\widgets;
 
 use yii\bootstrap\ButtonDropdown;
+use yii\helpers\Url;
 use Yii;
 
 class LanguageSwitcher extends ButtonDropdown
@@ -57,12 +58,55 @@ class LanguageSwitcher extends ButtonDropdown
      */
     private function getUrl($lang = '', $requestUri = null)
     {
-        $output = Yii::getAlias('@web')
-                . (!empty($lang) ? '/' . $lang : '') . '/'
-                . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $requestUri), "/\\");
+        $output = Yii::getAlias('@web') . (!empty($lang) ? '/' . $lang : '') . $this->filter($requestUri);
+
+//        // debug info ----------------------------------------------------------
+//        \common\components\log\AppLogger::info(array(
+//            '$lang'         => $lang,
+//            '$requestUri'   => $requestUri,
+//            '$output'       => $output,
+//        ));
+//        // ---------------------------------------------------------------------
 
         return $output;
     }
+
+    /**
+     * @param string $requestUri
+     * @return string
+     */
+    private function filter($requestUri = '')
+    {
+        $params     = Yii::$app->params;
+        $languages  = isset($params['app.localeUrls'], $params['app.localeUrls']['languages'])
+                    ? $params['app.localeUrls']['languages'] : [];
+        $urls       = [];
+        $webRoot    = Yii::getAlias('@web');
+
+        foreach ($languages as $lang) {
+            $urls[] = trim($webRoot . '/' . $lang, "/\\");
+        }
+
+        $requestUri = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $requestUri), "/\\");
+        $requestUri = Url::to([$requestUri]);
+
+        // filter langs
+        $pattern    = '#^/' . implode('|', $urls) . '/#i';
+        $requestUri = preg_replace($pattern, '', $requestUri);
+
+//        // debug info ----------------------------------------------------------
+//        \common\components\log\AppLogger::info(array(
+//            '$languages'    => $languages,
+//            '$urls'         => $urls,
+//            '$pattern'      => $pattern,
+//            '$requestUri'   => $requestUri,
+//            '$requestUri'   => $requestUri,
+//        ));
+//        // ---------------------------------------------------------------------
+
+        return $requestUri;
+    }
+
 
     /**
      *
