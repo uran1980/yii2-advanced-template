@@ -11,7 +11,7 @@ $this->title = Module::t('Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="site-login row">
+<div class="profile-index-login row">
     <div class="col-md-5 col-md-push-3">
         <h1><?php echo Html::encode($this->title); ?></h1>
 

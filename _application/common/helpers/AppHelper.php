@@ -8,60 +8,105 @@ class AppHelper
 {
     /**
      * Your application root directory
+     *
      * @var string
      */
     const ALIAS_APP = '@app';
 
     /**
-     * Your vendor directory under @app
+     * Your vendor directory
+     *
      * @var string
      */
     const ALIAS_VENDOR = '@vendor';
 
     /**
+     * Your bower directory under @vendor
+     *
+     * @var string
+     */
+    const ALIAS_BOWER = '@bower';
+
+    /**
+     * Your npm directory under @vendor
+     *
+     * @var string
+     */
+    const ALIAS_NPM = '@npm';
+
+    /**
      * Your application files runtime/cache storage folder
+     *
      * @var string
      */
     const ALIAS_RUNTIME = '@runtime';
 
     /**
      * Your application base url path
+     *
      * @var string
      */
     const ALIAS_WEB = '@web';
 
     /**
      * Your application web root
+     *
      * @var string
      */
     const ALIAS_WEBROOT = '@webroot';
 
     /**
-     * Your console tests directory
+     * Your theme base url path
+     *
      * @var string
      */
-    const ALIAS_TEST = '@tests';
+    const ALIAS_THEMES = '@themes';
+
+    /**
+     * Your theme web root
+     *
+     * @var string
+     */
+    const ALIAS_THEME_BASEPATH = '@themeBasePath';
+
+    /**
+     * Your project root
+     *
+     * @var string
+     */
+    const ALIAS_ROOT = '@root';
+
+    /**
+     * Your application root
+     *
+     * @var string
+     */
+    const ALIAS_APP_ROOT = '@appRoot';
 
     /**
      * Alias for your common root folder under @app
+     *
      * @var string
      */
     const ALIAS_COMMON = '@common';
 
     /**
      * Alias for your frontend root folder under @app
+     *
      * @var string
      */
     const ALIAS_FRONTEND = '@frontend';
 
     /**
      * Alias for your backend root folder under @app
+     *
      * @var string
      */
     const ALIAS_BACKEND = '@backend';
 
     /**
      * Alias for your console root folder under @app
+     *
      * @var string
      */
     const ALIAS_CONSOLE = '@console';

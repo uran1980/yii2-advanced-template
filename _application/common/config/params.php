@@ -108,6 +108,10 @@ $config = [
     // @see vendor\yiisoft\yii2\web\AssetConverter.php
     'app.assetManager' => [
 //        'forceCopy' => YII_ENV_DEV,
+        'converter' => [
+            'class' => common\assets\AppAssetConvertor::className(),
+//            'forceConvert' => YII_ENV_DEV,
+        ],
         'bundles' => [
             // we will use bootstrap css from our theme
             'yii\bootstrap\BootstrapAsset' => [
@@ -127,10 +131,7 @@ $config = [
 //                 ]
 //             ],
         ],
-        'converter' => [
-            'class' => common\assets\AppAssetConvertor::className(),
-//            'forceConvert' => YII_ENV_DEV,
-        ],
+        
     ],
 
     // ------------------------- AUTH MANAGER ----------------------------------

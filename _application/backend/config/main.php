@@ -14,7 +14,7 @@ $params = ArrayHelper::merge(
 $config = [
     'id'                    => 'app-backend',
     'basePath'              => dirname(__DIR__),
-    'bootstrap'           => ['log', 'localeUrls'],
+    'bootstrap'             => ['log', 'localeUrls'],
     'controllerNamespace'   => 'backend\modules\backend\controllers',
     'controller'            => '@backend/modules/backend/IndexController',
     'defaultRoute'          => 'backend/index/index',
@@ -37,7 +37,7 @@ $config = [
         ],
     ],
     'components' => [
-//        'urlManager' => $params['app.urlManager'],
+//        'urlManager'    => $params['app.urlManager'],
         'urlManager' => $params['app.urlManager.localeUrls'],
         'localeUrls' => $params['app.localeUrls'],
         // here you can set theme used for your backend application
@@ -45,8 +45,7 @@ $config = [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                    '@app/modules/backend/views'    => '@webroot/themes/default/views',
-                    '@app/modules/translate/views'  => '@webroot/themes/default/views',
+                    '@app/modules/backend/views' => '@webroot/themes/default/views',
                 ],
                 'baseUrl' => '@web/themes/default',
             ],

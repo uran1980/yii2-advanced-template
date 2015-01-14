@@ -5,7 +5,7 @@ use frontend\modules\profile\Module;
 /* @var $this yii\web\View */
 $this->title = Module::t(Yii::$app->name);
 ?>
-<div class="site-index">
+<div class="profile-index-index">
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>

@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\codeception\common\_support;
 
 use tests\codeception\common\fixtures\UserFixture;

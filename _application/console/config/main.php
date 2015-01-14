@@ -1,4 +1,4 @@
-<?php
+<?php // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
@@ -19,6 +19,7 @@ $config = [
         // TODO
     ],
     'components' => [
+        'i18n'      => $params['app.i18nModule'],
         'log' => [
             'targets' => [
                 'file' => [

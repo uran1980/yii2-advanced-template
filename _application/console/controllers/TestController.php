@@ -5,7 +5,7 @@ namespace console\controllers;
 use Yii;
 use yii\helpers\Console;
 use common\components\log\AppLogger;
-use vova07\users\helpers\Security;
+use common\helpers\Security;
 use common\helpers\AppDebug;
 
 class TestController extends \yii\console\Controller

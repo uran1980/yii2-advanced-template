@@ -2,9 +2,10 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use common\components\widgets\LanguageSwitcher;
 use backend\modules\backend\Module;
 use common\rbac\AccessControl;
+use common\components\widgets\LanguageSwitcher;
+use Yii;
 
 NavBar::begin([
     'brandLabel' => Module::t('Backend Dashboard'),

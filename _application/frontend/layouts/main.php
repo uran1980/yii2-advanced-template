@@ -1,8 +1,8 @@
 <?php
-use frontend\assets\AppAsset;
-use frontend\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use frontend\assets\AppAsset;
+use frontend\widgets\Alert;
 use frontend\modules\site\Module;
 
 /* @var $this \yii\web\View */

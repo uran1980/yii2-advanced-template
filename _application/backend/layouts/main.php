@@ -9,37 +9,39 @@ use backend\modules\backend\Module;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+<?php $this->beginPage(); ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-    <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php include '_includes/top-nav.php'; ?>
+<html lang="<?php echo  Yii::$app->language; ?>">
+    <head>
+        <meta charset="<?php echo  Yii::$app->charset; ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?php echo  Html::csrfMetaTags(); ?>
+        <title><?php echo  Html::encode($this->title); ?></title>
+        <?php $this->head(); ?>
+    </head>
+    <body>
+        <?php $this->beginBody(); ?>
+        <div class="wrap">
+            <?php include '_includes/top-nav.php'; ?>
 
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+            <div class="container">
+            <?php echo  Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]); ?>
+            <?php echo  $content; ?>
+            </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        <div class="container">
-        <p class="pull-left">&copy; <?= Module::t(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div class="container">
+            <p class="pull-left">&copy; <?php echo Module::t(Yii::$app->name); ?> <?php echo date('Y'); ?></p>
+            <p class="pull-right"><?php echo Yii::powered(); ?></p>
+            </div>
+        </footer>
 
-    <?php $this->endBody() ?>
-</body>
+        <a href="#wrapper" class="scroll-to-top-link" style="display: none;"><?php
+            echo Module::t('Scroll to top'); ?></a>
+        <?php $this->endBody(); ?>
+    </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>

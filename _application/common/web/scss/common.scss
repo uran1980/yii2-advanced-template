@@ -4,10 +4,10 @@
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
 
-@import '../../../../common/web/scss/variables';
-@import '../../../../common/web/scss/functions';
-@import '../../../../common/web/scss/mixins';
-@import '../../../../common/web/scss/bootstrap2-theme';
+@import '../../../../_application/common/web/scss/variables';
+@import '../../../../_application/common/web/scss/functions';
+@import '../../../../_application/common/web/scss/mixins';
+@import '../../../../_application/common/web/scss/bootstrap2-theme';
 
 html {
     //@include noise-background($white);
@@ -67,6 +67,25 @@ a.scroll-to-top-link {
         > a:hover,
         > a:focus {
             background-color: $gray;
+        }
+    }
+}
+
+.navbar {
+    .lang-switcher {
+        margin: 8px 0 0 20px;
+        .btn {
+            background: transparent;
+        }
+    }
+    &.navbar-inverse {
+        .lang-switcher {
+            color: $navbar-inverse-brand-color;
+            .btn {
+                &:hover, &:focus, &.focus {
+                    color: $white;
+                }
+            }
         }
     }
 }
