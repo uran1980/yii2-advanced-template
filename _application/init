@@ -79,6 +79,7 @@ foreach (array(
     $root . '/_application/console/runtime',
     $root . '/web/assets',
     $root . '/web/compiled',
+    $root . '/web/backend/assets',
     $root . '/web/backend/compiled',
 ) as $path ) {
     if ( !is_dir($path) ) {
