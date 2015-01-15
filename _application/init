@@ -72,6 +72,22 @@ foreach ($files as $file) {
     }
 }
 
+// create extra dirs/files -----------------------------------------------------
+foreach (array(
+    $root . '/_application/backend/runtime',
+    $root . '/_application/frontend/runtime',
+    $root . '/_application/console/runtime',
+    $root . '/web/assets',
+    $root . '/web/compiled',
+    $root . '/web/backend/compiled',
+) as $path ) {
+    if ( !is_dir($path) ) {
+        @mkdir($path, 0777, true);
+        file_put_contents($path . '/.gitignore', "*\n!.gitignore\n");
+    }
+}
+// -----------------------------------------------------------------------------
+
 $callbacks = ['setCookieValidationKey', 'setWritable', 'setExecutable'];
 foreach ($callbacks as $callback) {
     if (!empty($env[$callback])) {
