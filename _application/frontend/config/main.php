@@ -1,4 +1,8 @@
-<?php // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
+<?php
+
+// Docs links:
+// 1) https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
+// 2) https://github.com/yiisoft/yii2/blob/master/docs/guide/structure-controllers.md#default-controller-
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
@@ -16,7 +20,7 @@ $config = [
     'bootstrap'           => ['log', 'localeUrls'],
     'controllerNamespace' => 'frontend\modules\site\controllers',
     'controller'          => '@frontend/modules/site/IndexController',
-    'defaultRoute'        => 'site/index/index',
+    'defaultRoute'        => 'site/index/index',                                // @see link 2)
     'layout'              => '@frontend/layouts/main.php',
     'modules' => [
         'site'      => frontend\modules\site\Module::className(),
@@ -25,18 +29,7 @@ $config = [
     'components' => [
         'urlManager'    => $params['app.urlManager.localeUrls'],
         'localeUrls'    => $params['app.localeUrls'],
-        // here you can set theme used for your frontend application
-        // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/modules/site/views'    => '@webroot/themes/default/views',
-                    '@app/modules/profile/views' => '@webroot/themes/default/views',
-                    '@app/modules/test/views'    => '@webroot/themes/default/views',
-                ],
-                'baseUrl' => '@web/themes/default',
-            ],
-        ],
+        'view'          => $params['app.view'],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/runtime-logging.md#log-targets

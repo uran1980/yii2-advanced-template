@@ -31,10 +31,6 @@ $config = [
     ], // components
 ];
 
-if ( YII_ENV_PROD || YII_ENV == 'staging' ) {
-    $config['components']['view'] = $params['app.minifyView'];
-}
-
 // configuration adjustments for 'dev' environment
 if (!YII_ENV_TEST && !YII_ENV_PROD) {
     $config['bootstrap'][]      = 'debug';

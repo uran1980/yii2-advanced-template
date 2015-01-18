@@ -59,6 +59,7 @@ $config = [
         'enablePrettyUrl'   => true,
         'showScriptName'    => false,                                           // false - means that index.php will not be part of the URLs
     ],
+    // @see https://github.com/codemix/yii2-localeurls
     'app.urlManager.localeUrls' => [
         'class'             => codemix\localeurls\UrlManager::className(),
         'enablePrettyUrl'   => true,
@@ -131,7 +132,6 @@ $config = [
 //                 ]
 //             ],
         ],
-        
     ],
 
     // ------------------------- AUTH MANAGER ----------------------------------

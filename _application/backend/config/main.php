@@ -1,4 +1,8 @@
-<?php // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
+<?php
+
+// Docs links:
+// 1) https://github.com/yiisoft/yii2/blob/master/docs/guide/concept-configurations.md
+// 2) https://github.com/yiisoft/yii2/blob/master/docs/guide/structure-controllers.md#default-controller-
 
 use yii\helpers\ArrayHelper;
 use common\components\log\AppLogger;
@@ -17,12 +21,15 @@ $config = [
     'bootstrap'             => ['log', 'localeUrls'],
     'controllerNamespace'   => 'backend\modules\backend\controllers',
     'controller'            => '@backend/modules/backend/IndexController',
-    'defaultRoute'          => 'backend/index/index',
+    'defaultRoute'          => 'backend/index/index',                           // @see link 2)
     'layout'                => '@backend/layouts/main.php',
     'modules' => [
         'backend'   => backend\modules\backend\Module::className(),
         'i18n'      => [
             'class' => Zelenin\yii\modules\I18n\Module::className(),
+            'controllerMap' => [
+                'default' => common\modules\i18n\controllers\DefaultController::className(),
+            ],
             'as access' => [
                 'class' => yii\filters\AccessControl::className(),
                 'rules' => [
@@ -40,16 +47,7 @@ $config = [
 //        'urlManager'    => $params['app.urlManager'],
         'urlManager' => $params['app.urlManager.localeUrls'],
         'localeUrls' => $params['app.localeUrls'],
-        // here you can set theme used for your backend application
-        // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/modules/backend/views' => '@webroot/themes/default/views',
-                ],
-                'baseUrl' => '@web/themes/default',
-            ],
-        ],
+        'view' => $params['app.view'],
         'user' => [
             'class'             => yii\web\User::className(),
             'identityClass'     => common\models\UserIdentity::className(),
