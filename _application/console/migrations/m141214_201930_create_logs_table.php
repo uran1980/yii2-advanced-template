@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m150107_201930_create_logs_table extends Migration
+class m141214_201930_create_logs_table extends Migration
 {
     public function init()
     {

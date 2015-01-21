@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+/** ----------------------------------------------------------------------------
+ *                                  COMMON
+ * ----------------------------------------------------------------------------- */
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
@@ -15,6 +18,10 @@ html {
 }
 body {
     background: transparent;
+
+    > pre {
+        padding-top: 60px;
+    }
 }
 
 // FIX -------------------------------------------------------------------------

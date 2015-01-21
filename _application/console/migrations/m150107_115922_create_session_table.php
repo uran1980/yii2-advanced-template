@@ -3,7 +3,7 @@
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m141022_115922_create_session_table extends Migration
+class m150107_115922_create_session_table extends Migration
 {
     public function up()
     {
@@ -14,7 +14,8 @@ class m141022_115922_create_session_table extends Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions   = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
             $dataType       = 'LONGBLOB';
-        } elseif ($this->db->driverName === 'pgsql') {
+        }
+        elseif ($this->db->driverName === 'pgsql') {
             $dataType = 'BYTEA';
         } else {
             // mssql, oracle, sqlite, cubrid
@@ -22,9 +23,9 @@ class m141022_115922_create_session_table extends Migration
         }
 
         $this->createTable('{{%session}}', [
-            'id'     => 'CHAR(64) NOT NULL PRIMARY KEY',
-            'expire' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'data'   => ''.$dataType.' NOT NULL',
+            'id'        => 'CHAR(64) NOT NULL PRIMARY KEY',
+            'expire'    => Schema::TYPE_INTEGER . ' NOT NULL',
+            'data'      => ''.$dataType.' NOT NULL',
         ], $tableOptions);
     }
 
@@ -34,7 +35,6 @@ class m141022_115922_create_session_table extends Migration
             $this->dropTable('{{%session}}');
         } else {
             echo "WARNING: " . __CLASS__ . " cannot be reverted.\n";
-
             return false;
         }
     }

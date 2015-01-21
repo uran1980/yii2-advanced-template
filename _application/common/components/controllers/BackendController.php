@@ -20,6 +20,22 @@ class BackendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'controllers'   => ['backend/index'],
+                        'actions'       => ['login', 'error'],
+                        'allow'         => true,
+                    ],
+                    [
+                        'controllers'   => ['backend/index'],
+                        'actions'       => ['logout'],
+                        'allow'         => true,
+                        'roles'         => ['@'],
+                    ],
+                    [
+                        'controllers'   => ['backend/index'],
+                        'allow'         => true,
+                        'roles'         => [AccessControl::ROLE_ADMIN],
+                    ],
+                    [
                         'controllers'   => ['backend/user'],
                         'actions'       => ['index', 'view', 'create', 'update', 'delete'],
                         'allow'         => true,
@@ -35,6 +51,7 @@ class BackendController extends MainController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'logout' => ['post'],
                 ],
             ], // verbs
         ]; // return

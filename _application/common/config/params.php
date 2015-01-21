@@ -91,19 +91,6 @@ $config = [
         'class' => yii\caching\FileCache::className(),
     ],
 
-    // ------------------------ MINIFY VIEW COMPONET ---------------------------
-    // @see https://github.com/rmrevin/yii2-minify-view
-    'app.minifyView' => [
-        'class'          => rmrevin\yii\minify\View::className(),
-        'base_path'      => '@webroot',
-        'minify_path'    => '@webroot/compiled',
-        'force_charset'  => 'UTF-8',
-        'expand_imports' => true,
-        'js_position' => [
-            View::POS_END,
-        ],
-    ],
-
     // ------------------- ASSET MANAGER COMPONENT -----------------------------
     // @see http://stackoverflow.com/questions/25850164/yii2-asset-convertor
     // @see vendor\yiisoft\yii2\web\AssetConverter.php

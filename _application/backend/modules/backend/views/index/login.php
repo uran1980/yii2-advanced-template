@@ -16,7 +16,6 @@ $this->title = Module::t('Login');
 
         <div class="well bs-component">
             <p><?php echo Module::t('Please fill out the following fields to login:'); ?></p>
-
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?php //-- use email or username field depending on model scenario --// ?>
                 <?php if ($model->scenario === 'LoginWithEmail'): ?>

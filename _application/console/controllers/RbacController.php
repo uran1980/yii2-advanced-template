@@ -4,22 +4,22 @@ namespace console\controllers;
 use yii\helpers\Console;
 use yii\console\Controller;
 use common\rbac\AccessControl;
+use common\rbac\rules\AuthorRule;
 use Yii;
 
 /**
  * Creates base rbac authorization data for our application.
  * -----------------------------------------------------------------------------
- * Creates 6 roles:
- *
- * - root : you, developer of this site (super admin)
+ * Creates roles:
+ * - root       : you, developer of this site (super admin)
  * - admin      : your direct clients, administrators of this site
  * - editor     : editor of this site
  * - support    : support staff
+ * - translator : site translators
  * - premium    : premium user of this site
  * - user       : user of this site who has registered his profile and can log in
  *
- * Creates 7 permissions:
- *
+ * Creates permissions:
  * - usePremiumContent  : allows premium users to use premium content
  * - createArticle      : allows editor+ roles to create articles
  * - updateOwnArticle   : allows editor+ roles to update own articles
@@ -35,15 +35,21 @@ use Yii;
 class RbacController extends Controller
 {
     /**
+     * @var string the default command action.
+     */
+    public $defaultAction = 'init';
+
+    /**
      * Initializes the RBAC authorization data.
      */
     public function actionInit()
     {
         $auth = Yii::$app->authManager;
+        $auth->removeAll();
 
         //----------------------------- RULES ----------------------------------
         // add the rule
-        $rule = new \common\rbac\rules\AuthorRule;
+        $rule = new AuthorRule;
         $auth->add($rule);
 
         //-------------------------- PERMISSIONS -------------------------------
@@ -106,6 +112,13 @@ class RbacController extends Controller
         $auth->addChild($support, $premium);
         $auth->addChild($support, $user);
 
+        // add "translator" role
+        // translator can do everything that user can, and can translate site
+        $translator = $auth->createRole(AccessControl::ROLE_TRANSLATOR);
+        $translator->description = 'Translator';
+        $auth->add($translator);
+        $auth->addChild($translator, $user);
+
         // add "editor" role and give this role:
         // createArticle, updateOwnArticle and adminArticle permissions, plus he can do everything that support role can do.
         $editor = $auth->createRole(AccessControl::ROLE_EDITOR);
@@ -122,6 +135,7 @@ class RbacController extends Controller
         $admin->description = 'Administrator of this application';
         $auth->add($admin);
         $auth->addChild($admin, $editor);
+        $auth->addChild($admin, $translator);
         $auth->addChild($admin, $manageUsers);
         $auth->addChild($admin, $updateArticle);
         $auth->addChild($admin, $deleteArticle);

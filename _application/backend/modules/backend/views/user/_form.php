@@ -11,13 +11,9 @@ use backend\modules\backend\Module;
 /* @var $role common\rbac\models\Role; */
 ?>
 <div class="user-form">
-
     <?php $form = ActiveForm::begin(['id' => 'form-user']); ?>
-
         <?= $form->field($user, 'username') ?>
-
         <?= $form->field($user, 'email') ?>
-
         <?php if ($user->scenario === 'create'): ?>
             <?= $form->field($user, 'password')->widget(PasswordInput::classname(), []) ?>
         <?php else: ?>
@@ -25,20 +21,15 @@ use backend\modules\backend\Module;
                      ->passwordInput(['placeholder' => Module::t('New pwd ( if you want to change it )')])
             ?>
         <?php endif ?>
-
     <div class="row">
-    <div class="col-lg-6">
-
-        <?= $form->field($user, 'status')->dropDownList($user->statusList) ?>
-
-        <?php foreach (AuthItem::getRoles() as $item_name): ?>
-            <?php $roles[$item_name->name] = $item_name->name ?>
-        <?php endforeach ?>
-        <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
-
+        <div class="col-lg-6">
+            <?= $form->field($user, 'status')->dropDownList($user->statusList) ?>
+            <?php foreach (AuthItem::getRoles() as $item_name): ?>
+                <?php $roles[$item_name->name] = $item_name->name ?>
+            <?php endforeach ?>
+            <?= $form->field($role, 'item_name')->dropDownList($roles) ?>
+        </div>
     </div>
-    </div>
-
     <div class="form-group">
         <?= Html::submitButton($user->isNewRecord ? Module::t('Create')
             : Module::t('Update'), ['class' => $user->isNewRecord
@@ -46,7 +37,5 @@ use backend\modules\backend\Module;
 
         <?= Html::a(Module::t('Cancel'), ['user/index'], ['class' => 'btn btn-default']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>

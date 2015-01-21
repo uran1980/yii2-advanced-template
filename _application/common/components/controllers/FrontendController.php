@@ -4,6 +4,7 @@ namespace common\components\controllers;
 
 use common\rbac\AccessControl;
 use yii\filters\VerbFilter;
+use Yii;
 
 class FrontendController extends MainController
 {
@@ -53,4 +54,21 @@ class FrontendController extends MainController
             ], // verbs
         ]; // return
     } // behaviors
+
+    /**
+     * Redirects the browser to the client's profile page.
+     *
+     * You can use this method in an action by returning the [[Response]] directly:
+     *
+     * ```php
+     * // stop executing this action and redirect to home page
+     * return $this->goToProfile();
+     * ```
+     *
+     * @return Response the current response object
+     */
+    public function goToProfile()
+    {
+        return Yii::$app->getResponse()->redirect(Yii::$app->getUrlManager()->createUrl('/profile/index/index'));
+    }
 }

@@ -2,6 +2,7 @@
 namespace frontend\modules\profile\models;
 
 use common\models\User;
+use common\rbac\AccessControl;
 use common\rbac\helpers\RbacHelper;
 use nenad\passwordStrength\StrengthValidator;
 use yii\base\Model;
@@ -30,13 +31,13 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['username', 'unique', 'targetClass' => '\common\models\User',
-                'message' => 'This username has already been taken.'],
+                'message' => Module::t('This username has already been taken.')],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => '\common\models\User',
-                'message' => 'This email address has already been taken.'],
+                'message' => Module::t('This email address has already been taken.')],
 
             ['password', 'required'],
             // use passwordStrengthRule() method to determine password strength
@@ -98,7 +99,10 @@ class SignupForm extends Model
         $user = new User();
 
         $user->username = $this->username;
-        $user->email = $this->email;
+        $user->email    = $this->email;
+        $user->role     = ( (int) User::find()->count() === 0 )
+                        ? AccessControl::ROLE_ROOT
+                        : AccessControl::ROLE_USER;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->status = $this->status;
@@ -109,7 +113,7 @@ class SignupForm extends Model
         }
 
         // if user is saved and role is assigned return user object
-        return $user->save() && RbacHelper::assignRole($user->getId()) ? $user : null;
+        return $user->save() && RbacHelper::assignRole($user) ? $user : null;
     }
 
     /**
@@ -122,9 +126,9 @@ class SignupForm extends Model
     {
         return Yii::$app->mailer
             ->compose('profileActivationToken', ['user' => $user])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
             ->setTo($this->email)
-            ->setSubject('Profile activation for ' . Yii::$app->name)
+            ->setSubject(Module::t('Profile activation for') . ' ' . Yii::$app->name)
             ->send()
         ;
     }

@@ -146,7 +146,7 @@ class UserController extends BackendController
         $this->findModel($id)->delete();
 
         // delete this user's role from auth_assignment table
-        $role = Role::find()->where(['user_id'=>$id])->one();
+        $role = Role::find()->where(['user_id' => $id])->one();
         if ( $role ) {
             $role->delete();
         }

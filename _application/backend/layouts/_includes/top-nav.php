@@ -5,7 +5,6 @@ use yii\bootstrap\NavBar;
 use backend\modules\backend\Module;
 use common\rbac\AccessControl;
 use common\components\widgets\LanguageSwitcher;
-use Yii;
 
 NavBar::begin([
     'brandLabel' => Module::t('Backend Dashboard'),
@@ -20,6 +19,9 @@ if (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) {
     $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
     $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
 }
+else if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
+    $menuItems[] = ['label' => Module::t('Translations'), 'url' => ['/translations']];
+}
 
 // display Login page to guests of the site
 if (Yii::$app->user->isGuest) {
@@ -33,7 +35,7 @@ else {
         'linkOptions' => ['data-method' => 'post']
     ];
 }
-if ( Yii::$app->has('localeUrls') ) {
+if ( \Yii::$app->has('localeUrls') ) {
     echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
 }
 echo Nav::widget([

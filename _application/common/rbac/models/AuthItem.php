@@ -50,4 +50,18 @@ class AuthItem extends ActiveRecord
             ;
         }
     }
+
+    /**
+     * Return permissions.
+     *
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getPermissions()
+    {
+        return static::find()
+            ->select('name')
+            ->where(['type' => 2])
+            ->all()
+        ;
+    }
 }

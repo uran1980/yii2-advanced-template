@@ -20,7 +20,7 @@ use yii\db\Migration;
  * @since 2.0
  * -----------------------------------------------------------------------------
  */
-class m150109_115912_create_rbac_tables extends Migration
+class m150110_115912_create_rbac_tables extends Migration
 {
     /**
      * @throws yii\base\InvalidConfigException

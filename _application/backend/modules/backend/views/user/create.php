@@ -11,17 +11,13 @@ $this->params['breadcrumbs'][] = ['label' => Module::t('Users'), 'url' => ['inde
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-create">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="col-lg-5 well bs-component">
-
         <?= $this->render('_form', [
             'user' => $user,
             'role' => $role,
         ]) ?>
-
     </div>
-
 </div>
 

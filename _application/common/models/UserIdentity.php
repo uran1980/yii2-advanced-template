@@ -14,12 +14,13 @@ use Yii;
  *
  * @property integer $id
  * @property string  $username
- * @property string  $password_hash
- * @property string  $password_reset_token
  * @property string  $email
- * @property string  $profile_activation_token
+ * @property string  $role
+ * @property string  $password_hash
+ * @property string  $status
  * @property string  $auth_key
- * @property integer $status
+ * @property string  $password_reset_token
+ * @property string  $profile_activation_token
  * @property integer $created_at
  * @property integer $updated_at
  */

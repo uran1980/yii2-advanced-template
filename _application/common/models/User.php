@@ -15,9 +15,9 @@ use Yii;
  */
 class User extends UserIdentity
 {
-    const STATUS_DELETED    = 0;
-    const STATUS_NOT_ACTIVE = 1;
-    const STATUS_ACTIVE     = 10;
+    const STATUS_DELETED    = 'deleted';
+    const STATUS_NOT_ACTIVE = 'not_active';
+    const STATUS_ACTIVE     = 'active';
 
     public $password;
 
@@ -44,8 +44,8 @@ class User extends UserIdentity
             // use passwordStrengthRule() method to determine password strength
             $this->passwordStrengthRule(),
 
-            ['username', 'unique', 'message' => 'This username has already been taken.'],
-            ['email', 'unique', 'message' => 'This email address has already been taken.'],
+            ['username', 'unique', 'message' => Yii::t('common', 'This username has already been taken.')],
+            ['email',    'unique', 'message' => Yii::t('common', 'This email address has already been taken.')],
         ];
     }
 
@@ -61,7 +61,7 @@ class User extends UserIdentity
 
         // password strength rule is determined by StrengthValidator
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
-        $strong = [['password'], StrengthValidator::className(), 'preset'=>'normal'];
+        $strong = [['password'], StrengthValidator::className(), 'preset' => 'normal'];
 
         // normal yii rule
         $normal = ['password', 'string', 'min' => 6];
