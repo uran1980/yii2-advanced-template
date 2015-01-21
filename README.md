@@ -104,7 +104,7 @@ For backend:
 
 ``` http://yii2-advanced-template.local/backend ```
 
-> Note: First user that signs up will get 'The Creator' (super admin) role. This is supposed to be you. This role have all possible super powers :) . Every other user that signs up after the first one will get 'member' role. Member is just normal authenticated user.
+> Note: First user that signs up will get 'root' (super admin) role. This is supposed to be you. This role have all possible super powers :) . Every other user that signs up after the first one will get 'member' role. Member is just normal authenticated user.
 
 Testing
 -------------------
