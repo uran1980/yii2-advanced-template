@@ -60,7 +60,7 @@ and execute ```php init``` command.
    Type __0__ for development, execute command, type __yes__ to confirm, and execute again.
 
 7. Now you need to tell your application to use database that you have previously created.
-Open up main-local.php config file in ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
+Open up config files: ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
 and adjust your connection credentials.
 
 8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
