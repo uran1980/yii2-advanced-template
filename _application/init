@@ -77,10 +77,19 @@ foreach (array(
     $root . '/_application/backend/runtime',
     $root . '/_application/frontend/runtime',
     $root . '/_application/console/runtime',
+
     $root . '/web/assets',
-    $root . '/web/themes/default/compiled',
     $root . '/web/backend/assets',
+
+    $root . '/web/themes/cerulean/compiled',
+    $root . '/web/themes/default/compiled',
+    $root . '/web/themes/slate/compiled',
+    $root . '/web/themes/spacelab/compiled',
+
+    $root . '/web/backend/themes/cerulean/compiled',
     $root . '/web/backend/themes/default/compiled',
+    $root . '/web/backend/themes/slate/compiled',
+    $root . '/web/backend/themes/spacelab/compiled',
 ) as $path ) {
     if ( !is_dir($path) ) {
         @mkdir($path, 0777, true);

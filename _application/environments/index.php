@@ -33,10 +33,19 @@ return [
             '_application/frontend/runtime',
             '_application/frontend/runtime/mail',
             '_application/console/runtime',
+
             '/web/assets',
             '/web/backend/assets',
-            '/web/compiled',
-            '/web/backend/compiled',
+
+            '/web/themes/cerulean/compiled',
+            '/web/themes/default/compiled',
+            '/web/themes/slate/compiled',
+            '/web/themes/spacelab/compiled',
+
+            '/web/backend/themes/cerulean/compiled',
+            '/web/backend/themes/default/compiled',
+            '/web/backend/themes/slate/compiled',
+            '/web/backend/themes/spacelab/compiled',
         ],
         'setExecutable' => [
             '_application/yii',
