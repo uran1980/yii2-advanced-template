@@ -60,7 +60,7 @@ and execute ```php init``` command.
    Type __0__ for development, execute command, type __yes__ to confirm, and execute again.
 
 7. Now you need to tell your application to use database that you have previously created.
-Open up main-local.php config file in ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
+Open up config files: ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
 and adjust your connection credentials.
 
 8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
@@ -104,7 +104,7 @@ For backend:
 
 ``` http://yii2-advanced-template.local/backend ```
 
-> Note: First user that signs up will get 'The Creator' (super admin) role. This is supposed to be you. This role have all possible super powers :) . Every other user that signs up after the first one will get 'member' role. Member is just normal authenticated user.
+> Note: First user that signs up will get 'root' (super admin) role. This is supposed to be you. This role have all possible super powers :) . Every other user that signs up after the first one will get 'user' role - is just normal authenticated user.
 
 Testing
 -------------------
