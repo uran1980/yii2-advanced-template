@@ -4,7 +4,7 @@ namespace common\assets;
 
 class HolderjsAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@vendor/bower/holderjs';
+    public $sourcePath = '@bower/holderjs';
     public $js = [
         'holder.js',
     ];

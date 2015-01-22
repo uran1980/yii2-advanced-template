@@ -73,25 +73,23 @@ foreach ($files as $file) {
 }
 
 // create extra dirs/files -----------------------------------------------------
-foreach (array(
+$themes = ['default', 'cerulean', 'slate', 'spacelab'];
+$paths = [
     $root . '/_application/backend/runtime',
     $root . '/_application/frontend/runtime',
     $root . '/_application/console/runtime',
-
     $root . '/web/assets',
     $root . '/web/backend/assets',
+];
+foreach ($themes as $theme) {
+    $paths[] = $root . '/web/themes/'.$theme.'/compiled';
+    $paths[] = $root . '/web/themes/'.$theme.'/.sass-cache';
+    $paths[] = $root . '/web/backend/themes/'.$theme.'/compiled';
+    $paths[] = $root . '/web/backend/themes/'.$theme.'/.sass-cache';
+}
 
-    $root . '/web/themes/cerulean/compiled',
-    $root . '/web/themes/default/compiled',
-    $root . '/web/themes/slate/compiled',
-    $root . '/web/themes/spacelab/compiled',
-
-    $root . '/web/backend/themes/cerulean/compiled',
-    $root . '/web/backend/themes/default/compiled',
-    $root . '/web/backend/themes/slate/compiled',
-    $root . '/web/backend/themes/spacelab/compiled',
-) as $path ) {
-    if ( !is_dir($path) ) {
+foreach ($paths as $path) {
+    if (!is_dir($path)) {
         @mkdir($path, 0777, true);
         file_put_contents($path . '/.gitignore', "*\n!.gitignore\n");
     }

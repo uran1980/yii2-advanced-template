@@ -1,4 +1,20 @@
 <?php
+
+$themes = ['default', 'cerulean', 'slate', 'spacelab'];
+$paths = [
+    '/_application/backend/runtime',
+    '/_application/frontend/runtime',
+    '/_application/console/runtime',
+    '/web/assets',
+    '/web/backend/assets',
+];
+foreach ($themes as $theme) {
+    $paths[] = '/web/themes/'.$theme.'/compiled';
+    $paths[] = '/web/themes/'.$theme.'/.sass-cache';
+    $paths[] = '/web/backend/themes/'.$theme.'/compiled';
+    $paths[] = '/web/backend/themes/'.$theme.'/.sass-cache';
+}
+
 /**
  * The manifest of files that are local to specific environment.
  * This file returns a list of environments that the application
@@ -28,25 +44,7 @@
 return [
     'Development' => [
         'path' => 'dev',
-        'setWritable' => [
-            '_application/backend/runtime',
-            '_application/frontend/runtime',
-            '_application/frontend/runtime/mail',
-            '_application/console/runtime',
-
-            '/web/assets',
-            '/web/backend/assets',
-
-            '/web/themes/cerulean/compiled',
-            '/web/themes/default/compiled',
-            '/web/themes/slate/compiled',
-            '/web/themes/spacelab/compiled',
-
-            '/web/backend/themes/cerulean/compiled',
-            '/web/backend/themes/default/compiled',
-            '/web/backend/themes/slate/compiled',
-            '/web/backend/themes/spacelab/compiled',
-        ],
+        'setWritable' => $paths,
         'setExecutable' => [
             '_application/yii',
         ],
@@ -57,16 +55,7 @@ return [
     ],
     'Production' => [
         'path' => 'prod',
-        'setWritable' => [
-            '_application/backend/runtime',
-            '_application/frontend/runtime',
-            '_application/frontend/runtime/mail',
-            '_application/console/runtime',
-            '/web/assets',
-            '/web/backend/assets',
-            '/web/compiled',
-            '/web/backend/compiled',
-        ],
+        'setWritable' => $paths,
         'setExecutable' => [
             '_application/yii',
             '_application/frontend/runtime/mail',
@@ -78,16 +67,7 @@ return [
     ],
     'Staging' => [
         'path' => 'staging',
-        'setWritable' => [
-            '_application/backend/runtime',
-            '_application/frontend/runtime',
-            '_application/frontend/runtime/mail',
-            '_application/console/runtime',
-            '/web/assets',
-            '/web/backend/assets',
-            '/web/compiled',
-            '/web/backend/compiled',
-        ],
+        'setWritable' => $paths,
         'setExecutable' => [
             '_application/yii',
         ],

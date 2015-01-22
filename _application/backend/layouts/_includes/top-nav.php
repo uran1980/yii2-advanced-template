@@ -14,9 +14,16 @@ NavBar::begin([
     ],
 ]);
 
+$menuItems[] = [
+    'label' => Module::t('Site'),
+    'url' => Yii::$app->urlManagerFrontend->baseUrl,
+//    'linkOptions' => [
+//        'target' => '_blank',
+//    ],
+];
+
 // display Account and Users to admin+ roles
 if (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) {
-    $menuItems[] = ['label' => Module::t('Site'),  'url' => Yii::$app->urlManagerFrontend->baseUrl];
 //    $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
     $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
 }

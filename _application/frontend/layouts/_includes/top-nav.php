@@ -21,7 +21,13 @@ $menuItems[] = ['label' => Module::t('Home'), 'url' => ['/site/index/index']];
 // for admin show link to backend
 // @see https://github.com/yiisoft/yii2/issues/1578
 if ( Yii::$app->user->can(AccessControl::ROLE_ADMIN) ) {
-    $menuItems[] = ['label' => Module::t('Backend'), 'url' => Yii::$app->urlManagerBackend->baseUrl];
+    $menuItems[] = [
+        'label' => Module::t('Backend'),
+        'url' => Yii::$app->urlManagerBackend->baseUrl,
+//        'linkOptions' => [
+//            'target' => '_blank',
+//        ],
+    ];
 }
 
 // we do not need to display Article/index, About and Contact pages to editor+ roles
