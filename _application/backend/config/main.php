@@ -46,6 +46,7 @@ $config = [
     'components' => [
 //        'urlManager'    => $params['app.urlManager'],
         'urlManager' => $params['app.urlManager.localeUrls'],
+        'urlManagerFrontend' => $params['app.urlManagerFrontend'],
         'localeUrls' => $params['app.localeUrls'],
         'view' => $params['app.view'],
         'user' => [

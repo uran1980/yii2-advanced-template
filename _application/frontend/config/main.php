@@ -28,6 +28,7 @@ $config = [
     ],
     'components' => [
         'urlManager'    => $params['app.urlManager.localeUrls'],
+        'urlManagerBackend' => $params['app.urlManagerBackend'],
         'localeUrls'    => $params['app.localeUrls'],
         'view'          => $params['app.view'],
         'log' => [

@@ -29,6 +29,12 @@ $config = [
             '<_m:[\w\-]+>/<_c:[\w\-]+>'                 => '<_m>/<_c>/index',
         ],
     ],
+    'app.urlManagerBackend' => [
+        'class'             => yii\web\UrlManager::className(),
+        'enablePrettyUrl'   => true,
+        'showScriptName'    => false,
+        'baseUrl'           => '/backend',
+    ],
 
     // -------------------------- VIEW COMPONENT -------------------------------
     'app.view' => [

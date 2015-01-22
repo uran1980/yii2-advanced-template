@@ -30,6 +30,12 @@ $config = [
             '<_c:[\w\-]+>/<_a:[\w\-]+>'                 => 'backend/<_c>/<_a>',
         ],
     ],
+    'app.urlManagerFrontend' => [
+        'class'             => yii\web\UrlManager::className(),
+        'enablePrettyUrl'   => true,
+        'showScriptName'    => false,
+        'baseUrl'           => '/../',
+    ],
 
     // -------------------------- VIEW COMPONENT -------------------------------
     'app.view' => [
