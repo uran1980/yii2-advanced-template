@@ -29,7 +29,6 @@
         "danielstjules/stringy": "*",
 
         "bower-asset/awesome-bootstrap-checkbox": "*",
-        "bower-asset/animate.css": "*",
         "bower-asset/bootstrap-sass-official": "*",
         "bower-asset/bootstrap-chosen": "*",
         "bower-asset/chosen": "*",
