@@ -30,9 +30,7 @@
 
         "bower-asset/awesome-bootstrap-checkbox": "*",
         "bower-asset/bootstrap-sass-official": "*",
-        "bower-asset/bootstrap-chosen": "*",
         "bower-asset/compass-mixins": "*",
-        "bower-asset/colors": "*",
         "bower-asset/datetimepicker": "*",
         "bower-asset/fancybox": "*",
         "bower-asset/formValidation": "*",
