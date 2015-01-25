@@ -4,18 +4,22 @@
 
 
 // -----------------------------------------------------------------------------
-// Load Bootstrap3 core variables and mixins
+// Bootstrap3 core variables and mixins
 // -----------------------------------------------------------------------------
-//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
-//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
-//@import "../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
+// @see https://github.com/twbs/bootstrap-sass
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
+@import "../../../../vendor/bower/compass-mixins/lib/compass/css3/_border-radius.scss";
+@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
 
 @import 'variables';
+@import 'mixins';
 @import 'bootstrap2-theme/base';
 @import 'bootstrap2-theme/jumbotron';
 @import 'bootstrap2-theme/badges';
 @import 'bootstrap2-theme/progress-bars';
 @import 'bootstrap2-theme/buttons';
+@import 'bootstrap2-theme/button-groups';
 @import 'bootstrap2-theme/images';
 @import 'bootstrap2-theme/dropdowns';
 @import 'bootstrap2-theme/navbar';

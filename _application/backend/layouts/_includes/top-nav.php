@@ -27,7 +27,7 @@ if (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) {
 //    $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
     $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
 }
-else if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
+if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
     $menuItems[] = ['label' => Module::t('Translations'), 'url' => ['/translations']];
 }
 

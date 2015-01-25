@@ -20,11 +20,13 @@ $this->title = Module::t('Application Log Messages');
 
 <?php
     echo GridView::widget([
-        'dataProvider'  => $dataProvider,
-        'id'            => 'dblog-panel-detailed-grid',
-        'options'       => ['class' => 'detail-grid-view table-responsive'],
-        'filterModel'   => $searchModel,
-//        'filterUrl'     => $panel->getUrl(),                                  // TODO
+        'dataProvider' => $dataProvider,
+        'id' => 'dblog-panel-detailed-grid',
+        'options' => [
+            'class' => 'detail-grid-view table-responsive',
+        ],
+        'filterModel' => $searchModel,
+        'filterUrl' => $panel->getUrl(),
         'columns' => [
             [
                 'class' => yii\grid\SerialColumn::className(),

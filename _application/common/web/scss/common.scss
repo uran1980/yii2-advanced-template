@@ -4,13 +4,7 @@
  *                                  COMMON
  * ----------------------------------------------------------------------------- */
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
-@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
-@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
-
 @import '../../../../_application/common/web/scss/variables';
-@import '../../../../_application/common/web/scss/functions';
-@import '../../../../_application/common/web/scss/mixins';
-@import '../../../../_application/common/web/scss/bootstrap2-theme';
 
 html {
     //@include noise-background($white);
@@ -61,21 +55,6 @@ a.scroll-to-top-link {
 
 .spoiler-content {
     display: none;
-}
-
-.table-responsive {
-    border: none;
-    overflow-x: visible;
-}
-
-.nav-tabs {
-    > li.active {
-        > a,
-        > a:hover,
-        > a:focus {
-            background-color: $gray;
-        }
-    }
 }
 
 .navbar {

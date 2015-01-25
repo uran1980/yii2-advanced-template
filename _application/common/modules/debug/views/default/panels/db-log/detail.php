@@ -14,19 +14,26 @@ use Stringy\StaticStringy as Stringy;
     echo Yii::t('app-frontend', 'Scroll to top'); ?></a>
 
 <h1>Log Messages</h1>
-<?php
 
+<?php
 echo GridView::widget([
-    'dataProvider'  => $dataProvider,
-    'id'            => 'dblog-panel-detailed-grid',
-    'options'       => ['class' => 'detail-grid-view table-responsive'],
-    'filterModel'   => $searchModel,
-    'filterUrl'     => $panel->getUrl(),
+    'dataProvider' => $dataProvider,
+    'dataColumnClass' => \common\components\grid\DataColumn::className(),
+    'id' => 'dblog-panel-detailed-grid',
+    'showFooter' => true,
+    'options' => [
+        'class' => 'detail-grid-view table-responsive',
+    ],
+    'filterModel' => $searchModel,
+    'filterUrl' => $panel->getUrl(),
     'columns' => [
         [
             'class' => yii\grid\SerialColumn::className(),
             'headerOptions' => [
                 'class' => 'text-align-center',
+            ],
+            'footerOptions' => [
+                'class' => 'text-align-center font-weight-bold th',
             ],
             'contentOptions' => [
                 'class' => 'text-align-center',
@@ -46,6 +53,9 @@ echo GridView::widget([
             },
             'headerOptions' => [
                 'class' => 'sort-numerical text-align-center',
+            ],
+            'footerOptions' => [
+                'class' => 'sort-numerical text-align-center font-weight-bold th',
             ],
             'contentOptions' => [
                 'class' => 'nowrap font-size-10px text-align-center',
@@ -73,6 +83,9 @@ echo GridView::widget([
             'headerOptions' => [
                 'class' => 'text-align-center',
             ],
+            'footerOptions' => [
+                'class' => 'text-align-center font-weight-bold th',
+            ],
             'contentOptions' => [
                 'class' => 'text-align-center',
             ],
@@ -81,6 +94,9 @@ echo GridView::widget([
             'attribute' => 'category',
             'headerOptions' => [
                 'class' => 'text-align-center',
+            ],
+            'footerOptions' => [
+                'class' => 'text-align-center font-weight-bold th',
             ],
             'contentOptions' => [
                 'class' => 'font-size-10px',
@@ -116,6 +132,9 @@ echo GridView::widget([
             ],
             'headerOptions' => [
                 'class' => 'text-align-center',
+            ],
+            'footerOptions' => [
+                'class' => 'text-align-center font-weight-bold th',
             ],
             'contentOptions' => [
                 'class' => 'spoiler',

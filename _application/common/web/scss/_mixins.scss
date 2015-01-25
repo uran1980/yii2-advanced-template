@@ -2,6 +2,33 @@
 //                              CUSTOM MIXINS
 // -----------------------------------------------------------------------------
 
+// Mixin for generating new styles
+@mixin btn-styles($btn-color: #555) {
+  @include gradient-vertical($start-color: $btn-color, $end-color: darken($btn-color, 10%));
+  @include reset-filter; // Disable gradients for IE9 because filter bleeds through rounded corners; see https://github.com/twbs/bootstrap/issues/10620
+  background-repeat: repeat-x;
+  border-color: darken($btn-color, 10%);
+
+  &:hover,
+  &:focus  {
+    background-color: darken($btn-color, 10%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($btn-color, 10%);
+    border-color: darken($btn-color, 10%);
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled] {
+    background-color: darken($btn-color, 10%);
+    background-image: none;
+  }
+}
+
 // Stiched
 // -------
 // @see http://codepen.io/anon/pen/jKvzl

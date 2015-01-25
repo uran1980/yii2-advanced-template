@@ -55,20 +55,68 @@
     }
 }
 .table-bordered {
-  border: 1px solid $table-border-color;
-  > thead,
-  > tbody,
-  > tfoot {
-    > tr {
-      > th,
-      > td {
-        border: 1px solid $table-border-color;
-      }
+    border: 1px solid $table-border-color;
+    @include border-radius($border-radius-base);
+    border-collapse: inherit;
+    border-spacing: 0;
+    > thead,
+    > tbody,
+    > tfoot {
+        > tr {
+            > th,
+            > td {
+                border: 1px solid $table-border-color;
+                border-left: none;
+                border-bottom: none;
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
     }
-  }
+    > thead,
+    > tfoot {
+        > tr {
+            > th,
+            > td.th {
+                @include gradient-vertical($start-color: rgba(lighten($blue-gray, 5%), 0.5), $end-color: lighten($blue-gray, 3%));
+                text-shadow: 0 1px 0 lighten($blue-gray, 30%);
+                @include box-shadow(0 1px 0 lighten($blue-gray, 20%) inset);
+            }
+        }
+    }
+    > thead {
+        > tr {
+            > th,
+            > td.th {
+                &:first-child {
+                    @include border-top-left-radius($border-radius-base);
+                }
+                &:last-child {
+                    @include border-top-right-radius($border-radius-base);
+                }
+            }
+        }
+    }
+    > tfoot {
+        > tr {
+            > th,
+            > td.th {
+                &:first-child {
+                    @include border-bottom-left-radius($border-radius-base);
+                }
+                &:last-child {
+                    @include border-bottom-right-radius($border-radius-base);
+                }
+            }
+        }
+    }
 }
 .table-responsive {
-    border: 1px solid $table-border-color;
+    overflow-x: visible;
+    &.bordered {
+        border: 1px solid $table-border-color;
+    }
 }
 
 // Generate the contextual variants

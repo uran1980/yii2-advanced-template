@@ -29,6 +29,12 @@ use yii\helpers\VarDumper;
                 </tr>
             <?php endforeach; ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-align-center" width="100">Name</th>
+                    <th class="text-align-center">Value</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
-<?php endif; ?>
+<?php endif;

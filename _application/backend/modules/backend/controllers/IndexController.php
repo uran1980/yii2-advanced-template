@@ -89,6 +89,8 @@ class IndexController extends BackendController
 
         // everything went fine, log in the user
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            AccessControl::checkRoleAssignment();
+
             return $this->goBack();
         }
         // errors will be displayed

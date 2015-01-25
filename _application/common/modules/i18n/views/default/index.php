@@ -27,37 +27,66 @@ echo Breadcrumbs::widget(['links' => [
     echo GridView::widget([
         'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
+        'dataColumnClass' => \common\components\grid\DataColumn::className(),
+        'showFooter' => true,
+        'options' => [
+            'class' => 'grid-view table-responsive',
+        ],
         'columns' => [
             [
                 'attribute' => 'id',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'value' => function ($model, $index, $dataColumn) {
-                        return $model->id;
-                    },
-                'filter' => false
+                    return $model->id;
+                },
+                'filter' => false,
             ],
             [
                 'attribute' => 'message',
                 'format' => 'raw',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'value' => function ($model, $index, $widget) {
-                        return Html::a($model->message, ['update', 'id' => $model->id], ['data' => ['pjax' => 0]]);
-                    }
+                    return Html::a($model->message, ['update', 'id' => $model->id], ['data' => ['pjax' => 0]]);
+                },
             ],
             [
                 'attribute' => 'category',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'value' => function ($model, $index, $dataColumn) {
-                        return $model->category;
-                    },
-                'filter' => ArrayHelper::map($searchModel::getCategories(), 'category', 'category')
+                    return $model->category;
+                },
+                'filter' => ArrayHelper::map($searchModel::getCategories(), 'category', 'category'),
             ],
             [
                 'attribute' => 'status',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'value' => function ($model, $index, $widget) {
-                        return '';
-                    },
+                    return '';
+                },
                 'filter' => Html::dropDownList($searchModel->formName() . '[status]', $searchModel->status, $searchModel->getStatus(), [
-                        'class' => 'form-control',
-                        'prompt' => ''
-                    ])
+                    'class'  => 'form-control',
+                    'prompt' => '',
+                ]),
             ]
         ]
     ]);

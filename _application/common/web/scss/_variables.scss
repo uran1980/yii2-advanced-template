@@ -14,9 +14,9 @@ $light-gray:        #f2f2f2;
 $dark-gray:         #474e5e;
 $smoke-gray:        #b1b8c6;
 $dark-smoke-gray:   #717c96;
+$blue:              #0088cc;
 $blue-gray:         #b1c0c4;
 $dark-blue-gray:    #414f67;
-$blue:              #3498db;
 $dark-blue:         #375a7f;
 $sky-blue:          #0d8fdb;
 $header-blue:       #0673a2;                                                    // #23779c;
@@ -35,9 +35,9 @@ $html-bg:   $gray;                                                              
 $header-bg: $header-blue;
 $footer-bg: $header-bg;
 
-$border-color: $blue-gray;
+$border-color: darken($blue-gray, 5%);
 
-$panel-primary-heading-bg:   darken($blue, 10%);
+$panel-primary-heading-bg:   darken($blue, 5%);
 $panel-info-heading-bg:      $blue;
 $panel-success-border-color: $light-green;
 
@@ -92,7 +92,7 @@ $pager-hover-text-shadow:   $pagination-hover-text-shadow;
 $pager-hover-color:         $pagination-hover-color;
 $pager-disabled-bg:         $pagination-disabled-bg;
 
-$nav-tabs-border-color:     $border-color;
+$nav-tabs-border-color:     darken($border-color, 5%);
 $page-header-border-color:  $border-color;
 $btn-default-border:        $border-color;
 $input-border:              $border-color;
@@ -100,6 +100,12 @@ $table-border-color:        $border-color;
 $blockquote-border-color:   $border-color;
 
 $thumbnail-border:          $border-color;
+
+$list-group-active-bg:              $blue;
+$label-info-bg:                     $blue;
+$nav-tabs-link-hover-border-color:  lighten($nav-tabs-border-color, 20%);
+$btn-primary-bg:                    $blue;
+$btn-primary-border:                darken($blue, 5%);
 
 
 // -----------------------------------------------------------------------------

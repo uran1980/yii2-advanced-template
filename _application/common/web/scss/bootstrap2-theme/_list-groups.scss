@@ -2,7 +2,7 @@
 // List groups
 // -----------------------------------------------------------------------------
 .list-group {
-    border-radius: $border-radius-base;
+    @include border-radius($border-radius-base);
     @include box-shadow(0 1px 2px rgba(0,0,0,.075));
 }
 .list-group-item.active,
