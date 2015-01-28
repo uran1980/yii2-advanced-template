@@ -1,5 +1,5 @@
 <?php
-use yii\helpers\Html;
+
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
@@ -10,38 +10,26 @@ use frontend\modules\site\Module;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-    <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php include '_includes/top-nav.php'; ?>
+<?php $this->beginContent('@common/layouts/base.php'); ?>
+<div class="wrap">
+    <?php include '_includes/top-nav.php'; ?>
 
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-        </div>
+    <div class="container">
+    <?php echo Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
+    <?php echo Alert::widget(); ?>
+    <?php echo $content; ?>
     </div>
+</div>
 
-    <footer class="footer">
-        <div class="container">
-        <p class="pull-left">&copy; <?= Module::t(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
+<footer class="footer">
+    <div class="container">
+    <p class="pull-left">&copy; <?php echo Module::t(Yii::$app->name); ?> <?php echo date('Y'); ?></p>
+    <p class="pull-right"><?php echo Yii::powered(); ?></p>
+    </div>
+</footer>
 
-    <?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+<a href="#wrapper" class="scroll-to-top-link" style="display: none;"><?php
+    echo Module::t('Scroll to top'); ?></a>
+<?php $this->endContent();
