@@ -14,9 +14,13 @@ use yii\helpers\Html;
         <?php $this->head(); ?>
     </head>
     <body>
-    <?php $this->beginBody(); ?>
+        <?php $this->beginBody(); ?>
         <?php echo $content; ?>
-    <?php $this->endBody(); ?>
+        <?php $this->endBody(); ?>
+
+        <?php include '_includes/footer.php'; ?>
+        <a href="#wrapper" class="scroll-to-top-link" style="display: none;"><?php
+            echo Module::t('Scroll to top'); ?></a>
     </body>
 </html>
 <?php $this->endPage();

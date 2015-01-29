@@ -22,14 +22,4 @@ AppAsset::register($this);
     <?php echo $content; ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-    <p class="pull-left">&copy; <?php echo Module::t(Yii::$app->name); ?> <?php echo date('Y'); ?></p>
-    <p class="pull-right"><?php echo Yii::powered(); ?></p>
-    </div>
-</footer>
-
-<a href="#wrapper" class="scroll-to-top-link" style="display: none;"><?php
-    echo Module::t('Scroll to top'); ?></a>
 <?php $this->endContent();
