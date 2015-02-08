@@ -28,7 +28,7 @@ $config = [
         'i18n'      => [
             'class' => Zelenin\yii\modules\I18n\Module::className(),
             'controllerMap' => [
-                'default' => common\modules\i18n\controllers\DefaultController::className(),
+                'default' => backend\modules\backend\controllers\TranslationsController::className(),
             ],
             'as access' => [
                 'class' => yii\filters\AccessControl::className(),

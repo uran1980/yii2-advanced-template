@@ -43,7 +43,7 @@ $config = [
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'theme' => [
             'pathMap' => [
-                '@Zelenin/yii/modules/I18n/views' => '@common/modules/i18n/views',
+                '@Zelenin/yii/modules/I18n/views/default' => '@backend/modules/backend/views/translations',
             ],
             'baseUrl'  => "@web/themes/$theme",
             'basePath' => "@webroot/themes/$theme",

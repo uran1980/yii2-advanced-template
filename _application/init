@@ -91,6 +91,8 @@ foreach ($themes as $theme) {
 foreach ($paths as $path) {
     if (!is_dir($path)) {
         @mkdir($path, 0777, true);
+    }
+    if ( is_dir($path) && !is_file($path . '/.gitignore') ) {
         file_put_contents($path . '/.gitignore', "*\n!.gitignore\n");
     }
 }
