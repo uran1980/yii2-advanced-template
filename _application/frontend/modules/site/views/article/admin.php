@@ -12,57 +12,109 @@ $this->title = Module::t('Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-admin">
-
     <h1>
-
-    <?= Html::encode($this->title) ?>
-
-    <span class="pull-right">
-        <?= Html::a(Module::t('Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
-    </span>
-
+        <?= Html::encode($this->title) ?>
+        <span class="pull-right">
+            <?= Html::a(Module::t('Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
+        </span>
     </h1>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary' => false,
+        'dataColumnClass' => \common\components\grid\DataColumn::className(),
+        'showFooter' => true,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => \yii\grid\SerialColumn::className(),
+                'header' => '#',
+                'footer' => '#',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+            ],
 
             //'id',
             // author
             [
-                'attribute'=>'user_id',
+                'attribute' => 'user_id',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'value' => function ($data) {
                     return $data->getAuthorName();
                 },
             ],
-            'title',
+            [
+                'attribute' => 'title',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+            ],
             // status
             [
-                'attribute'=>'status',
+                'attribute' => 'status',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'filter' => $searchModel->statusList,
+                'filterInputOptions' => [
+                    'class'     => 'form-control chosen-select',
+                    'id'        => null,
+                    'prompt'    => ' All ',
+                ],
                 'value' => function ($data) {
                     return $data->getStatusName($data->status);
                 },
                 'contentOptions'=>function($model, $key, $index, $column) {
-                    return ['class'=>CssHelper::articleStatusCss($model->statusName)];
+                    return ['class' => CssHelper::articleStatusCss($model->statusName)];
                 }
             ],
             [
-                'attribute'=>'category',
+                'attribute' => 'category',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
                 'filter' => $searchModel->categoryList,
+                'filterInputOptions' => [
+                    'class'     => 'form-control chosen-select',
+                    'id'        => null,
+                    'prompt'    => ' All ',
+                ],
                 'value' => function ($data) {
                     return $data->getCategoryName($data->category);
                 },
                 'contentOptions'=>function($model, $key, $index, $column) {
-                    return ['class'=>CssHelper::articleCategoryCss($model->categoryName)];
+                    return ['class' => CssHelper::articleCategoryCss($model->categoryName)];
                 }
             ],
-
-            ['class' => 'yii\grid\ActionColumn',
-            'header' => Module::t('Menu')],
+            [
+                'class' => \yii\grid\ActionColumn::className(),
+                'header' => Module::t('Menu'),
+                'footer' => Module::t('Menu'),
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+            ],
         ],
     ]); ?>
 
