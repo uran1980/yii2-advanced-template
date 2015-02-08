@@ -10,20 +10,18 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\Breadcrumbs;
-use yii\widgets\Pjax;
+//use yii\widgets\Pjax;
 use Zelenin\yii\modules\I18n\models\search\SourceMessageSearch;
-use Zelenin\yii\modules\I18n\Module;
+use backend\modules\backend\Module;
 
 $this->title = Module::t('Translations');
-echo Breadcrumbs::widget(['links' => [
-    $this->title
-]]);
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="message-index">
     <h3><?= Html::encode($this->title) ?></h3>
     <?php
-    Pjax::begin();
+//    Pjax::begin();
     echo GridView::widget([
         'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
@@ -71,6 +69,11 @@ echo Breadcrumbs::widget(['links' => [
                     return $model->category;
                 },
                 'filter' => ArrayHelper::map($searchModel::getCategories(), 'category', 'category'),
+                'filterInputOptions' => [
+                    'class'     => 'form-control chosen-select',
+                    'id'        => null,
+                    'prompt'    => ' All ',
+                ],
             ],
             [
                 'attribute' => 'status',
@@ -84,12 +87,12 @@ echo Breadcrumbs::widget(['links' => [
                     return '';
                 },
                 'filter' => Html::dropDownList($searchModel->formName() . '[status]', $searchModel->status, $searchModel->getStatus(), [
-                    'class'  => 'form-control',
-                    'prompt' => '',
+                    'class'  => 'form-control chosen-select',
+                    'prompt' => ' All ',
                 ]),
             ]
         ]
     ]);
-    Pjax::end();
+//    Pjax::end();
     ?>
 </div>

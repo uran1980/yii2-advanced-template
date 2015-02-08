@@ -7,18 +7,14 @@
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
-use yii\widgets\Breadcrumbs;
 use Zelenin\yii\modules\I18n\models\SourceMessage;
-use Zelenin\yii\modules\I18n\Module;
-use Zelenin\yii\widgets\Alert;
+use backend\modules\backend\Module;
 
 $this->title = Module::t('Update') . ': ' . $model->message;
-echo Breadcrumbs::widget(['links' => [
-    ['label' => Module::t('Translations'), 'url' => ['index']],
-    ['label' => $this->title]
-]]);
-echo Alert::widget();
+$this->params['breadcrumbs'][] = ['label' => Module::t('Translations'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="message-update">
     <div class="message-form">
         <div class="panel panel-default">
