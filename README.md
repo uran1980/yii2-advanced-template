@@ -33,23 +33,50 @@ Installation
 -------------------
 >I am assuming that you know how to: install and use Composer, and install additional packages/drivers that may be needed for you to run everything on your system. In case you are new to all of this, you can check my guides for installing default yii2 application templates, provided by yii2 developers, on Windows 8 and Ubuntu based Linux operating systems, posted on www.freetuts.org.
 
-1. Create database that you are going to use for your application (you can use phpMyAdmin or any
+1. If you do not already have Composer installed, you may do so by following the instructions at
+[getcomposer.org](https://getcomposer.org/download/). On Linux and Mac OS X, you'll run the following commands:
+
+    curl -s http://getcomposer.org/installer | php
+    mv composer.phar /usr/local/bin/composer
+
+On Windows, you'll download and run [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe).
+
+Please refer to the [Composer Documentation](https://getcomposer.org/doc/) if you encounter any
+problems or want to learn more about Composer usage.
+
+If you had Composer already installed before, make sure you use an up to date version. You can update Composer
+by running `composer self-update`.
+
+With Composer installed, you can install Yii by running the following commands under a Web-accessible folder:
+
+    composer global require "fxp/composer-asset-plugin:1.0.0"
+    composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+
+The first command installs the [composer asset plugin](https://github.com/francoispluchino/composer-asset-plugin/)
+which allows managing bower and npm package dependencies through Composer. You only need to run this command
+once for all. The second command installs Yii in a directory named `basic`. You can choose a different directory name if you want.
+
+> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer 
+> needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, 
+> please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
+
+2. Create database that you are going to use for your application (you can use phpMyAdmin or any
 other tool you like).
 
-2. Now open up your console and ```cd``` to your web root directory,
+3. Now open up your console and ```cd``` to your web root directory,
 for example: ``` cd /var/www/sites/ ```
 
-3. Clone this repo:
+4. Clone this repo:
  
 ``` git clone https://github.com/uran1980/yii2-advanced-template-custom.git advanced ```
 
-4. ```cd``` to your project root directory, for example: ``` cd /var/www/sites/advanced ```
+5. ```cd``` to your project root directory, for example: ``` cd /var/www/sites/advanced ```
 
-5. Run the Composer ```update``` command:
+6. Run the Composer ```update``` command:
 
    ``` composer update ```
 
-6. Once template is downloaded, you need to initialize it in one of three environments:
+7. Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
 and execute ```php init``` command.
 
@@ -59,21 +86,21 @@ and execute ```php init``` command.
 
    Type __0__ for development, execute command, type __yes__ to confirm, and execute again.
 
-7. Now you need to tell your application to use database that you have previously created.
+8. Now you need to tell your application to use database that you have previously created.
 Open up config files: ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
 and adjust your connection credentials.
 
-8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
+9. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
 While you are inside a project root folder execute ```php yii migrate command```:
 
    ``` php yii migrate ```
 
-9. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
+10. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
 permissions:
 
    ``` php yii rbac/init ```
 
-10. Configure your web server:
+11. Configure your web server:
 
 For apache2 web server on localhost developmen configure httpd-vhosts.conf:
 
