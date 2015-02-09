@@ -33,7 +33,7 @@ Installation
 -------------------
 >I am assuming that you know how to: install and use Composer, and install additional packages/drivers that may be needed for you to run everything on your system. In case you are new to all of this, you can check my guides for installing default yii2 application templates, provided by yii2 developers, on Windows 8 and Ubuntu based Linux operating systems, posted on www.freetuts.org.
 
-1. If you do not already have Composer installed, you may do so by following the instructions at
+If you do not already have Composer installed, you may do so by following the instructions at
 [getcomposer.org](https://getcomposer.org/download/). On Linux and Mac OS X, you'll run the following commands:
 
     curl -s http://getcomposer.org/installer | php
@@ -60,23 +60,23 @@ once for all. The second command installs Yii in a directory named `basic`. You 
 > needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, 
 > please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
-2. Create database that you are going to use for your application (you can use phpMyAdmin or any
+1. Create database that you are going to use for your application (you can use phpMyAdmin or any
 other tool you like).
 
-3. Now open up your console and ```cd``` to your web root directory,
+2. Now open up your console and ```cd``` to your web root directory,
 for example: ``` cd /var/www/sites/ ```
 
-4. Clone this repo:
+3. Clone this repo:
  
 ``` git clone https://github.com/uran1980/yii2-advanced-template-custom.git advanced ```
 
-5. ```cd``` to your project root directory, for example: ``` cd /var/www/sites/advanced ```
+4. ```cd``` to your project root directory, for example: ``` cd /var/www/sites/advanced ```
 
-6. Run the Composer ```update``` command:
+5. Run the Composer ```update``` command:
 
    ``` composer update ```
 
-7. Once template is downloaded, you need to initialize it in one of three environments:
+6. Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
 and execute ```php init``` command.
 
@@ -86,21 +86,21 @@ and execute ```php init``` command.
 
    Type __0__ for development, execute command, type __yes__ to confirm, and execute again.
 
-8. Now you need to tell your application to use database that you have previously created.
+7. Now you need to tell your application to use database that you have previously created.
 Open up config files: ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
 and adjust your connection credentials.
 
-9. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
+8. Back to the console. It is time to run yii migrations that will create necessary tables in our database.
 While you are inside a project root folder execute ```php yii migrate command```:
 
    ``` php yii migrate ```
 
-10. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
+9. Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
 permissions:
 
    ``` php yii rbac/init ```
 
-11. Configure your web server:
+10. Configure your web server:
 
 For apache2 web server on localhost developmen configure httpd-vhosts.conf:
 
