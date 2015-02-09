@@ -35,7 +35,7 @@ Installation
 
 
 **Install composer**
-
+---
 If you do not already have Composer installed, you may do so by following the instructions at
 [getcomposer.org](https://getcomposer.org/download/). On Linux and Mac OS X, you'll run the following commands:
 
@@ -52,7 +52,7 @@ by running `composer self-update`.
 
 
 **Install composer-asset-plugin**
-
+---
 With Composer installed, you install composer-asset-plugin by running the following commands under a Web-accessible folder:
 
     ``` composer global require "fxp/composer-asset-plugin:1.0.0" ```
@@ -67,13 +67,13 @@ once for all. The second command installs Yii in a directory named `basic`. You 
 
 
 **Database**
-
+---
 Create database that you are going to use for your application (you can use phpMyAdmin or any
 other tool you like).
 
 
 **Clone repo**
-
+---
 Now open up your console and ```cd``` to your web root directory, for example: ``` cd /var/www/sites/ ```
 Clone this repo: 
 
@@ -83,14 +83,14 @@ Clone this repo:
 
 
 **Run composer update comand**
-
+---
 Run the Composer ```update``` command:
 
    ``` composer update ```
 
 
 **Init project**
-
+---
 Once template is downloaded, you need to initialize it in one of three environments:
 development (dev), staging (staging) or production (prod). Change your working directory to project root
 and execute ```php init``` command.
@@ -103,14 +103,14 @@ and execute ```php init``` command.
 
 
 **Configure App**
-
+---
 Now you need to tell your application to use database that you have previously created.
 Open up config files: ```advanced/_application/common/config/multidb/db.php``` and ```advanced/_application/common/config/multidb/dbLogger.php```
 and adjust your connection credentials.
 
 
 **Apply migrations**
-
+---
 Back to the console. It is time to run yii migrations that will create necessary tables in our database.
 While you are inside a project root folder execute ```php yii migrate command```:
 
@@ -118,7 +118,7 @@ While you are inside a project root folder execute ```php yii migrate command```
 
 
 **Init RBAC**
-
+---
 Execute _rbac_ controller _init_ action that will populate our rbac tables with default roles and
 permissions:
 
@@ -126,7 +126,7 @@ permissions:
 
 
 **Configure web server**
-
+---
 Configure your web server:
 
 For apache2 web server on localhost developmen configure httpd-vhosts.conf:
