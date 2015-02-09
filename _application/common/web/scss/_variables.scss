@@ -61,22 +61,23 @@ $dropdown-link-color:   $link-color;
 $text-shadow-primary:   0 1px 0 rgba(darken($panel-primary-heading-bg, 50%),.85);
 $box-shadow-primary:    0 0 20px rgba(0, 0, 0, 0.3) inset;
 
-$alert-success-bg:  #62c462;
+$alert-success-bg:  #c3ff66;
 //$alert-danger-bg:   #ffcdc9;
 $alert-danger-bg:   lighten($red, 5%);
 $alert-warning-bg:  #f6b559;                                                    // #ffdc00; //#ffe22f;
+$alert-warning-bg:  #ffefa2;                                                    // #ffdc00; //#ffe22f;
 $alert-info-bg:     #7fdbff;
 $alert-default-bg:  #fff;
 
-$panel-success-heading-bg:  $alert-success-bg;
-$panel-warning-heading-bg:  $alert-warning-bg;
+$panel-success-heading-bg:  #62c462;
+$panel-warning-heading-bg:  #f6b559;
 $panel-danger-heading-bg:   $red;
 
 $state-info-bg:         #c8ecff;
 $state-success-text:    $green;
 $state-success-bg:      #c3ffab;
-$state-warning-text:    darken($alert-warning-bg, 10%);
-$state-warning-bg:      #ffefa2;
+$state-warning-text:    darken($panel-warning-heading-bg, 10%);
+$state-warning-bg:      $alert-warning-bg;
 $state-danger-text:     $fire-red;
 $state-danger-bg:       #ffdada;
 

@@ -44,7 +44,8 @@
         "bower-asset/perfect-scrollbar": "*",
         "bower-asset/scroll-to-top": "*",
         "bower-asset/spin.js": "*",
-        "bower-asset/stitch-css": "*"
+        "bower-asset/stitch-css": "*",
+        "bower-asset/animate.css": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

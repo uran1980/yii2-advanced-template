@@ -1,7 +1,7 @@
 // Mixin for generating new styles
-@mixin alert-styles($color-bg, $color: darken($color-bg, 55%), $text-shadow: 0 1px 0 rgba(lighten($color-bg, 50%),.5)) {
+@mixin alert-styles($color-bg, $color: darken($color-bg, 55%), $text-shadow: 0 1px 0 rgba(lighten($color-bg, 50%),.5), $border-color: darken($color-bg, 15%)) {
     @include gradient-vertical($start-color: $color-bg, $end-color: darken($color-bg, 5%));
-    border-color: darken($color-bg, 15%);
+    border-color: $border-color;
     color: $color;
     text-shadow: $text-shadow;
 }
@@ -20,14 +20,17 @@
 
 // Apply the mixin to the alerts
 .alert-success    {
-    @include alert-styles($alert-success-bg, darken($white, 3%), none);
+    @include alert-styles($alert-success-bg, $border-color: darken($alert-success-bg, 30%));
     .alert-link {
-        color: $white;
+        color: $link-color;
+        &:hover {
+            color: $link-hover-color;
+        }
     }
 }
 .alert-info       { @include alert-styles($alert-info-bg); }
 .alert-warning    {
-    @include alert-styles($alert-warning-bg);
+    @include alert-styles($alert-warning-bg, $color: darken($alert-warning-bg, 60%), $border-color: darken($alert-warning-bg, 35%));
     .alert-link {
         color: $link-color;
         &:hover {
