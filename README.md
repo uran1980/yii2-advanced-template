@@ -55,7 +55,7 @@ by running `composer self-update`.
 ---
 With Composer installed, you install composer-asset-plugin by running the following commands under a Web-accessible folder:
 
-    ``` composer global require "fxp/composer-asset-plugin:1.0.0" ```
+    composer global require "fxp/composer-asset-plugin:1.0.0"
 
 The first command installs the [composer asset plugin](https://github.com/francoispluchino/composer-asset-plugin/)
 which allows managing bower and npm package dependencies through Composer. You only need to run this command
