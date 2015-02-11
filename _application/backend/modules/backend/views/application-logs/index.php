@@ -10,7 +10,7 @@ use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
 use backend\modules\backend\Module;
 
-\common\assets\CommonAsset::register($this);
+\common\assets\AppCommonAsset::register($this);
 
 $this->title = Module::t('Application Log Messages');
 ?>

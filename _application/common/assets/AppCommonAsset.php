@@ -2,7 +2,7 @@
 
 namespace common\assets;
 
-class CommonAsset extends AssetBundle
+class AppCommonAsset extends AssetBundle
 {
     public $sourcePath = '@common/web';
     public $css = [

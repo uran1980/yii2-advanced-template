@@ -3,7 +3,7 @@
 /* @var $content string */
 use yii\helpers\Html;
 
-\common\assets\DebugPanelAsset::register($this);
+\common\assets\AppDebugPanelAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
