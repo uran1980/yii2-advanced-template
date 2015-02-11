@@ -9,6 +9,10 @@ body {
     background-color: $body-color-bg;
 }
 
+a:focus, a:hover {
+    text-decoration: underline;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     //color: #555;
     color: $link-color;
@@ -32,4 +36,11 @@ blockquote.pull-right {
     padding-left: 0;
 }
 
-
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn.active.focus {
+    outline: none;
+}

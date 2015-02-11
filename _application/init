@@ -78,6 +78,7 @@ $paths = [
     $root . '/_application/backend/runtime',
     $root . '/_application/frontend/runtime',
     $root . '/_application/console/runtime',
+    $root . '/_application/common/config/multidb',
     $root . '/web/assets',
     $root . '/web/backend/assets',
 ];

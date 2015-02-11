@@ -13,7 +13,10 @@ class AppCommonAsset extends AssetBundle
         'js/common.js',
     ];
     public $depends = [
+        'common\assets\AppScrollToTopAsset',
+        'common\assets\AppSpoilersAsset',
+        'common\assets\AppChosenSelectAsset',
+
         'rmrevin\yii\fontawesome\AssetBundle',                                  // @see https://github.com/rmrevin/yii2-fontawesome
-        'common\assets\ScrollToTopAsset',
     ];
 }
