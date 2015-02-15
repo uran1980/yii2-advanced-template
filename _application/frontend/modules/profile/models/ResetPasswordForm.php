@@ -1,11 +1,11 @@
 <?php
+
 namespace frontend\modules\profile\models;
 
 use common\models\User;
 use nenad\passwordStrength\StrengthValidator;
 use yii\base\InvalidParamException;
 use yii\base\Model;
-use frontend\modules\profile\Module;
 use Yii;
 
 /**
@@ -88,7 +88,7 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => Module::t('Password'),
+            'password' => Yii::t('frontend-profile', 'Password'),
         ];
     }
 

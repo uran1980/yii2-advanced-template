@@ -1,9 +1,9 @@
 <?php
+
 namespace frontend\modules\profile\models;
 
 use common\models\User;
 use yii\base\Model;
-use frontend\modules\profile\Module;
 use Yii;
 
 /**
@@ -27,7 +27,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass'   => '\common\models\User',
                 'filter'        => ['status' => User::STATUS_ACTIVE],
-                'message'       => Module::t('There is no user with such email.'),
+                'message'       => Yii::t('frontend-profile', 'There is no user with such email.'),
             ],
         ];
     }

@@ -3,16 +3,14 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use common\components\widgets\LanguageSwitcher;
-use frontend\modules\site\Module;
 use common\rbac\AccessControl;
-use Yii;
 
 ?>
 <?php if ( isset($this->blocks['top-nav']) ) { ?>
     <?php echo $this->blocks['top-nav']; ?>
 <?php } else {
     NavBar::begin([
-        'brandLabel' => Module::t(Yii::$app->name),
+        'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -20,13 +18,13 @@ use Yii;
     ]);
 
     // everyone can see Home page
-    $menuItems[] = ['label' => Module::t('Home'), 'url' => ['/site/index/index']];
+    $menuItems[] = ['label' => Yii::t('frontend', 'Home'), 'url' => ['/site/index/index']];
 
     // for admin show link to backend
     // @see https://github.com/yiisoft/yii2/issues/1578
     if ( Yii::$app->user->can(AccessControl::ROLE_ADMIN) ) {
         $menuItems[] = [
-            'label' => Module::t('Backend'),
+            'label' => Yii::t('frontend', 'Backend'),
             'url' => Yii::$app->urlManagerBackend->baseUrl,
     //        'linkOptions' => [
     //            'target' => '_blank',
@@ -36,25 +34,25 @@ use Yii;
 
     // we do not need to display Article/index, About and Contact pages to editor+ roles
     if (!Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
-        $menuItems[] = ['label' => Module::t('Articles'),   'url' => ['/site/article/index']];
-        $menuItems[] = ['label' => Module::t('About'),      'url' => ['/site/index/about']];
-        $menuItems[] = ['label' => Module::t('Contact'),    'url' => ['/site/index/contact']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Articles'),   'url' => ['/site/article/index']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'About'),      'url' => ['/site/index/about']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Contact'),    'url' => ['/site/index/contact']];
     }
 
     // display Article admin page to editor+ roles
     if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
-        $menuItems[] = ['label' => Module::t('Articles'), 'url' => ['/site/article/admin']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Articles'), 'url' => ['/site/article/admin']];
     }
 
     // display Signup and Login pages to guests of the site
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Module::t('Signup'), 'url' => ['/profile/index/signup']];
-        $menuItems[] = ['label' => Module::t('Login'),  'url' => ['/profile/index/login']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/profile/index/signup']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Login'),  'url' => ['/profile/index/login']];
     }
     // display Logout to all logged in users
     else {
         $menuItems[] = [
-            'label'       => Module::t('Logout'). ' (' . Yii::$app->user->identity->username . ')',
+            'label'       => Yii::t('frontend', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
             'url'         => ['/logout'],
             'linkOptions' => ['data-method' => 'post'],
         ];

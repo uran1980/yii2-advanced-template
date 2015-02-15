@@ -1,4 +1,4 @@
-var COMMON = COMMON || {};
+var appCommon = appCommon || {};
 
 // @see http://stackoverflow.com/questions/10896749/what-does-function-function-window-jquery-do
 !(function ($) {
@@ -15,17 +15,17 @@ var COMMON = COMMON || {};
      * @see http://api.jquery.com/ready/
      */
     $(document).ready(function () {
-        COMMON.xhr = [];
+        appCommon.xhr = [];
 
         /***********************************************************************
          *                      APPLICATION METHODS
          **********************************************************************/
-        COMMON.xhrAbort = function () {
+        appCommon.xhrAbort = function () {
             // clear prev AJAX requests...
-            $.each(COMMON.xhr, function () {
+            $.each(appCommon.xhr, function () {
                 try{ this.abort(); }catch(ex){}
             });
-            COMMON.xhr = [];
+            appCommon.xhr = [];
         };
 
         // TODO
@@ -34,17 +34,17 @@ var COMMON = COMMON || {};
         /***********************************************************************
          *                          ACTIONS HANDLER
          **********************************************************************/
-        COMMON.actionsHandler = function () {
+        appCommon.actionsHandler = function () {
             // TODO
         };
 
         /***********************************************************************
          *                               INIT
          **********************************************************************/
-        COMMON.init = function () {
-            COMMON.actionsHandler();
+        appCommon.init = function () {
+            appCommon.actionsHandler();
             // TODO
         };
-        COMMON.init();
+        appCommon.init();
     });
 })(window.jQuery);

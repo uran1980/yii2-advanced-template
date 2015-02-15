@@ -15,6 +15,9 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
+    'controllerMap' => [
+        'message' => console\controllers\MessageController::className(),        // override core command
+    ],
     'modules' => [
         // TODO
     ],

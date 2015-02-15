@@ -14,11 +14,11 @@ AppAsset::register($this);
     <?php include '_includes/top-nav.php'; ?>
 
     <div class="container">
-    <?php echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-    <?php echo Alert::widget(); ?>
-    <?php echo $content; ?>
+        <?php echo Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]); ?>
+        <?php echo Alert::widget(); ?>
+        <?php echo $content; ?>
     </div>
 </div>
 <?php $this->endContent();

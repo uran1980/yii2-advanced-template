@@ -1,21 +1,20 @@
 <?php
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = Module::t('Login');
+$this->title = Yii::t('backend', 'Login');
 ?>
-
 <div class="backend-login row">
     <div class="col-lg-5 col-lg-push-3">
         <h1 class="login"><?php echo Html::encode($this->title); ?></h1>
 
         <div class="well bs-component">
-            <p><?php echo Module::t('Please fill out the following fields to login:'); ?></p>
+            <p><?php echo Yii::t('backend', 'Please fill out the following fields to login:'); ?></p>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?php //-- use email or username field depending on model scenario --// ?>
                 <?php if ($model->scenario === 'LoginWithEmail'): ?>
@@ -28,7 +27,7 @@ $this->title = Module::t('Login');
                 <?php echo $form->field($model, 'rememberMe')->checkbox(); ?>
 
                 <div class="form-group"><?php
-                    echo Html::submitButton(Module::t('Login'), [
+                    echo Html::submitButton(Yii::t('backend', 'Login'), [
                         'class' => 'btn btn-primary',
                         'name'  => 'login-button',
                     ]); ?>

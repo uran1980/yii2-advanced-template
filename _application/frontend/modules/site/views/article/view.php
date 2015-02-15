@@ -1,32 +1,32 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use frontend\modules\site\Module;
 use common\rbac\AccessControl;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\site\models\Article */
 
 $this->title                    = $model->title;
-$this->params['breadcrumbs'][]  = ['label' => Module::t('Articles'), 'url' => ['index']];
+$this->params['breadcrumbs'][]  = ['label' => Yii::t('frontend-site', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][]  = $this->title;
 ?>
 <div class="article-view">
-    <h1><?= Html::encode($this->title) ?>
+    <h1><?php echo Html::encode($this->title) ?>
         <div class="pull-right">
         <?php if (Yii::$app->user->can(AccessControl::PERMISSION_ADMIN_ARTICLE)): ?>
-            <?= Html::a(Module::t('Back'), ['admin'], ['class' => 'btn btn-warning']) ?>
+            <?php echo Html::a(Yii::t('frontend-site', 'Back'), ['admin'], ['class' => 'btn btn-warning']) ?>
         <?php endif; ?>
 
         <?php if (Yii::$app->user->can(AccessControl::PERMISSION_UPDATE_ARTICLE, ['model' => $model])): ?>
-            <?= Html::a(Module::t('Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php echo Html::a(Yii::t('frontend-site', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php endif; ?>
 
         <?php if (Yii::$app->user->can(AccessControl::PERMISSION_DELETE_ARTICLE)): ?>
-            <?= Html::a(Module::t('Delete'), ['delete', 'id' => $model->id], [
+            <?php echo Html::a(Yii::t('frontend-site', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Module::t('Are you sure you want to delete this article?'),
+                    'confirm' => Yii::t('frontend-site', 'Are you sure you want to delete this article?'),
                     'method' => 'post',
                 ],
             ]) ?>
@@ -34,23 +34,23 @@ $this->params['breadcrumbs'][]  = $this->title;
         </div>
     </h1>
 
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
 //            'id',
 //             [
-//                 'label' => Module::t('Author'),
+//                 'label' => Yii::t('frontend-site', 'Author'),
 //                 'value' => $model->authorName,
 //             ],
             'title',
             'summary:ntext',
             'content:html',
 //             [
-//                 'label' => Module::t('Status'),
+//                 'label' => Yii::t('frontend-site', 'Status'),
 //                 'value' => $model->statusName,
 //             ],
             [
-                'label' => Module::t('Category'),
+                'label' => Yii::t('frontend-site', 'Category'),
                 'value' => $model->categoryName,
             ],
             'created_at:dateTime',

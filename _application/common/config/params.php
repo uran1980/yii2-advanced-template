@@ -1,7 +1,5 @@
 <?php
 
-use \yii\web\View;
-
 $config = [
     'projectName' => 'My Project',
 

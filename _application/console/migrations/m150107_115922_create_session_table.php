@@ -25,7 +25,7 @@ class m150107_115922_create_session_table extends Migration
         $this->createTable('{{%session}}', [
             'id'        => 'CHAR(64) NOT NULL PRIMARY KEY',
             'expire'    => Schema::TYPE_INTEGER . ' NOT NULL',
-            'data'      => ''.$dataType.' NOT NULL',
+            'data'      => '' . $dataType,
         ], $tableOptions);
     }
 

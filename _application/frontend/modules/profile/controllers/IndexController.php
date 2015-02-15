@@ -5,7 +5,6 @@ namespace frontend\modules\profile\controllers;
 use common\components\controllers\FrontendController;
 use common\models\User;
 use common\models\LoginForm;
-use frontend\modules\profile\Module;
 use frontend\modules\profile\models\ProfileActivation;
 use frontend\modules\profile\models\PasswordResetRequestForm;
 use frontend\modules\profile\models\ResetPasswordForm;
@@ -95,7 +94,7 @@ class IndexController extends FrontendController
         // user couldn't be logged in, because he has not activated his profile
         else if($model->notActivated()) {
             // if his profile is not activated, he will have to activate it first
-            Yii::$app->session->setFlash('error', Module::t('You have to activate your profile first. Please check your email.'));
+            Yii::$app->session->setFlash('error', Yii::t('frontend-profile', 'You have to activate your profile first. Please check your email.'));
 
             return $this->refresh();
         }
@@ -134,12 +133,12 @@ class IndexController extends FrontendController
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', Module::t('Check your email for further instructions.'));
+                Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'Check your email for further instructions.'));
 
                 return $this->goHome();
             }
             else {
-                Yii::$app->getSession()->setFlash('error', Module::t('Sorry, we are unable to reset password for email provided.'));
+                Yii::$app->getSession()->setFlash('error', Yii::t('frontend-profile', 'Sorry, we are unable to reset password for email provided.'));
             }
         }
         else
@@ -170,7 +169,7 @@ class IndexController extends FrontendController
         if ( $model->load(Yii::$app->request->post())
              && $model->validate() && $model->resetPassword() )
         {
-            Yii::$app->getSession()->setFlash('success', Module::t('New password was saved.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'New password was saved.'));
 
             return $this->goHome();
         }
@@ -229,8 +228,8 @@ class IndexController extends FrontendController
 
                 // log this error, so we can debug possible problem easier.
                 Yii::error(Mosule::t('Signup failed!') . ' '
-                    . Module::t('User {user} could not sign up.', ['user' => Html::encode($user->username)]) . ' '
-                    . Module::t('Possible causes: something strange happened while saving user in database.'));
+                    . Yii::t('frontend-profile', 'User {user} could not sign up.', ['user' => Html::encode($user->username)]) . ' '
+                    . Yii::t('frontend-profile', 'Possible causes: something strange happened while saving user in database.'));
 
                 return $this->refresh();
             }
@@ -253,19 +252,19 @@ class IndexController extends FrontendController
     {
         // try to send profile activation email
         if ($model->sendProfileActivationEmail($user)) {
-            Yii::$app->session->setFlash('success', Module::t('Hello {user}.', ['user' => Html::encode($user->username)]) . ' '
-                . Module::t('To be able to log in, you need to confirm your registration.') . ' '
-                . Module::t('Please check your email, we have sent you a message.'));
+            Yii::$app->session->setFlash('success', Yii::t('frontend-profile', 'Hello {user}.', ['user' => Html::encode($user->username)]) . ' '
+                . Yii::t('frontend-profile', 'To be able to log in, you need to confirm your registration.') . ' '
+                . Yii::t('frontend-profile', 'Please check your email, we have sent you a message.'));
         }
         // email could not be sent
         else {
             // display error message to user
-            Yii::$app->session->setFlash('error', Module::t("We couldn't send you profile activation email, please contact us."));
+            Yii::$app->session->setFlash('error', Yii::t('frontend-profile', "We couldn't send you profile activation email, please contact us."));
 
             // log this error, so we can debug possible problem easier.
-            Yii::error(Module::t('Signup failed!') . ' '
-                . Module::t('User {user} could not sign up.', ['user' => Html::encode($user->username)]) . ' '
-                . Module::t('Possible causes: verification email could not be sent.'));
+            Yii::error(Yii::t('frontend-profile', 'Signup failed!') . ' '
+                . Yii::t('frontend-profile', 'User {user} could not sign up.', ['user' => Html::encode($user->username)]) . ' '
+                . Yii::t('frontend-profile', 'Possible causes: verification email could not be sent.'));
         }
     }
 
@@ -294,12 +293,12 @@ class IndexController extends FrontendController
 
         if ($user->activateProfile())
         {
-            Yii::$app->getSession()->setFlash('success', Module::t('Success! You can now log in.') . ' '
-                . Module::t('Thank you {user} for joining us!', ['user' => Html::encode($user->username)]));
+            Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'Success! You can now log in.') . ' '
+                . Yii::t('frontend-profile', 'Thank you {user} for joining us!', ['user' => Html::encode($user->username)]));
         }
         else
         {
-            Yii::$app->getSession()->setFlash('error', Module::t('Sorry, {user} your profile could not be activated, please contact us!', [
+            Yii::$app->getSession()->setFlash('error', Yii::t('frontend-profile', 'Sorry, {user} your profile could not be activated, please contact us!', [
                 'user' => Html::encode($user->username),
             ]));
         }

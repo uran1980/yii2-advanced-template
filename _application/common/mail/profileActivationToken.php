@@ -8,8 +8,8 @@ $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['site/activate-profile',
     'token' => $user->profile_activation_token]);
 ?>
 
-Hello <?= Html::encode($user->username) ?>,
+Hello <?php echo Html::encode($user->username) ?>,
 
 Follow this link to activate your profile:
 
-<?= Html::a('Please, click here to activate your profile.', $resetLink) ?>
+<?php echo Html::a('Please, click here to activate your profile.', $resetLink) ?>

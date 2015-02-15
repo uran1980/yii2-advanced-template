@@ -120,8 +120,8 @@ class LanguageSwitcher extends ButtonDropdown
     {
         if (self::$_labels === null) {
             self::$_labels = [
-                'en' => Yii::t('app-language', 'English'),
-                'ru' => Yii::t('app-language', 'Russian'),
+                'en' => Yii::t('common', 'English'),
+                'ru' => Yii::t('common', 'Russian'),
             ];
         }
 

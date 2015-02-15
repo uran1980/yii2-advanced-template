@@ -1,0 +1,25 @@
+<?php
+
+namespace console\controllers;
+
+use common\models\Translate;
+
+class MessageController extends \yii\console\controllers\MessageController
+{
+    /**
+     * Extracts messages to be translated from source code.
+     *
+     * This command will search through source code files and extract
+     * messages that need to be translated in different languages.
+     *
+     * @param string $configFile the path or alias of the configuration file.
+     * You may use the "yii message/config" command to generate
+     * this file and then customize it for your needs.
+     * @throws Exception on failure.
+     */
+    public function actionExtract($configFile)
+    {
+        Translate::getInstance()->extract($configFile);
+    }
+
+}

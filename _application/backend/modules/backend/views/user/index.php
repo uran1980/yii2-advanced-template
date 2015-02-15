@@ -1,29 +1,29 @@
 <?php
+
 use common\helpers\CssHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('Users');
+$this->title = Yii::t('backend', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
     <h1>
 
-    <?= Html::encode($this->title) ?>
+    <?php echo Html::encode($this->title) ?>
 
     <span class="pull-right">
-        <?= Html::a(Module::t('Create User'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
     </span>
 
     </h1>
 
-    <?= GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary' => false,
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['title'=>'Delete user',
                             'class'=>'glyphicon glyphicon-trash',
                             'data' => [
-                                'confirm' => Module::t('Are you sure you want to delete this user?'),
+                                'confirm' => Yii::t('backend', 'Are you sure you want to delete this user?'),
                                 'method' => 'post']
                         ]);
                     }

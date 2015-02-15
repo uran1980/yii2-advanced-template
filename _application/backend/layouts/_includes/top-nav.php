@@ -2,7 +2,6 @@
 
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use backend\modules\backend\Module;
 use common\rbac\AccessControl;
 use common\components\widgets\LanguageSwitcher;
 
@@ -11,7 +10,7 @@ use common\components\widgets\LanguageSwitcher;
     <?php echo $this->blocks['top-nav']; ?>
 <?php } else {
     NavBar::begin([
-        'brandLabel' => Module::t('Backend Dashboard'),
+        'brandLabel' => Yii::t('backend', 'Backend Dashboard'),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -19,7 +18,7 @@ use common\components\widgets\LanguageSwitcher;
     ]);
 
     $menuItems[] = [
-        'label' => Module::t('Site'),
+        'label' => Yii::t('backend', 'Site'),
         'url' => Yii::$app->urlManagerFrontend->baseUrl,
 //        'linkOptions' => [
 //            'target' => '_blank',
@@ -28,21 +27,21 @@ use common\components\widgets\LanguageSwitcher;
 
     // display Account and Users to admin+ roles
     if (Yii::$app->user->can(AccessControl::ROLE_ADMIN)) {
-    //    $menuItems[] = ['label' => Module::t('Home'),  'url' => ['/backend/index/index']];
-        $menuItems[] = ['label' => Module::t('Users'), 'url' => ['/backend/user/index']];
+    //    $menuItems[] = ['label' => Yii::t('backend', 'Home'),  'url' => ['/backend/index/index']];
+        $menuItems[] = ['label' => Yii::t('backend', 'Users'), 'url' => ['/backend/user/index']];
     }
     if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
-        $menuItems[] = ['label' => Module::t('Translations'), 'url' => ['/translations']];
+        $menuItems[] = ['label' => Yii::t('backend', 'Translations'), 'url' => ['/translations']];
     }
 
     // display Login page to guests of the site
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Module::t('Login'), 'url' => ['/backend/index/login']];
+        $menuItems[] = ['label' => Yii::t('backend', 'Login'), 'url' => ['/backend/index/login']];
     }
     // display Logout to all logged in users
     else {
         $menuItems[] = [
-            'label'       => Module::t('Logout'). ' (' . Yii::$app->user->identity->username . ')',
+            'label'       => Yii::t('backend', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
             'url'         => ['/backend/index/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];

@@ -1,4 +1,5 @@
 <?php
+
 /* @var $searchModel yii\debug\models\search\DbLog */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $this yii\web\View */
@@ -8,20 +9,21 @@ use yii\grid\GridView;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
-use backend\modules\backend\Module;
 
 \common\assets\AppCommonAsset::register($this);
 
-$this->title = Module::t('Application Log Messages');
+$this->title = Yii::t('backend', 'Application Log Messages');
 ?>
 
 <div class="backend-application-logs-index">
-    <h1><?php echo Module::t('Application Log Messages'); ?></h1>
+    <h1><?php echo Yii::t('backend', 'Application Log Messages'); ?></h1>
 
 <?php
     echo GridView::widget([
         'dataProvider' => $dataProvider,
+        'dataColumnClass' => \common\components\grid\DataColumn::className(),
         'id' => 'dblog-panel-detailed-grid',
+        'showFooter' => true,
         'options' => [
             'class' => 'detail-grid-view table-responsive',
         ],
@@ -32,6 +34,9 @@ $this->title = Module::t('Application Log Messages');
                 'class' => yii\grid\SerialColumn::className(),
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
@@ -51,6 +56,9 @@ $this->title = Module::t('Application Log Messages');
                 },
                 'headerOptions' => [
                     'class' => 'sort-numerical text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'sort-numerical text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'nowrap font-size-10px text-align-center',
@@ -75,8 +83,16 @@ $this->title = Module::t('Application Log Messages');
                     Logger::LEVEL_WARNING   => ' Warning ',
                     Logger::LEVEL_ERROR     => ' Error ',
                 ],
+                'filterInputOptions' => [
+                    'class'     => 'form-control chosen-select',
+                    'id'        => null,
+                    'prompt'    => ' All ',
+                ],
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
@@ -86,6 +102,9 @@ $this->title = Module::t('Application Log Messages');
                 'attribute' => 'category',
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'font-size-10px',
@@ -121,6 +140,9 @@ $this->title = Module::t('Application Log Messages');
                 ],
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'spoiler',

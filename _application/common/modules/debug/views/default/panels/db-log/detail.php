@@ -11,7 +11,7 @@ use Stringy\StaticStringy as Stringy;
 
 ?>
 <a href="#yii-debug-toolbar" class="scroll-to-top-link" style="display: none;"><?php
-    echo Yii::t('app-frontend', 'Scroll to top'); ?></a>
+    echo Yii::t('common', 'Scroll to top'); ?></a>
 
 <h1>Log Messages</h1>
 
@@ -79,6 +79,11 @@ echo GridView::widget([
                 Logger::LEVEL_INFO      => ' Info ',
                 Logger::LEVEL_WARNING   => ' Warning ',
                 Logger::LEVEL_ERROR     => ' Error ',
+            ],
+            'filterInputOptions' => [
+                'class'     => 'form-control chosen-select',
+                'id'        => null,
+                'prompt'    => ' All ',
             ],
             'headerOptions' => [
                 'class' => 'text-align-center',

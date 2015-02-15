@@ -1,8 +1,8 @@
 <?php
+
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\site\models\Article */
@@ -10,32 +10,25 @@ use frontend\modules\site\Module;
 ?>
 
 <div class="article-form">
-
     <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
-
-        <?= $form->field($model, 'summary')->textarea(['rows' => 6]) ?>
-
-        <?= $form->field($model, 'content')->widget(CKEditor::className(),
-            ['editorOptions' => [ 'preset' => 'full', 'inline' => false]]); ?>
-
+        <?php echo $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
+        <?php echo $form->field($model, 'summary')->textarea(['rows' => 6]) ?>
+        <?php echo $form->field($model, 'content')->widget(CKEditor::className(), ['editorOptions' => [
+                'preset' => 'full',
+                'inline' => false,
+            ]]); ?>
     <div class="row">
     <div class="col-lg-6">
-
-        <?= $form->field($model, 'status')->dropDownList($model->statusList) ?>
-
-        <?= $form->field($model, 'category')->dropDownList($model->categoryList) ?>
-
+        <?php echo $form->field($model, 'status')->dropDownList($model->statusList) ?>
+        <?php echo $form->field($model, 'category')->dropDownList($model->categoryList) ?>
     </div>
     </div>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Module::t('Create')
-            : Module::t('Update'), ['class' => $model->isNewRecord
+    <div class="form-group"><?php
+        echo Html::submitButton($model->isNewRecord ? Yii::t('frontend-site', 'Create')
+            : Yii::t('frontend-site', 'Update'), ['class' => $model->isNewRecord
             ? 'btn btn-success' : 'btn btn-primary']) ?>
-
-        <?= Html::a(Module::t('Cancel'), ['article/index'], ['class' => 'btn btn-default']) ?>
+        <?php echo Html::a(Yii::t('frontend-site', 'Cancel'), ['article/index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

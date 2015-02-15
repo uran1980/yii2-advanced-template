@@ -3,7 +3,6 @@
 namespace frontend\modules\site\models;
 
 use yii\base\Model;
-use frontend\modules\site\Module;
 use Yii;
 
 /**
@@ -40,11 +39,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name'       => Module::t('Name'),
-            'email'      => Module::t('Email'),
-            'subject'    => Module::t('Subject'),
-            'body'       => Module::t('Text'),
-            'verifyCode' => Module::t('Verification Code'),
+            'name'       => Yii::t('frontend-site', 'Name'),
+            'email'      => Yii::t('frontend-site', 'Email'),
+            'subject'    => Yii::t('frontend-site', 'Subject'),
+            'body'       => Yii::t('frontend-site', 'Text'),
+            'verifyCode' => Yii::t('frontend-site', 'Verification Code'),
         ];
     }
 

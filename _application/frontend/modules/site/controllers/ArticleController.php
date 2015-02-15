@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\modules\site\controllers;
 
 use common\components\controllers\FrontendController;
@@ -6,7 +7,6 @@ use frontend\modules\site\models\Article;
 use frontend\modules\site\models\ArticleSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
-use frontend\modules\site\Module;
 use common\rbac\AccessControl;
 use Yii;
 
@@ -102,7 +102,7 @@ class ArticleController extends FrontendController
             }
         }
         else {
-            throw new MethodNotAllowedHttpException(Module::t('You are not allowed to access this page.'));
+            throw new MethodNotAllowedHttpException(Yii::t('frontend-site', 'You are not allowed to access this page.'));
         }
     }
 

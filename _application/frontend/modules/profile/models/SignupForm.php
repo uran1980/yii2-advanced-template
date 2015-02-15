@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\modules\profile\models;
 
 use common\models\User;
@@ -6,7 +7,6 @@ use common\rbac\AccessControl;
 use common\rbac\helpers\RbacHelper;
 use nenad\passwordStrength\StrengthValidator;
 use yii\base\Model;
-use frontend\modules\profile\Module;
 use Yii;
 
 /**
@@ -31,13 +31,13 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'string', 'min' => 2, 'max' => 255],
             ['username', 'unique', 'targetClass' => '\common\models\User',
-                'message' => Module::t('This username has already been taken.')],
+                'message' => Yii::t('frontend-profile', 'This username has already been taken.')],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => '\common\models\User',
-                'message' => Module::t('This email address has already been taken.')],
+                'message' => Yii::t('frontend-profile', 'This email address has already been taken.')],
 
             ['password', 'required'],
             // use passwordStrengthRule() method to determine password strength
@@ -81,9 +81,9 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username'  => Module::t('Username'),
-            'password'  => Module::t('Password'),
-            'email'     => Module::t('Email'),
+            'username'  => Yii::t('frontend-profile', 'Username'),
+            'password'  => Yii::t('frontend-profile', 'Password'),
+            'email'     => Yii::t('frontend-profile', 'Email'),
         ];
     }
 
@@ -128,7 +128,7 @@ class SignupForm extends Model
             ->compose('profileActivationToken', ['user' => $user])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
             ->setTo($this->email)
-            ->setSubject(Module::t('Profile activation for') . ' ' . Yii::$app->name)
+            ->setSubject(Yii::t('frontend-profile', 'Profile activation for') . ' ' . Yii::$app->name)
             ->send()
         ;
     }

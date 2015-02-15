@@ -5,7 +5,7 @@ use yii\bootstrap\Tabs;
 
 ?>
 <a href="#yii-debug-toolbar" class="scroll-to-top-link" style="display: none;"><?php
-    echo Yii::t('app-frontend', 'Scroll to top'); ?></a>
+    echo Yii::t('common', 'Scroll to top'); ?></a>
 
 <h1>Dev Info</h1>
 

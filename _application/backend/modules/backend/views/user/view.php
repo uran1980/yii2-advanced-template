@@ -1,27 +1,27 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use backend\modules\backend\Module;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => Module::t('Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
-    <h1><?= Html::encode($this->title) ?>
+    <h1><?php echo Html::encode($this->title) ?>
 
     <div class="pull-right">
-        <?= Html::a(Module::t('Back'), ['index'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a(Module::t('Update'), ['update', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('backend', 'Back'), ['index'], ['class' => 'btn btn-warning']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], [
             'class' => 'btn btn-primary']) ?>
-        <?= Html::a(Module::t('Delete'), ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Module::t('Are you sure you want to delete this user?'),
+                'confirm' => Yii::t('backend', 'Are you sure you want to delete this user?'),
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </h1>
 
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',

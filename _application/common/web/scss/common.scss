@@ -71,3 +71,13 @@ a.scroll-to-top-link {
         }
     }
 }
+
+.chosen-container-single {
+    .chosen-single {
+        height: 33px;
+        padding: 4px 0 4px 8px;
+        div {
+            top: 4px;
+        }
+    }
+}

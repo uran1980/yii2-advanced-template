@@ -27,10 +27,10 @@ $config = [
         'profile'   => frontend\modules\profile\Module::className(),
     ],
     'components' => [
-        'urlManager'    => $params['app.urlManager.localeUrls'],
+        'urlManager'        => $params['app.urlManager.localeUrls'],
         'urlManagerBackend' => $params['app.urlManagerBackend'],
-        'localeUrls'    => $params['app.localeUrls'],
-        'view'          => $params['app.view'],
+        'localeUrls'        => $params['app.localeUrls'],
+        'view'              => $params['app.view'],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/runtime-logging.md#log-targets

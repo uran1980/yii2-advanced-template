@@ -13,25 +13,32 @@ class m150109_093837_addI18nTables extends Migration
     public function up()
     {
         $i18n = Yii::$app->getI18n();
+
         if (!isset($i18n->sourceMessageTable) || !isset($i18n->messageTable)) {
             throw new InvalidConfigException('You should configure i18n component');
         }
-        $sourceMessageTable = $i18n->sourceMessageTable;
-        $messageTable       = $i18n->messageTable;
 
-        $this->createTable($sourceMessageTable, [
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
+        $this->createTable($i18n->sourceMessageTable, [
             'id'        => Schema::TYPE_PK,
-            'category'  => 'varchar(32) null',
-            'message'   => 'text null'
-        ]);
+            'hash'      => Schema::TYPE_STRING  . '(32) NOT NULL DEFAULT ""',
+            'category'  => Schema::TYPE_STRING  . '(32) NULL',
+            'message'   => Schema::TYPE_TEXT    . ' NULL',
+            'location'  => Schema::TYPE_TEXT    . ' NULL',
+        ], $tableOptions);
 
-        $this->createTable($messageTable, [
-            'id'            => Schema::TYPE_INTEGER . ' not null default 0',
-            'language'      => 'varchar(16) not null default ""',
-            'translation'   => 'text null'
-        ]);
-        $this->addPrimaryKey('id', $messageTable, ['id', 'language']);
-        $this->addForeignKey('fk_source_message_message', $messageTable, 'id', $sourceMessageTable, 'id', 'cascade');
+        $this->createTable($i18n->messageTable, [
+            'id'            => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
+            'language'      => Schema::TYPE_STRING  . '(16) NOT NULL DEFAULT ""',
+            'hash'          => Schema::TYPE_STRING  . '(32) NOT NULL DEFAULT ""',
+            'translation'   => Schema::TYPE_TEXT    . ' NULL',
+        ], $tableOptions);
+        $this->addPrimaryKey('id', $i18n->messageTable, ['id', 'language']);
+        $this->addForeignKey('fk_source_message_message', $i18n->messageTable, 'id', $i18n->sourceMessageTable, 'id', 'cascade');
     }
 
     /**

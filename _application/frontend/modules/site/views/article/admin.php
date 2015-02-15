@@ -1,25 +1,25 @@
 <?php
+
 use common\helpers\CssHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use frontend\modules\site\Module;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Module::t('Articles');
+$this->title = Yii::t('frontend-site', 'Articles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-admin">
     <h1>
-        <?= Html::encode($this->title) ?>
+        <?php echo Html::encode($this->title) ?>
         <span class="pull-right">
-            <?= Html::a(Module::t('Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a(Yii::t('frontend-site', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
         </span>
     </h1>
 
-    <?= GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary' => false,
@@ -106,8 +106,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => \yii\grid\ActionColumn::className(),
-                'header' => Module::t('Menu'),
-                'footer' => Module::t('Menu'),
+                'header' => Yii::t('frontend-site', 'Menu'),
+                'footer' => Yii::t('frontend-site', 'Menu'),
                 'headerOptions' => [
                     'class' => 'text-align-center',
                 ],
