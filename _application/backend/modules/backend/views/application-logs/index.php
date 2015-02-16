@@ -5,7 +5,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use common\components\grid\GridView;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
@@ -21,9 +21,7 @@ $this->title = Yii::t('backend', 'Application Log Messages');
 <?php
     echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'dataColumnClass' => \common\components\grid\DataColumn::className(),
         'id' => 'dblog-panel-detailed-grid',
-        'showFooter' => true,
         'options' => [
             'class' => 'detail-grid-view table-responsive',
         ],

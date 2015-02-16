@@ -4,7 +4,7 @@
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use common\components\grid\GridView;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
@@ -18,9 +18,7 @@ use Stringy\StaticStringy as Stringy;
 <?php
 echo GridView::widget([
     'dataProvider' => $dataProvider,
-    'dataColumnClass' => \common\components\grid\DataColumn::className(),
     'id' => 'dblog-panel-detailed-grid',
-    'showFooter' => true,
     'options' => [
         'class' => 'detail-grid-view table-responsive',
     ],

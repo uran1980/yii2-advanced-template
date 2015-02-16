@@ -1,6 +1,6 @@
 <?php
 
-use common\widgets\Alert;
+use common\components\widgets\Alert;
 
 ?>
 <?php $this->beginContent('@common/layouts/base.php'); ?>

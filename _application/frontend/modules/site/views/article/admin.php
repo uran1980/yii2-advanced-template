@@ -2,7 +2,7 @@
 
 use common\helpers\CssHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use common\components\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticleSearch */
@@ -23,8 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'summary' => false,
-        'dataColumnClass' => \common\components\grid\DataColumn::className(),
-        'showFooter' => true,
         'columns' => [
             [
                 'class' => \yii\grid\SerialColumn::className(),

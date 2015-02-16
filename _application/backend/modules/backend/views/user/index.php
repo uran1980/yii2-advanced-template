@@ -2,7 +2,7 @@
 
 use common\helpers\CssHelper;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use common\components\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */

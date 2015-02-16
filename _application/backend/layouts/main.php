@@ -2,7 +2,7 @@
 
 use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
-use common\widgets\Alert;
+use common\components\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

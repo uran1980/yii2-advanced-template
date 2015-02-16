@@ -7,7 +7,7 @@
  */
 
 use yii\data\ActiveDataProvider;
-use yii\grid\GridView;
+use common\components\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
@@ -25,11 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
     echo GridView::widget([
         'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
-        'dataColumnClass' => \common\components\grid\DataColumn::className(),
-        'showFooter' => true,
-        'options' => [
-            'class' => 'grid-view table-responsive',
-        ],
         'columns' => [
             [
                 'attribute' => 'id',
