@@ -24,7 +24,7 @@
         "rmrevin/yii2-fontawesome": "*",
         "rmrevin/yii2-minify-view": "*",
         "codemix/yii2-localeurls": "*",
-        "zelenin/yii2-i18n-module": "*",
+        "zelenin/yii2-i18n-module": "dev-master",
         "vova07/yii2-fileapi-widget": "*",
         "danielstjules/stringy": "*",
 

@@ -4,22 +4,26 @@
 .form-control {
     border: 1px solid $input-border;
 }
+.input-group-addon {
+    border: 1px solid $input-group-addon-border-color;
+}
 
 // Feedback states
 .has-success {
-    @include form-control-validation($state-success-text, $state-success-text, $state-success-bg);
+    //@include form-control-validation($state-success-text, $input-border, $state-success-bg);
+    @include form-control-validation($state-success-text, rgba($state-success-text, 0.5), $state-success-bg);
     .form-control {
-        background-color: $state-success-bg;
+        background-color: rgba($state-success-bg, 0.5);
     }
 }
 .has-warning {
-    @include form-control-validation($state-warning-text, $state-warning-text, $state-warning-bg);
+    @include form-control-validation($state-warning-text, rgba($state-warning-text, 0.75), $state-warning-bg);
     .form-control {
         background-color: $state-warning-bg;
     }
 }
 .has-error {
-    @include form-control-validation($state-danger-text, $state-danger-text, $state-danger-bg);
+    @include form-control-validation($state-danger-text, rgba($state-danger-text, 0.5), $state-danger-bg);
     .form-control {
         background-color: $state-danger-bg;
     }

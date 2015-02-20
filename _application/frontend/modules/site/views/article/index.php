@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = Yii::t('frontend-site', 'Articles');
     <?php echo ListView::widget([
         'summary'       => false,
         'dataProvider'  => $dataProvider,
-        'emptyText'     => Yii::t('frontend-site', 'We haven\'t created any articles yet.'),
+        'emptyText'     => Yii::t('frontend-site', "We haven't created any articles yet."),
         'itemOptions'   => ['class' => 'item'],
         'itemView'      => function ($model, $key, $index, $widget) {
             return $this->render('_index', ['model' => $model]);

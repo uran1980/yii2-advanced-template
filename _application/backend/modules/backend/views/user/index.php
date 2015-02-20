@@ -50,8 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->roleName;
                 },
                 'contentOptions'=>function($model, $key, $index, $column) {
-
-                    return ['class'=>CssHelper::roleCss($model->roleName)];
+                    return ['class' => CssHelper::roleCss($model->roleName)];
                 }
             ],
             // buttons
@@ -60,17 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
-                        return Html::a('', $url, ['title'=>'View user',
-                            'class'=>'glyphicon glyphicon-eye-open']);
+                        return Html::a('', $url, ['title' => 'View user',
+                            'class' => 'glyphicon glyphicon-eye-open']);
                     },
                     'update' => function ($url, $model, $key) {
-                        return Html::a('', $url, ['title'=>'Manage user',
-                            'class'=>'glyphicon glyphicon-user']);
+                        return Html::a('', $url, ['title' => 'Manage user',
+                            'class' => 'glyphicon glyphicon-user']);
                     },
                     'delete' => function ($url, $model, $key) {
                         return Html::a('', $url,
-                        ['title'=>'Delete user',
-                            'class'=>'glyphicon glyphicon-trash',
+                        ['title' => 'Delete user',
+                            'class' => 'glyphicon glyphicon-trash',
                             'data' => [
                                 'confirm' => Yii::t('backend', 'Are you sure you want to delete this user?'),
                                 'method' => 'post']

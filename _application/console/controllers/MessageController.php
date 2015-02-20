@@ -2,12 +2,17 @@
 
 namespace console\controllers;
 
-use common\models\Translate;
+use common\models\search\SourceMessageSearch;
 
 class MessageController extends \yii\console\controllers\MessageController
 {
     /**
      * Extracts messages to be translated from source code.
+     *
+     * Example from yii console:
+     * ```
+     * php yii message/extract @common/config/messages.php
+     * ```
      *
      * This command will search through source code files and extract
      * messages that need to be translated in different languages.
@@ -19,7 +24,7 @@ class MessageController extends \yii\console\controllers\MessageController
      */
     public function actionExtract($configFile)
     {
-        Translate::getInstance()->extract($configFile);
+        SourceMessageSearch::getInstance()->extract($configFile);
     }
 
 }

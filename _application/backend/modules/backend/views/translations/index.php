@@ -2,45 +2,64 @@
 
 /**
  * @var View $this
- * @var SourceMessageSearch $searchModel
- * @var ActiveDataProvider $dataProvider
  */
-
-use yii\data\ActiveDataProvider;
 use common\components\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
 //use yii\widgets\Pjax;
-use Zelenin\yii\modules\I18n\models\search\SourceMessageSearch;
+use common\models\search\SourceMessageSearch;
+use yii\helpers\Url;
+
+$searchModel = SourceMessageSearch::getInstance();
 
 $this->title = Yii::t('backend', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="message-index">
-    <h2><?php echo Html::encode($this->title) ?></h2>
+    <h2>
+        <?php echo Html::encode($this->title); ?>
+        <span class="pull-right btn-group">
+            <a class="btn btn-success" href="<?php
+                echo Url::toRoute('/translations/rescan'); ?>"><i class="fa fa-refresh"></i> <?php
+                echo Yii::t('backend', 'Rescan'); ?></a>
+            <a class="btn btn-warning btn-ajax"
+               before-send-igrowl-title="<?php echo Yii::t('backend', 'Request sent'); ?>"
+               before-send-igrowl-message="<?php echo Yii::t('backend', 'Please, wait...'); ?>"
+               success-igrowl-title="<?php echo Yii::t('backend', 'Server Response'); ?>"
+               success-igrowl-message="<?php echo Yii::t('backend', 'Cache successfully cleared.'); ?>"
+               href="<?php
+               echo Url::toRoute('/translations/clear-cache'); ?>"><i class="fa fa-recycle"></i> <?php
+               echo Yii::t('backend', 'Clear Cache'); ?></a>
+        </span>
+    </h2>
     <?php
 //    Pjax::begin();
     echo GridView::widget([
         'filterModel' => $searchModel,
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $searchModel->search(Yii::$app->getRequest()->get()),
         'columns' => [
             [
                 'attribute' => 'id',
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                    'width' => '30',
                 ],
                 'footerOptions' => [
                     'class' => 'text-align-center font-weight-bold th',
                 ],
-                'value' => function ($model, $index, $dataColumn) {
+                'contentOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'value' => function ($model, $key, $index, $dataColumn) {
                     return $model->id;
                 },
                 'filter' => false,
             ],
             [
                 'attribute' => 'message',
+                'label' => Yii::t('frontend-site', 'Sourse Messages'),
                 'format' => 'raw',
                 'headerOptions' => [
                     'class' => 'text-align-center',
@@ -48,19 +67,53 @@ $this->params['breadcrumbs'][] = $this->title;
                 'footerOptions' => [
                     'class' => 'text-align-center font-weight-bold th',
                 ],
-                'value' => function ($model, $index, $widget) {
+                'value' => function ($model, $key, $index, $widget) {
                     return Html::a($model->message, ['update', 'id' => $model->id], ['data' => ['pjax' => 0]]);
                 },
             ],
             [
-                'attribute' => 'category',
+                'label' => '',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                    'width' => '30',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+                'contentOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'filter' => false,
+                'value' => function ($model, $key, $index, $widget) {
+                    return ' => ';
+                },
+            ],
+            [
+                'label' => Yii::t('backend', 'Message Translations'),
                 'headerOptions' => [
                     'class' => 'text-align-center',
                 ],
                 'footerOptions' => [
                     'class' => 'text-align-center font-weight-bold th',
                 ],
-                'value' => function ($model, $index, $dataColumn) {
+                'filter' => false,
+                'value' => function ($model, $key, $index, $widget) {
+                    return 'TODO';
+                },
+            ],
+            [
+                'attribute' => 'category',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                    'width' => '150',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+                'contentOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'value' => function ($model, $key, $index, $dataColumn) {
                     return $model->category;
                 },
                 'filter' => ArrayHelper::map($searchModel::getCategories(), 'category', 'category'),
@@ -74,19 +127,52 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'headerOptions' => [
                     'class' => 'text-align-center',
+                    'width' => '150',
                 ],
                 'footerOptions' => [
                     'class' => 'text-align-center font-weight-bold th',
                 ],
-                'value' => function ($model, $index, $widget) {
+                'contentOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'value' => function ($model, $key, $index, $widget) {
                     return '';
                 },
                 'filter' => Html::dropDownList($searchModel->formName() . '[status]', $searchModel->status, $searchModel->getStatus(), [
                     'class'  => 'form-control chosen-select',
                     'prompt' => ' All ',
                 ]),
-            ]
-        ]
+            ],
+            [
+                'class' => \yii\grid\ActionColumn::className(),
+                'header' => Yii::t('frontend-site', 'Actions'),
+                'footer' => Yii::t('frontend-site', 'Actions'),
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                    'width' => '75',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+                'contentOptions' => [
+                    'class' => 'text-align-center',
+                ],
+            ],
+            [
+                'attribute' => 'location',
+                'headerOptions' => [
+                    'class' => 'text-align-center',
+                ],
+                'footerOptions' => [
+                    'class' => 'text-align-center font-weight-bold th',
+                ],
+                'value' => function ($model, $key, $index, $dataColumn) {
+                    return $model->location;
+                },
+                'enableSorting' => false,
+                'visible' => false,
+            ],
+        ],
     ]);
 //    Pjax::end();
     ?>

@@ -10,7 +10,7 @@ class m150109_093837_addI18nTables extends Migration
      * @return bool|void
      * @throws InvalidConfigException
      */
-    public function up()
+    public function safeUp()
     {
         $i18n = Yii::$app->getI18n();
 
@@ -26,16 +26,16 @@ class m150109_093837_addI18nTables extends Migration
         $this->createTable($i18n->sourceMessageTable, [
             'id'        => Schema::TYPE_PK,
             'hash'      => Schema::TYPE_STRING  . '(32) NOT NULL DEFAULT ""',
-            'category'  => Schema::TYPE_STRING  . '(32) NULL',
-            'message'   => Schema::TYPE_TEXT    . ' NULL',
-            'location'  => Schema::TYPE_TEXT    . ' NULL',
+            'category'  => Schema::TYPE_STRING,
+            'message'   => Schema::TYPE_TEXT,
+            'location'  => Schema::TYPE_TEXT    . ' NOT NULL DEFAULT ""',
         ], $tableOptions);
 
         $this->createTable($i18n->messageTable, [
             'id'            => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'language'      => Schema::TYPE_STRING  . '(16) NOT NULL DEFAULT ""',
             'hash'          => Schema::TYPE_STRING  . '(32) NOT NULL DEFAULT ""',
-            'translation'   => Schema::TYPE_TEXT    . ' NULL',
+            'translation'   => Schema::TYPE_TEXT,
         ], $tableOptions);
         $this->addPrimaryKey('id', $i18n->messageTable, ['id', 'language']);
         $this->addForeignKey('fk_source_message_message', $i18n->messageTable, 'id', $i18n->sourceMessageTable, 'id', 'cascade');
@@ -45,18 +45,22 @@ class m150109_093837_addI18nTables extends Migration
      * @return boolean
      * @throws InvalidConfigException
      */
-    public function down()
+    public function safeDown()
     {
-//        if ( !YII_ENV_PROD ) {
-//            $i18n = Yii::$app->getI18n();
-//            if (!isset($i18n->sourceMessageTable) || !isset($i18n->messageTable)) {
-//                throw new InvalidConfigException('You should configure i18n component');
-//            }
-//            $this->dropTable($i18n->messageTable);
-//            $this->dropTable($i18n->sourceMessageTable);
-//        } else {
-            echo "WARNING: " . __CLASS__ . " cannot be reverted.\n";
+        if ( !YII_ENV_PROD ) {
+            $i18n = Yii::$app->getI18n();
+            if (!isset($i18n->sourceMessageTable) || !isset($i18n->messageTable)) {
+                throw new InvalidConfigException('You should configure i18n component');
+            }
+
+            $this->dropTable($i18n->sourceMessageTable);
+            $this->dropTable($i18n->messageTable);
+
+            return true;
+        } else {
+            echo "WARNING: " . __CLASS__ . " cannot be reverted." . PHP_EOL;
+
             return false;
-//        }
+        }
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\codeception\frontend\unit\models;
 
 use frontend\models\ContactForm;

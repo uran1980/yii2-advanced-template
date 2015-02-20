@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\models\search;
 
 use Yii;
 use yii\console\Exception;
@@ -10,7 +10,7 @@ use yii\helpers\VarDumper;
 use yii\i18n\GettextPoFile;
 use yii\helpers\Json;
 
-class Translate
+class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\SourceMessageSearch
 {
     /**
      * @var Translate
@@ -48,6 +48,20 @@ class Translate
             self::$_instance = new self();
 
         return self::$_instance;
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'        => 'ID',
+            'category'  => Yii::t('common', 'Category'),
+            'message'   => Yii::t('common', 'Message'),
+            'status'    => Yii::t('common', 'Translation status'),
+            'location'  => Yii::t('common', 'Location'),
+        ];
     }
 
     /**

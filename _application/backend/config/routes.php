@@ -1,8 +1,10 @@
 <?php
 
 return [
-    ''      => 'backend/index/index',
-    '/home' => 'backend/index/index',
+    ''                                          => 'backend/index/index',
+    '/home'                                     => 'backend/index/index',
+    '/translations/rescan'                      => 'backend/translations/rescan',
+    '/translations/clear-cache'                 => 'backend/translations/clear-cache',
 
     // @see http://www.elisdn.ru/blog/62/seo-service-on-yii2-ide-and-modules
     '<_a:(backend|dashbord|admin)>'             => 'backend/index/index',
