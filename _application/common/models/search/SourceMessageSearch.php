@@ -13,7 +13,7 @@ use yii\helpers\Json;
 class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\SourceMessageSearch
 {
     /**
-     * @var Translate
+     * @var SourceMessageSearch
      */
     protected static $_instance = null;
 
@@ -40,7 +40,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
     ];
 
     /**
-     * @return Translate
+     * @return SourceMessageSearch
      */
     public static function getInstance()
     {

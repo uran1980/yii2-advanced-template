@@ -7,6 +7,15 @@ use yii\helpers\Html;
 
 class DataColumn extends \yii\grid\DataColumn
 {
+    /**
+     * @var array
+     */
+    public static $filterOptionsForChosenSelect = [
+        'class'  => 'form-control chosen-select',
+        'id'     => null,
+        'prompt' => ' All ',
+    ];
+
     public function init()
     {
         $this->headerOptions = [

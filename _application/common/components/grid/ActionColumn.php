@@ -12,6 +12,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         $this->footer = Yii::t('common', 'Actions');
         $this->headerOptions = [
             'class' => 'text-align-center',
+            'width' => '100',
         ];
         $this->footerOptions = [
             'class' => 'text-align-center font-weight-bold th',

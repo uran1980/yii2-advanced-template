@@ -79,7 +79,10 @@
         > tr {
             > th,
             > td.th {
-                @include gradient-vertical($start-color: rgba(lighten($blue-gray, 5%), 0.5), $end-color: lighten($blue-gray, 3%));
+                @include gradient-vertical(
+                    $start-color: rgba(lighten($blue-gray, 5%), 0.5),
+                    $end-color: lighten($blue-gray, 3%)
+                );
                 text-shadow: 0 1px 0 lighten($blue-gray, 30%);
                 @include box-shadow(0 1px 0 lighten($blue-gray, 20%) inset);
             }

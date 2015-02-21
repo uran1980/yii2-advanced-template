@@ -10,10 +10,6 @@
 
         &:hover,
         &:focus {
-            //@include gradient-vertical($start-color: $pagination-hover-bg, $end-color: darken($pagination-hover-bg, 12%));
-            //@include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
-            //background-repeat: repeat-x;
-
             @include btn-styles($pagination-hover-bg);
             border-color: darken($pagination-hover-bg, 20%);
             color: $pagination-hover-color;
@@ -26,8 +22,12 @@
         &,
         &:hover,
         &:focus {
-            @include gradient-vertical($start-color: $pagination-hover-bg, $end-color: darken($pagination-hover-bg, 12%));
-            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            @include gradient-vertical(
+                $start-color: $pagination-hover-bg,
+                $end-color: darken($pagination-hover-bg, 12%)
+            );
+            @include reset-filter();                                            // Disable gradients for IE9
+                                                                                // because filter bleeds through rounded corners
             box-shadow: $box-shadow-primary;
             text-shadow: $text-shadow-primary;
         }
@@ -41,7 +41,8 @@
         > a:focus {
             background-color: $pagination-disabled-bg !important;
             background-image: none !important;
-            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            @include reset-filter();                                            // Disable gradients for IE9
+                                                                                // because filter bleeds through rounded corners
         }
     }
 }
@@ -79,8 +80,12 @@
         &,
         &:hover,
         &:focus {
-            @include gradient-vertical($start-color: $pager-hover-bg, $end-color: darken($pager-hover-bg, 12%));
-            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            @include gradient-vertical(
+                $start-color: $pager-hover-bg,
+                $end-color: darken($pager-hover-bg, 12%)
+            );
+            @include reset-filter();                                            // Disable gradients for IE9
+                                                                                // because filter bleeds through rounded corners
             box-shadow: $box-shadow-primary;
             text-shadow: $text-shadow-primary;
         }
@@ -94,7 +99,8 @@
         > a:focus {
             background-color: $pager-disabled-bg !important;
             background-image: none !important;
-            @include reset-filter();                                            // Disable gradients for IE9 because filter bleeds through rounded corners
+            @include reset-filter();                                            // Disable gradients for IE9
+                                                                                // because filter bleeds through rounded corners
             border-color: lighten($pager-border, 5%);
             color: $pager-disabled-color;
             text-shadow: none;

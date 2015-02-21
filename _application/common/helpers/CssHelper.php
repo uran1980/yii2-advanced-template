@@ -26,6 +26,36 @@ class CssHelper
     }
 
     /**
+     * Returns the appropriate css class based on the value of user $status.
+     * NOTE: used in user/index view.
+     *
+     * @param  string $status User status.
+     * @return string         Css class.
+     */
+    public static function statusCssLabel($status)
+    {
+        switch ($status) {
+            case 'Active':
+                $class = 'label label-success';
+                break;
+
+            case 'Inactive':
+                $class = 'label label-warning';
+                break;
+
+            case 'Deleted':
+                $class = 'label label-danger';
+                break;
+
+            default:
+                $class = 'label label-primary';
+                break;
+        }
+
+        return $class;
+    }
+
+    /**
      * Returns the appropriate css class based on the value of role $item_name.
      * NOTE: used in user/index view.
      *
@@ -34,7 +64,7 @@ class CssHelper
      */
     public static function roleCss($role)
     {
-        return "role-".$role."";
+        return 'role-' . $role;
     }
 
     /**
