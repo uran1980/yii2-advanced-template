@@ -3,6 +3,7 @@
 namespace common\components\grid;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class ActionColumn extends \yii\grid\ActionColumn
 {
@@ -10,15 +11,15 @@ class ActionColumn extends \yii\grid\ActionColumn
     {
         $this->header = Yii::t('common', 'Actions');
         $this->footer = Yii::t('common', 'Actions');
-        $this->headerOptions = [
+        $this->headerOptions = ArrayHelper::merge($this->headerOptions, [
             'class' => 'text-align-center',
             'width' => '100',
-        ];
-        $this->footerOptions = [
+        ]);
+        $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
             'class' => 'text-align-center font-weight-bold th',
-        ];
-        $this->contentOptions = [
+        ]);
+        $this->contentOptions = ArrayHelper::merge($this->contentOptions, [
             'class' => 'text-align-center',
-        ];
+        ]);
     }
 }

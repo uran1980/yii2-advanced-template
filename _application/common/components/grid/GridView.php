@@ -3,6 +3,7 @@
 namespace common\components\grid;
 
 use common\components\widgets\LinkPager;
+use yii\helpers\ArrayHelper;
 
 class GridView extends \yii\grid\GridView
 {
@@ -15,9 +16,9 @@ class GridView extends \yii\grid\GridView
         $this->dataColumnClass  = DataColumn::className();
         $this->layout           = "{summary}\n{pager}\n{items}\n{pager}";
         $this->showFooter       = true;
-        $this->options = [
+        $this->options = ArrayHelper::merge($this->options, [
             'class' => 'grid-view table-responsive',
-        ];
+        ]);
         $this->pager = [
             'class' => LinkPager::className(),
         ];

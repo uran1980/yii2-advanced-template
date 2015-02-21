@@ -51,6 +51,43 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
     }
 
     /**
+     * @param array $item
+     * @return string
+     */
+    public static function isActiveTranslation($item)
+    {
+        $output = '';                                                           // default
+
+        $params = Yii::$app->request->getQueryParams();
+        unset($params['page']);
+        if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
+            $route = $item['url'][0];
+            if ($route[0] !== '/' && Yii::$app->controller) {
+                $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
+            }
+            if (ltrim($route, '/') === Yii::$app->controller->getRoute()) {
+                if ( empty($params) && count($item['url']) == 1 )
+                    return ' active ';
+            }
+            unset($item['url']['#']);
+            if ( isset($params['SourceMessageSearch'], $params['SourceMessageSearch']['status']) )
+            {
+                if ( count($item['url']) > 1 ) {
+                    foreach ( $item['url'] as $name => $value ) {
+                        if ( $params['SourceMessageSearch']['status'] == $value ) {
+                            return ' active ';
+                        }
+                    }
+                } else if ( empty($params['SourceMessageSearch']['status']) ) {
+                    return ' active ';
+                }
+            }
+        }
+
+        return $output;
+    }
+
+    /**
      * @return array
      */
     public function attributeLabels()

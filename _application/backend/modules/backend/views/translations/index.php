@@ -6,11 +6,12 @@
 use common\components\grid\GridView;
 use common\components\grid\SerialColumn;
 use common\components\grid\ActionColumn;
+use common\components\grid\DataColumn;
+use common\models\search\SourceMessageSearch;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
 //use yii\widgets\Pjax;
-use common\models\search\SourceMessageSearch;
 use yii\helpers\Url;
 
 $searchModel = SourceMessageSearch::getInstance();
@@ -19,12 +20,39 @@ $this->title = Yii::t('backend', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="message-index">
+<div class="translations-index">
+    <div class="row">
+        <div class="col-lg-12">
+            <span class="pull-left btn-group">
+                <a class="btn btn-default <?php
+                    $route = ['/backend/translations/index'];
+                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    echo Url::to($route); ?>"><?php
+                    echo Yii::t('backend', 'All'); ?></a>
+                <a class="btn btn-default <?php
+                    $route = [
+                        '/backend/translations/index',
+                        $searchModel->formName() . '[status]' => SourceMessageSearch::STATUS_TRANSLATED,
+                    ];
+                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    echo Url::to($route); ?>"><?php
+                    echo Yii::t('backend', 'Translated'); ?></a>
+                <a class="btn btn-default <?php
+                    $route = [
+                        '/backend/translations/index',
+                        $searchModel->formName() . '[status]' => SourceMessageSearch::STATUS_NOT_TRANSLATED,
+                    ];
+                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    echo Url::to($route); ?>"><?php
+                    echo Yii::t('backend', 'Not Translated'); ?></a>
+            </span>
+        </div>
+    </div>
     <h2>
         <?php echo Html::encode($this->title); ?>
         <span class="pull-right btn-group">
             <a class="btn btn-success" href="<?php
-                echo Url::toRoute('/translations/rescan'); ?>"><i class="fa fa-refresh"></i> <?php
+                echo Url::to(['/backend/translations/rescan']); ?>"><i class="fa fa-refresh"></i> <?php
                 echo Yii::t('backend', 'Rescan'); ?></a>
             <a class="btn btn-warning btn-ajax"
                before-send-igrowl-title="<?php echo Yii::t('backend', 'Request sent'); ?>"
@@ -32,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                success-igrowl-title="<?php echo Yii::t('backend', 'Server Response'); ?>"
                success-igrowl-message="<?php echo Yii::t('backend', 'Cache successfully cleared.'); ?>"
                href="<?php
-               echo Url::toRoute('/translations/clear-cache'); ?>"><i class="fa fa-recycle"></i> <?php
+               echo Url::to(['/backend/translations/clear-cache']); ?>"><i class="fa fa-recycle"></i> <?php
                echo Yii::t('backend', 'Clear Cache'); ?></a>
         </span>
     </h2>
@@ -101,11 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->category;
                 },
                 'filter' => ArrayHelper::map($searchModel::getCategories(), 'category', 'category'),
-                'filterInputOptions' => [
-                    'class'     => 'form-control chosen-select',
-                    'id'        => null,
-                    'prompt'    => ' All ',
-                ],
+                'filterInputOptions' => DataColumn::$filterOptionsForChosenSelect,
             ],
             [
                 'attribute' => 'status',
@@ -119,23 +143,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model, $key, $index, $widget) {
                     return '';
                 },
-                'filter' => Html::dropDownList($searchModel->formName() . '[status]', $searchModel->status, $searchModel->getStatus(), [
-                    'class'  => 'form-control chosen-select',
-                    'prompt' => ' All ',
-                ]),
+                'filter' => Html::dropDownList(
+                    $searchModel->formName() . '[status]',
+                    $searchModel->status,
+                    $searchModel->getStatus(),
+                    DataColumn::$filterOptionsForChosenSelect
+                ),
+                'visible' => false,
             ],
             [
                 'class' => ActionColumn::className(),
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                    'width' => '75',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
-                'contentOptions' => [
-                    'class' => 'text-align-center',
-                ],
             ],
             [
                 'attribute' => 'location',

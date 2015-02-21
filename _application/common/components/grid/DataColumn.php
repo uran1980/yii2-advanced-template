@@ -4,6 +4,7 @@ namespace common\components\grid;
 
 use yii\base\Model;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 class DataColumn extends \yii\grid\DataColumn
 {
@@ -18,12 +19,12 @@ class DataColumn extends \yii\grid\DataColumn
 
     public function init()
     {
-        $this->headerOptions = [
+        $this->headerOptions = ArrayHelper::merge($this->headerOptions, [
             'class' => 'text-align-center',
-        ];
-        $this->footerOptions = [
+        ]);
+        $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
             'class' => 'text-align-center font-weight-bold th',
-        ];
+        ]);
     }
 
     /**
