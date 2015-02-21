@@ -1,11 +1,13 @@
 <?php
-namespace common\models;
 
+namespace common\models\search;
+
+use Yii;
+use common\models\User;
+use common\rbac\AccessControl;
 use common\rbac\models\AuthItem;
 use yii\data\ActiveDataProvider;
 use yii\base\Model;
-use common\rbac\AccessControl;
-use Yii;
 
 /**
  * UserSearch represents the model behind the search form for common\models\User.
@@ -13,11 +15,27 @@ use Yii;
 class UserSearch extends User
 {
     /**
+     * @var UserSearch
+     */
+    protected static $_instance = null;
+
+    /**
      * How many users we want to display per page.
      *
      * @var int
      */
     private $_pageSize = 11;
+
+    /**
+     * @return UserSearch
+     */
+    public static function getInstance()
+    {
+        if ( null === self::$_instance )
+            self::$_instance = new self();
+
+        return self::$_instance;
+    }
 
     /**
      * Returns the validation rules for attributes.

@@ -3,7 +3,6 @@ namespace backend\modules\backend\controllers;
 
 use common\components\controllers\BackendController;
 use common\models\User;
-use common\models\UserSearch;
 use common\rbac\models\Role;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
@@ -22,13 +21,7 @@ class UserController extends BackendController
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**

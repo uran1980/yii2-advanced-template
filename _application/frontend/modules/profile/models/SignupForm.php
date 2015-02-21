@@ -64,7 +64,7 @@ class SignupForm extends Model
 
         // password strength rule is determined by StrengthValidator
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
-        $strong = [['password'], StrengthValidator::className(), 'preset'=>'normal'];
+        $strong = [['password'], StrengthValidator::className(), 'preset' => 'normal'];
 
         // use normal yii rule
         $normal = ['password', 'string', 'min' => 6];
@@ -98,11 +98,11 @@ class SignupForm extends Model
     {
         $user = new User();
 
-        $user->username = $this->username;
-        $user->email    = $this->email;
-        $user->role     = ( (int) User::find()->count() === 0 )
-                        ? AccessControl::ROLE_ROOT
-                        : AccessControl::ROLE_USER;
+        $user->username  = $this->username;
+        $user->email     = $this->email;
+        $user->user_role = ( (int) User::find()->count() === 0 )
+                         ? AccessControl::ROLE_ROOT
+                         : AccessControl::ROLE_USER;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->status = $this->status;

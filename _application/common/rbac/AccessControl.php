@@ -91,7 +91,7 @@ class AccessControl extends \yii\filters\AccessControl
 
         if ( null === Role::findOne(['user_id' => $id]) ) {
             $role            = new Role();
-            $role->item_name = $user->role;
+            $role->item_name = $user->user_role;
             $role->user_id   = $id;
             $role->save(false);
         }

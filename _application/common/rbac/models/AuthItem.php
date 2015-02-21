@@ -1,4 +1,5 @@
 <?php
+
 namespace common\rbac\models;
 
 use yii\db\ActiveRecord;

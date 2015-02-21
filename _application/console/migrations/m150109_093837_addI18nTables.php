@@ -28,7 +28,7 @@ class m150109_093837_addI18nTables extends Migration
             'hash'      => Schema::TYPE_STRING  . '(32) NOT NULL DEFAULT ""',
             'category'  => Schema::TYPE_STRING,
             'message'   => Schema::TYPE_TEXT,
-            'location'  => Schema::TYPE_TEXT    . ' NOT NULL DEFAULT ""',
+            'location'  => Schema::TYPE_TEXT,
         ], $tableOptions);
 
         $this->createTable($i18n->messageTable, [

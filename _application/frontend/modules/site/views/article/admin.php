@@ -3,6 +3,8 @@
 use common\helpers\CssHelper;
 use yii\helpers\Html;
 use common\components\grid\GridView;
+use common\components\grid\SerialColumn;
+use common\components\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ArticleSearch */
@@ -25,49 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'summary' => false,
         'columns' => [
             [
-                'class' => \yii\grid\SerialColumn::className(),
-                'header' => '#',
-                'footer' => '#',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
+                'class' => SerialColumn::className(),
             ],
 
             //'id',
             // author
             [
                 'attribute' => 'user_id',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'value' => function ($data) {
                     return $data->getAuthorName();
                 },
             ],
             [
                 'attribute' => 'title',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
             ],
             // status
             [
                 'attribute' => 'status',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'filter' => $searchModel->statusList,
                 'filterInputOptions' => [
                     'class'     => 'form-control chosen-select',
@@ -83,12 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'category',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'filter' => $searchModel->categoryList,
                 'filterInputOptions' => [
                     'class'     => 'form-control chosen-select',
@@ -103,17 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'class' => \yii\grid\ActionColumn::className(),
-                'header' => Yii::t('frontend-site', 'Menu'),
-                'footer' => Yii::t('frontend-site', 'Menu'),
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
+                'class' => ActionColumn::className(),
             ],
         ],
     ]); ?>
-
 </div>

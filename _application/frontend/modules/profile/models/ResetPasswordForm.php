@@ -71,7 +71,7 @@ class ResetPasswordForm extends Model
         // presets are located in: vendor/nenad/yii2-password-strength/presets.php
         // NOTE: you should use RESET rule because it doesn't require username and email validation
         $strong = [['password'], StrengthValidator::className(),
-                    'preset'=>'reset', 'userAttribute'=>'password'];
+                    'preset' => 'reset', 'userAttribute' => 'password'];
 
         // use normal yii rule
         $normal = ['password', 'string', 'min' => 6];

@@ -1,39 +1,46 @@
 <?php
 
 use common\helpers\CssHelper;
-use yii\helpers\Html;
+use common\models\search\UserSearch;
+use common\components\grid\SerialColumn;
+use common\components\grid\ActionColumn;
 use common\components\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+
+/** @var UserSearch $searchModel */
+$searchModel = UserSearch::getInstance();
 
 $this->title = Yii::t('backend', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
-
-    <h1>
-
-    <?php echo Html::encode($this->title) ?>
-
-    <span class="pull-right">
-        <?php echo Html::a(Yii::t('backend', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
-    </span>
-
+<div class="backend-user-index">
+    <h1><?php echo Html::encode($this->title); ?>
+        <span class="pull-right">
+            <?php echo Html::a(Yii::t('backend', 'Create User'), ['create'], ['class' => 'btn btn-success']); ?>
+        </span>
     </h1>
 
     <?php echo GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         'filterModel' => $searchModel,
         'summary' => false,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'username',
-            'email:email',
+            [
+                'class' => SerialColumn::className(),
+            ],
+            // username
+            [
+                'attribute' => 'username',
+            ],
+            // email
+            [
+                'attribute' => 'email',
+            ],
             // status
             [
-                'attribute'=>'status',
+                'attribute' => 'status',
                 'filter' => $searchModel->statusList,
                 'value' => function ($data) {
                     return $data->statusName;
@@ -44,19 +51,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // role
             [
-                'attribute'=>'item_name',
+                'attribute' => 'item_name',
                 'filter' => $searchModel->rolesList,
                 'value' => function ($data) {
                     return $data->roleName;
                 },
-                'contentOptions'=>function($model, $key, $index, $column) {
+                'contentOptions' => function($model, $key, $index, $column) {
                     return ['class' => CssHelper::roleCss($model->roleName)];
                 }
             ],
-            // buttons
-            ['class' => 'yii\grid\ActionColumn',
-            'header' => "Menu",
-            'template' => '{view} {update} {delete}',
+            // actions buttons
+            [
+                'class' => ActionColumn::className(),
+                'template' => '{view} {update} {delete}',
                 'buttons' => [
                     'view' => function ($url, $model, $key) {
                         return Html::a('', $url, ['title' => 'View user',
@@ -74,10 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'confirm' => Yii::t('backend', 'Are you sure you want to delete this user?'),
                                 'method' => 'post']
                         ]);
-                    }
-                ]
+                    },
+                ],
             ], // ActionColumn
         ], // columns
     ]); ?>
-
 </div>

@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use common\components\grid\GridView;
+use common\components\grid\SerialColumn;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
@@ -26,16 +27,7 @@ echo GridView::widget([
     'filterUrl' => $panel->getUrl(),
     'columns' => [
         [
-            'class' => yii\grid\SerialColumn::className(),
-            'headerOptions' => [
-                'class' => 'text-align-center',
-            ],
-            'footerOptions' => [
-                'class' => 'text-align-center font-weight-bold th',
-            ],
-            'contentOptions' => [
-                'class' => 'text-align-center',
-            ],
+            'class' => SerialColumn::className(),
         ],
         [
             'attribute' => 'timestamp',

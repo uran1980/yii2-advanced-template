@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use yii\db\ActiveRecord;
@@ -15,7 +16,7 @@ use Yii;
  * @property integer $id
  * @property string  $username
  * @property string  $email
- * @property string  $role
+ * @property string  $user_role
  * @property string  $password_hash
  * @property string  $status
  * @property string  $auth_key
@@ -36,9 +37,9 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
 
-//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 // IDENTITY INTERFACE IMPLEMENTATION
-//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 
     /**
      * Finds an identity by the given ID.
@@ -100,9 +101,9 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
         return $this->getAuthKey() === $authKey;
     }
 
-//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 // IMPORTANT IDENTITY HELPERS
-//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------//
 
     /**
      * Generates "remember me" authentication key.

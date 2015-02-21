@@ -4,6 +4,8 @@
  * @var View $this
  */
 use common\components\grid\GridView;
+use common\components\grid\SerialColumn;
+use common\components\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
@@ -61,12 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'message',
                 'label' => Yii::t('frontend-site', 'Sourse Messages'),
                 'format' => 'raw',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'value' => function ($model, $key, $index, $widget) {
                     return Html::a($model->message, ['update', 'id' => $model->id], ['data' => ['pjax' => 0]]);
                 },
@@ -76,9 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => [
                     'class' => 'text-align-center',
                     'width' => '30',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
@@ -90,12 +83,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => Yii::t('backend', 'Message Translations'),
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'filter' => false,
                 'value' => function ($model, $key, $index, $widget) {
                     return 'TODO';
@@ -106,9 +93,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => [
                     'class' => 'text-align-center',
                     'width' => '150',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
@@ -129,9 +113,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'text-align-center',
                     'width' => '150',
                 ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
                 ],
@@ -144,9 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
             ],
             [
-                'class' => \yii\grid\ActionColumn::className(),
-                'header' => Yii::t('frontend-site', 'Actions'),
-                'footer' => Yii::t('frontend-site', 'Actions'),
+                'class' => ActionColumn::className(),
                 'headerOptions' => [
                     'class' => 'text-align-center',
                     'width' => '75',
@@ -160,12 +139,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'location',
-                'headerOptions' => [
-                    'class' => 'text-align-center',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
-                ],
                 'value' => function ($model, $key, $index, $dataColumn) {
                     return $model->location;
                 },

@@ -26,7 +26,7 @@ class RbacHelper
         Role::deleteAll(['user_id' => $id]);
 
         $auth = Yii::$app->authManager;
-        $role = $auth->getRole($user->role);
+        $role = $auth->getRole($user->user_role);
         $auth->assign($role, $id);
 
         // return assigned role name in case you want to use this method in tests

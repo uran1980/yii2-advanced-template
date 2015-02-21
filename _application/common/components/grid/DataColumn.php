@@ -7,6 +7,16 @@ use yii\helpers\Html;
 
 class DataColumn extends \yii\grid\DataColumn
 {
+    public function init()
+    {
+        $this->headerOptions = [
+            'class' => 'text-align-center',
+        ];
+        $this->footerOptions = [
+            'class' => 'text-align-center font-weight-bold th',
+        ];
+    }
+
     /**
      * Used to render footer like header
      */
