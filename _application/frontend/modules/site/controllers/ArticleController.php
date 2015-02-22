@@ -4,7 +4,7 @@ namespace frontend\modules\site\controllers;
 
 use common\components\controllers\FrontendController;
 use frontend\modules\site\models\Article;
-use frontend\modules\site\models\ArticleSearch;
+use frontend\modules\site\models\search\ArticleSearch;
 use yii\web\NotFoundHttpException;
 use yii\web\MethodNotAllowedHttpException;
 use common\rbac\AccessControl;

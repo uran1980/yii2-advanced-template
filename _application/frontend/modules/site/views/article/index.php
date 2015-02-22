@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticleSearch */
+/* @var $searchModel app\models\search\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::$app->name . ' '. Yii::t('frontend-site', 'news');

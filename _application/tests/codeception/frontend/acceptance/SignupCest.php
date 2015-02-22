@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\codeception\frontend\acceptance;
 
 use common\models\User;

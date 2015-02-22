@@ -4,6 +4,7 @@ namespace backend\modules\backend\controllers;
 
 use Yii;
 use common\models\search\SourceMessageSearch;
+use common\helpers\AppHelper;
 
 class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\DefaultController
 {
@@ -17,11 +18,11 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         // ------------------------- RESCAN MESSAGES ---------------------------
         // TODO
 
-        // -------------------------- RESCAN RESULT ----------------------------
-        Yii::$app->getSession()->setFlash('success', Yii::t('backend', 'TODO show rescan result...'));
+        // ----------------------- SHOW RESCAN RESULT --------------------------
+        AppHelper::showSuccessMessage(Yii::t('backend', 'TODO show rescan result...'));
 
         // ---------------------------- REDIRECT -------------------------------
-        return $this->redirect(['/translations']);
+        return $this->redirect(['/backend/translations/index']);
     }
 
     public function actionClearCache()

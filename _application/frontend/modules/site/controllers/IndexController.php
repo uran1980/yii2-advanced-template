@@ -3,12 +3,10 @@
 namespace frontend\modules\site\controllers;
 
 use common\components\controllers\FrontendController;
-use frontend\modules\site\models\ContactForm;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+use common\helpers\AppHelper;
+use frontend\modules\site\models\forms\ContactForm;
+use yii\helpers\ArrayHelper;
 use Yii;
-
-use yii\helpers\Url;
 
 /**
  * Site controller.
@@ -24,15 +22,12 @@ class IndexController extends FrontendController
      */
     public function actions()
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
+        return ArrayHelper::merge(parent::actions(), [
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-        ];
+        ]);
     }
 
 // -----------------------------------------------------------------------------
@@ -71,9 +66,9 @@ class IndexController extends FrontendController
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->contact(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                AppHelper::showSuccessMessage(Yii::t('site', 'Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
+                AppHelper::showSuccessMessage(Yii::t('site', 'There was an error sending email.'));
             }
 
             return $this->refresh();

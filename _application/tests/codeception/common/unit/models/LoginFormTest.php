@@ -1,7 +1,7 @@
 <?php
 namespace tests\codeception\common\unit\models;
 
-use common\models\LoginForm;
+use common\models\forms\LoginForm;
 use Codeception\Specify;
 use tests\codeception\common\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;

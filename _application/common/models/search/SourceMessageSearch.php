@@ -70,8 +70,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
                     return ' active ';
             }
             unset($item['url']['#']);
-            if ( isset($params['SourceMessageSearch'], $params['SourceMessageSearch']['status']) )
-            {
+            if ( isset($params['SourceMessageSearch'], $params['SourceMessageSearch']['status']) ) {
                 if ( count($item['url']) > 1 ) {
                     foreach ( $item['url'] as $name => $value ) {
                         if ( $params['SourceMessageSearch']['status'] == $value ) {

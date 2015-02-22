@@ -1,12 +1,11 @@
 <?php
+
 namespace tests\codeception\frontend\unit\models;
 
-use frontend\models\SignupForm;
-use common\rbac\models\Role;
-use Codeception\Specify;
 use tests\codeception\frontend\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;
-use Yii;
+use Codeception\Specify;
+use frontend\models\forms\SignupForm;
 
 class SignupFormTest extends DbTestCase
 {

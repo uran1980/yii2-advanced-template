@@ -4,12 +4,14 @@ namespace frontend\modules\profile\controllers;
 
 use common\components\controllers\FrontendController;
 use common\models\User;
-use common\models\LoginForm;
+use common\models\forms\LoginForm;
+use common\helpers\AppHelper;
 use frontend\modules\profile\models\ProfileActivation;
-use frontend\modules\profile\models\PasswordResetRequestForm;
-use frontend\modules\profile\models\ResetPasswordForm;
-use frontend\modules\profile\models\SignupForm;
+use frontend\modules\profile\models\forms\PasswordResetRequestForm;
+use frontend\modules\profile\models\forms\ResetPasswordForm;
+use frontend\modules\profile\models\forms\SignupForm;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
@@ -94,7 +96,7 @@ class IndexController extends FrontendController
         // user couldn't be logged in, because he has not activated his profile
         else if($model->notActivated()) {
             // if his profile is not activated, he will have to activate it first
-            Yii::$app->session->setFlash('error', Yii::t('frontend-profile', 'You have to activate your profile first. Please check your email.'));
+            AppHelper::showErrorMessage(Yii::t('frontend-profile', 'You have to activate your profile first. Please check your email.'));
 
             return $this->refresh();
         }
@@ -133,12 +135,12 @@ class IndexController extends FrontendController
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'Check your email for further instructions.'));
+                AppHelper::showSuccessMessage(Yii::t('frontend-profile', 'Check your email for further instructions.'));
 
                 return $this->goHome();
             }
             else {
-                Yii::$app->getSession()->setFlash('error', Yii::t('frontend-profile', 'Sorry, we are unable to reset password for email provided.'));
+                AppHelper::showErrorMessage(Yii::t('frontend-profile', 'Sorry, we are unable to reset password for email provided.'));
             }
         }
         else
@@ -169,7 +171,7 @@ class IndexController extends FrontendController
         if ( $model->load(Yii::$app->request->post())
              && $model->validate() && $model->resetPassword() )
         {
-            Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'New password was saved.'));
+            AppHelper::showSuccessMessage(Yii::t('frontend-profile', 'New password was saved.'));
 
             return $this->goHome();
         }
@@ -223,11 +225,10 @@ class IndexController extends FrontendController
             // user could not be saved in database
             else {
                 // display error message to user
-                Yii::$app->session->setFlash('error',
-                    "We couldn't sign you up, please contact us.");
+                AppHelper::showErrorMessage(Yii::t('frontend-profile', "We couldn't sign you up, please contact us."));
 
                 // log this error, so we can debug possible problem easier.
-                Yii::error(Mosule::t('Signup failed!') . ' '
+                Yii::error(Yii::t('frontend-profile', 'Signup failed!') . ' '
                     . Yii::t('frontend-profile', 'User {user} could not sign up.', ['user' => Html::encode($user->username)]) . ' '
                     . Yii::t('frontend-profile', 'Possible causes: something strange happened while saving user in database.'));
 
@@ -252,14 +253,14 @@ class IndexController extends FrontendController
     {
         // try to send profile activation email
         if ($model->sendProfileActivationEmail($user)) {
-            Yii::$app->session->setFlash('success', Yii::t('frontend-profile', 'Hello {user}.', ['user' => Html::encode($user->username)]) . ' '
+            AppHelper::showSuccessMessage(Yii::t('frontend-profile', 'Hello {user}.', ['user' => Html::encode($user->username)]) . ' '
                 . Yii::t('frontend-profile', 'To be able to log in, you need to confirm your registration.') . ' '
                 . Yii::t('frontend-profile', 'Please check your email, we have sent you a message.'));
         }
         // email could not be sent
         else {
             // display error message to user
-            Yii::$app->session->setFlash('error', Yii::t('frontend-profile', "We couldn't send you profile activation email, please contact us."));
+            AppHelper::showErrorMessage(Yii::t('frontend-profile', "We couldn't send you profile activation email, please contact us."));
 
             // log this error, so we can debug possible problem easier.
             Yii::error(Yii::t('frontend-profile', 'Signup failed!') . ' '
@@ -282,29 +283,24 @@ class IndexController extends FrontendController
      */
     public function actionActivateProfile($token)
     {
-        try
-        {
+        try {
             $user = new ProfileActivation($token);
         }
-        catch (InvalidParamException $e)
-        {
+        catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        if ($user->activateProfile())
-        {
-            Yii::$app->getSession()->setFlash('success', Yii::t('frontend-profile', 'Success! You can now log in.') . ' '
+        if ($user->activateProfile()) {
+            AppHelper::showSuccessMessage(Yii::t('frontend-profile', 'Success! You can now log in.') . ' '
                 . Yii::t('frontend-profile', 'Thank you {user} for joining us!', ['user' => Html::encode($user->username)]));
         }
-        else
-        {
-            Yii::$app->getSession()->setFlash('error', Yii::t('frontend-profile', 'Sorry, {user} your profile could not be activated, please contact us!', [
+        else {
+            AppHelper::showErrorMessage(Yii::t('frontend-profile', 'Sorry, {user} your profile could not be activated, please contact us!', [
                 'user' => Html::encode($user->username),
             ]));
         }
 
         return $this->redirect('/login');
-//        return $this->redirect('login');
     }
 
 

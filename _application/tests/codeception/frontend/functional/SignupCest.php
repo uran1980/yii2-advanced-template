@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\codeception\frontend\functional;
 
 use common\models\User;

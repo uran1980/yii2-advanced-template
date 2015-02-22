@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\site\models;
+namespace frontend\modules\site\models\forms;
 
 use yii\base\Model;
 use Yii;

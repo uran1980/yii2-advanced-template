@@ -1,9 +1,10 @@
 <?php
+
 namespace tests\codeception\frontend\unit\models;
 
-use frontend\models\ResetPasswordForm;
 use tests\codeception\frontend\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;
+use frontend\models\forms\ResetPasswordForm;
 
 class ResetPasswordFormTest extends DbTestCase
 {

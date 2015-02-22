@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\codeception\frontend\_pages;
 
 use yii\codeception\BasePage;
@@ -17,13 +18,10 @@ class SignupPage extends BasePage
      */
     public function submit(array $signupData)
     {
-        foreach ($signupData as $field => $value) 
-        {
+        foreach ($signupData as $field => $value) {
             $inputType = $field === 'body' ? 'textarea' : 'input';
-
             $this->actor->fillField($inputType . '[name="SignupForm[' . $field . ']"]', $value);
         }
-        
         $this->actor->click('signup-button');
     }
 }

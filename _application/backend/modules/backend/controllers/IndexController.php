@@ -5,7 +5,7 @@ namespace backend\modules\backend\controllers;
 use Yii;
 use common\rbac\AccessControl;
 use common\components\controllers\BackendController;
-use common\models\LoginForm;
+use common\models\forms\LoginForm;
 use yii\filters\VerbFilter;
 
 /**
@@ -40,20 +40,6 @@ class IndexController extends BackendController
                 'actions' => [
                     'logout' => ['post'],
                 ],
-            ],
-        ];
-    }
-
-    /**
-     * Declares external actions for the controller.
-     *
-     * @return array
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
             ],
         ];
     }

@@ -153,6 +153,32 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
+                'template' => '{save} {fullscreen} {delete}',
+                'buttons' => [
+                    'save' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-download"></span> ' . Yii::t('common', 'Save'), $url, [
+                            'class'     => 'btn btn-xs btn-success',
+                            'title'     => Yii::t('common', 'Save'),
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                    'fullscreen' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-fullscreen"></span>', '', [
+                            'class'     => 'btn btn-xs btn-default',
+                            'title'     => Yii::t('common', 'Expand'),
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                            'class'         => 'btn btn-xs btn-danger margin-left-10px',
+                            'title'         => Yii::t('common', 'Delete'),
+                            'data-confirm'  => Yii::t('common', 'Are you sure you want to delete this item?'),
+                            'data-method'   => 'post',
+                            'data-pjax'     => '0',
+                        ]);
+                    },
+                ],
             ],
             [
                 'attribute' => 'location',

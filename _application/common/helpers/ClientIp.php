@@ -2,6 +2,8 @@
 
 namespace common\helpers;
 
+use Yii;
+
 class ClientIp
 {
     /**
@@ -9,16 +11,17 @@ class ClientIp
      */
     public static function get()
     {
-        $output = '';                                                           // default
+        $output = Yii::$app->getRequest()->getUserIP();
+        if ( null === $output ) {
+            // @see http://en.wikipedia.org/wiki/X-Forwarded-For
+            if ( isset($_SERVER[self::normalizeProxyHeader('X-Forwarded-For')]) )
+                $output = $_SERVER[self::normalizeProxyHeader('X-Forwarded-For')];
+            else if ( isset($_SERVER[self::normalizeProxyHeader('X-Real-IP')]) )
+                $output = $_SERVER[self::normalizeProxyHeader('X-Real-IP')];
 
-        // @see http://en.wikipedia.org/wiki/X-Forwarded-For
-        if ( isset($_SERVER[self::normalizeProxyHeader('X-Forwarded-For')]) )
-            $output = $_SERVER[self::normalizeProxyHeader('X-Forwarded-For')];
-        else if ( isset($_SERVER[self::normalizeProxyHeader('X-Real-IP')]) )
-            $output = $_SERVER[self::normalizeProxyHeader('X-Real-IP')];
-
-        if ( isset($_SERVER['REMOTE_ADDR']) )
-            $output = $_SERVER['REMOTE_ADDR'];
+            if ( isset($_SERVER['REMOTE_ADDR']) )
+                $output = $_SERVER['REMOTE_ADDR'];
+        }
 
         return $output;
     }

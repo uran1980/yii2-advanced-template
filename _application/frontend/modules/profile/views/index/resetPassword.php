@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model frontend\modules\site\models\ResetPasswordForm */
+/* @var $model frontend\modules\site\models\forms\ResetPasswordForm */
 
 $this->title = Yii::t('frontend-profile', 'Reset password');
 $this->params['breadcrumbs'][] = $this->title;

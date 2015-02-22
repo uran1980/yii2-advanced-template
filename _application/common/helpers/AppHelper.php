@@ -3,6 +3,7 @@
 namespace common\helpers;
 
 use Yii;
+use common\helpers\ClientIp;
 
 class AppHelper
 {
@@ -160,4 +161,92 @@ class AppHelper
 
         return $output;
     }
+
+    /**
+     * @return string
+     */
+    public static function getModuleName()
+    {
+        return Yii::$app->controller->module->getUniqueId();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getControllerName()
+    {
+        return Yii::$app->controller->getUniqueId();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getActionName()
+    {
+        return Yii::$app->controller->action->getUniqueId();
+    }
+
+    /**
+     * Returns the request component.
+     *
+     * @return \yii\web\Request the request component.
+     */
+    public static function getRequest()
+    {
+        return Yii::$app->getRequest();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRoute()
+    {
+        return Yii::$app->controller->getRoute();
+    }
+
+    /**
+     * @return string
+     */
+    public static function getClientIp()
+    {
+        return ClientIp::get();
+    }
+
+    /**
+     * @param string $message
+     * @param boolean $removeAfterAccess
+     */
+    public static function showErrorMessage($message, $removeAfterAccess = true)
+    {
+        Yii::$app->getSession()->setFlash('error', $message, $removeAfterAccess);
+    }
+
+    /**
+     * @param string $message
+     * @param boolean $removeAfterAccess
+     */
+    public static function showNoticeMessage($message, $removeAfterAccess = true)
+    {
+        return self::showWarningMessage($message, $removeAfterAccess);
+    }
+
+    /**
+     * @param string $message
+     * @param boolean $removeAfterAccess
+     */
+    public static function showWarningMessage($message, $removeAfterAccess = true)
+    {
+        Yii::$app->getSession()->setFlash('warning', $message, $removeAfterAccess);
+    }
+
+    /**
+     * @param string $message
+     * @param boolean $removeAfterAccess
+     */
+    public static function showSuccessMessage($message, $removeAfterAccess = true)
+    {
+        Yii::$app->getSession()->setFlash('success', $message, $removeAfterAccess);
+    }
+
+
 }

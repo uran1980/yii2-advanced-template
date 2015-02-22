@@ -63,7 +63,9 @@ $config = [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/index/error',
+            'class'         => yii\web\ErrorHandler::className(),
+//            'class'         => common\components\web\ErrorHandler::className(), // TODO
+            'errorAction'   => 'site/index/error',
         ],
     ],
     'params' => $params,

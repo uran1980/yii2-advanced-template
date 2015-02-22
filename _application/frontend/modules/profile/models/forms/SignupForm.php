@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\profile\models;
+namespace frontend\modules\profile\models\forms;
 
 use common\models\User;
 use common\rbac\AccessControl;

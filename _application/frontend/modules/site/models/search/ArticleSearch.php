@@ -1,8 +1,10 @@
 <?php
-namespace frontend\modules\site\models;
+
+namespace frontend\modules\site\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use frontend\modules\site\models\Article;
 use Yii;
 
 /**

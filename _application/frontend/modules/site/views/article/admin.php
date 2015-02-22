@@ -7,7 +7,7 @@ use common\components\grid\SerialColumn;
 use common\components\grid\ActionColumn;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ArticleSearch */
+/* @var $searchModel app\models\search\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('frontend-site', 'Articles');

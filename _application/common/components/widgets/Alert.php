@@ -2,6 +2,7 @@
 
 namespace common\components\widgets;
 
+use Yii;
 use yii\bootstrap\Widget;
 
 /**
@@ -37,7 +38,8 @@ class Alert extends Widget
         'danger'  => 'alert-danger',
         'success' => 'alert-success',
         'info'    => 'alert-info',
-        'warning' => 'alert-warning'
+        'warning' => 'alert-warning',
+        'notice'  => 'alert-warning',
     ];
 
     /**
@@ -52,9 +54,9 @@ class Alert extends Widget
     {
         parent::init();
 
-        $session = \Yii::$app->getSession();
-        $flashes = $session->getAllFlashes();
-        $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
+        $session    = Yii::$app->getSession();
+        $flashes    = $session->getAllFlashes();
+        $appendCss  = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 
         foreach ($flashes as $type => $data) {
             if (isset($this->alertTypes[$type])) {
@@ -67,9 +69,9 @@ class Alert extends Widget
                     $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
                     echo \yii\bootstrap\Alert::widget([
-                        'body' => $message,
-                        'closeButton' => $this->closeButton,
-                        'options' => $this->options,
+                        'body'          => $message,
+                        'closeButton'   => $this->closeButton,
+                        'options'       => $this->options,
                     ]);
                 }
 

@@ -25,6 +25,8 @@ class DataColumn extends \yii\grid\DataColumn
         $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
             'class' => 'text-align-center font-weight-bold th',
         ]);
+
+        parent::init();
     }
 
     /**

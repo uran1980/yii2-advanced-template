@@ -22,8 +22,8 @@ echo Tabs::widget([
             'active' => true,
         ],
         [
-            'label'     => 'TODO',
-            'content'   => '<h3>TODO</h3><p>TODO</p>',
+            'label'     => 'Yii::$app->params',
+            'content'   => '<h3>Yii::$app->params</h3><p><pre>' . print_r(Yii::$app->params, true) . '</pre></p>',
         ],
         [
             'label'     => 'TODO',

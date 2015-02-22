@@ -20,5 +20,7 @@ class SerialColumn extends \yii\grid\SerialColumn
         $this->contentOptions = ArrayHelper::merge($this->contentOptions, [
             'class' => 'text-align-center',
         ]);
+
+        parent::init();
     }
 }
