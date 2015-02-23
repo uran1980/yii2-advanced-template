@@ -9,16 +9,19 @@ var appAjaxButtons = appAjaxButtons || {};
      * @see http://api.jquery.com/ready/
      */
     $(document).ready(function () {
+        /***********************************************************************
+         *                              METHODS
+         **********************************************************************/
         /**
-         * @param el (obj)
+         * @param element (obj)
          */
-        appAjaxButtons.ajaxButtonSubmit = function ( el ) {
-            var url         = el.attr('href'),
-                icon        = el.find('i'),
+        appAjaxButtons.ajaxButtonSubmit = function ( element ) {
+            var url         = element.attr('href'),
+                icon        = element.find('i'),
                 iconClass   = icon.attr('class')
             ;
 
-            if ( el.data('locked') === true ) {
+            if ( element.data('locked') === true ) {
                 return false;
             }
             if ( iconClass ) {
@@ -26,27 +29,27 @@ var appAjaxButtons = appAjaxButtons || {};
             }
 
             if ( url ) {
-                el.data('locked', true);
+                element.data('locked', true);
                 $.ajax({
                     type: 'POST',
                     url: url,
                     beforeSend: function ( xhr, settings ) {
-                        if ( el.attr('before-send-igrowl-message') ) {
+                        if ( element.attr('before-send-igrowl-message') ) {
                             // show iGrowl popup message
                             // @see http://catc.github.io/iGrowl/
                             $.iGrowl.prototype.dismissAll('all');
                             $.iGrowl({
                                 placement:  {
-                                    x: el.attr('placement-x') || 'center',
-                                    y: el.attr('placement-y') || 'top'
+                                    x: element.attr('placement-x') || 'center',
+                                    y: element.attr('placement-y') || 'top'
                                 },
                                 type:       'notice',
-                                delay:      el.attr('delay') || 10000,
+                                delay:      element.attr('delay') || 10000,
                                 animation:  false,
                                 animShow:   'fadeInDown',
                                 animHide:   'fadeOutUp',
-                                title:      ':: ' + (el.attr('before-send-igrowl-title').toUpperCase() || 'REQUEST SENT') + ' .:',
-                                message:    el.attr('before-send-igrowl-message') || 'Please wait...'
+                                title:      ':: ' + (element.attr('before-send-igrowl-title').toUpperCase() || 'REQUEST SENT') + ' .:',
+                                message:    element.attr('before-send-igrowl-message') || 'Please wait...'
                             });
                         }
                     },
@@ -54,16 +57,24 @@ var appAjaxButtons = appAjaxButtons || {};
                         $.iGrowl.prototype.dismissAll('all');
                         $.iGrowl({
                             placement:  {
-                                x: el.attr('placement-x') || 'center',
-                                y: el.attr('placement-y') || 'top'
+                                x: element.attr('placement-x') || 'center',
+                                y: element.attr('placement-y') || 'top'
                             },
                             type:       data.status || 'success',
-                            delay:      el.attr('delay') || 2500,
+                            delay:      element.attr('delay') || 2500,
                             animation:  false,
                             animShow:   'fadeInDown',
                             animHide:   'fadeOutUp',
-                            title:      ':: ' + (el.attr('success-igrowl-title').toUpperCase() || 'SERVER RESPONSE') + ' .:',
-                            message:    el.attr('success-igrowl-message') || 'Success'
+                            title:      ':: ' + (element.attr('success-igrowl-title').toUpperCase() || 'SERVER RESPONSE') + ' .:',
+                            message:    element.attr('success-igrowl-message') || 'Success'
+                        });
+
+                        // triger event
+                        $(document).trigger('ajaxButtonSubmit', {
+                            element: element,
+                            url: url,
+                            action: element.attr('action'),
+                            data: data
                         });
                     },
                 }).then(function () {                                           // doneCallbacks (@see http://api.jquery.com/deferred.then/)
@@ -72,8 +83,8 @@ var appAjaxButtons = appAjaxButtons || {};
                     $.iGrowl.prototype.dismissAll('all')
                     $.iGrowl({
                         placement:  {
-                            x: el.attr('placement-x') || 'center',
-                            y: el.attr('placement-y') || 'top'
+                            x: element.attr('placement-x') || 'center',
+                            y: element.attr('placement-y') || 'top'
                         },
                         type:       'error',
                         delay:      2500,
@@ -82,10 +93,10 @@ var appAjaxButtons = appAjaxButtons || {};
                         animShow:   'fadeInDown',
                         animHide:   'fadeOutUp',
                         title:      ':: SERVER ERROR .:',
-                        message:    el.attr('error-igrowl-message') || 'Error'
+                        message:    xhr.responseText || 'Error'
                     });
                 }).always(function () {
-                    el.data('locked', false);
+                    element.data('locked', false);
                     icon.attr('class', iconClass);
                 });
             } else if ( iconClass ) {

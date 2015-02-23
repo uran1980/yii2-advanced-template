@@ -19,14 +19,12 @@ class DataColumn extends \yii\grid\DataColumn
 
     public function init()
     {
-        $this->headerOptions = ArrayHelper::merge($this->headerOptions, [
+        $this->headerOptions = ArrayHelper::merge([
             'class' => 'text-align-center',
-        ]);
-        $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
+        ], $this->headerOptions);
+        $this->footerOptions = ArrayHelper::merge([
             'class' => 'text-align-center font-weight-bold th',
-        ]);
-
-        parent::init();
+        ], $this->footerOptions);
     }
 
     /**

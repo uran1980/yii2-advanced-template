@@ -59,7 +59,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
         $output = '';                                                           // default
 
         $params = Yii::$app->request->getQueryParams();
-        unset($params['page']);
+        unset($params['page'], $params['sort']);
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
             $route = $item['url'][0];
             if ($route[0] !== '/' && Yii::$app->controller) {

@@ -17,7 +17,7 @@ class AppCommonAsset extends AssetBundle
         'common\assets\AppScrollToTopAsset',
         'common\assets\AppSpoilersAsset',
         'common\assets\AppChosenSelectAsset',
-        'common\assets\AppAjaxBattonsAsset',
+        'common\assets\AppAjaxButtonsAsset',
         'common\assets\AppIGrowlAsset',
 
         'rmrevin\yii\fontawesome\AssetBundle',                                  // @see https://github.com/rmrevin/yii2-fontawesome

@@ -10,17 +10,15 @@ class SerialColumn extends \yii\grid\SerialColumn
     {
         $this->header = 'ID';
         $this->footer = 'ID';
-        $this->headerOptions = ArrayHelper::merge($this->headerOptions, [
+        $this->headerOptions = ArrayHelper::merge([
             'class' => 'text-align-center',
             'width' => '30',
-        ]);
-        $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
+        ], $this->headerOptions);
+        $this->footerOptions = ArrayHelper::merge([
             'class' => 'text-align-center font-weight-bold th',
-        ]);
-        $this->contentOptions = ArrayHelper::merge($this->contentOptions, [
+        ], $this->footerOptions);
+        $this->contentOptions = ArrayHelper::merge([
             'class' => 'text-align-center',
-        ]);
-
-        parent::init();
+        ], $this->contentOptions);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace common\assets;
 
-class AppAjaxBattonsAsset extends AssetBundle
+class AppAjaxButtonsAsset extends AssetBundle
 {
     public $sourcePath = '@common/web';
     public $js = [
-        'js/app-ajax-battons.js',
+        'js/app-ajax-buttons.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',

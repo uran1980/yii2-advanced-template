@@ -9,7 +9,6 @@ var appSpoilers = appSpoilers || {};
      * @see http://api.jquery.com/ready/
      */
     $(document).ready(function () {
-        // ---------------------------- appSpoilers -------------------------------
         appSpoilers.spoiler = {
             init: function () {
                 $(".spoiler-title.closed:not(.initialized)").closest('.spoiler').find('.spoiler-content:first').hide();
@@ -35,7 +34,6 @@ var appSpoilers = appSpoilers || {};
         };
 
         appSpoilers.actionsHandler = function () {
-            // ------------------------ appSpoilers -------------------------------
             $('body').delegate('.spoiler-title', 'click', function() {
                 appSpoilers.spoiler.toggle($(this));
                 appSpoilers.spoiler.indication($(this));

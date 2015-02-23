@@ -29,7 +29,7 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
     {
         // ---------------------- CHECK IS AJAX REQUEST ------------------------
         if ( !Yii::$app->getRequest()->isAjax ) {
-            return $this->redirect(['/translations']);
+            return $this->redirect(['/backend/translations/index']);
         }
 
         // ------------------------ SET JSON RESPONSE --------------------------
@@ -48,6 +48,34 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         // debug test ----------------------------------------------------------
         $response['status']  = 'success';
         $response['message'] = 'TODO clear cache...';
+        // ---------------------------------------------------------------------
+
+        return $response;
+    }
+
+    public function actionSave()
+    {
+        // ---------------------- CHECK IS AJAX REQUEST ------------------------
+        if ( !Yii::$app->getRequest()->isAjax ) {
+            return $this->redirect(['/backend/translations/index']);
+        }
+
+        // ----------------------- SET JSON RESPONSE ---------------------------
+        // @see https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
+        Yii::$app->getResponse()->format = \yii\web\Response::FORMAT_JSON;
+
+        // --------------------- SET DEFAULT RESPONSE --------------------------
+        $response = array(
+            'status'  => 'error',
+            'message' => Yii::t('backend', 'An unexpected error occured!'),
+        );
+
+        // -------------------- SAVE TRANSLATION BY ID -----------------------
+        // TODO
+
+        // debug test ----------------------------------------------------------
+        $response['status']   = 'success';
+        $response['message']  = 'TODO save translation...';
         // ---------------------------------------------------------------------
 
         return $response;
@@ -74,8 +102,8 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         // TODO
 
         // debug test ----------------------------------------------------------
-        $response['status']  = 'success';
-        $response['message'] = 'TODO delete translation...';
+        $response['status']   = 'success';
+        $response['message']  = 'TODO delete translation...';
         // ---------------------------------------------------------------------
 
         return $response;

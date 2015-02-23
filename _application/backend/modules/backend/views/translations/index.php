@@ -4,20 +4,21 @@
  * @var View $this
  */
 use common\components\grid\GridView;
-use common\components\grid\SerialColumn;
 use common\components\grid\ActionColumn;
 use common\components\grid\DataColumn;
 use common\models\search\SourceMessageSearch;
+use backend\assets\AppTranslateAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
-//use yii\widgets\Pjax;
 use yii\helpers\Url;
 
 $searchModel = SourceMessageSearch::getInstance();
 
 $this->title = Yii::t('backend', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
+
+AppTranslateAsset::register($this);
 ?>
 
 <div class="translations-index">
@@ -54,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a class="btn btn-success" href="<?php
                 echo Url::to(['/backend/translations/rescan']); ?>"><i class="fa fa-refresh"></i> <?php
                 echo Yii::t('backend', 'Rescan'); ?></a>
-            <a class="btn btn-warning btn-ajax"
+            <a class="btn btn-warning btn-ajax" action="translation-clear-cache"
                before-send-igrowl-title="<?php echo Yii::t('backend', 'Request sent'); ?>"
                before-send-igrowl-message="<?php echo Yii::t('backend', 'Please, wait...'); ?>"
                success-igrowl-title="<?php echo Yii::t('backend', 'Server Response'); ?>"
@@ -73,11 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'headerOptions' => [
-                    'class' => 'text-align-center',
                     'width' => '30',
-                ],
-                'footerOptions' => [
-                    'class' => 'text-align-center font-weight-bold th',
                 ],
                 'contentOptions' => [
                     'class' => 'text-align-center',
@@ -96,18 +93,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label' => '',
+                'class' => ActionColumn::className(),
+                'header' => '<i class="fa fa-copy"></i>',
+                'footer' => '<i class="fa fa-copy"></i>',
+                'template' => '{copy}',
                 'headerOptions' => [
-                    'class' => 'text-align-center',
                     'width' => '30',
                 ],
-                'contentOptions' => [
-                    'class' => 'text-align-center',
+                'buttons' => [
+                    'copy' => function ($url, $model, $key) {
+                        return Html::a('<i class="fa fa-arrow-right "></i>', '', [
+                            'class'     => 'btn btn-xs btn-default translation-copy-from-source',
+                            'title'     => Yii::t('common', 'Copy from source message'),
+                        ]);
+                    },
                 ],
-                'filter' => false,
-                'value' => function ($model, $key, $index, $widget) {
-                    return ' => ';
-                },
             ],
             [
                 'label' => Yii::t('backend', 'Message Translations'),
@@ -119,7 +119,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'category',
                 'headerOptions' => [
-                    'class' => 'text-align-center',
                     'width' => '150',
                 ],
                 'contentOptions' => [
@@ -134,7 +133,6 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'headerOptions' => [
-                    'class' => 'text-align-center',
                     'width' => '150',
                 ],
                 'contentOptions' => [
@@ -156,26 +154,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{save} {fullscreen} {delete}',
                 'buttons' => [
                     'save' => function ($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-download"></span> ' . Yii::t('common', 'Save'), $url, [
-                            'class'     => 'btn btn-xs btn-success',
-                            'title'     => Yii::t('common', 'Save'),
-                            'data-pjax' => '0',
+                        return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Yii::t('common', 'Save'), $url, [
+                            'class'                         => 'btn btn-xs btn-success btn-ajax',
+                            'action'                        => 'translation-save',
+                            'title'                         => Yii::t('common', 'Save'),
+                            'before-send-igrowl-title'      => Yii::t('backend', 'Request sent'),
+                            'before-send-igrowl-message'    => Yii::t('backend', 'Please, wait...'),
+                            'success-igrowl-title'          => Yii::t('backend', 'Server Response'),
+                            'success-igrowl-message'        => Yii::t('backend', 'Message successfully saved.'),
                         ]);
                     },
                     'fullscreen' => function ($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-fullscreen"></span>', '', [
-                            'class'     => 'btn btn-xs btn-default',
+                        return Html::a('<i class="fa fa-arrows-alt "></i>', '', [
+                            'class'     => 'btn btn-xs btn-default translation-fullscreen',
                             'title'     => Yii::t('common', 'Expand'),
-                            'data-pjax' => '0',
                         ]);
                     },
                     'delete' => function ($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                            'class'         => 'btn btn-xs btn-danger margin-left-10px',
-                            'title'         => Yii::t('common', 'Delete'),
-                            'data-confirm'  => Yii::t('common', 'Are you sure you want to delete this item?'),
-                            'data-method'   => 'post',
-                            'data-pjax'     => '0',
+                        return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
+                            'class'                         => 'btn btn-xs btn-danger btn-ajax margin-left-10px',
+                            'action'                        => 'translation-delete',
+                            'title'                         => Yii::t('common', 'Delete'),
+                            'data-confirm'                  => Yii::t('common', 'Are you sure you want to delete this item?'),
+                            'before-send-igrowl-title'      => Yii::t('backend', 'Request sent'),
+                            'before-send-igrowl-message'    => Yii::t('backend', 'Please, wait...'),
+                            'success-igrowl-title'          => Yii::t('backend', 'Server Response'),
+                            'success-igrowl-message'        => Yii::t('backend', 'Message successfully deleted.'),
                         ]);
                     },
                 ],
@@ -189,7 +193,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 'visible' => false,
             ],
         ],
-    ]);
-//    Pjax::end();
-    ?>
+    ]); ?>
 </div>

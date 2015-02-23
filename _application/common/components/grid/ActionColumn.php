@@ -10,18 +10,18 @@ class ActionColumn extends \yii\grid\ActionColumn
 {
     public function init()
     {
-        $this->header = Yii::t('common', 'Actions');
-        $this->footer = Yii::t('common', 'Actions');
-        $this->headerOptions = ArrayHelper::merge($this->headerOptions, [
+        $this->header = $this->header ?: Yii::t('common', 'Actions');
+        $this->footer = $this->footer ?: Yii::t('common', 'Actions');
+        $this->headerOptions = ArrayHelper::merge([
             'class' => 'text-align-center',
             'width' => '100',
-        ]);
-        $this->footerOptions = ArrayHelper::merge($this->footerOptions, [
+        ], $this->headerOptions);
+        $this->footerOptions = ArrayHelper::merge([
             'class' => 'text-align-center font-weight-bold th',
-        ]);
-        $this->contentOptions = ArrayHelper::merge($this->contentOptions, [
+        ], $this->footerOptions);
+        $this->contentOptions = ArrayHelper::merge([
             'class' => 'text-align-center nowrap',
-        ]);
+        ], $this->contentOptions);
 
         parent::init();
     }
