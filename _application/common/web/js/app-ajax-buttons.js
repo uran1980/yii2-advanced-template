@@ -23,72 +23,38 @@ var appAjaxButtons = appAjaxButtons || {};
                 delay       = 2500
             ;
 
-            if ( element.data('locked') === true ) {
+            if ( !url || element.data('locked') === true ) {
                 return false;
             }
 
-            if ( url ) {
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    beforeSend: function ( xhr, settings ) {
-                        element.data('locked', true);
-                        if ( iconClass ) {
-                            icon.attr('class', 'fa fa-spinner fa-pulse');
-                        }
-                        if ( element.attr('before-send-igrowl-message') ) {
-                            // show iGrowl popup message
-                            // @see http://catc.github.io/iGrowl/
-                            $.iGrowl.prototype.dismissAll('all');
-                            $.iGrowl({
-                                placement:  {
-                                    x: element.attr('placement-x') || 'center',
-                                    y: element.attr('placement-y') || 'top'
-                                },
-                                type:       'notice',
-                                delay:      delay * 10,
-                                animation:  true,
-                                animShow:   'fadeIn',
-                                animHide:   'fadeOut',
-                                title:      ':: ' + (element.attr('before-send-igrowl-title').toUpperCase() || 'REQUEST SENT') + ' .:',
-                                message:    element.attr('before-send-igrowl-message') || 'Please wait...'
-                            });
-                        }
-                    },
-                    success: function ( data ) {
-                        window.setTimeout(function () {
-                            $.iGrowl.prototype.dismissAll('all');
-                            window.setTimeout(function () {
-                                $.iGrowl({
-                                    placement:  {
-                                        x: element.attr('placement-x') || 'center',
-                                        y: element.attr('placement-y') || 'top'
-                                    },
-                                    type:       data.status || 'success',
-                                    delay:      delay,
-                                    animation:  true,
-                                    animShow:   'fadeIn',
-                                    animHide:   'fadeOut',
-                                    title:      ':: ' + (element.attr('success-igrowl-title').toUpperCase() || 'SERVER RESPONSE') + ' .:',
-                                    message:    element.attr('success-igrowl-message') || 'Success'
-                                });
-                                if ( iconClass ) {
-                                    icon.attr('class', iconClass);
-                                }
-                                window.setTimeout(function () {element.data('locked', false);}, delay * 2);
-                                // triger event
-                                $(document).trigger('ajaxButtonSubmit', {
-                                    element: element,
-                                    url: url,
-                                    action: element.attr('action'),
-                                    data: data
-                                });
-                            }, timeout);
-                        }, timeout);
-                    },
-                }).then(function () {                                           // doneCallbacks (@see http://api.jquery.com/deferred.then/)
-                    // dummy
-                }, function ( xhr, errorType, exception ) {                     // failCallacks
+            $.ajax({
+                type: 'POST',
+                url: url,
+                beforeSend: function ( xhr, settings ) {
+                    element.data('locked', true);
+                    if ( iconClass ) {
+                        icon.attr('class', 'fa fa-spinner fa-pulse');
+                    }
+                    if ( element.attr('before-send-igrowl-message') ) {
+                        // show iGrowl popup message
+                        // @see http://catc.github.io/iGrowl/
+                        $.iGrowl.prototype.dismissAll('all');
+                        $.iGrowl({
+                            placement:  {
+                                x: element.attr('placement-x') || 'center',
+                                y: element.attr('placement-y') || 'top'
+                            },
+                            type:       'notice',
+                            delay:      delay * 60,
+                            animation:  true,
+                            animShow:   'fadeIn',
+                            animHide:   'fadeOut',
+                            title:      ':: ' + (element.attr('before-send-igrowl-title') || 'REQUEST SENT') + ' .:',
+                            message:    element.attr('before-send-igrowl-message') || 'Please wait...'
+                        });
+                    }
+                },
+                success: function ( data ) {
                     window.setTimeout(function () {
                         $.iGrowl.prototype.dismissAll('all');
                         window.setTimeout(function () {
@@ -97,23 +63,54 @@ var appAjaxButtons = appAjaxButtons || {};
                                     x: element.attr('placement-x') || 'center',
                                     y: element.attr('placement-y') || 'top'
                                 },
-                                type:       'error',
-                                delay:      delay,
-//                                delay:      delay * 60,                         // test
+                                type:       data.status || 'success',
+                                delay:      (data.status !== 'success') ? delay * 60 : delay,
                                 animation:  true,
                                 animShow:   'fadeIn',
                                 animHide:   'fadeOut',
-                                title:      ':: SERVER ERROR .:',
-                                message:    xhr.responseText || 'Error'
+                                title:      ':: ' + (element.attr('success-igrowl-title') || 'SERVER RESPONSE') + ' .:',
+                                message:    data.message || element.attr('success-igrowl-message') || '...'
                             });
                             if ( iconClass ) {
                                 icon.attr('class', iconClass);
                             }
                             window.setTimeout(function () {element.data('locked', false);}, delay * 2);
+                            // triger event
+                            $(document).trigger('ajaxButtonSubmit', {
+                                element: element,
+                                url: url,
+                                action: element.attr('action'),
+                                data: data
+                            });
                         }, timeout);
                     }, timeout);
-                });
-            }
+                },
+            }).then(function () {                                               // doneCallbacks (@see http://api.jquery.com/deferred.then/)
+                // dummy
+            }, function ( xhr, errorType, exception ) {                         // failCallacks
+                window.setTimeout(function () {
+                    $.iGrowl.prototype.dismissAll('all');
+                    window.setTimeout(function () {
+                        $.iGrowl({
+                            placement:  {
+                                x: element.attr('placement-x') || 'center',
+                                y: element.attr('placement-y') || 'top'
+                            },
+                            type:       'error',
+                            delay:      delay * 60,
+                            animation:  true,
+                            animShow:   'fadeIn',
+                            animHide:   'fadeOut',
+                            title:      ':: SERVER ERROR .:',
+                            message:    xhr.responseText || 'Error'
+                        });
+                        if ( iconClass ) {
+                            icon.attr('class', iconClass);
+                        }
+                        window.setTimeout(function () {element.data('locked', false);}, delay * 2);
+                    }, timeout);
+                }, timeout);
+            });
         };
 
         /***********************************************************************

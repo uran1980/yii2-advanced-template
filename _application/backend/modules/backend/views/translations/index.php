@@ -19,6 +19,15 @@ $this->title = Yii::t('backend', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 
 AppTranslateAsset::register($this);
+
+//// debug info ------------------------------------------------------------------
+//common\helpers\AppDebug::dump(array(
+//    'route'         => Yii::$app->controller->getRoute(),
+//    'params'        => Yii::$app->request->getQueryParams(),
+//    'request get'   => Yii::$app->getRequest()->get(),
+//    'request post'  => Yii::$app->getRequest()->post(),
+//));
+//// -----------------------------------------------------------------------------
 ?>
 
 <div class="translations-index">
@@ -26,24 +35,36 @@ AppTranslateAsset::register($this);
         <div class="col-lg-12">
             <span class="pull-left btn-group">
                 <a class="btn btn-default <?php
-                    $route = ['/backend/translations/index'];
-                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
+                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_ALL],
+                    ]);
+                    $route = ArrayHelper::merge(['/backend/translations/index'], $params);
+                    echo SourceMessageSearch::isActiveTranslation([
+                        'url'       => $route,
+                        'current'   => SourceMessageSearch::STATUS_ALL,
+                    ]); ?>" href="<?php
                     echo Url::to($route); ?>"><?php
                     echo Yii::t('backend', 'All'); ?></a>
                 <a class="btn btn-default <?php
-                    $route = [
-                        '/backend/translations/index',
-                        $searchModel->formName() . '[status]' => SourceMessageSearch::STATUS_TRANSLATED,
-                    ];
-                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
+                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_TRANSLATED],
+                    ]);
+                    $route = ArrayHelper::merge(['/backend/translations/index'], $params);
+                    echo SourceMessageSearch::isActiveTranslation([
+                        'url'       => $route,
+                        'current'   => SourceMessageSearch::STATUS_TRANSLATED,
+                    ]); ?>" href="<?php
                     echo Url::to($route); ?>"><?php
                     echo Yii::t('backend', 'Translated'); ?></a>
                 <a class="btn btn-default <?php
-                    $route = [
-                        '/backend/translations/index',
-                        $searchModel->formName() . '[status]' => SourceMessageSearch::STATUS_NOT_TRANSLATED,
-                    ];
-                    echo SourceMessageSearch::isActiveTranslation(['url' => $route]); ?>" href="<?php
+                    $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
+                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_NOT_TRANSLATED],
+                    ]);
+                    $route = ArrayHelper::merge(['/backend/translations/index'], $params);
+                    echo SourceMessageSearch::isActiveTranslation([
+                        'url'       => $route,
+                        'current'   => SourceMessageSearch::STATUS_NOT_TRANSLATED,
+                    ]); ?>" href="<?php
                     echo Url::to($route); ?>"><?php
                     echo Yii::t('backend', 'Not Translated'); ?></a>
             </span>

@@ -12,6 +12,8 @@ use yii\helpers\Json;
 
 class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\SourceMessageSearch
 {
+    const STATUS_ALL = 0;
+
     /**
      * @var SourceMessageSearch
      */
@@ -75,11 +77,18 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
                     foreach ( $item['url'] as $name => $value ) {
                         if ( $params['SourceMessageSearch']['status'] == $value ) {
                             return ' active ';
+                        } elseif ( $name == 'SourceMessageSearch'
+                                   && isset($item['current'])
+                                   && $params['SourceMessageSearch']['status'] == $item['current'] )
+                        {
+                            return ' active ';
                         }
                     }
-                } else if ( empty($params['SourceMessageSearch']['status']) ) {
+                } elseif ( empty($params['SourceMessageSearch']['status']) ) {
                     return ' active ';
                 }
+            } elseif ( isset($item['current']) && $item['current'] == self::STATUS_ALL ) {
+                return ' active ';
             }
         }
 
