@@ -642,6 +642,9 @@ EOD;
      */
     public function stdout($string)
     {
+        if ( Yii::$app->id != 'app-console' )
+            return false;
+
         if ($this->isColorEnabled()) {
             $args = func_get_args();
             array_shift($args);

@@ -1,5 +1,6 @@
 <?php
 
+$lamguages = require(__DIR__ . '/languages.php');
 $config = [
     'projectName' => 'My Project',
 
@@ -73,7 +74,7 @@ $config = [
         'enableLanguageDetection'   => true,
 
         // List all supported languages here
-        'languages' => ['en', 'ru'],
+        'languages' => $lamguages,
     ],
 
     // ---------------------------- GII MODULE ---------------------------------
@@ -94,6 +95,7 @@ $config = [
     // @see vendor\yiisoft\yii2\web\AssetConverter.php
     'app.assetManager' => [
 //        'forceCopy' => YII_ENV_DEV,
+        'appendTimestamp' => true,
         'converter' => [
             'class' => common\assets\AppAssetConvertor::className(),
 //            'forceConvert' => YII_ENV_DEV,
@@ -143,7 +145,7 @@ $config = [
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md
     'app.i18nModule' => [
         'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
-        'languages' => ['en', 'ru'],
+        'languages' => $lamguages,
         'translations' => [
             '*' => [
                 'class'             => yii\i18n\DbMessageSource::className(),

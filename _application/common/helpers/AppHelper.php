@@ -4,6 +4,7 @@ namespace common\helpers;
 
 use Yii;
 use common\helpers\ClientIp;
+use yii\helpers\ArrayHelper;
 
 class AppHelper
 {
@@ -194,6 +195,54 @@ class AppHelper
     public static function getRequest()
     {
         return Yii::$app->getRequest();
+    }
+
+    /**
+     * Returns the request Params
+     *
+     * @param string $type - all|get|post (default all)
+     * @return array
+     */
+    public static function getRequestParams($type = 'all')
+    {
+        $request    = Yii::$app->getRequest();
+        $getParams  = $request->get();
+        $postParams = $request->post();
+
+        switch ($type) {
+            case 'get':
+                $params = $getParams;
+                break;
+
+            case 'post':
+                $params = $postParams;
+                break;
+
+            case 'all':
+            default:
+                $params = ArrayHelper::merge($getParams, $postParams);
+                break;
+        }
+
+        return $params;
+    }
+
+    /**
+     * Returns GET|POST parameter with a given name. If name isn't specified,
+     * returns an array of all Request parameters.
+     *
+     * @param string $name the parameter name
+     * @param mixed $defaultValue the default parameter value if the parameter does not exist.
+     * @return array|mixed
+     */
+    public static function getRequestParam($name = null, $defaultValue = null)
+    {
+        $params = self::getRequestParams();
+        if ( isset($params[$name]) ) {
+            return $params[$name];
+        } else {
+            return $defaultValue;
+        }
     }
 
     /**

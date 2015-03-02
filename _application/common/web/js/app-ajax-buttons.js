@@ -13,17 +13,17 @@ var appAjaxButtons = appAjaxButtons || {};
          *                              METHODS
          **********************************************************************/
         /**
-         * @param element (obj)
+         * @param $element (obj)
          */
-        appAjaxButtons.ajaxButtonSubmit = function ( element ) {
-            var url         = element.attr('href'),
-                icon        = element.find('i'),
-                iconClass   = icon.attr('class'),
+        appAjaxButtons.ajaxButtonSubmit = function ( $element ) {
+            var url         = $element.attr('href'),
+                $icon       = $element.find('i'),
+                iconClass   = $icon.attr('class'),
                 timeout     = 1200,
                 delay       = 2500
             ;
 
-            if ( !url || element.data('locked') === true ) {
+            if ( !url || $element.data('locked') === true ) {
                 return false;
             }
 
@@ -31,26 +31,26 @@ var appAjaxButtons = appAjaxButtons || {};
                 type: 'POST',
                 url: url,
                 beforeSend: function ( xhr, settings ) {
-                    element.data('locked', true);
+                    $element.data('locked', true);
                     if ( iconClass ) {
-                        icon.attr('class', 'fa fa-spinner fa-pulse');
+                        $icon.attr('class', 'fa fa-spinner fa-pulse');
                     }
-                    if ( element.attr('before-send-igrowl-message') ) {
+                    if ( $element.attr('before-send-igrowl-message') ) {
                         // show iGrowl popup message
                         // @see http://catc.github.io/iGrowl/
                         $.iGrowl.prototype.dismissAll('all');
                         $.iGrowl({
                             placement:  {
-                                x: element.attr('placement-x') || 'center',
-                                y: element.attr('placement-y') || 'top'
+                                x: $element.attr('placement-x') || 'center',
+                                y: $element.attr('placement-y') || 'top'
                             },
                             type:       'notice',
                             delay:      delay * 60,
                             animation:  true,
                             animShow:   'fadeIn',
                             animHide:   'fadeOut',
-                            title:      ':: ' + (element.attr('before-send-igrowl-title') || 'REQUEST SENT') + ' .:',
-                            message:    element.attr('before-send-igrowl-message') || 'Please wait...'
+                            title:      ':: ' + ($element.attr('before-send-igrowl-title') || 'REQUEST SENT') + ' .:',
+                            message:    $element.attr('before-send-igrowl-message') || 'Please wait...'
                         });
                     }
                 },
@@ -60,28 +60,30 @@ var appAjaxButtons = appAjaxButtons || {};
                         window.setTimeout(function () {
                             $.iGrowl({
                                 placement:  {
-                                    x: element.attr('placement-x') || 'center',
-                                    y: element.attr('placement-y') || 'top'
+                                    x: $element.attr('placement-x') || 'center',
+                                    y: $element.attr('placement-y') || 'top'
                                 },
                                 type:       data.status || 'success',
                                 delay:      (data.status !== 'success') ? delay * 60 : delay,
                                 animation:  true,
                                 animShow:   'fadeIn',
                                 animHide:   'fadeOut',
-                                title:      ':: ' + (element.attr('success-igrowl-title') || 'SERVER RESPONSE') + ' .:',
-                                message:    data.message || element.attr('success-igrowl-message') || '...'
+                                title:      ':: ' + ($element.attr('success-igrowl-title') || 'SERVER RESPONSE') + ' .:',
+                                message:    data.message || $element.attr('success-igrowl-message') || '...'
                             });
                             if ( iconClass ) {
-                                icon.attr('class', iconClass);
+                                $icon.attr('class', iconClass);
                             }
-                            window.setTimeout(function () {element.data('locked', false);}, delay * 2);
-                            // triger event
+                            window.setTimeout(function () {$element.data('locked', false);}, delay * 2);
+                            // triger event: "ajaxButtonSubmit" ----------------
                             $(document).trigger('ajaxButtonSubmit', {
-                                element: element,
+                                $element: $element,
+                                status: data.status,
                                 url: url,
-                                action: element.attr('action'),
+                                action: $element.attr('action'),
                                 data: data
                             });
+                            // -------------------------------------------------
                         }, timeout);
                     }, timeout);
                 },
@@ -93,8 +95,8 @@ var appAjaxButtons = appAjaxButtons || {};
                     window.setTimeout(function () {
                         $.iGrowl({
                             placement:  {
-                                x: element.attr('placement-x') || 'center',
-                                y: element.attr('placement-y') || 'top'
+                                x: $element.attr('placement-x') || 'center',
+                                y: $element.attr('placement-y') || 'top'
                             },
                             type:       'error',
                             delay:      delay * 60,
@@ -105,9 +107,9 @@ var appAjaxButtons = appAjaxButtons || {};
                             message:    xhr.responseText || 'Error'
                         });
                         if ( iconClass ) {
-                            icon.attr('class', iconClass);
+                            $icon.attr('class', iconClass);
                         }
-                        window.setTimeout(function () {element.data('locked', false);}, delay * 2);
+                        window.setTimeout(function () {$element.data('locked', false);}, delay * 2);
                     }, timeout);
                 }, timeout);
             });

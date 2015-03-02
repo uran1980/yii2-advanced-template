@@ -3,6 +3,7 @@
 namespace backend\modules\backend\controllers;
 
 use Yii;
+use yii\base\Model;
 use common\models\search\SourceMessageSearch;
 use common\helpers\AppHelper;
 
@@ -16,10 +17,10 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
     public function actionRescan()
     {
         // ------------------------- RESCAN MESSAGES ---------------------------
-        // TODO
+        SourceMessageSearch::getInstance()->extract('@common/config/messages.php');
 
         // ----------------------- SHOW RESCAN RESULT --------------------------
-        AppHelper::showSuccessMessage(Yii::t('backend', 'TODO show rescan result...'));
+        AppHelper::showSuccessMessage(Yii::t('backend', 'Rescan successfully completed.'));
 
         // ---------------------------- REDIRECT -------------------------------
         return $this->redirect(['/backend/translations/index']);
@@ -53,7 +54,7 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         return $response;
     }
 
-    public function actionSave()
+    public function actionSave($id)
     {
         // ---------------------- CHECK IS AJAX REQUEST ------------------------
         if ( !Yii::$app->getRequest()->isAjax ) {
@@ -70,13 +71,22 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
             'message' => Yii::t('backend', 'An unexpected error occured!'),
         );
 
-        // -------------------- SAVE TRANSLATION BY ID -----------------------
-        // TODO
+        // --------------------- SAVE TRANSLATION BY ID ------------------------
+        // @see vendor\zelenin\yii2-i18n-module\controllers\DefaultController::actionUpdate
+        $model = $this->findModel($id);
+        $model->initMessages();
 
-        // debug test ----------------------------------------------------------
-        $response['status']   = 'success';
-        $response['message']  = 'TODO save translation...';
-        // ---------------------------------------------------------------------
+        if ( Model::loadMultiple($model->messages, Yii::$app->getRequest()->post())
+             && Model::validateMultiple($model->messages) )
+        {
+            $model->saveMessages();
+
+            // TODO clear cache...
+
+            $response['status']  = 'success';
+            $response['message'] = 'Translation successfuly saved.';
+            $response['params']  = AppHelper::getRequestParams();
+        }
 
         return $response;
     }

@@ -42,7 +42,7 @@ class LanguageSwitcher extends ButtonDropdown
 
             $this->dropdown['items'] = $items;
 
-            parent::run();
+            echo parent::run();
         }
     }
 

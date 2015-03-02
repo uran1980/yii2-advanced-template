@@ -11,6 +11,7 @@ return [
     '/profile/<_a:(login|logout|signup|request-password-reset|reset-password)>' => 'profile/index/<_a>',
     '<_a:(login|logout|signup|request-password-reset|reset-password)>'          => 'profile/index/<_a>',
 
+    '<_m:[\w\-]+>/<_c:[\w\-]+>/<_a:[\w\-]+>/page/<page:\d+>'                    => '<_m>/<_c>/<_a>',
     '<_m:[\w\-]+>/<_c:[\w\-]+>/<_a:[\w\-]+>'                                    => '<_m>/<_c>/<_a>',
     '<_m:[\w\-]+>/<_c:[\w\-]+>/<id:\d+>'                                        => '<_m>/<_c>/view',
     '<_m:[\w\-]+>'                                                              => '<_m>/index/index',

@@ -19,15 +19,6 @@ $this->title = Yii::t('backend', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 
 AppTranslateAsset::register($this);
-
-//// debug info ------------------------------------------------------------------
-//common\helpers\AppDebug::dump(array(
-//    'route'         => Yii::$app->controller->getRoute(),
-//    'params'        => Yii::$app->request->getQueryParams(),
-//    'request get'   => Yii::$app->getRequest()->get(),
-//    'request post'  => Yii::$app->getRequest()->post(),
-//));
-//// -----------------------------------------------------------------------------
 ?>
 
 <div class="translations-index">
@@ -133,9 +124,18 @@ AppTranslateAsset::register($this);
             [
                 'label' => Yii::t('backend', 'Message Translations'),
                 'filter' => false,
+                'contentOptions' => [
+                    'class' => 'translation-tabs tabs-mini',
+                ],
                 'value' => function ($model, $key, $index, $widget) {
-                    return 'TODO';
+                    return $this->render('_message-tabs', [
+                        'model'     => $model,
+                        'key'       => $key,
+                        'index'     => $index,
+                        'widget'    => $widget,
+                    ]);
                 },
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'category',
@@ -176,7 +176,7 @@ AppTranslateAsset::register($this);
                 'buttons' => [
                     'save' => function ($url, $model, $key) {
                         return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Yii::t('common', 'Save'), $url, [
-                            'class'                         => 'btn btn-xs btn-success btn-ajax',
+                            'class'                         => 'btn btn-xs btn-success btn-translation-save',
                             'action'                        => 'translation-save',
                             'title'                         => Yii::t('common', 'Save'),
                             'before-send-igrowl-title'      => Yii::t('backend', 'Request sent'),
@@ -185,15 +185,9 @@ AppTranslateAsset::register($this);
                             'success-igrowl-message'        => Yii::t('backend', 'Message successfully saved.'),
                         ]);
                     },
-                    'fullscreen' => function ($url, $model, $key) {
-                        return Html::a('<i class="fa fa-arrows-alt "></i>', '', [
-                            'class'     => 'btn btn-xs btn-default translation-fullscreen',
-                            'title'     => Yii::t('common', 'Expand'),
-                        ]);
-                    },
                     'delete' => function ($url, $model, $key) {
                         return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
-                            'class'                         => 'btn btn-xs btn-danger btn-ajax margin-left-10px',
+                            'class'                         => 'btn btn-xs btn-danger btn-ajax',
                             'action'                        => 'translation-delete',
                             'title'                         => Yii::t('common', 'Delete'),
                             'data-confirm'                  => Yii::t('common', 'Are you sure you want to delete this item?'),

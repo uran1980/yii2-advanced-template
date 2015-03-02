@@ -46,7 +46,7 @@ use common\components\widgets\LanguageSwitcher;
             'linkOptions' => ['data-method' => 'post']
         ];
     }
-    if ( \Yii::$app->has('localeUrls') ) {
+    if ( Yii::$app->has('localeUrls') ) {
         echo '<div class="lang-switcher pull-right">' . LanguageSwitcher::widget() . '</div>';
     }
     echo Nav::widget([

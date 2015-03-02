@@ -22,6 +22,7 @@ class AppCommonAsset extends AssetBundle
 
         'rmrevin\yii\fontawesome\AssetBundle',                                  // @see https://github.com/rmrevin/yii2-fontawesome
         'common\assets\JqueryCookieAsset',
+        'common\assets\JqueryFormAsset',
         'common\assets\FancyboxAsset',
     ];
 }
