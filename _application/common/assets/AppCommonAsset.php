@@ -20,7 +20,7 @@ class AppCommonAsset extends AssetBundle
         'common\assets\AppAjaxButtonsAsset',
         'common\assets\AppIGrowlAsset',
 
-        'rmrevin\yii\fontawesome\AssetBundle',                                  // @see https://github.com/rmrevin/yii2-fontawesome
+        'rmrevin\yii\fontawesome\AssetBundle',
         'common\assets\JqueryCookieAsset',
         'common\assets\JqueryFormAsset',
         'common\assets\FancyboxAsset',

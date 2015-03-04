@@ -94,19 +94,6 @@ class LanguageSwitcher extends ButtonDropdown
         $pattern    = '#^/' . implode('|', $urls) . '/#i';
         $requestUri = preg_replace($pattern, '', $requestUri);
 
-//        // debug info ----------------------------------------------------------
-//        \common\components\log\AppLogger::info(array(
-//            '$languages'    => $languages,
-//            '$urls'         => $urls,
-//            '$pattern'      => $pattern,
-//            '$requestUri'   => $requestUri,
-//            '$requestUri'   => $requestUri,
-//            'route'         => Yii::$app->controller->route,
-//            'baseUrl'       => $request->baseUrl,
-//            'queryParams'   => $queryParams,
-//        ));
-//        // ---------------------------------------------------------------------
-
         return $requestUri;
     }
 
@@ -120,8 +107,12 @@ class LanguageSwitcher extends ButtonDropdown
     {
         if (self::$_labels === null) {
             self::$_labels = [
-                'en' => Yii::t('common', 'English'),
-                'ru' => Yii::t('common', 'Russian'),
+                'en' => 'English',
+                'fr' => 'Français',
+                'it' => 'Italiano',
+                'es' => 'Español',
+                'pt' => 'Português',
+                'ru' => 'Русский',
             ];
         }
 

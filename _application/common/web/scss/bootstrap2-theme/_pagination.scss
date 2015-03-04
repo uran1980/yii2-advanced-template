@@ -2,6 +2,7 @@
 // Pagination (multiple pages)
 // -----------------------------------------------------------------------------
 .pagination {
+    margin: 10px 0;
     > li > a,
     > li > span {
         @include btn-styles($btn-default-bg);

@@ -17,7 +17,7 @@ foreach ( Yii::$app->params['app.localeUrls']['languages'] as $lang ) {
             'rel'   => $lang,
             'dir'   => (in_array($lang, ['ar', 'fa']) ? 'rtl' : 'ltr'),
             'rows'  => 3,
-        ]),
+        ]) . Html::hiddenInput('categories[' . $lang . ']', $model->category),
         'active' => ($lang == Yii::$app->language) ? true : false,
     ];
 }
@@ -27,13 +27,3 @@ echo '<form method="POST" class="translation-save-form">' . Tabs::widget([
     'items' => $items,
 ]) . '</form>';
 
-//// debug info ------------------------------------------------------------------
-//\common\helpers\AppDebug::dump(array(
-////    'model'     => $model,
-//    'id'        => $model->id,
-//    'key'       => $key,
-//    'index'     => $index,
-////    'widget'    => $widget,
-//    'lang'      => Yii::$app->language,
-//));
-//// -----------------------------------------------------------------------------

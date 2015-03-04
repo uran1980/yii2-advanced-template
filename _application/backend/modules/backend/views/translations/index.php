@@ -6,7 +6,7 @@
 use common\components\grid\GridView;
 use common\components\grid\ActionColumn;
 use common\components\grid\DataColumn;
-use common\models\search\SourceMessageSearch;
+use common\modules\i18n\models\search\SourceMessageSearch;
 use backend\assets\AppTranslateAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -25,39 +25,24 @@ AppTranslateAsset::register($this);
     <div class="row">
         <div class="col-lg-12">
             <span class="pull-left btn-group">
+            <?php   foreach ( [
+                        SourceMessageSearch::STATUS_ALL             => Yii::t('backend', 'All'),
+                        SourceMessageSearch::STATUS_TRANSLATED      => Yii::t('backend', 'Translated'),
+                        SourceMessageSearch::STATUS_NOT_TRANSLATED  => Yii::t('backend', 'Not Translated'),
+                        SourceMessageSearch::STATUS_DELETED         => Yii::t('backend', 'Deleted'),
+                    ] as $status => $name ) { ?>
                 <a class="btn btn-default <?php
                     $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
-                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_ALL],
+                        $searchModel->formName() => ['status' => $status],
                     ]);
                     $route = ArrayHelper::merge(['/backend/translations/index'], $params);
                     echo SourceMessageSearch::isActiveTranslation([
                         'url'       => $route,
-                        'current'   => SourceMessageSearch::STATUS_ALL,
+                        'current'   => $status,
                     ]); ?>" href="<?php
                     echo Url::to($route); ?>"><?php
-                    echo Yii::t('backend', 'All'); ?></a>
-                <a class="btn btn-default <?php
-                    $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
-                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_TRANSLATED],
-                    ]);
-                    $route = ArrayHelper::merge(['/backend/translations/index'], $params);
-                    echo SourceMessageSearch::isActiveTranslation([
-                        'url'       => $route,
-                        'current'   => SourceMessageSearch::STATUS_TRANSLATED,
-                    ]); ?>" href="<?php
-                    echo Url::to($route); ?>"><?php
-                    echo Yii::t('backend', 'Translated'); ?></a>
-                <a class="btn btn-default <?php
-                    $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
-                        $searchModel->formName() => ['status' => SourceMessageSearch::STATUS_NOT_TRANSLATED],
-                    ]);
-                    $route = ArrayHelper::merge(['/backend/translations/index'], $params);
-                    echo SourceMessageSearch::isActiveTranslation([
-                        'url'       => $route,
-                        'current'   => SourceMessageSearch::STATUS_NOT_TRANSLATED,
-                    ]); ?>" href="<?php
-                    echo Url::to($route); ?>"><?php
-                    echo Yii::t('backend', 'Not Translated'); ?></a>
+                    echo $name; ?></a>
+            <?php } ?>
             </span>
         </div>
     </div>
@@ -68,13 +53,13 @@ AppTranslateAsset::register($this);
                 echo Url::to(['/backend/translations/rescan']); ?>"><i class="fa fa-refresh"></i> <?php
                 echo Yii::t('backend', 'Rescan'); ?></a>
             <a class="btn btn-warning btn-ajax" action="translation-clear-cache"
-               before-send-igrowl-title="<?php echo Yii::t('backend', 'Request sent'); ?>"
-               before-send-igrowl-message="<?php echo Yii::t('backend', 'Please, wait...'); ?>"
-               success-igrowl-title="<?php echo Yii::t('backend', 'Server Response'); ?>"
-               success-igrowl-message="<?php echo Yii::t('backend', 'Cache successfully cleared.'); ?>"
+               before-send-title="<?php echo Yii::t('backend', 'Request sent'); ?>"
+               before-send-message="<?php echo Yii::t('backend', 'Please, wait...'); ?>"
+               success-title="<?php echo Yii::t('backend', 'Server Response'); ?>"
+               success-message="<?php echo Yii::t('backend', 'Cache successfully cleared.'); ?>"
                href="<?php
-               echo Url::to(['/backend/translations/clear-cache']); ?>"><i class="fa fa-recycle"></i> <?php
-               echo Yii::t('backend', 'Clear Cache'); ?></a>
+                    echo Url::to(['/backend/translations/clear-cache']); ?>"><i class="fa fa-recycle"></i> <?php
+                    echo Yii::t('backend', 'Clear Cache'); ?></a>
         </span>
     </h2>
     <?php
@@ -98,14 +83,21 @@ AppTranslateAsset::register($this);
             ],
             [
                 'attribute' => 'message',
-                'label' => Yii::t('frontend-site', 'Sourse Messages'),
                 'format' => 'raw',
-                'value' => function ($model, $key, $index, $widget) {
-                    return Html::a($model->message, ['update', 'id' => $model->id], ['data' => ['pjax' => 0]]);
+                'contentOptions' => [
+                    'class' => 'source-message',
+                ],
+                'value' => function ($model, $key, $index, $column) {
+                    return $this->render('_source-message-content', [
+                        'model'     => $model,
+                        'key'       => $key,
+                        'index'     => $index,
+                        'column'    => $column,
+                    ]);
                 },
             ],
             [
-                'class' => ActionColumn::className(),
+                'class'  => ActionColumn::className(),
                 'header' => '<i class="fa fa-copy"></i>',
                 'footer' => '<i class="fa fa-copy"></i>',
                 'template' => '{copy}',
@@ -115,24 +107,27 @@ AppTranslateAsset::register($this);
                 'buttons' => [
                     'copy' => function ($url, $model, $key) {
                         return Html::a('<i class="fa fa-arrow-right "></i>', '', [
-                            'class'     => 'btn btn-xs btn-default translation-copy-from-source',
-                            'title'     => Yii::t('common', 'Copy from source message'),
+                            'class' => 'btn btn-xs btn-default btn-translation-copy-from-source',
+                            'title' => Yii::t('common', 'Copy from source message'),
                         ]);
                     },
                 ],
             ],
             [
-                'label' => Yii::t('backend', 'Message Translations'),
-                'filter' => false,
+                'attribute' => 'translation',
+//                'label' => Yii::t('backend', 'Message Translations'),
+                'headerOptions' => [
+                    'width' => '400',
+                ],
                 'contentOptions' => [
                     'class' => 'translation-tabs tabs-mini',
                 ],
-                'value' => function ($model, $key, $index, $widget) {
+                'value' => function ($model, $key, $index, $column) {
                     return $this->render('_message-tabs', [
                         'model'     => $model,
                         'key'       => $key,
                         'index'     => $index,
-                        'widget'    => $widget,
+                        'column'    => $column,
                     ]);
                 },
                 'format' => 'raw',
@@ -159,9 +154,7 @@ AppTranslateAsset::register($this);
                 'contentOptions' => [
                     'class' => 'text-align-center',
                 ],
-                'value' => function ($model, $key, $index, $widget) {
-                    return '';
-                },
+                'value' => '',
                 'filter' => Html::dropDownList(
                     $searchModel->formName() . '[status]',
                     $searchModel->status,
@@ -176,26 +169,39 @@ AppTranslateAsset::register($this);
                 'buttons' => [
                     'save' => function ($url, $model, $key) {
                         return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Yii::t('common', 'Save'), $url, [
-                            'class'                         => 'btn btn-xs btn-success btn-translation-save',
-                            'action'                        => 'translation-save',
-                            'title'                         => Yii::t('common', 'Save'),
-                            'before-send-igrowl-title'      => Yii::t('backend', 'Request sent'),
-                            'before-send-igrowl-message'    => Yii::t('backend', 'Please, wait...'),
-                            'success-igrowl-title'          => Yii::t('backend', 'Server Response'),
-                            'success-igrowl-message'        => Yii::t('backend', 'Message successfully saved.'),
+                            'class'                 => 'btn btn-xs btn-success btn-translation-save',
+                            'action'                => 'translation-save',
+                            'title'                 => Yii::t('common', 'Save'),
+                            'before-send-title'     => Yii::t('backend', 'Request sent'),
+                            'before-send-message'   => Yii::t('backend', 'Please, wait...'),
+                            'success-title'         => Yii::t('backend', 'Server Response'),
+                            'success-message'       => Yii::t('backend', 'Message successfully saved.'),
                         ]);
                     },
                     'delete' => function ($url, $model, $key) {
-                        return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
-                            'class'                         => 'btn btn-xs btn-danger btn-ajax',
-                            'action'                        => 'translation-delete',
-                            'title'                         => Yii::t('common', 'Delete'),
-                            'data-confirm'                  => Yii::t('common', 'Are you sure you want to delete this item?'),
-                            'before-send-igrowl-title'      => Yii::t('backend', 'Request sent'),
-                            'before-send-igrowl-message'    => Yii::t('backend', 'Please, wait...'),
-                            'success-igrowl-title'          => Yii::t('backend', 'Server Response'),
-                            'success-igrowl-message'        => Yii::t('backend', 'Message successfully deleted.'),
-                        ]);
+                        if ( strstr($model->message, '@@') ) {
+                            return Html::a('<i class="glyphicon glyphicon-refresh"></i>', str_replace('delete', 'restore', $url), [
+                                'class'                 => 'btn btn-xs btn-info btn-ajax',
+                                'action'                => 'translation-restore',
+                                'title'                 => Yii::t('common', 'Restore'),
+                                'data-confirm'          => Yii::t('common', 'Are you sure you want to restore this item?'),
+                                'before-send-title'     => Yii::t('backend', 'Request sent'),
+                                'before-send-message'   => Yii::t('backend', 'Please, wait...'),
+                                'success-title'         => Yii::t('backend', 'Server Response'),
+                                'success-message'       => Yii::t('backend', 'Message successfully restored.'),
+                            ]);
+                        } else {
+                            return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
+                                'class'                 => 'btn btn-xs btn-danger btn-ajax',
+                                'action'                => 'translation-delete',
+                                'title'                 => Yii::t('common', 'Delete'),
+                                'data-confirm'          => Yii::t('common', 'Are you sure you want to delete this item?'),
+                                'before-send-title'     => Yii::t('backend', 'Request sent'),
+                                'before-send-message'   => Yii::t('backend', 'Please, wait...'),
+                                'success-title'         => Yii::t('backend', 'Server Response'),
+                                'success-message'       => Yii::t('backend', 'Message successfully deleted.'),
+                            ]);
+                        }
                     },
                 ],
             ],

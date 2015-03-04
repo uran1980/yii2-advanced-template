@@ -2,7 +2,7 @@
 
 namespace console\controllers;
 
-use common\models\search\SourceMessageSearch;
+use common\modules\i18n\models\search\SourceMessageSearch;
 
 class MessageController extends \yii\console\controllers\MessageController
 {

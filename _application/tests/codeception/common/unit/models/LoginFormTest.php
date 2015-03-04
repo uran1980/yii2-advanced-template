@@ -22,7 +22,7 @@ class LoginFormTest extends DbTestCase
             'components' => [
                 'user' => [
                     'class' => 'yii\web\User',
-                    'identityClass' => 'common\models\UserIdentity',
+                    'identityClass' => 'common\models\identity\UserIdentity',
                 ],
             ],
         ]);

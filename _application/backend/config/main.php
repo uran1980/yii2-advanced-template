@@ -51,7 +51,7 @@ $config = [
         'view' => $params['app.view'],
         'user' => [
             'class'             => yii\web\User::className(),
-            'identityClass'     => common\models\UserIdentity::className(),
+            'identityClass'     => common\models\identity\UserIdentity::className(),
             'enableAutoLogin'   => true,
             'loginUrl'          => '/backend/login',
         ],

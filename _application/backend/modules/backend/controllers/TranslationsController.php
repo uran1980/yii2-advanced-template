@@ -4,7 +4,7 @@ namespace backend\modules\backend\controllers;
 
 use Yii;
 use yii\base\Model;
-use common\models\search\SourceMessageSearch;
+use common\modules\i18n\models\search\SourceMessageSearch;
 use common\helpers\AppHelper;
 
 class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\DefaultController
@@ -23,7 +23,11 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         AppHelper::showSuccessMessage(Yii::t('backend', 'Rescan successfully completed.'));
 
         // ---------------------------- REDIRECT -------------------------------
-        return $this->redirect(['/backend/translations/index']);
+        if ( ($referrer = Yii::$app->getRequest()->referrer) ) {
+            return $this->redirect($referrer);
+        } else {
+            return $this->redirect(['/backend/translations/index']);
+        }
     }
 
     public function actionClearCache()
@@ -33,7 +37,7 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
             return $this->redirect(['/backend/translations/index']);
         }
 
-        // ------------------------ SET JSON RESPONSE --------------------------
+        // ------------------ SET JSON FORMAT FOR RESPONSE ---------------------
         // @see https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
         Yii::$app->getResponse()->format = \yii\web\Response::FORMAT_JSON;
 
@@ -44,12 +48,10 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         );
 
         // -------------------------- CLEAR CACHE ------------------------------
-        // TODO
-
-        // debug test ----------------------------------------------------------
-        $response['status']  = 'success';
-        $response['message'] = 'TODO clear cache...';
-        // ---------------------------------------------------------------------
+        if ( SourceMessageSearch::cacheFlush() ) {
+            $response['status']  = 'success';
+            $response['message'] = Yii::t('backend', 'Translations cache successfully cleared.');
+        }
 
         return $response;
     }
@@ -61,7 +63,7 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
             return $this->redirect(['/backend/translations/index']);
         }
 
-        // ----------------------- SET JSON RESPONSE ---------------------------
+        // ------------------ SET JSON FORMAT FOR RESPONSE ---------------------
         // @see https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
         Yii::$app->getResponse()->format = \yii\web\Response::FORMAT_JSON;
 
@@ -81,7 +83,16 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         {
             $model->saveMessages();
 
-            // TODO clear cache...
+            // clear translation cache
+            if ( ($categories = AppHelper::getRequestParam('categories')) ) {
+                foreach ( $categories as $language => $category ) {
+                    Yii::$app->cache->delete([
+                        'yii\i18n\DbMessageSource',
+                        $category,
+                        $language,
+                    ]);
+                }
+            }
 
             $response['status']  = 'success';
             $response['message'] = 'Translation successfuly saved.';
@@ -91,14 +102,14 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         return $response;
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
         // ---------------------- CHECK IS AJAX REQUEST ------------------------
         if ( !Yii::$app->getRequest()->isAjax ) {
             return $this->redirect(['/translations']);
         }
 
-        // ----------------------- SET JSON RESPONSE ---------------------------
+        // ------------------ SET JSON FORMAT FOR RESPONSE ---------------------
         // @see https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
         Yii::$app->getResponse()->format = \yii\web\Response::FORMAT_JSON;
 
@@ -109,12 +120,60 @@ class TranslationsController extends \Zelenin\yii\modules\I18n\controllers\Defau
         );
 
         // -------------------- DELETE TRANSLATION BY ID -----------------------
-        // TODO
+        $model = $this->findModel($id);
+        $model->message = '@@' . $model->message . '@@';
+        if ( $model->save() ) {
+            // clear cache
+            foreach ( Yii::$app->i18n->languages as $language ) {
+                Yii::$app->cache->delete([
+                    'yii\i18n\DbMessageSource',
+                    $model->category,
+                    $language,
+                ]);
+            }
 
-        // debug test ----------------------------------------------------------
-        $response['status']   = 'success';
-        $response['message']  = 'TODO delete translation...';
-        // ---------------------------------------------------------------------
+            // set response
+            $response['status']   = 'success';
+            $response['message']  = 'Translation successfully deleted.';
+        }
+
+        return $response;
+    }
+
+    public function actionRestore($id)
+    {
+        // ---------------------- CHECK IS AJAX REQUEST ------------------------
+        if ( !Yii::$app->getRequest()->isAjax ) {
+            return $this->redirect(['/translations']);
+        }
+
+        // ------------------ SET JSON FORMAT FOR RESPONSE ---------------------
+        // @see https://github.com/samdark/yii2-cookbook/blob/master/book/response-formats.md
+        Yii::$app->getResponse()->format = \yii\web\Response::FORMAT_JSON;
+
+        // --------------------- SET DEFAULT RESPONSE --------------------------
+        $response = array(
+            'status'  => 'error',
+            'message' => Yii::t('backend', 'An unexpected error occured!'),
+        );
+
+        // -------------------- RESTORE TRANSLATION BY ID ----------------------
+        $model = $this->findModel($id);
+        $model->message = trim($model->message, '@@');
+        if ( $model->save() ) {
+            // clear cache
+            foreach ( Yii::$app->i18n->languages as $language ) {
+                Yii::$app->cache->delete([
+                    'yii\i18n\DbMessageSource',
+                    $model->category,
+                    $language,
+                ]);
+            }
+
+            // set response
+            $response['status']   = 'success';
+            $response['message']  = 'Translation successfully restored.';
+        }
 
         return $response;
     }

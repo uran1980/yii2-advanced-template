@@ -35,7 +35,7 @@ var appTranslate = appTranslate || {};
                     if ( iconClass ) {
                         $icon.attr('class', 'fa fa-spinner fa-pulse');
                     }
-                    if ( $element.attr('before-send-igrowl-message') ) {
+                    if ( $element.attr('before-send-message') ) {
                         // show iGrowl popup message
                         // @see http://catc.github.io/iGrowl/
                         $.iGrowl.prototype.dismissAll('all');
@@ -49,8 +49,8 @@ var appTranslate = appTranslate || {};
                             animation:  true,
                             animShow:   'fadeIn',
                             animHide:   'fadeOut',
-                            title:      ':: ' + ($element.attr('before-send-igrowl-title') || 'REQUEST SENT') + ' .:',
-                            message:    $element.attr('before-send-igrowl-message') || 'Please wait...'
+                            title:      ':: ' + ($element.attr('before-send-title') || 'REQUEST SENT') + ' .:',
+                            message:    $element.attr('before-send-message') || 'Please wait...'
                         });
                     }
                 },
@@ -63,13 +63,13 @@ var appTranslate = appTranslate || {};
                                     x: $element.attr('placement-x') || 'center',
                                     y: $element.attr('placement-y') || 'top'
                                 },
-                                type:       response.status || 'success',
+                                type:       response.status || 'error',
                                 delay:      (response.status !== 'success') ? delay * 60 : delay,
                                 animation:  true,
                                 animShow:   'fadeIn',
                                 animHide:   'fadeOut',
-                                title:      ':: ' + ($element.attr('success-igrowl-title') || 'SERVER RESPONSE') + ' .:',
-                                message:    response.message || $element.attr('success-igrowl-message') || '...'
+                                title:      ':: ' + ($element.attr('success-title') || 'SERVER RESPONSE') + ' .:',
+                                message:    response.message || $element.attr('success-message') || '...'
                             });
                             if ( iconClass ) {
                                 $icon.attr('class', iconClass);
@@ -129,6 +129,18 @@ var appTranslate = appTranslate || {};
         };
 
         /**
+         * @param data (object)
+         */
+        appTranslate.restore = function (data) {
+            var $element = data.$element,
+                $row     = $element.closest('tr')
+            ;
+            if ( data.status === 'success' ) {
+                $row.addClass('success').fadeOut('slow');
+            }
+        };
+
+        /**
          * set lang direaction
          *
          * @var $elements (obj)
@@ -154,29 +166,14 @@ var appTranslate = appTranslate || {};
         /**
          * @param $element (object)
          */
-        appTranslate.fullScreen = function ($element) {
-            // TODO
-
-            // debug info ------------------------------------------------------
-            try{console.debug({
-                 TODO: 'translations fullScreen...',
-                 element: $element
-            });}catch(ex){}
-            // -----------------------------------------------------------------
-        };
-
-        /**
-         * @param $element (object)
-         */
         appTranslate.copy = function ($element) {
-            // TODO
-
-            // debug info ------------------------------------------------------
-            try{console.debug({
-                 TODO: 'copy translation from source message...',
-                 element: $element
-            });}catch(ex){}
-            // -----------------------------------------------------------------
+            var $row            = $element.closest('tr'),
+                $textarea       = $row.find('.tab-pane.active textarea'),
+                sourceMessage   = $row.find('.source-message .source-message-content').text()
+            ;
+            if ( sourceMessage ) {
+                $textarea.val(sourceMessage.replace(/@@/g, '')).focus();
+            }
         };
 
         /***********************************************************************
@@ -191,12 +188,11 @@ var appTranslate = appTranslate || {};
                 if ( data.action === 'translation-delete' ) {
                     appTranslate.delete(data);
                 }
+                if ( data.action === 'translation-restore' ) {
+                    appTranslate.restore(data);
+                }
             });
-            $('body').delegate('.translation-fullscreen', 'click', function () {
-                appTranslate.fullScreen($(this));
-                return false;
-            });
-            $('body').delegate('.translation-copy-from-source', 'click', function () {
+            $('.btn-translation-copy-from-source').on('click', function () {
                 appTranslate.copy($(this));
                 return false;
             });

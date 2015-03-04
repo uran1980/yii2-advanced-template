@@ -10,6 +10,7 @@ Yii::setAlias('@themes', Yii::$app->view->theme->baseUrl);
 
 class AppAsset extends AssetBundle
 {
+    // @see vendor\yiisoft\yii2\base\Theme.php
     public $basePath = '@webroot';
     public $baseUrl  = '@themes';
     public $css = [

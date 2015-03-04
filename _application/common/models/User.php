@@ -5,6 +5,7 @@ namespace common\models;
 use common\rbac\models\Role;
 use nenad\passwordStrength\StrengthValidator;
 use yii\behaviors\TimestampBehavior;
+use common\models\identity\UserIdentity;
 use Yii;
 
 /**

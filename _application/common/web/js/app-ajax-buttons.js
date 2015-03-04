@@ -17,6 +17,7 @@ var appAjaxButtons = appAjaxButtons || {};
          */
         appAjaxButtons.ajaxButtonSubmit = function ( $element ) {
             var url         = $element.attr('href'),
+                postData    = $element.attr('data') || '',
                 $icon       = $element.find('i'),
                 iconClass   = $icon.attr('class'),
                 timeout     = 1200,
@@ -29,13 +30,14 @@ var appAjaxButtons = appAjaxButtons || {};
 
             $.ajax({
                 type: 'POST',
+                data: postData,
                 url: url,
                 beforeSend: function ( xhr, settings ) {
                     $element.data('locked', true);
                     if ( iconClass ) {
                         $icon.attr('class', 'fa fa-spinner fa-pulse');
                     }
-                    if ( $element.attr('before-send-igrowl-message') ) {
+                    if ( $element.attr('before-send-message') ) {
                         // show iGrowl popup message
                         // @see http://catc.github.io/iGrowl/
                         $.iGrowl.prototype.dismissAll('all');
@@ -49,8 +51,8 @@ var appAjaxButtons = appAjaxButtons || {};
                             animation:  true,
                             animShow:   'fadeIn',
                             animHide:   'fadeOut',
-                            title:      ':: ' + ($element.attr('before-send-igrowl-title') || 'REQUEST SENT') + ' .:',
-                            message:    $element.attr('before-send-igrowl-message') || 'Please wait...'
+                            title:      ':: ' + ($element.attr('before-send-title') || 'REQUEST SENT') + ' .:',
+                            message:    $element.attr('before-send-message') || 'Please wait...'
                         });
                     }
                 },
@@ -68,8 +70,8 @@ var appAjaxButtons = appAjaxButtons || {};
                                 animation:  true,
                                 animShow:   'fadeIn',
                                 animHide:   'fadeOut',
-                                title:      ':: ' + ($element.attr('success-igrowl-title') || 'SERVER RESPONSE') + ' .:',
-                                message:    data.message || $element.attr('success-igrowl-message') || '...'
+                                title:      ':: ' + ($element.attr('success-title') || 'SERVER RESPONSE') + ' .:',
+                                message:    data.message || $element.attr('success-message') || '...'
                             });
                             if ( iconClass ) {
                                 $icon.attr('class', iconClass);

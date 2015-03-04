@@ -24,7 +24,7 @@ $config = [
         ],
         'user' => [
             'class'             => yii\web\User::className(),
-            'identityClass'     => common\models\UserIdentity::className(),
+            'identityClass'     => common\models\identity\UserIdentity::className(),
             'enableAutoLogin'   => true,
             'loginUrl'          => '/login',
         ],

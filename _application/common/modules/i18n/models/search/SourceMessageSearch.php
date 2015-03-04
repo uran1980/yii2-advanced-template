@@ -1,18 +1,26 @@
 <?php
 
-namespace common\models\search;
+namespace common\modules\i18n\models\search;
 
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\console\Exception;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
 use yii\i18n\GettextPoFile;
 use yii\helpers\Json;
+use common\modules\i18n\models\SourceMessage;
 
-class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\SourceMessageSearch
+class SourceMessageSearch extends SourceMessage
 {
-    const STATUS_ALL = 0;
+    const STATUS_TRANSLATED     = 'translated';
+    const STATUS_NOT_TRANSLATED = 'not-translated';
+    const STATUS_ALL            = 'all';
+    const STATUS_DELETED        = 'deleted';
+
+    public $status;
 
     /**
      * @var SourceMessageSearch
@@ -50,6 +58,141 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
             self::$_instance = new self();
 
         return self::$_instance;
+    }
+
+    /**
+     * Returns the validation rules for attributes.
+     *
+     * Validation rules are used by [[validate()]] to check if attribute values are valid.
+     * Child classes may override this method to declare different validation rules.
+     *
+     * Each rule is an array with the following structure:
+     *
+     * ~~~
+     * [
+     *     ['attribute1', 'attribute2'],
+     *     'validator type',
+     *     'on' => ['scenario1', 'scenario2'],
+     *     ...other parameters...
+     * ]
+     * ~~~
+     *
+     * where
+     *
+     *  - attribute list: required, specifies the attributes array to be validated, for single attribute you can pass string;
+     *  - validator type: required, specifies the validator to be used. It can be a built-in validator name,
+     *    a method name of the model class, an anonymous function, or a validator class name.
+     *  - on: optional, specifies the [[scenario|scenarios]] array when the validation
+     *    rule can be applied. If this option is not set, the rule will apply to all scenarios.
+     *  - additional name-value pairs can be specified to initialize the corresponding validator properties.
+     *    Please refer to individual validator class API for possible properties.
+     *
+     * A validator can be either an object of a class extending [[Validator]], or a model class method
+     * (called *inline validator*) that has the following signature:
+     *
+     * ~~~
+     * // $params refers to validation parameters given in the rule
+     * function validatorName($attribute, $params)
+     * ~~~
+     *
+     * In the above `$attribute` refers to currently validated attribute name while `$params` contains an array of
+     * validator configuration options such as `max` in case of `string` validator. Currently validate attribute value
+     * can be accessed as `$this->[$attribute]`.
+     *
+     * Yii also provides a set of [[Validator::builtInValidators|built-in validators]].
+     * They each has an alias name which can be used when specifying a validation rule.
+     *
+     * Below are some examples:
+     *
+     * ~~~
+     * [
+     *     // built-in "required" validator
+     *     [['username', 'password'], 'required'],
+     *     // built-in "string" validator customized with "min" and "max" properties
+     *     ['username', 'string', 'min' => 3, 'max' => 12],
+     *     // built-in "compare" validator that is used in "register" scenario only
+     *     ['password', 'compare', 'compareAttribute' => 'password2', 'on' => 'register'],
+     *     // an inline validator defined via the "authenticate()" method in the model class
+     *     ['password', 'authenticate', 'on' => 'login'],
+     *     // a validator of class "DateRangeValidator"
+     *     ['dateRange', 'DateRangeValidator'],
+     * ];
+     * ~~~
+     *
+     * Note, in order to inherit rules defined in the parent class, a child class needs to
+     * merge the parent rules with child rules using functions such as `array_merge()`.
+     *
+     * @return array validation rules
+     * @see scenarios()
+     */
+    public function rules()
+    {
+        return [
+            ['category', 'safe'],
+            ['message', 'safe'],
+            ['status', 'safe'],
+//            // TODO filter with relation table
+//            // @see http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/
+//            ['translation', 'safe'],
+
+        ];
+    }
+
+    /**
+     * @param array|null $params
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = SourceMessage::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        // check and populate params
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+
+        if ($this->status == static::STATUS_TRANSLATED) {
+            $query->translated();
+        }
+        if ($this->status == static::STATUS_NOT_TRANSLATED) {
+            $query->notTranslated();
+        }
+        if ( $this->status == static::STATUS_DELETED ) {
+            $query->deleted();
+        }
+
+        $query
+            ->andFilterWhere(['like', 'category', $this->category])
+            ->andFilterWhere(['like', 'message', $this->message])
+            ->andFilterWhere(['like', 'translation', $this->translation])
+        ;
+
+//        // debug info ----------------------------------------------------------
+//        \common\helpers\AppDebug::dump(array(
+//            'sql' => (new \yii\db\mysql\QueryBuilder(Yii::$app->db))->build($query),
+//        ));
+//        // ---------------------------------------------------------------------
+
+        return $dataProvider;
+    }
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public static function getStatus($id = null)
+    {
+        $statuses = [
+            self::STATUS_TRANSLATED => Yii::t('common', 'Translated'),
+            self::STATUS_NOT_TRANSLATED => Yii::t('common', 'Not translated'),
+        ];
+        if ($id !== null) {
+            return ArrayHelper::getValue($statuses, $id, null);
+        }
+        return $statuses;
     }
 
     /**
@@ -107,6 +250,26 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
             'status'    => Yii::t('common', 'Translation status'),
             'location'  => Yii::t('common', 'Location'),
         ];
+    }
+
+    /**
+     * Deletes all translations values from cache.
+     *
+     * @return boolean whether the flush operation was successful.
+     */
+    public static function cacheFlush()
+    {
+        foreach ( self::getCategories() as $category ) {
+            foreach ( Yii::$app->i18n->languages as $language ) {
+                Yii::$app->cache->delete([
+                    'yii\i18n\DbMessageSource',
+                    $category,
+                    $language,
+                ]);
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -326,10 +489,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
 
         $subject  = file_get_contents($fileName);
         $messages = [];
-        if (!is_array($translator)) {
-            $translator = [$translator];
-        }
-        foreach ($translator as $currentTranslator) {
+        foreach ((array)$translator as $currentTranslator) {
             $translatorTokens = token_get_all('<?php ' . $currentTranslator);
             array_shift($translatorTokens);
 
@@ -463,7 +623,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
             $merged = [];
             $untranslated = [];
             foreach ($messages as $message) {
-                if (array_key_exists($message, $existingMessages) && strlen($existingMessages[$message]) > 0) {
+                if (array_key_exists($message, $existingMessages) && $existingMessages[$message] !== '') {
                     $merged[$message] = $existingMessages[$message];
                 } else {
                     $untranslated[] = $message;
@@ -477,7 +637,7 @@ class SourceMessageSearch extends \Zelenin\yii\modules\I18n\models\search\Source
             }
             ksort($existingMessages);
             foreach ($existingMessages as $message => $translation) {
-                if (!isset($merged[$message]) && !isset($todo[$message]) && !$removeUnused) {
+                if (!$removeUnused && !isset($merged[$message]) && !isset($todo[$message])) {
                     if (!empty($translation) && strncmp($translation, '@@', 2) === 0 && substr_compare($translation, '@@', -2, 2) === 0) {
                         $todo[$message] = $translation;
                     } else {
@@ -574,7 +734,7 @@ EOD;
 
                 // merge existing message translations with new message translations
                 foreach ($msgs as $message) {
-                    if (array_key_exists($message, $existingMessages) && strlen($existingMessages[$message]) > 0) {
+                    if (array_key_exists($message, $existingMessages) && $existingMessages[$message] !== '') {
                         $merged[$category . chr(4) . $message] = $existingMessages[$message];
                     } else {
                         $notTranslatedYet[] = $message;
@@ -590,7 +750,7 @@ EOD;
 
                 // add obsolete unused messages
                 foreach ($existingMessages as $message => $translation) {
-                    if (!isset($merged[$category . chr(4) . $message]) && !isset($todos[$category . chr(4) . $message]) && !$removeUnused) {
+                    if (!$removeUnused && !isset($merged[$category . chr(4) . $message]) && !isset($todos[$category . chr(4) . $message])) {
                         if (!empty($translation) && substr($translation, 0, 2) === '@@' && substr($translation, -2) === '@@') {
                             $todos[$category . chr(4) . $message] = $translation;
                         } else {

@@ -1,6 +1,6 @@
 <?php
 
-$lamguages = require(__DIR__ . '/languages.php');
+$languages = require(__DIR__ . '/languages.php');
 $config = [
     'projectName' => 'My Project',
 
@@ -74,7 +74,7 @@ $config = [
         'enableLanguageDetection'   => true,
 
         // List all supported languages here
-        'languages' => $lamguages,
+        'languages' => $languages,
     ],
 
     // ---------------------------- GII MODULE ---------------------------------
@@ -88,6 +88,9 @@ $config = [
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/caching.md
     'app.fileCache' => [
         'class' => yii\caching\FileCache::className(),
+    ],
+    'app.redisCache' => [
+        // TODO
     ],
 
     // ------------------- ASSET MANAGER COMPONENT -----------------------------
@@ -145,7 +148,7 @@ $config = [
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md
     'app.i18nModule' => [
         'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
-        'languages' => $lamguages,
+        'languages' => $languages,
         'translations' => [
             '*' => [
                 'class'             => yii\i18n\DbMessageSource::className(),

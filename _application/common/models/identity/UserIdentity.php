@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\models\identity;
 
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -49,7 +49,7 @@ class UserIdentity extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'status' => \common\models\User::STATUS_ACTIVE]);
     }
 
     /**

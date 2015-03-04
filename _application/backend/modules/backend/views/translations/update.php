@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
-use Zelenin\yii\modules\I18n\models\SourceMessage;
+use common\modules\i18n\models\SourceMessage;
 
 $this->title = Yii::t('backend', 'Update') . ': ' . $model->message;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Translations'), 'url' => ['index']];
