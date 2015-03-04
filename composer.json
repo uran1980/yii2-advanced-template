@@ -35,6 +35,7 @@
         "bower-asset/fancybox": "*",
         "bower-asset/formValidation": "*",
         "bower-asset/holderjs": "*",
+        "bower-asset/jquery-form": "*",
         "bower-asset/jquery.easing": "*",
         "bower-asset/jquery-cookie": "*",
         "bower-asset/jquery-mousewheel": "*",
