@@ -6,11 +6,10 @@ use yii\helpers\Json;
 $locations = Json::decode($model->location);
 ?>
 <div class="source-message-content"><?php
-    echo Html::a(
-        $model->message,
-        ['update', 'id' => $model->id],
-        ['data' => ['pjax' => 0]]
-    ); ?>
+    echo Html::a($model->message, ['update', 'id' => $model->id], [
+        'data'   => ['pjax' => 0],
+        'target' => '_blank',
+    ]); ?>
 </div>
 <?php
 if ( is_array($locations) && !empty($locations) ) {

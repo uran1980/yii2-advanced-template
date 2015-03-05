@@ -1,18 +1,17 @@
 /** ----------------------------------------------------------------------------
  *                            BOOTSTRAP2 THEME
  * ----------------------------------------------------------------------------- */
-
+@import 'variables';
 
 // -----------------------------------------------------------------------------
 // Bootstrap3 core variables and mixins
 // -----------------------------------------------------------------------------
 // @see https://github.com/twbs/bootstrap-sass
-@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
+//@import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_mixins.scss";
 @import "../../../../vendor/bower/compass-mixins/lib/compass/css3/_border-radius.scss";
 @import "../../../../vendor/bower/bootstrap-sass-official/assets/stylesheets/bootstrap/_theme.scss";
 
-@import 'variables';
 @import 'mixins';
 @import 'bootstrap2-theme/base';
 @import 'bootstrap2-theme/jumbotron';

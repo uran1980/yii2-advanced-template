@@ -53,8 +53,24 @@ tr {
     min-height: 100px;
     max-height: 150px;
     margin-top: 5px;
-}.source-message {
+}
+.source-message {
     ul.trace {
         border-top: 1px solid #dcdcdc;
+    }
+}
+.translations-index {
+    table {
+        // Cells
+        > thead,
+        > tbody,
+        > tfoot {
+            > tr {
+                > th,
+                > td {
+                  vertical-align: middle;
+                }
+            }
+        }
     }
 }

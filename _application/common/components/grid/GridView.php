@@ -14,8 +14,11 @@ class GridView extends \yii\grid\GridView
     public function init()
     {
         $this->dataColumnClass  = DataColumn::className();
-        $this->layout           = '<div class="well well-sm pull-left margin-bottom-10px">{summary}</div><div class="clearfix"></div>{pager}{items}{pager}';
-        $this->showFooter       = true;
+        $this->summaryOptions   = [
+            'class' => 'summary well well-sm pull-left margin-bottom-10px',
+        ];
+        $this->layout     = '{summary}<div class="clearfix"></div>{pager}{items}{pager}';
+        $this->showFooter = true;
         $this->options = ArrayHelper::merge($this->options, [
             'class' => 'grid-view table-responsive',
         ]);
