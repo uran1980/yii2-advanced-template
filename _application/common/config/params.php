@@ -72,9 +72,7 @@ $config = [
         'enableDefaultSuffix'       => true,
         'enablePersistence'         => true,
         'enableLanguageDetection'   => true,
-
-        // List all supported languages here
-        'languages' => $languages,
+        'languages'                 => $languages,
     ],
 
     // ---------------------------- GII MODULE ---------------------------------
@@ -128,6 +126,7 @@ $config = [
     'app.authManager' => [
         // varinat1: data base storage scenario
         'class' => yii\rbac\DbManager::className(),
+        'cache' => 'cache',
 
 //        // variant2: file storage scenario
 //        'class' => yii\rbac\PhpManager::className(),
@@ -138,22 +137,29 @@ $config = [
 
     // ------------------------ MAIL COMPONENT ---------------------------------
     'app.mail' => [
-        'class' => yii\swiftmailer\Mailer::className(),
-        'viewPath' => '@common/mails',
-        'useFileTransport' => true,
+        'class'             => yii\swiftmailer\Mailer::className(),
+        'viewPath'          => '@common/mails',
+        'useFileTransport'  => true,
     ],
 
-    // ----------------------------- I18N MODULE -------------------------------
+    // -------------------------- I18N COMPONENT -------------------------------
     // @see https://github.com/zelenin/yii2-i18n-module
     // @see https://github.com/yiisoft/yii2/blob/master/docs/guide/tutorial-i18n.md
-    'app.i18nModule' => [
-        'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
-        'languages' => $languages,
+    'app.i18n' => [
+        'class'      => uran1980\yii\modules\i18n\components\I18N::className(),
+        'languages'  => $languages,
+        'format'     => 'db',
+        'sourcePath' => [
+            __DIR__ . '/../../frontend',
+            __DIR__ . '/../../backend',
+            __DIR__ . '/../../common',
+        ],
+        'messagePath'  => __DIR__  . '/../../messages',
         'translations' => [
             '*' => [
                 'class'             => yii\i18n\DbMessageSource::className(),
                 'enableCaching'     => true,
-                'cachingDuration'   => 60 * 60 * 2,                             // cache on 2 hourse
+                'cachingDuration'   => 60 * 60 * 2,                             // cache on 2 hours
             ],
         ],
     ],

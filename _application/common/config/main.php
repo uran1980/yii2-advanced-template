@@ -18,7 +18,7 @@ $config = [
         'urlManager'    => $params['app.urlManager'],
         'assetManager'  => $params['app.assetManager'],
         'authManager'   => $params['app.authManager'],
-        'i18n'          => $params['app.i18nModule'],
+        'i18n'          => $params['app.i18n'],
         'session' => [
             'class' => yii\web\DbSession::className(),
         ],

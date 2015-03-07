@@ -31,7 +31,11 @@ use common\components\widgets\LanguageSwitcher;
         $menuItems[] = ['label' => Yii::t('backend', 'Users'), 'url' => ['/backend/user/index']];
     }
     if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
-        $menuItems[] = ['label' => Yii::t('backend', 'Translations'), 'url' => ['/backend/translations/index']];
+        $menuItems[] = [
+            'label'     => Yii::t('backend', 'Translations'),
+            'url'       => ['i18n/default/index'],
+            'active'    => (Yii::$app->controller->route == 'i18n/default/index'),
+        ];
     }
 
     // display Login page to guests of the site

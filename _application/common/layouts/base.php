@@ -17,8 +17,7 @@ use yii\helpers\Html;
         <?php $this->beginBody(); ?>
         <?php echo $content; ?>
         <?php include '_includes/footer.php'; ?>
-        <a href="#wrapper" class="scroll-to-top-link" style="display: none;"><?php
-            echo Yii::t('common', 'Scroll to top'); ?></a>
+        <?php echo \uran1980\yii\widgets\scrollToTop\ScrollToTop::widget(); ?>
         <?php $this->endBody(); ?>
     </body>
 </html>

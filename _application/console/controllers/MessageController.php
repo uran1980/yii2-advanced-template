@@ -2,7 +2,7 @@
 
 namespace console\controllers;
 
-use common\modules\i18n\models\search\SourceMessageSearch;
+use uran1980\yii\modules\i18n\models\search\SourceMessageSearch;
 
 class MessageController extends \yii\console\controllers\MessageController
 {
@@ -24,7 +24,7 @@ class MessageController extends \yii\console\controllers\MessageController
      */
     public function actionExtract($configFile)
     {
-        SourceMessageSearch::getInstance()->extract($configFile);
+        SourceMessageSearch::getInstance()->extract();
     }
 
 }

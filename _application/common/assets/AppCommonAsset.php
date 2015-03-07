@@ -14,7 +14,6 @@ class AppCommonAsset extends AssetBundle
     ];
     public $depends = [
         'common\assets\PaceAsset',
-        'common\assets\AppScrollToTopAsset',
         'common\assets\AppSpoilersAsset',
         'common\assets\AppChosenSelectAsset',
         'common\assets\AppAjaxButtonsAsset',

@@ -2,8 +2,6 @@
 
 namespace common\components\grid;
 
-use yii\base\Model;
-use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 
 class DataColumn extends \yii\grid\DataColumn

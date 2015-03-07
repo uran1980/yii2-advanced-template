@@ -22,7 +22,7 @@ $config = [
         // TODO
     ],
     'components' => [
-        'i18n'      => $params['app.i18nModule'],
+        'i18n'      => $params['app.i18n'],
         'log' => [
             'targets' => [
                 'file' => [

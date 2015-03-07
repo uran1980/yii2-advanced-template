@@ -22,13 +22,9 @@ class LanguageSwitcher extends ButtonDropdown
     public function run()
     {
         $appLanguage = Yii::$app->language;
-        $languages  = isset(Yii::$app->localeUrls->languages)
-                    ? Yii::$app->localeUrls->languages
-                    : [];
-
-        if (count($languages) > 1) {
+        if (count(Yii::$app->i18n->languages) > 1) {
             $items = [];
-            foreach ($languages as $lang) {
+            foreach (Yii::$app->i18n->languages as $lang) {
                 if ($lang === $appLanguage) {
                     $this->label = static::label($lang);
                 }
@@ -55,48 +51,36 @@ class LanguageSwitcher extends ButtonDropdown
         $route  = Yii::$app->controller->route;
         $output = Yii::getAlias('@web') . (!empty($lang) ? '/' . $lang : '') . $this->filter($route);
 
-//        // debug info ----------------------------------------------------------
-//        \common\components\log\AppLogger::info(array(
-//            '$lang'   => $lang,
-//            '$route'  => $route,
-//            '$output' => $output,
-//        ));
-//        // ---------------------------------------------------------------------
-
         return $output;
     }
 
     /**
-     * @param string $requestUri
+     * @param string $route
      * @return string
      */
-    private function filter($requestUri = '')
+    private function filter($route = '')
     {
-        $params      = Yii::$app->params;
-        $languages   = isset($params['app.localeUrls'], $params['app.localeUrls']['languages'])
-                     ? $params['app.localeUrls']['languages'] : [];
         $urls        = [];
         $request     = Yii::$app->getRequest();
         $baseUrl     = $request->baseUrl;
         $queryParams = $request->queryParams;
 
-        foreach ($languages as $lang) {
+        foreach (Yii::$app->i18n->languages as $lang) {
             $urls[] = trim($baseUrl . '/' . $lang, "/\\");
         }
 
-        $requestUri = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $requestUri), "/\\");
+        $route = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $route), "/\\");
 
-        array_unshift($queryParams, $requestUri);
+        array_unshift($queryParams, $route);
 
-        $requestUri = Url::to($queryParams);
+        $route = Url::to($queryParams);
 
         // filter langs
-        $pattern    = '#^/' . implode('|', $urls) . '/#i';
-        $requestUri = preg_replace($pattern, '', $requestUri);
+        $pattern = '#^/' . implode('|', $urls) . '/#i';
+        $route   = preg_replace($pattern, '', $route);
 
-        return $requestUri;
+        return $route;
     }
-
 
     /**
      *

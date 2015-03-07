@@ -26,18 +26,18 @@ $config = [
     'modules' => [
         'backend'   => backend\modules\backend\Module::className(),
         'i18n'      => [
-            'class' => Zelenin\yii\modules\I18n\Module::className(),
+            'class' => uran1980\yii\modules\i18n\Module::className(),
             'controllerMap' => [
-                'default' => backend\modules\backend\controllers\TranslationsController::className(),
+                'default' => uran1980\yii\modules\i18n\controllers\DefaultController::className(),
             ],
             'as access' => [
                 'class' => yii\filters\AccessControl::className(),
                 'rules' => [
                     [
                         'controllers'   => ['i18n/default'],
-                        'actions'       => ['index', 'update'],
+                        'actions'       => ['index', 'update', 'rescan', 'clear-cache', 'delete', 'restore'],
                         'allow'         => true,
-                        'roles'         => [AccessControl::ROLE_ADMIN],
+                        'roles'         => [AccessControl::ROLE_TRANSLATOR],
                     ],
                 ],
             ],
