@@ -19,7 +19,8 @@ class View extends \rmrevin\yii\minify\View
                 $css = '';
 
                 foreach ($css_files as $file) {
-                    $content = file_get_contents($this->getBasePath() . $file);
+                    $file = preg_replace("#\?v=\d{1,}$#i", '', $file);
+                    $content = file_get_contents($this->getBasePath($file));
 
                     preg_match_all('|url\(([^)]+)\)|is', $content, $m);
                     if (!empty($m[0])) {
@@ -30,7 +31,7 @@ class View extends \rmrevin\yii\minify\View
                                 continue;
                             }
                             $url = str_replace(['\'', '"'], '', $m[1][$k]);
-                            if (preg_match('#^(' . implode('|', $this->schemas) . ')#is', $url)) {
+                            if ($this->isUrl($url)) {
                                 $result[$m[1][$k]] = '\'' . $url . '\'';
                             } else {
                                 $result[$m[1][$k]] = '\'' . $path . '/' . $url . '\'';
@@ -62,14 +63,14 @@ class View extends \rmrevin\yii\minify\View
             }
 
 //            // debug info ------------------------------------------------------
-//            \common\components\log\AppLogger::info(array(
+//            \common\components\log\AppLogger::info([
 //                'method'                => __METHOD__,
 //                'line'                  => __LINE__,
 //                '$this->base_path'      => $this->base_path,
 //                'alias'                 => $this->getBasePath(),
 //                '$this->minify_path'    => $this->minify_path,
 //                '$css_minify_file'      => $css_minify_file,
-//            ));
+//            ]);
 //            // -----------------------------------------------------------------
 
             $css_file = str_replace($this->getBasePath(), '', $css_minify_file);
@@ -90,6 +91,7 @@ class View extends \rmrevin\yii\minify\View
                 if (false === in_array($position, $this->js_position)) {
                     $this->jsFiles[$position] = [];
                     foreach ($files as $file => $html) {
+                        $file = preg_replace("#\?v=\d{1,}$#i", '', $file);
                         $this->jsFiles[$position][$file] = helpers\Html::jsFile($file);
                     }
                 } else {
@@ -99,7 +101,8 @@ class View extends \rmrevin\yii\minify\View
                     if (!file_exists($js_minify_file)) {
                         $js = '';
                         foreach ($files as $file => $html) {
-                            $file = $this->getBasePath() . $file;
+                            $file = preg_replace("#\?v=\d{1,}$#i", '', $file);
+                            $file = $this->getBasePath($file);
                             $js .= file_get_contents($file) . ';' . PHP_EOL;
                         }
 
@@ -121,20 +124,25 @@ class View extends \rmrevin\yii\minify\View
     }
 
     /**
+     * @param string $file
      * @return string
      */
-    protected function getBasePath()
+    protected function getBasePath($file = '')
     {
-        $output = preg_replace("#/backend$#i", '', \Yii::getAlias($this->base_path));
+        $output  = preg_replace("#/backend$#i", '', \Yii::getAlias($this->base_path));
+        $output .= preg_replace("#\?v=\d{1,}$#i", '', $file);
 
 //        // debug info ----------------------------------------------------------
-//        \common\components\log\AppLogger::info(array(
+//        $dump = [
 //            'method'                => __METHOD__,
 //            'line'                  => __LINE__,
+//            '$file'                 => $file,
 //            '$this->base_path'      => $this->base_path,
 //            'alias'                 => \Yii::getAlias($this->base_path),
 //            '$this->minify_path'    => $this->minify_path,
-//        ));
+//            '$output'               => $output,
+//        ];
+//        \common\components\log\AppLogger::info($dump);
 //        // ---------------------------------------------------------------------
 
         return $output;
@@ -148,7 +156,7 @@ class View extends \rmrevin\yii\minify\View
     {
         $result = '';
         foreach ($files as $file => $html) {
-            $result .= sha1_file($this->getBasePath() . $file);
+            $result .= sha1_file($this->getBasePath($file));
         }
 
         return sha1($result);
@@ -250,5 +258,14 @@ class View extends \rmrevin\yii\minify\View
         return $this->_collect($css, '|\@font-face\{[^}]+\}|is', function ($string) {
             return $string;
         });
+    }
+
+    /**
+     * @param string $url
+     * @return bool
+     */
+    private function isUrl($url)
+    {
+        return (bool) preg_match('#^(' . implode('|', $this->schemas) . ')#is', $url);
     }
 }

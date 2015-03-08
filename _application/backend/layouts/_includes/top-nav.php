@@ -33,7 +33,7 @@ use common\components\widgets\LanguageSwitcher;
     if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
         $menuItems[] = [
             'label'     => Yii::t('backend', 'Translations'),
-            'url'       => ['i18n/default/index'],
+            'url'       => ['/translations'],
             'active'    => (Yii::$app->controller->route == 'i18n/default/index'),
         ];
     }

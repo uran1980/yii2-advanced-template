@@ -13,11 +13,9 @@ class AppCommonAsset extends AssetBundle
         'js/common.js',
     ];
     public $depends = [
-        'common\assets\PaceAsset',
         'common\assets\AppSpoilersAsset',
         'common\assets\AppChosenSelectAsset',
         'common\assets\AppAjaxButtonsAsset',
-        'common\assets\AppIGrowlAsset',
 
         'rmrevin\yii\fontawesome\AssetBundle',
         'common\assets\JqueryCookieAsset',

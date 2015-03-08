@@ -25,11 +25,13 @@ class LoggerController extends FrontendController
         // --------------------------- TITLE -----------------------------------
         $this->getView()->title .= ' :: ' . S::upperCamelize($this->action->id);
 
-        AppLogger::log(array(
+        // log -----------------------------------------------------------------
+        AppLogger::log([
             'method'        => __METHOD__,
             'line'          => __LINE__,
             'requestParams' => Yii::$app->request->getQueryParams(),
-        ), AppLogger::WARNING, AppLogger::CATEGORY_TEST);
+        ], AppLogger::WARNING, AppLogger::CATEGORY_TEST);
+        // ---------------------------------------------------------------------
 
         return $this->render('/index/index');
     }

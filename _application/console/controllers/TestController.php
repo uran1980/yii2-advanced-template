@@ -21,12 +21,12 @@ class TestController extends \yii\console\Controller
     public function actionTest()
     {
         // debug info ----------------------------------------------------------
-        $debugInfo = print_r(array(
+        $debugInfo = print_r([
             'method'    => __METHOD__,
             'line'      => __LINE__,
             'test'      => 'TEST',
 //            'dbLogger'  => Yii::$app->get('dbLogger'),
-        ), true) . PHP_EOL;
+        ], true) . PHP_EOL;
         // ---------------------------------------------------------------------
 
         AppLogger::info($debugInfo, AppLogger::CATEGORY_CONSOLE);

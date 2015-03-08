@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 
+uran1980\yii\widgets\pace\Pace::widget();
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@ use yii\helpers\Html;
         <?php $this->beginBody(); ?>
         <?php echo $content; ?>
         <?php include '_includes/footer.php'; ?>
-        <?php echo \uran1980\yii\widgets\scrollToTop\ScrollToTop::widget(); ?>
+        <?php echo uran1980\yii\widgets\scrollToTop\ScrollToTop::widget(); ?>
         <?php $this->endBody(); ?>
     </body>
 </html>

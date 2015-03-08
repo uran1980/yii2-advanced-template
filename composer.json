@@ -24,9 +24,11 @@
         "rmrevin/yii2-fontawesome": "*",
         "rmrevin/yii2-minify-view": "*",
         "codemix/yii2-localeurls": "*",
-        "zelenin/yii2-i18n-module": "dev-master",
         "vova07/yii2-fileapi-widget": "*",
         "danielstjules/stringy": "*",
+        "uran1980/yii2-translate-panel": "*",
+        "uran1980/yii2-scroll-to-top": "*",
+        "uran1980/yii2-pace-widget": "*",
 
         "bower-asset/awesome-bootstrap-checkbox": "*",
         "bower-asset/bootstrap-sass-official": "*",
@@ -43,12 +45,10 @@
         "bower-asset/jqueryui-timepicker-addon": "*",
         "bower-asset/ladda-bootstrap": "*",
         "bower-asset/perfect-scrollbar": "*",
-        "bower-asset/scroll-to-top": "*",
         "bower-asset/spin.js": "*",
         "bower-asset/stitch-css": "*",
-        "bower-asset/animate.css": "*",
         "bower-asset/scrollMonitor": "*",
-        "bower-asset/pace": "*"
+        "bower-asset/x-editable": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

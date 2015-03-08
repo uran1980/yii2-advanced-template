@@ -1,14 +1,14 @@
 sintax: glob
 
 # @see https://bitbucket.org/tortoisehg/hgtk/issue/1008/hgignore-invalid-pattern-relre-obj
-^backend/config/main-local.php
-^backend/config/params-local.php
-^frontend/config/main-local.php
-^frontend/config/params-local.php
-^common/config/main-local.php
-^common/config/params-local.php
-^console/config/main-local.php
-^console/config/params-local.php
+backend/config/main-local.php
+backend/config/params-local.php
+frontend/config/main-local.php
+frontend/config/params-local.php
+common/config/main-local.php
+common/config/params-local.php
+console/config/main-local.php
+console/config/params-local.php
 
 virtualbox/
 
@@ -33,6 +33,7 @@ Thumbs.db
 composer.lock
 Gemfile.lock
 vendor/
+^components/
 
 # Mac DS_Store Files
 .DS_Store

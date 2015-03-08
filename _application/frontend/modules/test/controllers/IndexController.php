@@ -140,7 +140,7 @@ class IndexController extends FrontendController
         $this->getView()->title .= ' :: ' . S::upperCamelize($this->action->id);
 
         // debug info ----------------------------------------------------------
-        AppDebug::dump(array(
+        AppDebug::dump([
             'method'                    => __METHOD__,
             'line'                      => __LINE__,
             'module'                    => $this->getModuleName(),
@@ -151,7 +151,7 @@ class IndexController extends FrontendController
             '/profile/signup'           => Url::toRoute('/profile/signup'),
             '/request-password-reset'   => Url::toRoute('request-password-reset'),
             'site/captcha'              => Url::toRoute('site/captcha'),
-        ));
+        ]);
         // ---------------------------------------------------------------------
 
         // TODO
