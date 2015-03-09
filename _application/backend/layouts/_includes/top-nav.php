@@ -19,10 +19,7 @@ use common\components\widgets\LanguageSwitcher;
 
     $menuItems[] = [
         'label' => Yii::t('backend', 'Site'),
-        'url' => Yii::$app->urlManagerFrontend->baseUrl,
-//        'linkOptions' => [
-//            'target' => '_blank',
-//        ],
+        'url'   => Yii::$app->urlManagerFrontend->baseUrl,
     ];
 
     // display Account and Users to admin+ roles
@@ -30,11 +27,21 @@ use common\components\widgets\LanguageSwitcher;
     //    $menuItems[] = ['label' => Yii::t('backend', 'Home'),  'url' => ['/backend/index/index']];
         $menuItems[] = ['label' => Yii::t('backend', 'Users'), 'url' => ['/backend/user/index']];
     }
+
     if ( Yii::$app->user->can(AccessControl::ROLE_TRANSLATOR) ) {
         $menuItems[] = [
             'label'     => Yii::t('backend', 'Translations'),
             'url'       => ['/translations'],
             'active'    => (Yii::$app->controller->route == 'i18n/default/index'),
+        ];
+    }
+
+    // for admin show link to backend
+    // @see https://github.com/yiisoft/yii2/issues/1578
+    if ( Yii::$app->user->can(AccessControl::ROLE_ADMIN) ) {
+        $menuItems[] = [
+            'label' => Yii::t('backend', 'Backend'),
+            'url'   => Yii::$app->urlManager->baseUrl,
         ];
     }
 

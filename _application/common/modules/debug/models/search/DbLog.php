@@ -8,6 +8,11 @@ use common\models\Log;
 class DbLog extends Base
 {
     /**
+     * @var DbLog
+     */
+    protected static $_instance = null;
+
+    /**
      * @var string ip attribute input search value
      */
     public $level;
@@ -19,6 +24,17 @@ class DbLog extends Base
      * @var integer message attribute input search value
      */
     public $message;
+
+    /**
+     * @return DbLog
+     */
+    public static function getInstance()
+    {
+        if ( null === self::$_instance )
+            self::$_instance = new self();
+
+        return self::$_instance;
+    }
 
 
     /**

@@ -7,27 +7,24 @@
 use yii\helpers\Html;
 use common\components\grid\GridView;
 use common\components\grid\SerialColumn;
+use common\modules\debug\models\search\DbLog;
 use yii\helpers\VarDumper;
 use yii\log\Logger;
 use Stringy\StaticStringy as Stringy;
 
-\common\assets\AppCommonAsset::register($this);
+/** @var DbLog $searchModel */
+$searchModel = DbLog::getInstance();
 
-$this->title = Yii::t('backend', 'Application Log Messages');
+$this->title = Yii::t('backend', 'Application DB Log Messages');
 ?>
 
 <div class="backend-application-logs-index">
-    <h1><?php echo Yii::t('backend', 'Application Log Messages'); ?></h1>
+    <h1><?php echo $this->title; ?></h1>
 
 <?php
     echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'id' => 'dblog-panel-detailed-grid',
-        'options' => [
-            'class' => 'detail-grid-view table-responsive',
-        ],
+        'dataProvider' => $searchModel->search(Yii::$app->request->queryParams),
         'filterModel' => $searchModel,
-        'filterUrl' => $panel->getUrl(),
         'columns' => [
             [
                 'class' => SerialColumn::className(),
@@ -85,7 +82,10 @@ $this->title = Yii::t('backend', 'Application Log Messages');
             [
                 'attribute' => 'category',
                 'contentOptions' => [
-                    'class' => 'font-size-10px',
+                    'class' => 'font-size-10px text-align-center',
+                ],
+                'headerOptions' => [
+                    'width' => '200',
                 ],
             ],
             [
@@ -94,8 +94,8 @@ $this->title = Yii::t('backend', 'Application Log Messages');
                     $description    = Html::encode(is_string($data['message'])
                                     ? $data['message']
                                     : VarDumper::export($data['message']));
-                    $message        = '<a href="javascript:;" class="spoiler-title" data-title="" data-content="'
-                                    . $description . '">' . Stringy::substr(Stringy::collapseWhitespace($description), 0, 60, 'UTF-8') . '...' . '</a>';
+                    $message        = '<a href="javascript: void(0);" class="spoiler-title" data-title="" data-content="'
+                                    . $description . '">' . Stringy::substr(Stringy::collapseWhitespace($description), 0, 80, 'UTF-8') . '...' . '</a>';
                     $trace          = '';
 
                     if (!empty($data['trace'])) {
@@ -113,9 +113,6 @@ $this->title = Yii::t('backend', 'Application Log Messages');
                     return $message;
                 },
                 'format' => 'html',
-                'options' => [
-                    'width' => '50%',
-                ],
                 'contentOptions' => [
                     'class' => 'spoiler',
                 ],

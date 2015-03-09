@@ -20,6 +20,10 @@ class BackendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'allow' => true,
+                        'roles' => [AccessControl::ROLE_ADMIN],
+                    ],
+                    [
                         'controllers'   => ['backend/index'],
                         'actions'       => ['login', 'error'],
                         'allow'         => true,

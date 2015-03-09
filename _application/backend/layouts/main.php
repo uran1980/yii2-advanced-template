@@ -12,6 +12,7 @@ AppAsset::register($this);
 <?php $this->beginContent('@common/layouts/base.php'); ?>
 <div class="wrap">
     <?php include '_includes/top-nav.php'; ?>
+    <?php include '_includes/header.php';  ?>
 
     <div class="container">
         <?php echo Breadcrumbs::widget([

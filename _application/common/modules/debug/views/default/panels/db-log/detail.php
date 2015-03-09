@@ -125,12 +125,6 @@ echo GridView::widget([
             'options' => [
                 'width' => '50%',
             ],
-            'headerOptions' => [
-                'class' => 'text-align-center',
-            ],
-            'footerOptions' => [
-                'class' => 'text-align-center font-weight-bold th',
-            ],
             'contentOptions' => [
                 'class' => 'spoiler',
             ],
