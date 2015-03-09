@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use uran1980\yii\widgets\scrollToTop\ScrollToTop;
 
 uran1980\yii\widgets\pace\Pace::widget();
 ?>
@@ -18,7 +19,7 @@ uran1980\yii\widgets\pace\Pace::widget();
         <?php $this->beginBody(); ?>
         <?php echo $content; ?>
         <?php include '_includes/footer.php'; ?>
-        <?php echo uran1980\yii\widgets\scrollToTop\ScrollToTop::widget(); ?>
+        <?php echo ScrollToTop::widget(); ?>
         <?php $this->endBody(); ?>
     </body>
 </html>

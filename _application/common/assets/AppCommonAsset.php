@@ -14,7 +14,7 @@ class AppCommonAsset extends AssetBundle
     ];
     public $depends = [
         'common\assets\AppSpoilersAsset',
-        'common\assets\AppChosenSelectAsset',
+        'uran1980\yii\widgets\chosen\ChosenSelectAsset',
         'common\assets\AppAjaxButtonsAsset',
 
         'rmrevin\yii\fontawesome\AssetBundle',

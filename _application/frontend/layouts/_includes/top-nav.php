@@ -20,16 +20,8 @@ use common\rbac\AccessControl;
     // everyone can see Home page
     $menuItems[] = ['label' => Yii::t('frontend', 'Home'), 'url' => ['/site/index/index']];
 
-    // for admin show link to backend
-    // @see https://github.com/yiisoft/yii2/issues/1578
-    if ( Yii::$app->user->can(AccessControl::ROLE_ADMIN) ) {
-        $menuItems[] = [
-            'label' => Yii::t('frontend', 'Backend'),
-            'url' => Yii::$app->urlManagerBackend->baseUrl,
-    //        'linkOptions' => [
-    //            'target' => '_blank',
-    //        ],
-        ];
+    if ( Yii::$app->user->can(AccessControl::ROLE_USER) ) {
+        $menuItems[] = ['label' => Yii::t('frontend', 'Profile'), 'url' => ['/profile/index/index']];
     }
 
     // we do not need to display Article/index, About and Contact pages to editor+ roles
@@ -42,6 +34,18 @@ use common\rbac\AccessControl;
     // display Article admin page to editor+ roles
     if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
         $menuItems[] = ['label' => Yii::t('frontend', 'Articles'), 'url' => ['/site/article/admin']];
+    }
+
+    // for admin show link to backend
+    // @see https://github.com/yiisoft/yii2/issues/1578
+    if ( Yii::$app->user->can(AccessControl::ROLE_ADMIN) ) {
+        $menuItems[] = [
+            'label' => Yii::t('frontend', 'Backend'),
+            'url'   => Yii::$app->urlManagerBackend->baseUrl,
+    //        'linkOptions' => [
+    //            'target' => '_blank',
+    //        ],
+        ];
     }
 
     // display Signup and Login pages to guests of the site

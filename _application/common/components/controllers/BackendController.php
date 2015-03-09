@@ -37,7 +37,7 @@ class BackendController extends MainController
                     ],
                     [
                         'controllers'   => ['backend/user'],
-                        'actions'       => ['index', 'view', 'create', 'update', 'delete'],
+//                        'actions'       => ['index', 'view', 'create', 'update', 'delete'],
                         'allow'         => true,
                         'roles'         => [AccessControl::ROLE_ADMIN],
                     ],

@@ -21,14 +21,7 @@ class FrontendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'controllers' => ['site/index', 'site/foo'],
                         'allow' => true,
-                    ],
-                    [
-                        'controllers'   => ['site/article'],
-                        'actions'       => ['index', 'view', 'create', 'update', 'delete', 'admin'],
-                        'allow'         => true,
-                        'roles'         => [AccessControl::ROLE_ADMIN],
                     ],
                     [
                         'controllers'   => ['site/article'],
@@ -39,7 +32,7 @@ class FrontendController extends MainController
                     [
                         'controllers'   => ['site/article'],
                         'actions'       => ['index', 'view'],
-                        'allow'         => true
+                        'allow'         => true,
                     ],
                     [
                         // other rules

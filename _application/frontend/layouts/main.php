@@ -12,13 +12,14 @@ AppAsset::register($this);
 <?php $this->beginContent('@common/layouts/base.php'); ?>
 <div class="wrap">
     <?php include '_includes/top-nav.php'; ?>
+    <?php include '_includes/header.php';  ?>
 
     <div class="container">
-    <?php echo Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
-    <?php echo Alert::widget(); ?>
-    <?php echo $content; ?>
+        <?php echo Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]); ?>
+        <?php echo Alert::widget(); ?>
+        <?php echo $content; ?>
     </div>
 </div>
 <?php $this->endContent();

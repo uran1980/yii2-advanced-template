@@ -31,7 +31,7 @@ $config = [
                 'default' => uran1980\yii\modules\i18n\controllers\DefaultController::className(),
             ],
             'as access' => [
-                'class' => yii\filters\AccessControl::className(),
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'controllers'   => ['i18n/default'],

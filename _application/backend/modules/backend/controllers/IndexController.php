@@ -6,44 +6,12 @@ use Yii;
 use common\rbac\AccessControl;
 use common\components\controllers\BackendController;
 use common\models\forms\LoginForm;
-use yii\filters\VerbFilter;
 
 /**
  * Index controller
  */
 class IndexController extends BackendController
 {
-    /**
-     * Returns a list of behaviors that this component should behave as.
-     *
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Displays the index (home) page.
      * Use it in case your home page contains static content.

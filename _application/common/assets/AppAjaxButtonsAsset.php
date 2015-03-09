@@ -10,7 +10,7 @@ class AppAjaxButtonsAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'rmrevin\yii\fontawesome\AssetBundle',                                  // @see https://github.com/rmrevin/yii2-fontawesome
+        'rmrevin\yii\fontawesome\AssetBundle',
         'uran1980\yii\widgets\igrowl\IgrowlAsset',
     ];
 }
