@@ -14,6 +14,7 @@ class AppCommonAsset extends AssetBundle
     ];
     public $depends = [
         'common\assets\AppSpoilersAsset',
+        'uran1980\yii\bootstrapConfirmation\BootstrapConfirmationAsset',
         'uran1980\yii\widgets\chosen\ChosenSelectAsset',
         'common\assets\AppAjaxButtonsAsset',
 

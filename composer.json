@@ -26,9 +26,12 @@
         "codemix/yii2-localeurls": "*",
         "vova07/yii2-fileapi-widget": "*",
         "danielstjules/stringy": "*",
+
         "uran1980/yii2-translate-panel": "*",
         "uran1980/yii2-scroll-to-top": "*",
         "uran1980/yii2-pace-widget": "*",
+        "uran1980/yii2-chosen-select": "*",
+        "uran1980/yii2-bootstrap-confirmation": "*",
 
         "bower-asset/awesome-bootstrap-checkbox": "*",
         "bower-asset/bootstrap-sass-official": "*",
