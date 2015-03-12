@@ -61,11 +61,19 @@ class ActionColumn extends \yii\grid\ActionColumn
         if (!isset($this->buttons['delete'])) {
             $this->buttons['delete'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                    'class'         => 'btn btn-xs btn-danger margin-left-10px',
-                    'title'         => Yii::t('common', 'Delete'),
-                    'data-confirm'  => Yii::t('common', 'Are you sure you want to delete this item?'),
-                    'data-method'   => 'post',
-                    'data-pjax'     => '0',
+                    'class'                 => 'btn btn-xs btn-danger margin-left-10px',
+//                    'title'               => Yii::t('common', 'Delete'),
+//                    'data-confirm'        => Yii::t('common', 'Are you sure you want to delete this item?'),
+                    'data-toggle'           => 'confirmation',
+                    'data-singleton'        => 'true',
+                    'data-placement'        => 'top',
+                    'data-btn-ok-lable'     => Yii::t('common', 'Yes'),
+                    'data-btn-ok-class'     => 'btn-xs btn-success',
+                    'data-btn-cancel'       => Yii::t('common', 'No'),
+                    'data-btn-cancel-class' => 'btn-xs btn-warning',
+                    'data-popout'           => 'true',
+                    'data-method'           => 'post',
+                    'data-pjax'             => '0',
                 ]);
             };
         }

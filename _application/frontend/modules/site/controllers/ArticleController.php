@@ -26,7 +26,7 @@ class ArticleController extends FrontendController
          * How many articles we want to display per page.
          * @var integer
          */
-        $pageSize = 2;
+        $pageSize = 10;
 
         /**
          * Articles have to be published.

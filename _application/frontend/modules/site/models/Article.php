@@ -79,7 +79,7 @@ class Article extends ActiveRecord
             'id'            => Yii::t('frontend-site', 'ID'),
             'user_id'       => Yii::t('frontend-site', 'Author'),
             'title'         => Yii::t('frontend-site', 'Title'),
-            'summary'       => Yii::t('frontend-site', 'Summary'),
+            'summary'       => Yii::t('frontend-site', 'Intro'),
             'content'       => Yii::t('frontend-site', 'Content'),
             'status'        => Yii::t('frontend-site', 'Status'),
             'category'      => Yii::t('frontend-site', 'Category'),

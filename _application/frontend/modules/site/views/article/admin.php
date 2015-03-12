@@ -10,27 +10,25 @@ use common\components\grid\ActionColumn;
 /* @var $searchModel app\models\search\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('frontend-site', 'Articles');
+$this->title = Yii::t('frontend-site', 'Posts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-admin">
     <h1>
-        <?php echo Html::encode($this->title) ?>
-        <span class="pull-right">
-            <?php echo Html::a(Yii::t('frontend-site', 'Create Article'), ['create'], ['class' => 'btn btn-success']) ?>
-        </span>
+        <?php echo Html::encode($this->title); ?>
+        <span class="pull-right"><?php
+            echo Html::a('<i class="fa fa-plus"></i> ' . Yii::t('frontend-site', 'New Post'), ['create'], [
+                'class' => 'btn btn-success',
+            ]); ?></span>
     </h1>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'summary' => false,
         'columns' => [
             [
                 'class' => SerialColumn::className(),
             ],
-
-            //'id',
             // author
             [
                 'attribute' => 'user_id',
@@ -74,6 +72,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                            'class'     => 'btn btn-xs btn-default',
+                            'title'     => Yii::t('common', 'Edit'),
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                ],
             ],
         ],
     ]); ?>

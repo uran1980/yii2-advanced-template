@@ -6,9 +6,26 @@ use Yii;
 use common\components\controllers\FrontendController;
 use Stringy\StaticStringy as S;
 use common\components\log\AppLogger;
+use yii\helpers\ArrayHelper;
+use common\rbac\AccessControl;
 
 class LoggerController extends FrontendController
 {
+    public function behaviors()
+    {
+        return ArrayHelper::merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => [AccessControl::ROLE_ADMIN],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
     public function init()
     {
         parent::init();

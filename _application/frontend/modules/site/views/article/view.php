@@ -7,7 +7,8 @@ use common\rbac\AccessControl;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\site\models\Article */
 
-$this->title                    = $model->title;
+$this->title = $model->title;
+
 $this->params['breadcrumbs'][]  = ['label' => Yii::t('frontend-site', 'Articles'), 'url' => ['index']];
 $this->params['breadcrumbs'][]  = $this->title;
 ?>
@@ -19,15 +20,16 @@ $this->params['breadcrumbs'][]  = $this->title;
         <?php endif; ?>
 
         <?php if (Yii::$app->user->can(AccessControl::PERMISSION_UPDATE_ARTICLE, ['model' => $model])): ?>
-            <?php echo Html::a(Yii::t('frontend-site', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?php echo Html::a(Yii::t('frontend-site', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php endif; ?>
 
         <?php if (Yii::$app->user->can(AccessControl::PERMISSION_DELETE_ARTICLE)): ?>
             <?php echo Html::a(Yii::t('frontend-site', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Yii::t('frontend-site', 'Are you sure you want to delete this article?'),
-                    'method' => 'post',
+                    'toggle'  => 'confirmation',
+                    'confirm' => Yii::t('frontend-site', 'Are you sure?'),
+                    'method'  => 'post',
                 ],
             ]) ?>
         <?php endif; ?>
@@ -37,24 +39,24 @@ $this->params['breadcrumbs'][]  = $this->title;
     <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
-//            'id',
-//             [
-//                 'label' => Yii::t('frontend-site', 'Author'),
-//                 'value' => $model->authorName,
-//             ],
+            'id',
+             [
+                 'label' => Yii::t('frontend-site', 'Author'),
+                 'value' => $model->authorName,
+             ],
             'title',
             'summary:ntext',
             'content:html',
-//             [
-//                 'label' => Yii::t('frontend-site', 'Status'),
-//                 'value' => $model->statusName,
-//             ],
+             [
+                 'label' => Yii::t('frontend-site', 'Status'),
+                 'value' => $model->statusName,
+             ],
             [
                 'label' => Yii::t('frontend-site', 'Category'),
                 'value' => $model->categoryName,
             ],
             'created_at:dateTime',
-//            'updated_at:dateTime',
+            'updated_at:dateTime',
         ],
     ]) ?>
 </div>

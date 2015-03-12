@@ -21,11 +21,16 @@ class FrontendController extends MainController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'controllers' => ['site/index'],
                         'allow' => true,
                     ],
                     [
+                        'allow' => true,
+                        'roles' => [AccessControl::ROLE_ADMIN],
+                    ],
+                    [
                         'controllers'   => ['site/article'],
-                        'actions'       => ['create', 'update', 'admin'],
+                        'actions'       => ['create', 'update', 'admin', 'delete'],
                         'allow'         => true,
                         'roles'         => [AccessControl::ROLE_EDITOR],
                     ],
@@ -34,15 +39,13 @@ class FrontendController extends MainController
                         'actions'       => ['index', 'view'],
                         'allow'         => true,
                     ],
-                    [
-                        // other rules
-                    ],
                 ], // rules
             ], // access
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['POST'],
+                    'logout' => ['POST'],
                 ],
             ], // verbs
         ]; // return

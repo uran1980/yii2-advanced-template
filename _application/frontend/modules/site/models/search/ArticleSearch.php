@@ -45,21 +45,24 @@ class ArticleSearch extends Article
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $pageSize = 3, $published = false)
+    public function search($params, $pageSize = 10, $published = false)
     {
         $query = Article::find();
 
         // this means that editor is trying to see articles
         // we will allow him to see published ones and drafts made by him
-        if ($published === true)
-        {
-            $query->where(['status' => Article::STATUS_PUBLISHED]);
-            $query->orWhere(['user_id' => Yii::$app->user->id]);
+        if ($published === true) {
+            $query
+                ->where(['status' => Article::STATUS_PUBLISHED])
+                ->orWhere(['user_id' => Yii::$app->user->id])
+            ;
         }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]],
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC],
+            ],
             'pagination' => [
                 'pageSize' => $pageSize,
             ]
@@ -70,15 +73,17 @@ class ArticleSearch extends Article
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'status' => $this->status,
-            'category' => $this->category,
+            'id'        => $this->id,
+            'user_id'   => $this->user_id,
+            'status'    => $this->status,
+            'category'  => $this->category,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
+        $query
+            ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'summary', $this->summary])
-            ->andFilterWhere(['like', 'content', $this->content]);
+            ->andFilterWhere(['like', 'content', $this->content])
+        ;
 
         return $dataProvider;
     }

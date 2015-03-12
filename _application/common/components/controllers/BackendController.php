@@ -54,8 +54,8 @@ class BackendController extends MainController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
-                    'logout' => ['post'],
+                    'delete' => ['POST'],
+                    'logout' => ['POST'],
                 ],
             ], // verbs
         ]; // return

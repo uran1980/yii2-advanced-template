@@ -2,6 +2,7 @@
 
 namespace frontend\modules\profile\controllers;
 
+use Yii;
 use common\components\controllers\FrontendController;
 use common\models\User;
 use common\models\forms\LoginForm;
@@ -16,7 +17,8 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use common\rbac\AccessControl;
-use Yii;
+use yii\helpers\ArrayHelper;
+use common\rbac\AccessControl;
 
 class IndexController extends FrontendController
 {
@@ -27,7 +29,7 @@ class IndexController extends FrontendController
      */
     public function behaviors()
     {
-        return [
+        return ArrayHelper::merge(parent::behaviors(), [
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout', 'signup'],
@@ -47,10 +49,20 @@ class IndexController extends FrontendController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['POST'],
                 ],
             ],
-        ];
+        ]);
+    }
+
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'auth' => [
+                'class'             => 'yii\authclient\AuthAction',
+                'successCallback'   => [$this, 'successCallback'],
+            ],
+        ]);
     }
 
     /**

@@ -26,14 +26,14 @@ use common\rbac\AccessControl;
 
     // we do not need to display Article/index, About and Contact pages to editor+ roles
     if (!Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
-        $menuItems[] = ['label' => Yii::t('frontend', 'Articles'),   'url' => ['/site/article/index']];
-        $menuItems[] = ['label' => Yii::t('frontend', 'About'),      'url' => ['/site/index/about']];
-        $menuItems[] = ['label' => Yii::t('frontend', 'Contact'),    'url' => ['/site/index/contact']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Posts'),   'url' => ['/site/article/index']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'About'),   'url' => ['/site/index/about']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Contact'), 'url' => ['/site/index/contact']];
     }
 
     // display Article admin page to editor+ roles
     if (Yii::$app->user->can(AccessControl::ROLE_EDITOR)) {
-        $menuItems[] = ['label' => Yii::t('frontend', 'Articles'), 'url' => ['/site/article/admin']];
+        $menuItems[] = ['label' => Yii::t('frontend', 'Posts'), 'url' => ['/site/article/admin']];
     }
 
     // for admin show link to backend

@@ -3,7 +3,6 @@
 namespace common\rbac;
 
 use Yii;
-use yii\web\ForbiddenHttpException;
 use common\rbac\models\AuthItem;
 use common\rbac\models\Role;
 
