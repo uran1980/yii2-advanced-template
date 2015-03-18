@@ -24,12 +24,12 @@ use Yii;
  */
 class Article extends ActiveRecord
 {
-    const STATUS_DRAFT = 1;
-    const STATUS_PUBLISHED = 2;
+    const STATUS_DRAFT      = 1;
+    const STATUS_PUBLISHED  = 2;
 
-    const CATEGORY_ECONOMY = 1;
-    const CATEGORY_SOCIETY = 2;
-    const CATEGORY_SPORT = 3;
+    const CATEGORY_ECONOMY  = 1;
+    const CATEGORY_SOCIETY  = 2;
+    const CATEGORY_SPORT    = 3;
 
     /**
      * Declares the name of the database table associated with this AR class.

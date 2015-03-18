@@ -12,13 +12,11 @@ use frontend\modules\profile\models\forms\PasswordResetRequestForm;
 use frontend\modules\profile\models\forms\ResetPasswordForm;
 use frontend\modules\profile\models\forms\SignupForm;
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use common\rbac\AccessControl;
 use yii\helpers\ArrayHelper;
-use common\rbac\AccessControl;
 
 class IndexController extends FrontendController
 {

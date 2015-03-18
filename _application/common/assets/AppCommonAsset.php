@@ -16,11 +16,10 @@ class AppCommonAsset extends AssetBundle
         'common\assets\AppSpoilersAsset',
         'uran1980\yii\bootstrapConfirmation\BootstrapConfirmationAsset',
         'uran1980\yii\widgets\chosen\ChosenSelectAsset',
+        'uran1980\yii\assets\jQueryEssential\JqueryEssentialAsset',
         'common\assets\AppAjaxButtonsAsset',
 
         'rmrevin\yii\fontawesome\AssetBundle',
-        'common\assets\JqueryCookieAsset',
-        'common\assets\JqueryFormAsset',
         'common\assets\FancyboxAsset',
     ];
 }

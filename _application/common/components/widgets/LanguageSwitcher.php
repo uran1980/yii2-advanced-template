@@ -77,7 +77,7 @@ class LanguageSwitcher extends ButtonDropdown
 
         // filter langs
         $pattern = '#^/' . implode('|', $urls) . '/#i';
-        $route   = preg_replace($pattern, '', $route);
+        $route   = preg_replace($pattern, '', $route, 1);
 
         return $route;
     }

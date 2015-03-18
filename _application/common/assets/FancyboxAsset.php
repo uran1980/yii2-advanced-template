@@ -13,7 +13,6 @@ class FancyboxAsset extends \yii\web\AssetBundle
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'common\assets\JqueryEasingAsset',
-        'common\assets\JqueryMouseWheelAsset',
+        'uran1980\yii\assets\jQueryEssential\JqueryEssentialAsset',
     ];
 }

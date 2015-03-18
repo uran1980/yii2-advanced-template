@@ -22,5 +22,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
 
         'common\assets\AppCommonAsset',
+        'uran1980\yii\assets\codePrettify\CodePrettifyAsset',
     ];
 }

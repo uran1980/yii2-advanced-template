@@ -11,7 +11,7 @@ AddDefaultCharset UTF-8
 
 # Mod_Rewrite
 <IfModule mod_rewrite.c>
-    RewriteEngine on
+    RewriteEngine On
 
     # hide files and folders
     RedirectMatch 404 /_protected
