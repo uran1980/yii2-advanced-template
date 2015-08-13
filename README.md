@@ -55,14 +55,14 @@ by running `composer self-update`.
 ---
 With Composer installed, you install composer-asset-plugin by running the following commands under a Web-accessible folder:
 
-    composer global require "fxp/composer-asset-plugin:1.0.0"
+    composer global require "fxp/composer-asset-plugin:1.0.3"
 
 The first command installs the [composer asset plugin](https://github.com/francoispluchino/composer-asset-plugin/)
 which allows managing bower and npm package dependencies through Composer. You only need to run this command
 once for all. The second command installs Yii in a directory named `basic`. You can choose a different directory name if you want.
 
-> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer 
-> needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details, 
+> Note: During the installation Composer may ask for your Github login credentials. This is normal because Composer
+> needs to get enough API rate-limit to retrieve the dependent package information from Github. For more details,
 > please refer to the [Composer documentation](https://getcomposer.org/doc/articles/troubleshooting.md#api-rate-limit-and-oauth-tokens).
 
 
@@ -75,7 +75,7 @@ other tool you like).
 **Clone repo**
 ---
 Now open up your console and ```cd``` to your web root directory, for example: ``` cd /var/www/sites/ ```
-Clone this repo: 
+Clone this repo:
 
 ``` git clone https://github.com/uran1980/yii2-advanced-template-custom.git advanced ```
 
