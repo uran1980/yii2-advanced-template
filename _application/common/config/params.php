@@ -60,19 +60,13 @@ $config = [
     ],
     // @see https://github.com/codemix/yii2-localeurls
     'app.urlManager.localeUrls' => [
-        'class'             => codemix\localeurls\UrlManager::className(),
-        'enablePrettyUrl'   => true,
-        'showScriptName'    => false,
-    ],
-
-    // ----------------------- LOCALE URLS COMPONENT ---------------------------
-    // @see https://github.com/codemix/yii2-localeurls
-    'app.localeUrls' => [
-        'class'                     => codemix\localeurls\LocaleUrls::className(),
-        'enableDefaultSuffix'       => true,
-        'enablePersistence'         => true,
-        'enableLanguageDetection'   => true,
-        'languages'                 => $languages,
+        'class' => codemix\localeurls\UrlManager::className(),
+        'enablePrettyUrl'               => true,
+        'showScriptName'                => false,
+        'enableDefaultLanguageUrlCode'  => true,
+        'enableLanguagePersistence'     => true,
+        'enableLanguageDetection'       => true,
+        'languages'                     => $languages,
     ],
 
     // ---------------------------- GII MODULE ---------------------------------
