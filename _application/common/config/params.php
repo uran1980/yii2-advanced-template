@@ -60,7 +60,7 @@ $config = [
     ],
     // @see https://github.com/codemix/yii2-localeurls
     'app.urlManager.localeUrls' => [
-        'class' => codemix\localeurls\UrlManager::className(),
+        'class'                         => codemix\localeurls\UrlManager::className(),
         'enablePrettyUrl'               => true,
         'showScriptName'                => false,
         'enableDefaultLanguageUrlCode'  => true,
