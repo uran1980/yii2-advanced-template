@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @see http://www.yiiframework.com/forum/index.php/topic/56027-yii2-multilingual-website-url-rules/
  * @see https://github.com/phemellc/yii2-i18n-url
  */
-
 namespace common\components\widgets;
 
 use yii\bootstrap\ButtonDropdown;
@@ -14,6 +14,9 @@ class LanguageSwitcher extends ButtonDropdown
 {
     private static $_labels;
 
+    public $beginTag = '';
+    public $endTag   = '';
+
     /**
      * Renders the language drop down if there are currently more than one languages in the app.
      * If you pass an associative array of language names along with their code to the URL manager
@@ -21,12 +24,16 @@ class LanguageSwitcher extends ButtonDropdown
      */
     public function run()
     {
-        $appLanguage = Yii::$app->language;
         if (count(Yii::$app->i18n->languages) > 1) {
+            $appLanguage = Yii::$app->language;
             $items = [];
             foreach (Yii::$app->i18n->languages as $lang) {
                 if ($lang === $appLanguage) {
                     $this->label = static::label($lang);
+                }
+                $label = static::label($lang);
+                if ( empty($label) ) {
+                    continue;
                 }
 
                 $item = [
@@ -38,8 +45,62 @@ class LanguageSwitcher extends ButtonDropdown
 
             $this->dropdown['items'] = $items;
 
-            echo parent::run();
+            echo $this->getBeginTag() . parent::run() . $this->getEndTag();
         }
+    }
+
+    /**
+     * Menu Items for Navbar list
+     * @return array
+     */
+    public static function getMenuItems()
+    {
+        $output = [];                                                           // default
+
+        if (count(Yii::$app->i18n->languages) > 1) {
+            $self = new self();
+            $appLanguage = Yii::$app->language;
+            $items = [];
+            foreach (Yii::$app->i18n->languages as $lang) {
+                $label = static::label($lang);
+                if ( empty($label) ) {
+                    continue;
+                }
+                if ($lang === $appLanguage) {
+                    $self->label = $label;
+                }
+
+                $item = [
+                    'label' => static::label($lang),
+                    'url'   => $self->getUrl($lang),
+                ];
+                $items[] = $item;
+            }
+
+            $output['label'] = $self->label;
+            $output['url']   = $self->getUrl($appLanguage);
+            $output['items'] = $items;
+        }
+
+        return $output;
+    }
+
+    public function getBeginTag()
+    {
+        if ( isset($this->options['beginTag']) ) {
+            $this->beginTag = $this->options['beginTag'];
+        }
+
+        return $this->beginTag;
+    }
+
+    public function getEndTag()
+    {
+        if ( isset($this->options['endTag']) ) {
+            $this->endTag = $this->options['endTag'];
+        }
+
+        return $this->endTag;
     }
 
     /**
@@ -66,24 +127,24 @@ class LanguageSwitcher extends ButtonDropdown
         $queryParams = $request->queryParams;
 
         foreach (Yii::$app->i18n->languages as $lang) {
-            $urls[] = trim($baseUrl . '/' . $lang, "/\\");
+            $urls[] = trim($baseUrl . '/' . $lang, "\\/");
         }
 
-        $route = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $route), "/\\");
+        $route = '/' . ltrim(preg_replace("#i18n/default/(index|update)#i", 'translations', $route), "\\/");
 
         array_unshift($queryParams, $route);
 
         $route = Url::to($queryParams);
 
-        // filter langs
-        $pattern = '#^/' . implode('|', $urls) . '/#i';
-        $route   = preg_replace($pattern, '', $route, 1);
+        // filter langs from route
+        $pattern1 = '#^/(' . implode('|', $urls) . ')/#i';
+        $pattern2 = '#^/(' . implode('|', $urls) . ')$#i';
+        $route    = preg_replace(array($pattern1, $pattern2), '/', $route, 1);
 
         return $route;
     }
 
     /**
-     *
      * @param string $code
      * @return string
      */
